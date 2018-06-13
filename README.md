@@ -3,4 +3,6 @@ Repository for "Data Science and Big Data Analytics: Making Data-Driven Decision
 
 ###Image
 
-![](https://imgur.com/13W3ow3)
+![sometext](https://imgur.com/13W3ow3)
+
+
