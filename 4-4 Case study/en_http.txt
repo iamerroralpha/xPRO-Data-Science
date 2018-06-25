@@ -1,0 +1,139 @@
+Thus far, we have spent time discussing variety of approaches for
+designing recommendation systems.
+Today, we shall put our learnings to practice.
+We shall do this by means of three case studies.
+We'll design a recommendation system for
+recommending movies, just like Netflix, design recommendation system for
+recommending songs, just like Pandora or Spotify.
+And we shall design recommendations system for
+recommending products, just like Amazon or Wayfair.
+First case study, movie recommendations.
+We shall start by discussing recommendation system design for movies.
+For this case study, we shall utilize movie lens dataset.
+This dataset is freely available at grouplens.org.
+This dataset has been collected between 1995 to January 2016 at a website
+hosted by University of Minnesota as a part of their research project.
+The dataset is a collection of readings for movies by users.
+The total number of movies are a little more than 11,000..
+The total number of users are a little more than 30,000.
+In principle, each user can assign a rating between one to five, to each movie.
+Therefore, total number of ratings can be little more than 330 million.
+In the dataset collected,
+we have less than 3% of these 330 million or so entries filled.
+It is an extremely sparse matrix.
+The goal of recommendation algorithm would be to fill in these 97% or
+so missing entries.
+Among the ratings reviewed about users,
+the distribution of readings is as follows.
+Around 4% of entries are rating 1, 10% or so
+are rating 2, 30% or so are rating 3, 35% or so
+are rating 4, and rest are rating 5.
+That is roughly 20% are rating 5.
+It is worth noting that a good fraction of ratings are 3, 4, or 5.
+Less than 15% of ratings are 0 or 1.
+However, there is enough variation in the distribution that a simple recommendation
+algorithm will not be able to get accurate predictions upon missing entry.
+Now, we shall apply various algorithms we have learned to this dataset and
+evaluate the performance.
+To be able to evaluate performance of an algorithm,
+we will need to know how well does an algorithm predict an unknown entry.
+Now, if entry is unknown, then we will never know how good is the prediction.
+This is a standard dilemma all such evaluation tasks face.
+To overcome this, a simple but
+clever solution has been developed, which is known as cross validation.
+We dig the available data, hide a small fraction of it from the algorithm, and
+then ask the algorithm to predict the values of hidden data.
+And then, compare performance of the algorithm by comparing
+it with the hidden ground tree data.
+In experiments to follow, we shall hide 20%,
+or one-fifth of the data, and use the remaining 80% of data for training.
+The choice of this 20/80 split is done at random.
+To evaluate the performance of the prediction, we shall utilize the metric,
+known as root mean squared error, or RMSE for short.
+It is the square root of the average of
+the squared error between the predicted ratings and the true ratings.
+For example, suppose algorithms predicts ratings for position one and
+two as s1 and s2, or suppose the true ratings were r1 and
+r2, then the RMSE is computed as follows.
+First, compute the summation of the squared difference between s1 and
+r1 as well as s2 and r2.
+Now, divide this by two and then take the square root of it.
+Now, where it is,
+you can see there are different recommendation algorithm on this dataset.
+To begin with, and to set the baseline, let us start with an algorithm that does
+not utilize any data, a random recommendation algorithm,
+which uses any of the five ratings at random and does a prediction.
+Let's try to understand how well will this algorithm perform on our data.
+The algorithm will predict a rating to be 1 with 20% chance or probability .2.
+As we discussed earlier, as per rating distribution,
+the unknown rating is likely to be 1 with roughly 4% chance.
+That is, the error will be zero when predictive rating is one,
+which is with chance 4%.
+Similarly, as for the rating distribution, the unknown rating is two, three,
+four, and five respectively with chances 10%, 30%, 25%, and 21%.
+And therefore, the expected or
+average squared error when prediction
+is one will be 0(.04) + 1(.1)
++ 4(.3) + 9(.35) + 16(.21).
+Sum it up all, you'll get 7.81.
+Now, this is the squared error when prediction is one,
+which will happen with 20% chance.
+Similarly, when predictions are two three, four, and five, the resulting squared
+error when we did all the calculations just like what we did for second back,
+we'll get 3.63, 1.45, 1.27, and 3.09 just by third.
+Therefore, the total average square error under random algorithm
+is 7.81 + 3.63 + 1.45 + 1.27 + 3.09.
+Okay, that's a lot.
+All divided by 5, which gives us 3.45.
+And the square root of 3.45 turns out to be 1.85,
+which is exactly the RMSE of the random algorithm.
+The algorithm that uses no information about the data achieves RMSE of 1.85.
+This should serve as a baseline for
+performance of algorithms that we shall evaluate.
+We shall start with the first algorithm we had learned, the population average.
+In this case, for each movie, we shall compute average ratings, and then for
+a user for
+which the rating of this movie is unknown, we shall assign this average rating.
+No personalization.
+The RMSE, when evaluated for this algorithm, turns out to be .983,
+much better than the random algorithm.
+So definitely a good start.
+When we look at the movies or shows with highest average rating, they turn out to
+be Lord of the Rings the Return of the King, Lost Season 1, Battlestar Galactica,
+Lord of the Rings, Two Towers, Arrested Development Season 2, and so on.
+Clearly, these are not personalized recommendations as they are based on
+population averages.
+Now, moving on to personalized algorithm.
+We shall first look at collaborative filtering algorithms.
+Using the user-user collaborative filtering algorithm,
+we find that the RMSE is .85.
+This is down from .983 of the population averages,
+a major improvement due to personalization.
+To see how it personalizes the movie recommendation,
+consider the following scenario.
+Suppose I have rated Love Actually five, Notting Hill four, Pretty Woman four,
+Sleepless in Seattle five, Forrest Gump four, and An affair to Remember four.
+Clearly, from these ratings, you might say I really like romantic movies.
+Now, we can ask the collaborative featuring algorithm to produce
+personalized recommendations for me using the rest of the movie lens dataset.
+It will produce the top recommendation as follows.
+Titanic, Sex in the City Season 4,
+The Notebook, How to Lose a Guy in 10 Days, Steel Magnolias.
+Clearly, these seem to be a good fit for the profile of a romantic character.
+We would want to quickly compare performance of other algorithms as we
+have discussed.
+The variation of collaborative filtering, which is the item-Item
+collaborative filtering, and apply to this dataset results into RMSE of .91.
+This is a poorer performance compared to user-user collaborative filtering, but
+definitely a step up from the population level algorithm.
+Finally, we can also compare performance of matrix factorization-based algorithm.
+These are based on viewing the user movie rating matrix as having low
+rank structure, and the goal is to find this low rank structure based on
+the partially-filled matrix.
+A popular implementation for
+such a problem is known as the soft impute algorithm.
+Using this algorithm for the dataset results into a little higher RMSE
+compared to the collaborative filtering algorithm.
+So in summary, for movie recommendation based on movie and dataset,
+the best algorithm seem to be user-user collaborative filtering.
+It seemed to achieve a very good level of personalization.

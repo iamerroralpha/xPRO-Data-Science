@@ -1,0 +1,150 @@
+This lecture is a case study where we apply the concepts of network theory
+developed so far.
+This case study is about finding genes that cause autism.
+Autism is a complex disorder of brain development.
+It is characterized by impaired social interaction, communication and
+repetitive behavior.
+And if often comes with epilepsy.
+Autism is highly heritable.
+It is important to determine the causative genes in order to cure the disorder, for
+example using gene therapies.
+Research related to determining genes that are associated to autism is a very
+active area and various causative genes have already been identified.
+However, the genetic basis of autism is still poorly understood, and
+only a fraction of cases can receive a genetic diagnosis.
+Using network analysis methods, additional candidate genes can be determined and
+these genes can then be tested in the clinic.
+So what is the network on which we will build our analysis?
+Well, a lot of research nowadays is concentrated on building more and
+more accurate protein-protein interaction networks.
+In these networks, the nodes are genes, and
+an edge between gene A and gene B means that the protein produced
+by gene A interacts with the protein produced by gene B.
+Protein-protein interaction networks
+are based on many different kinds of experiments.
+The problem with these networks is that there are a lot of false negative
+as well as false positive edges.
+First, researchers often focus on particular proteins
+that are known to be important for various diseases.
+While other proteins are not studied at all.
+This leads to biased networks with many edges connecting the highly studied genes,
+but many missing edges among the genes that are yet to be discovered.
+Since it is difficult to determine protein interactions in our body,
+the data often comes from lab experiments directly on the proteins.
+However just noting that proteins can interact in the lab
+does not mean that they are indeed interacting in our body.
+It is possible that although protein A and
+B can interact they never get to meet each other in our body.
+This explains the high rate of false positive edges.
+Hence a protein-protein interaction network should not
+be taken as the ground truth.
+Now, a list of genes known to cause autism
+is available through the gene autism database, SFARI.
+We can highlight these genes in the protein-protein interaction network
+available, for example, through a database called BioGRID.
+But how do we now suggest other candidate genes that
+can then be experimentally validated with respect to their relationship with others?
+Before discussing further let's take a small detour and consider a completely
+different application where the equivalent problem arises.
+So the Sicilian mafia, also known as La Cosa Nostra,
+is still quite active in Sicily and in fact, all of Italy.
+So let's assume we have access to a network of acquaintances
+of individuals in Italy.
+Similarly to the protein-protein network, the network of acquaintances is noisy.
+Data might have been collected from various sources.
+One source could be Facebook, which has many false negative edges,
+since individuals who know each other might not be Facebook friends.
+On the other hand,
+the network of acquaintances could also contain links coming from cell phone data.
+However, just because an individual called someone related to the mafia,
+the phone call might not be related to any illegal activities.
+Now various members of the Casa Nostra are well known.
+So we can highlight these members in the network of acquaintances.
+In this example, we have ten known members.
+But how are we now going to determine other suspects of the Cosa Nostra?
+It is reasonable to suspect that the members of the Cosa Nostra
+are connected to each other in the network of acquaintances.
+Hence, it is reasonable to suspect individuals to be part of the mafia
+that would connect the already known members of the mafia in the network.
+So we are interested in central nodes in the network that lie on paths
+that connect the already known members of the mafia.
+Now on earlier lectures, we discussed how to find the shortest paths
+between any two nodes in the network.
+Such paths are called geodesic paths.
+Now in this application we have multiple nodes.
+The known members of the Cosa Nostra.
+And we would like to find this molar sub graph that connects all these nodes.
+This problem is known as the minimum-weight Steiner tree problem.
+Although it is known to be np hard to find the minimum-weight Steiner tree.
+There are good polynomial time algorithms that find approximate.
+Minimum-weight Steiner trees.
+Such approximations are based on algorithms for
+finding geodesic paths between nodes.
+We have a subset of nodes, in our case, the set of ten known mafulsy.
+First we compute the geodesic distance between all of these nodes in the subset.
+Then we build a minimum spanning tree among these nodes.
+This is a tree of minimum weight, where the nodes are the people in this upset and
+the edges correspond to their geodesic distances in the original graph.
+This approach allows us to find approximate stiner trees
+that connect all known mafosian in the network of acquaintances.
+We can extract the subnetwork from the original network.
+And we call this network the mafia interactome.
+Now we can perform a first test to make sure that the mafia interactome
+indeed makes sense.
+It is to be expected that the mafia is highly connected within the network of
+acquaintances.
+We can check this by choosing subsets of ten nodes at random
+from the network of acquaintances.
+And building the interactum of these subsets.
+The connectivity of a network is captured, for instance,
+by the diameter of the network or
+the average geodesic distance between any two nodes in a network.
+We can compute these network measures for
+all the randomly generated interactums and find that, indeed,
+the mafia network is more highly connected than any randomly chosen subnetwork.
+This analysis suggests that the mafia interactum indeed contains
+some useful information.
+Next we analysis the mafia interactum itself.
+The goal is to determine important nodes in this network.
+In this application, it is reasonable to assume that a node is important
+if the central to the flow of information through the network.
+Assuming that information flows at a constant speed and
+take the shortest route in the network.
+Then the amount of information that flows through a node,
+is proportional to the number of geodesic paths that go through that node.
+As we already discussed in earlier lectures,
+this is captured by the betweenness centrality hence the betweenness
+centrality is an appropriate centrality measure for this application.
+And we've already discussed how to compute it.
+Using the betweenness centrality, we reached the following conclusion.
+Mainly that these individuals here are suspects for belonging to the Cosa Nostra.
+So after this detour through the world of mafulsy let's
+return to the problem of identifying new kind of gene for Autism.
+In did the problem is analogous to the problem of identifying suspects
+for the mafia.
+An underlying undirected network is available
+together with the list of know autism genes.
+From these known autism genes, we can build an autism interactome.
+Just like in the mafia interactome, it is to be expected that the autism interactome
+is more highly connected than any randomly chosen sub network.
+This is the case since the genes causing autism
+are expected to be related by particular pathways.
+Finally, the goal is to determine new candidate genes
+using the autism interactome.
+This problem translates into the problem of determining
+important genes in a network.
+Similarly, as in the mafia interactome, a gene is important because
+it is central to the information flow in the autism interactome.
+Problems in such genes are expected to cascade and
+lead to problems in the expression of many of the genes in their interactome,
+including the genes known to cause autism.
+To summarize, we discussed how the network analysis tools that we introduced in this
+series of lectures can be used to determine candidate genes that cause
+autism, starting from a protein-protein interaction network, and
+a set of known autism genes.
+This problem is analogous to the problem of identifying suspects in the mafia
+given a network of acquaintances, and a set of known mafiosi.
+While identifying mafia suspects is an important problem for
+international crime control.
+Identifying autism genes is crucial for
+developing therapeutic interventions against autism.

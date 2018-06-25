@@ -1,0 +1,144 @@
+Hi.
+In this lecture, we're going to do a case study.
+Focusing in on some of the details of GPS Navigation.
+GPS Navigation provides the perfect setting to illustrate the concepts we've
+discussed on interferons and graphical model, especially the common filter as
+used in practical systems that impact all of us everyday.
+Part of what makes this problem challenging and
+interesting is that typically GPS data,
+which is acquired by satellites is supplemented with other navigation
+information from sensors in the vehicle itself, such as speed measurements.
+The Kalman filter is used to integrate the sources of information to give
+an accurate estimate.
+GPS stands for Global Positioning System and
+was developed by the US Department of Defense.
+Since then, it has been made available for nonmilitary use.
+It's amazing how helpful GPS navigation is for
+getting from place to place when driving in a new city.
+I'll admit I'm probably more dependent on GPS than I ought to be.
+Me, being absent minded, I'll sometimes enter in the directions to get to work on
+my phone just to be sure that I don't miss a turn.
+We all know more or less what GPS is.
+It's a system for telling you where you are.
+The idea is to give accurate position information for any number of devices,
+whether these are the phones in your pocket or planes in the air.
+Location information is extremely useful and GPS is used in applications,
+including precise aircraft landing, mapping, both on land and
+ocean floor, vehicle navigation to coordinate transit systems and farming.
+So, there are many devices that need to figure out the position.
+You could imagine some sort of two way system where devices
+are receiving signals and also transmitting.
+But for various reasons, GPS works by the device only receiving signals.
+For one, if everyone's device was transmitting information,
+the satellites would be overwhelmed with too many things to listen to.
+Even more problematic, GPS is supposed to work well anywhere on Earth.
+It would require a giant battery to have enough power to send
+signals up to the satellites all the time.
+There are a bunch of GPS specific satellites in orbit.
+The system needs 24, but there are closer to 30 now.
+Each satellite periodically transmits a signal with its position and the time, and
+the GPS receiver then figures out the approximate distance to each of
+the satellites from which it gets a signal.
+The approximate distance is figured out using the time difference between when
+the signal was sent and when it was received.
+Finally, with three or more distances from know satellite positions, it's possible to
+triangulate and solve for the position of an object on the surface of the Earth at
+least four satellites will use most actual systems for various reasons.
+Figuring out the distance from the GPS receiver to a satellite is called
+ranging and it depends on the accurate timing for propagation of signal.
+Since the signal travels at the speed of light,
+even tiny errors in the timing results in errors in the estimated distance.
+The clocks on the GPS receiver,
+such as the one in your phone just isn't as accurate as you might hope.
+So, we get a noisy estimate of the distance to the satellite.
+When combining these signals,
+we get a noisy estimate of the position of the receiver at each time step.
+The accuracy is on the order of tens of meters.
+There are actually a bunch of other sources where there are noise.
+These include small areas and estimates of the satellite position.
+Satellite clock errors.
+Errors to due to the multi path of the ranging signals.
+Noise and receiver electronics.
+Change in speed of propagation of the signal in the upper layers of
+the atmosphere and all this.
+We won't worry about the details too much and just lump together all of the errors.
+Imagine that we were getting a noisy estimate of our location via GPS,
+as just described.
+Let's say, once per second to be concrete.
+Fundamentally, the GP location estimates are noisy and our application
+such as precise landing of a drone requires an accurate estimate of location.
+So, we want to get a higher degree of accuracy than the signal that
+we're getting.
+Can we do something better than just using the GPS measurement at each time as our
+estimate?
+It helps to visualize what's going on with the location measurement.
+There's the true position of the drone, as it's flying around and
+the noisy measurements are bouncing around.
+The thing that saves the day is that the position of the drone changes smoothly
+from one time to the next.
+So the GPS measurements are actually quite correlated and
+the collection of measurements over time can help to average out much of the noise,
+suppose for a moment that our drone hasn't moved.
+In this case, the true location is unknown but
+it's We collect a bunch of noisy measurements and we can
+average the measurements to get a much more accurate estimate of the position.
+Now our drone is actually moving and this makes things a bit more complicated.
+This is where we're going to use the hidden markup model framework and
+the Kalman filter.
+In terms of the drone's position and
+velocity, the laws of physics give us equations of motion
+that predict where the drone will be at the next instance of time.
+So if we have position and velocity is the state of the system,
+each of which is a three dimensional vector,
+the state of evolves over time according to a mark up process.
+Of course, there's noise involved since not everything is accounted for
+in the equations like fluctuating wind and
+this can be captured in the hidden mark up model.
+I'm simplifying a bit by not including the controller inputs to the drone, but
+these can be subtracted out since they're known.
+We can think of the GPS location measurement as giving us a noisy
+observation of the state of the system at each time and
+the appropriate model is the hidden Markov model.
+Our goal is to combine the observations up until the present time to produce
+an estimate of the state of the system.
+And for this task, the common filter we discussed is very well-suited,
+even better accuracy can be obtained by combining data from the vehicle or
+device itself with the GPS data.
+For example, if we're thinking about a vehicle.
+It has an odometer, which measures how far it's gone over a given time period and
+it can also have a gyroscope, which measures orientation.
+If you know how far you've gone in one direction, then assuming you know where
+you started, you can figure out where you are, but these measurements are noisy too.
+Tire pressure changes over time.
+Tires can slip or skid and the tires wear out,
+and these all cause the odometer reading to drift over time and
+no longer give an accurate estimate of the actual distance traveled.
+Similarly, gyroscopes will have bias due to changes in temperature.
+Combing measurements from these sensors together with GPS can be done using
+a common filter in a fairly direct way.
+The dimension of the observation variables grows appropriately and
+the equations have to modified to account for new observation model.
+More extensive systems along the same lines
+go by the name Inertial Navigation Systems or INS for shorter.
+These include accelerometers and other sensors.
+Combining information from INS and GPS can get the best of both worlds.
+The GPS signal can be obstructed.
+For example, by a forest, but INS still gives useful information.
+While the sensors in INS drift over time,
+but this can be corrected by incorporating the GPS measurements.
+This concludes our discussion on GPS navigation.
+It's quite remarkable how complex a hugely important system
+boils down to a relatively simple inference problem
+that can be solved using the methods we discussed.
+The same graphical model inference framework, which has proved so
+useful in this and other engineering systems forms the foundation for
+how we think about much of inference and machine learning and
+it will continue to serve us a new and exciting applications.
+This also concludes the module on networks and graphical models.
+We've learned about the important properties of networks, network models,
+statistical models, processes on networks, including graphical models,
+learning network structure from data and inference in graphical models.
+Looking to the future, many of the most exciting developments are happening in
+networks, including social networks and biological networks.
+We hope that you will find what you've learned to be useful and
+thank you for joining us.
