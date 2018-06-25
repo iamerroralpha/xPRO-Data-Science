@@ -1,0 +1,185 @@
+In the previous section, we looked at how to frame binary classification problem in
+the setting of supervised learning.
+Let's briefly review where we left off, and
+define some notations to use going forward.
+We described each object to be classified as a list of d real numbers,
+which we call the feature vector.
+We can think of these as points in d-dimensional space, which we'll call Rd.
+A binary classifier is then a function that maps each point in Rd
+to one of the two possible categories.
+If we label the positive examples with plus 1 and
+the negative examples with minus 1, we can thus succinctly describe the binary
+classifier as a function from Rd to the set containing plus and minus 1.
+We're then given a bunch of training examples, which consist of points
+x1 through xn, in Rd, along with our correct labels, l1 through ln.
+We use these to decide what function f from Rd to plus or
+minus 1 to use as our classifier.
+Then, given a new point to classify,
+we get our answer by just applying the function f.
+Deciding what class of functions to choose the classifier from
+is one of the crucial design choices to be made when setting up our classifier.
+And we decided to start with the case of linear classifiers,
+which choose a category by dividing space up into two categories using a hyperplane.
+We can describe the hyperplane as the set of points with w .x equals b.
+Where w equals W1 through Wd is a vector in Rd and B as a number.
+If we use plus or minus 1 to label our categories, we can write or
+classify very cleanly.
+We want to return plus 1 is w .x is bigger than b, and minus 1 if it's smaller.
+So, this just says that f of x is equal to the sign of w .x minus b.
+We then looked at the case where there was a hyperplane that correctly classifies
+all of our training data.
+In which case, we said that the points were linearly separable.
+We define the margin of such a hyperplane to be the amount we can shift in either
+direction, while still correctly classifying all the training data.
+Given linearly separable training data, there'll often will be many
+hyperplanes that separate the positive and negative examples,
+so we have some freedom in how to construct our linear classifiers.
+One role people often use to make this decision
+is to choose a hyperplane with the largest possible margin.
+The resulting linear classifiers called the Support Vector Machine.
+We thus gave a reasonable proposal for how to perform binary classification when
+the training examples are linear acceptable.
+But it's only useful if we can actually implement it reasonably efficiently.
+There are actually some problems that don't look too different from this.
+But for which the running time grows exponentially in the number of dimensions,
+which would be prohibitive, even for fairly moderate D.
+So, it's not obvious apreari that we can do this.
+However, luckily, we can.
+Let's see how.
+Our classifier is specified by the vector w and the threshold b.
+For it to correctly classify the ith training example,
+we need w .x of i minus b to be greater than 0, if l sub i equals 1, and
+less than 0 if l sub i equals minus 1.
+Keeping the vector b around ends up being a little bit annoying.
+It'd be cleaner if we were in the case where b equals 0.
+It turns out that there's a nice trick that lets us reduce to this case.
+And the idea is just that we're going to add the dummy coordinate and
+set it equal to 1 for all of our training points.
+So, we now think of our training points as vectors, x sub 1 prime through x sub n
+prime, where x sub i is the d plus 1 dimensional vector X sub i comma one.
+We then pull b into our weight vector by defining w prime to
+be the vector w comma negative b.
+This makes it so that w prime dot x sub i prime equals w dot x minus b.
+So, finding a vector w such that w dot x sub i minus b is greater than or
+less than 0 is the same as finding a vector w minus prime,
+such that w minus prime .x sub i minus prime is greater than, or less than 0.
+And now we don't have to worry about b.
+We can thus assume from now on that b is 0 without loss of generality.
+With this pre-processing step, the algorithmic problem
+of finding a classifier that works for all of the training data comes down to finding
+a vector w that meets all the constraints coming from the x of i.
+That is we want to find a vector w, such that w .x of i is greater than zero,
+for all i such that l sub i equals one.
+And w .x sub i is less than 0 for all i such that l sub i equals negative 1.
+Let s be the set of w that meet these constraints.
+To find the support vector machine, we wanna find the w in s with maximum margin.
+If we start with the hyper plane w .x equals 0,
+we can get shifted versions of it by just changing the right hand side.
+How quickly the hyperplane moves when we change the right hand side depends
+on the norm of w.
+And one can check if the hyper plane w dot x equals delta,
+corresponds to shifting the original one by a distance of delta over the norm of w.
+If we shift the hyperplane so that it hits a point xi,
+which corresponds to the margin of the hyperplane with respect to the point xi,
+this will be the hyperplane with delta equal to w .xi.
+Which means that we shifted it by W.
+Xi over the norm of W.
+By scaling these constraints, we can write the problem of finding the hyperplane
+of maximum margin as just minimizing the norm of W.
+Now, there are a few ways one can find the W we're looking for.
+In other sections of this course, both before and after this one, an important
+theme has been that we have these powerful algorithmic techniques available for
+solving convex optimization problems.
+In practice, the most common approach for finding linear classifiers in general, and
+FPNs in particular, is to use convex optimization.
+The basic idea is that one can rewrite the problem of finding the hyperplane of
+maximum margin as optimizing a convex function over the set S.
+And we can then apply the convex optimization machinery.
+This machinery has been carefully tuned for SVMs,
+and there are excellent libraries available for doing this.
+However, rather than just running through some algebra to write the problem in
+a convex form, and then referencing the existing general algorithms for
+these problems, I'd like to instead talk about a beautifully simple way of solving
+the problem, that I think actually might be a bit more insightful.
+It's called the perceptron algorithm.
+And it's not quite as efficient as the convex optimization routines,
+and I'm just gonna talk about it for finding any linear classifier,
+rather than to find the one with with the largest margin.
+But it has some beautiful ideas in it.
+And it will let me give you a full, self contained algorithm.
+Moreover, it solves a more general version of the problem called online learning.
+Before we talk about the algorithm,
+there's one final modification that it will be convenient to make.
+Since we've gotten rid of B,
+all of our constraints look at whether w .x sub i is positive or negative.
+Note that scaling Xi by a positive content won't change that.
+For instance, saying that W .Xi is positive is the same as saying
+that W.5xi is positive.
+We can best scale all of the Xi however we want.
+By doing this, we can assume that each Xi has norm, which is just another word for
+length equal to one.
+A basic property of dot products says that the square of the norm
+of a vector is given by the dot product of the vector with itself.
+So, we can write this as norm of x squared equals xi .xi equals 1.
+We can now finally describe the output.
+The idea is as follows.
+Instead of being given all of the training data,
+we'll imagine that somebody hands us the points from it one at a time.
+Possibly giving us the same point more than once.
+Each time we're given a point, we have to assign it to a category.
+After we do, we find out what the actual label was, and
+we can use this information for the later points.
+Now, the difference here is that we have to make our decisions online.
+That is, we don't get to see the whole training stat before we have to
+classify some points.
+Our algorithm for doing this is going to be very simple.
+We'll maintain a vector w that will be our guess for
+the weights, which is initially set to zero.
+Given a point, X, to classify, we'll then use your current guess for W.
+So, we'll guess positive if W .X is greater than 0, and negative otherwise.
+Now, if we guessed right, we'll leave our guess for W unchanged.
+However, if you make a mistake, we'll update our guess to try to fix it.
+Specifically, if we guess negative, and the answer was positive,
+we'll replace w with w plus x.
+This increases w .x, so it pushes w in the direction of answering positive for x.
+Similarly, if we guess positive when we should have said negative,
+we'll replace w with w minus x.
+Now, if we wanna solve the original problem, we can just pick our points from
+the training set, say randomly, and feed them to the algorithm and repeat.
+That’s actually the whole algorithm, which I’ve written a bit more formally here.
+We can actually show a remarkably strong guarantee about this algorithm.
+It will say that if there is any linear classifier that
+correctly classifies all of the points that were given with some margin gamma,
+then the total number of mistakes we'll make over the entire series of points
+will just be one over gamma squared.
+To give you a feel for
+it, here's an animation of the algorithm being run on some two dimensional data.
+Here are the data points, and here is the maximum margin hyper blade,
+which we notice does not pass through the origin.
+We start by adding a dummy coordinate to let us work with hyper planes through
+the origin, as shown here.
+And by initializing w1 to be 0,
+we'll choose each x sub t randomly from the data points, allowing reads.
+Now, one mild technicality is that w1 is 0.
+So, for the first point, the dot product, w sub 1.x sub 1 is actually 0.
+And we need to decide whether to call that.
+Positive or negative.
+Which one we choose doesn't really matter, so we'll just pick one.
+Say, negative, if the dot product is exactly zero.
+Now, in this case, the correct label for x1 was positive, so we made a mistake.
+And we update our weights by setting w2 equal to 0 plus x1.
+We now have a nonzero weight vector, so we can think of it as
+specifying a hyperplane, which we then use to classify the points.
+We'll then repeatedly compute W sub .Xt, use that to see which side of
+the hyperplane the point lies on, and then use this to compute the sign,
+which we'll use to compute a prediction for l sub t.
+We'll then use this to update our weight vector accordingly,
+and obtain W sub t plus 1.
+The rest of this section is an animation of the perception
+algorithm run on our data.
+It steps through the first ten iterations slowly, so
+you can see exactly what's happened.
+And then it quickly steps through the next hundred, so that you can get a feel for
+the overall behavior of the algorithm.
+For the first ten iterations, you may find it helpful to pause the video on each and
+make sure you understand how I got from one step to the next.

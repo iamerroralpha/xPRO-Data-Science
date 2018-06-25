@@ -1,0 +1,170 @@
+The methods for binary classification that we focused on so far,
+work in what I'd like to call a statistical setting.
+Given some input to classify,
+they postulate some class of probabilistic models, fit various parameters.
+And using these they give us an estimate of the probability that the input falls
+into one category or the other.
+If we think back to the description of binary classification,
+we were just required to pick one of the two categories.
+So trying to give a numerical estimate of the probability for
+each category is actually a little more than we were originally asked for.
+Of course these problems are very related to each other and
+it can't hurt to know this extra information.
+But finding it sometimes comes with a cost.
+For instance, it may require stronger assumptions about the distribution of
+the data, like normality or independence.
+And it may limit your flexibility in choosing your methods, or
+require you to solve more complicated, computational questions.
+What I'd like to talk about now are some non statistical methods.
+But just try to answer the original question of choosing one of the two
+categories.
+And don't try to fit a statistical model or assigned probabilities.
+I should mention that sometimes these procedures can be turned
+into statistical ones.
+But it's not always obvious how to do so, and
+it often involves making further assumptions.
+Perhaps most importantly, the non statistical perspective
+suggests methods that we might not come up with from a statistical point of view.
+And it's led to some techniques that have been extremely effective in practice.
+Before launching into the methods,
+it's helpful to spend a little time carefully defining our question.
+We'll set the problem up in the framework of supervised learning that was discussed
+earlier in the course.
+The first step here is to describe our data.
+To do this, we'll represent each object be classified with a list of
+numbers that describe it which we'll call a feature vector.
+For instance, if we're trying to classify an image,
+say trying to determine whether it includes a human face.
+The feature vector may be red, green, and blue values for each pixels.
+If we're trying to determine if the patient is having a heart attack,
+the vector may comprise their blood pressure, their heart rate.
+A zero or one indicating if they're conscious, and a number between one and
+ten indicating their self assessed level of chest pain.
+Now there's a lot of discretion in choosing this representation.
+I could give you many different ways of describing an image, or
+many sets of numbers that would describe a patient.
+And we'll see that actually how we choose this representation is crucially important
+in determining the quality of our classifier.
+It's easy to see intuitively why a good representation should be important.
+Imagine that you're trying to decide,
+without a computer, if a picture contained a face.
+Now suppose that instead of giving you the picture in it's original form,
+I gave it to you with the pixels reshuffled in some arbitrary order.
+If I told you of the order that the pixels were in,
+this would contain the same information as the original image.
+But you would obviously find the problem a lot harder.
+For now, you should think of the good representation as being
+one where the number has captured the important information in the problem.
+Encode it in a nice way, and don't include too much extraneous junk.
+Once we choose how to represent objects with feature vectors, we can think of
+the objects to be classified as points in some possibly high dimensional space.
+The classifier is then just a division of the points in the space into two pieces
+according to the category it assigns them.
+We can think of this as a function that takes points as input and
+produces a category label as its output.
+In supervised learning,
+the process is that we are given some training data which comes in the form of
+a collection of points that are correctly labeled as positive or negative.
+Using these, we try to construct a good classification function.
+We are then given new points, and we classified them by applying our function.
+The question then comes down to how we choose this function,
+which is what distinguishes the different techniques for classification.
+There's usually an important trade-off involved here.
+If the class of functions we look at is too simple,
+we won't be able to find the function in this class that does a good job describing
+the right way to map feature vectors to category labels.
+If we look at classes of functions that are too complicated we'll need immense
+amounts of data and possibly computation to figure out which one to use.
+The first method we'll look at is called support vector machines, or SVMs.
+The category of functions they use will seem very simple, perhaps even too simple.
+But they're often very effective maps.
+Moreover, we'll see that there is a beautiful and
+simple technique called the Kernel Trick.
+That lets them handle a much more complex classes of functions with very
+little additional work.
+In addition, they'll be the fundamental building block out of which we'll
+construct deep networks, which for
+many problems give the president state of the art.
+To specify SVMs we'll need to specify two things.
+The collection of allowable classification functions that we could end up producing.
+And how we choose which one to use based on the training data.
+The classification functions we produced will be what we call linear classifiers.
+They'll work by applying a linear function and thresholding the result.
+More precisely,
+we will specify a classifier by giving a vector w of weights, w1through wn,
+where n is the number of coordinates in the future vectors.
+And a threshold b, given a data point x, with coordinates x1 through xm.
+They first compute the dot product, w.x.
+Which you'll recall means that we add up w1 times x1,
+plus w2 times x2, etc., up to wn times xm.
+They'll then compare the resulting number to the threshold b.
+If it's larger than b, they'll put the point in the positive category,
+otherwise they'll put it in the negative category.
+This has a nice geometric interpretation.
+If say the feature vectors are two dimensional,
+instead of points with w.x exactly equal to b, it's just the line in the plane.
+The points with positive dot product lie on one side and
+the points with negative dot product lie on the other.
+The classifier is thus just cutting the plane into two pieces
+with a straight line.
+In three dimensions,
+the set of points with w.x equal to b is a two-dimensional plane,
+and ou classifier uses it to divide the three-dimensional space into two regions.
+When the dimension is larger, it's a little harder to visualize, but
+the picture is analogous.
+The points with w.x = b form an n minus 1 dimensional hyperplane which divides
+un-dimensional space into two regions.
+The classifier calls something in one region positive, and
+something in the other region negative.
+Now, let's see how we should choose such a hyperplane given a set of label points of
+training data.
+It's not always possible to separate the positive and negative points for
+the hyperplane.
+For instance, we can clearly see that there's no way to do it with the points
+showing here.
+However, let's suppose for now that we're in the good case where we can find such
+a hyperplane that perfectly separates the positive and negative training points.
+In this case, we will call the points linearly separable, and
+it means that there is some linear classifier that correctly classifies
+all of the training data.
+If you look at the picture, you'll see that there could be many such hyperplanes.
+While they all give the same answers on the training data,
+it would correspond to very different rules for classifying new objects.
+For instance, the two hyperplanes shown here both match the training data exactly.
+However, they would give very different answers when asked to classify any of
+the points shown here.
+To choose among them, SVMs look for what's known as the hyperplane of maximum margin.
+Given linearly separable training data, we can see how far we can move this
+hyperplane until it stops classifying the data correctly.
+In the picture, this means that we'll shift in one direction until it hits
+something in the set of positive points.
+And then we'll shift it in the other direction until it hits something in
+the set of negative points.
+This gives us two new hyperplanes, both parallel to our original one.
+And they both correctly classify our training data.
+Intuitively, when these hyperplanes are very far apart,
+this means that the original hyperplane very robustly divides the two groups in
+the training data.
+Because it worked with room to spare so
+to speak, this means that it's reasonable to guess that if we had some new training
+data the hyperplane would probably still work fairly well.
+We'll call the distance between these two parallel hyperplanes the margin.
+Now support vector machines work by looking at all the hyperplanes that divide
+the two groups in the training data.
+And then they try to find the one with the largest possible margin.
+If we imagine shifting and
+rotating the hyperplane around to see what possibilities are,
+you'll see that it can hit the points that lie nearest to it, shown here in red.
+And that these are the ones that determine everything we need to know.
+Whereas the ones that are farther away, shown in blue, don't really matter.
+And moving them around a bit doesn't change the answer.
+The red points are called support vectors,
+which is why we call these support vector machines.
+Here are a few examples of the maximum margin hyperplanes for
+different training sets.
+You can see that they nicely match our intuition about the right way to divide
+the two classes.
+Going forward, there are two very natural questions that we'll need to answer.
+The first is whether and how we can find this optimal hyperplane?
+And the second is, what we should do when the points are not linearly separable?
+Answering these will be the primary goal of our next two sections.

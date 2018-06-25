@@ -1,0 +1,97 @@
+Okay, so let me start by convincing you
+why we can use matrix completion algorithm like collaborative filtering.
+Note that after the transformation we did with our data,
+we have a matrix with unknown entries being plus one or minus one.
+The unknown entries that we want to predict
+is really matrix completion problem for that reason.
+There is, recall, one such algorithm, user-user collaborative filtering.
+Suppose you and I are two users.
+We have provided preferences for a collection of movies.
+Some movies for which you have provided preference but
+I have not, some movies for which I have provided preference but
+you have not, and some movies for which you and I share preferences.
+Let us suppose there are three movies for which both you and
+I have provided preferences.
+Let us say those three movies are A, B, and C.
+The corresponding pairs would be A compared with B,
+B compared with C, and C compared with A.
+These correspond to three different columns in our matrix.
+For each of these columns, we have provided values of plus 1 or -1.
+I like A over B, I like B over C, and I like A over C.
+On the other hand, you might have liked A over B, C over B, and A over C.
+Looking at the overlap of these three columns,
+it seems that you and I agree on two out of these three entries.
+After computing similarity using cosine of our vectors restricted to
+the overlap of these three columns, we get similarity of 1 over 3.
+Now suppose you have provided ranking of Iron Man preferred over Superman,
+but my ranking for Iron Man versus Superman is unknown.
+Then we can use similarity between you and me to transport your plus 1,
+that is, you liking Iron Man over Superman,
+to my setting with the similarity rate of one-third that we just computed.
+Now suppose in addition, there is our common friend, say,
+Philippe, who has also provided preferences over A, B, and
+C, then his similarity to myself is -1/3.
+And now suppose Philippe does not like Iron Man over Superman,
+that is, he has given preference for Iron Man compared to Superman as -1,
+then we can use his -1 with weight of -1/3.
+Putting all of these things together, we obtain prediction as follows.
+1/3 for similarity between you and me, multiplied by plus 1 coming from you,
+plus -1/3 for similarity between Philippe and me,
+times -1 coming from Philippe's preferences.
+This whole thing divided by 2/3 comes out to be 1.
+That is, our prediction is plus 1.
+That's nice.
+Effectively, you are like me, and you like Iron Man.
+On the other hand, Philippe is not like me, and he did not like Iron Man.
+And hence, when we combine both of these weighted preferences together,
+they end up suggesting that Iron Man is preferred over Superman.
+That is plus 1.
+But now suppose Philippe actually had liked Iron Man,
+and Philippe's similarity to me was -1 rather than -1/3.
+Then, the prediction would be,
+just quickly recalling the same calculation with different numbers,
+is 1/3 times plus 1 plus -1 times plus 1, and this whole thing divided by 4/3.
+This after a simple calculation will turn out to be -1/2.
+This example provides intuition why we will see predicted values that
+are not necessarily plus 1 and -1, but values most likely in between.
+This example also explains how collaborative filtering
+like matrix completion algorithm can be directly used in our setting.
+Now we will address the second challenge of obtaining ranking for
+movies using these predicted scores for movie pairs.
+Let us look at any two movie pairs, say Iron Man and Superman as before.
+The score of -1/2 between them suggests that Superman is preferred over Iron Man.
+One way to interpret this is in the form of random outcome of games.
+To understand what -1/2 means,
+let us consider special values of -1, 0, and plus 1 first.
+-1 means that Iron Man always loses compared to Superman.
+Plus 1 means Iron Man always wins.
+And 0 means that Iron Man wins half of the time, Superman wins half of the time.
+This suggests that if a predicted number
+between -1 and 1 is, say, x,
+then it can be thought of as tossing a coin
+with bias B, where B is equal to 1+x/2.
+When outcome of coin toss is head, which happens with probability B, Iron Man wins.
+When outcome is tail, Iron Man loses.
+Therefore, we can convert each of the predicted value for a given user
+row by adding plus 1 to it and then dividing the resulting value by 2.
+This gives us probability of one of the movie winning against the other movie
+amongst the pair of the movies that the column corresponds to.
+If it was minus half, then B equals to one-quarter, that is,
+Iron Man wins only 25% of the time against Superman.
+Now we are back to the setting where we have a collection of movies, and
+between a pair of these movies,
+we know what fraction of time one movie wins over another movie.
+This is exactly the setting for which rank centrality was designed,
+to obtain global ranking.
+That means that we can now apply rank centrality over all movies and
+obtain a global ranking among them for each user separately.
+And this gives us personalized ranking for movies.
+In summary, we discussed how to obtain personalized ranking when preference
+data is available in form of comparisons rather than ratings.
+There is nothing new about the algorithm.
+It is about putting two algorithms that we have learned earlier, matrix completion
+algorithm like collaborative filtering and rank centrality for
+obtaining global ranking between objects using pairwise comparison data.
+Next, we shall discuss other approaches for
+personalization beyond what we have already discussed.
+Thank you.

@@ -1,0 +1,144 @@
+Now that we've gotten a sense of the excitement surrounding deep learning,
+let's get into the mathematics of what it is and what it's all about.
+Later, I'll tell you about some of the philosophy and
+motivations from neuroscience behind deep learning.
+But I think of this as superfluous to understanding
+on a pragmatic level what deep learning means.
+Now is a good time to mention that the word deep in deep learning
+isn't the judgement call about the intellectual merits of the field.
+But rather, refers to layering.
+So, for starters, whenever someone mentions the term deep learning,
+you should immediately think layered learning.
+That's what deep learning is about, building complex,
+hierarchical representations from simple building blocks.
+Let's start with the building blocks.
+In fact, when we covered support vector machines,
+we already covered what's a common building blocks of deep networks.
+Remember the classifer itself?
+That's sometimes called a perceptron.
+Let me remind you what a perceptron is.
+A perceptron is a function that has several inputs and one output.
+Let's say that it has n inputs just to fix some parameters.
+Then the output of a perceptron is computed in two steps.
+In the first step, we compute a linear function of the inputs.
+The coefficients of the linear function are called weights.
+In the second step, we take the output of the first step and compute a threshold.
+This threshold takes any value above some cut off tao and maps it to the value +1.
+And maps everything below tao to -1.
+The second step is the only non-linearity.
+Now just to make sure that the previous definition was clear,
+how many parameters define an n input one output perceptron?
+While we need n weights and one threshold tao, so in total that's n+1 parameters.
+Now what's the connection to support vector machines?
+The class fire that we learned was itself a perceptron.
+As a class fire it only recognizes linear patterns.
+And to combat this,
+we introduced the idea of mapping the input space to a new space using a kernel.
+In deep learning, we will take a very different approach where we layer
+perceptrons on top of each other to get our non-linearities.
+So let's work up towards that and start with a concrete example.
+Let's return to the problem of image classification.
+Now what if we're interested in identifying which images contain a dog and
+which images don't?
+This is already an easier problem than the types of problems that we
+face in the image net challenge problem,
+where we even need to distinguish between different breeds of dogs from each other.
+In any case, as usual, we can represent our input,
+say a 256 by 256 size image as a vector.
+If each pixel is associated with three values, that's, red, green, and
+blue composition, in what dimensional space should we think of our picture?
+Well, we can can think of it as 256 times 256 times three dimensional space.
+Now if we want to use a perceptron to solve our image classification problem.
+What we're really asking for is a linear function of the pixels
+that's positive if the image contains a dog, and negative if it doesn't.
+As you might imagine a perceptron is just too simple a function
+to solve such a complex task in vision.
+There probably isn't the nice linear function of the pixels
+that decides whether or not there is a dog in the picture.
+So how can we create more complex functions out of perceptrons
+as building blocks?
+Well we can layer them.
+In the simplest set up, imagine that there are just two layers of perceptrons.
+Our input is an end-dimensional vector representing a picture.
+Each perceptron in the first layer has n inputs, each with its own weight.
+So each perceptron in the first layer computes its own
+thresholded linear function.
+Now comes the interesting part.
+If we have n perceptrons in the first layer
+we can have a single perceptron in the second layer,
+which takes as its inputs all of the outputs of the other n perceptrons.
+So how many parameters define this model?
+Well, we have (n+1)m parameters for the first perceptrons in the first layer and
+(m+1) parameters for the perceptron in the second layer.
+What's important is that the overall function we've computed that takes in an n
+dimensional input factor and outputs a plus one or minus one is much more
+interesting and complex than the type of function we got from a single perceptron.
+We can take this idea much further and have more than two layers.
+The functions that we get are called deep neural networks, and
+in practice one usually sets them to have between six and eight layers and
+millions of perceptrons in between.
+There are several fragments of intuition behind these types of functions.
+The hope is that the lower level layers of the network identify some base features,
+like edges and patterns, and that each layer on top of them
+builds on the previous layer to create much more complex, composite features.
+The intuition is how might you build up a feature that represents whether or
+not a dog is present in an image?
+First you would identify its edges.
+And then you'd identify which collections of arrangements of edges represent legs
+and which represent the body and
+the head and then which arrangements of those parts represent the dog?
+Recall that in ImageNet we want to correctly classify according to 1,000
+different labels at once.
+Even though there a million total images,
+that's not actually that many examples per label.
+So what's important is that the features that are useful for identifying
+one breed of dog can be useful in identifying other breeds of dog as well.
+In this sense, a deep network can have a thousand outputs, one for
+each label, built on top of a common deep network underneath it,
+one which is hopefully identifying useful,
+high level representations that are needed to understand images.
+Another rationalization for
+deep neural networks is that they parallel what happens in the visual cortex.
+There's still a lot about the brain, okay,
+most of the brain, that we don't understand.
+But it does seem that the visual cortex has a similar type of
+hierarchical structure with neurons on the lower layers recognizing
+lower level features like edges.
+Moreover, we can measure how quickly a human can recognize an object and
+how quickly a neuron fires.
+These tell us that even though the visual cortex is performing some
+hierarchical computation, it requires at most six to eight layers
+in order to solve high level recognition problems.
+So let's conclude this discussion by first generalizing what we've talked about so
+far, and then pointing towards the main topic that we will be interested in for
+the rest of the unit.
+First, the perceptron has a linear and non-linear part, the threshold function.
+If it wasn't for the threshold, creating deeper networks would not buy us anything.
+We would still be composing linear functions.
+And no matter how deep we make the computation,
+the function we get would still be linear.
+It's the non-linearity that we added that makes deep network so
+functionally expressive.
+In fact, there are many other non-linear functions that we could have chosen
+instead of a threshold.
+We could have chosen a logisti, sigmoid, or hyperbolic tangent, or
+any other smooth approximation to a step function.
+This and many other aspects of the architecture of deep neural networks
+are all valid design choices that have their own merits.
+There are many research papers that grapple with issues like
+which non-linear functions work the best, and
+how should we structure the internal layers for example, using convolution.
+We won't talk more about these issues, but
+it's good to know that they're very important.
+Second, we've said nothing about actually finding the parameters of a deep network.
+Modern deep networks have millions of parameters,
+which is a very large space to search over.
+When we talked about the support vector machine, we had the perceptron algorithm,
+that told us if there is a linear class file, we can find it algorithmically.
+But even if there is a setting of the parameters of the deep network,
+that really can classify images accurately, into,
+say different breeds of dog, how can we find it?
+There is no simple answer to this question.
+There are approaches that seem to work in practice, but why they do it is still very
+much a mystery and perhaps a phenomenon that has to so
+with some of the strangeties of searching in such a high dimensional space.

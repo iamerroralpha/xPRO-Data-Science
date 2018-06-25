@@ -1,0 +1,117 @@
+
+Let's get back to our data.
+100 million triplets is huge.
+And remember that this is only what
+Netflix released for this competition,
+but the data set of all their users
+and all their movies is actually much, much larger.
+Let's try to organize this data a bit.
+The most natural way to do this is
+to put these numbers into a table, where the rows are users
+and the columns are movies.
+The cells of this table contain the ratings.
+The Netflix Prize data set had about half a million users
+and 17,000 movies, so we should build a table
+with half a million rows and 17,000 columns.
+Here's the row corresponding to Frank,
+and here is the column corresponding to the movie
+Dirty Dancing.
+This entry of the table is Frank's rating
+of Dirty Dancing, a five.
+Let's see where 100,000,000 scores
+looks like in this table.
+It's a drop in the ocean.
+We know about 1.2% of the entries of the entire table,
+and the remaining entries are completely unknown.
+To be fair, I should say that in the case of the Netflix Prize,
+the goal was to predict only a few missing numbers--
+about one million, still.
+But Netflix needs to predict all numbers every day.
+This looks like an impossible task, right?
+How does knowing that Frank is a Dirty Dancing
+fan can help me predict how Ted is going
+to like the Western Rio Grande?
+Well, we'll see our statistical modeling
+coupled with efficient algorithms
+can help us extrapolate known ratings to the entire table
+by leveraging realistic structural assumptions.
+In mathematics, a table filled with numbers
+is called a matrix.
+This is not just to sound fancy.
+Matrices are a well-studied object
+in a field called linear algebra.
+Using this theory, we can not only
+describe mathematically our structural assumptions,
+but also leverage a powerful algorithmic toolbox that
+can be scaled to the size of the whole Netflix data set and even
+larger.
+It turns out that the Tinder data set is essentially
+the same.
+Men are rows-- here's Frank--
+women are columns, and the entries are binary here.
+Zero is swipe left, one is swipe right, and then
+a lot of question marks.
+The eHarmony data set is essentially the same,
+but the meaning of the entries is not as clear.
+It's some sort of a compatibility index
+it's computing using side information.
+This is the first thing that a dating site asks you
+when you subscribe, answer a long list of questions
+to collect information about you.
+We can even extract some of your physical features or type
+of activities from the photos you post.
+Exploiting this side of information
+requires a lot of domain-specific knowledge,
+and this is a whole field in itself.
+In a way, this is the secret sauce of E-Harmony.
+Let's go back to our Netflix example.
+Netflix knows a bit about their users--
+location, type of credit card they
+used at time of subscription, their browsing history,
+what type of smartphone they use, and a lot about movies--
+cast, director, year, rating, budget, et cetera.
+Leveraging this information has been
+instrumental to win the Netflix prize, as well.
+To conclude this video, let me come back to a remark
+that I made earlier.
+Netflix may be interested in other objectives
+than simply recommending you a movie that you will like.
+For example, Netflix may be interested in showing you
+as many summary pages as possible
+to collect even more information about your browsing pattern.
+To do this, all the numbers fill the table, not just
+the ratings.
+Here's another example.
+Amazon may be interested in recommending
+a product on which they expect to make more profit
+rather than the one you are the most likely to purchase.
+For example, assume that the chances that you purchase
+Coffee Machine A are 20% if recommended to you and 10%
+for Coffee Machine B.
+However, Amazon receives $100 each time they sell
+Coffee Machine B versus only $10 for Coffee Machine A.
+In expectation, Amazon will receive $10 times 20%,
+equals $2 for Coffee Machine A, versus $100 times 10%
+equals $10 for Coffee Machine B. So Amazon
+may be tempted to recommend Coffee Machine B rather than A.
+Unlike Amazon or Netflix, or matching users to products,
+Tinder or eHarmony are matching users to users.
+The key difference is that products don't have
+any preferences, but users do.
+In other words, Tinder and eHarmony
+have more complicated problems on their hands.
+And we'll touch upon the specifics later in this module.
+To account for these different objectives,
+a good data scientist must know what
+values to enter in the table--
+chances of buying, or expected revenue, for example.
+This is, again, domain-specific, and often,
+several recommendations systems are run in parallel
+to account for these objectives.
+To summarize, we've seen that the data
+can be thought of as a matrix with lots of missing entries.
+We need to fill out these entries.
+The meaning of these entries is very much context-specific.
+In the next few videos, we'll see
+how we can make simplifying assumptions that
+can help us solve the problem.

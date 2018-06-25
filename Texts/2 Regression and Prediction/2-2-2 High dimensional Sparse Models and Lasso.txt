@@ -1,0 +1,113 @@
+In this segment, we will talk about high-dimensional sparse models and
+a penalized regression method called the Lasso.
+Here, we consider the regression model Y = beta X + epsilon,
+where beta X is a population-best linear predictor of Y using X.
+Or simply the population linear regression function.
+The regresssor X is p-dimensional, with components denoted by Xj.
+That is, there are p regressors, and
+p is large, possibly much larger than N, where N is the sample size.
+In order to simplify the discussion,
+we assume that each Xj has a unit variance in the sample.
+Here, we are dealing with the high-dimensional setting,
+where p/N is not small.
+Classical linear regression, or ordinary least squares fails in these settings,
+because it overfits the data, as we have seen in part one of our module.
+We need to make some assumptions and
+modify the classical regression method to deal with the high-dimensional case.
+One intuitive assumption is approximate sparsity, which informally means that
+there is a small group of regressors that have relatively large coefficients,
+that can be used to approximate the BLP beta 'X quite well.
+The rest of regressors have relatively small coefficients.
+An example of an approximately sparse model is the linear regression model with
+the regression coefficients beta j given by 1/j-squared as j ranges from 1 to p.
+The figure that you see here shows the graph of these coefficients.
+As we can see, the coefficients has decreased quite fast, with only three or
+four regression coefficients that appear to be large.
+Formally, the approximate sparsity means that the sorted absolute values
+of the coefficients decrease to zero fast enough.
+Namely, the js largest in absolute value coefficient is at most of size j into
+the power of minus a times a constant, where a is greater than one half.
+Here, the constant a measures the speed of decay.
+For estimation purposes, we have a random sample of Yi and
+Xi, where i ranges from 1 to n.
+We seek to construct a good linear predictor,
+head-beta X, which works well when p over N is not small.
+We can construct head-beta as a solution of the following penalized regression
+problem called Lasso.
+Here, we are minimizing the sample mean-squared error that results from
+predicting Yi with bX plus a penalty term, which penalizes the size of
+the coefficients, bjs, by their absolute values.
+We control the degree of penalization by the penalty level lambda.
+A theoretically justified penalty level for
+Lasso is given by the formula that you see here.
+This penalty level ensures that the Lasso predictor, hat beta X, does not overfit
+the data and delivers good predictive performance under approximate sparsity.
+Another good way to pick penalty level is by cross-validation,
+which uses repeated splitting of data into training and
+testing samples to measure predictive performance.
+We will discuss cross-validation later in this module.
+Intuitively, Lasso imposes the approximate sparsity on the coefficients hat beta,
+just like in the assumption.
+It presses down all of the coefficients to zero,
+as much as possible without sacrificing too much fit, and
+it ends up setting many of these coefficients exactly to zero.
+We can see this in the simulation example where our Xjs and
+epsilons are standard normal variables, and
+the true coefficients beta j are equal to 1 over j squared.
+Suppose also that n is equal to 300 and p is equal to 1000.
+The following figure shows that hat beta, in blue, is indeed sparse and
+is close to the true coefficient vector beta, in black, indeed.
+Most of hat-beta js are set to 0, except for several coefficients that align quite
+well with the largest coefficient beta j, or the true coefficient vector.
+This really shows that Lasso is able to leverage approximate sparsity to deliver
+good approximation to the true coefficients.
+From the figure,
+we see that Lasso sets most of the regression coefficients to zero.
+It basically figures out approximately,
+though not perfectly, the right set of regressors.
+In practice, we often use the Lasso-selected set of regressors
+to refit the model by least squares.
+This method is called the least squares post Lasso, or simply post-Lasso.
+Post Lasso does not shrink large coefficients to zero as much as
+Lasso does.
+And it often improves over Lasso in terms of prediction.
+We next discuss the quality of prediction that Lasso and Post-Lasso methods provide.
+In what follows, we will use the term Lasso to refer to either of these methods.
+By definition, the best linear prediction rule, out-of-sample, is beta X, so
+the question is, does hat-beta X provide a good approximation to beta X?
+We are trying to estimate p parameters,
+beta 1 through beta p, imposing the approximate sparsity via penalization.
+Under sparsity, only a few, say s, parameters will be important.
+And we can interpret s as the effective dimension.
+Lasso approximately figures out which parameters are important, and
+estimates them.
+Intuitively, to estimate each of the important parameters well,
+we need many observations per each size parameter.
+This means that n over s must be large, or equivalently, s over n must be small.
+This intuition is indeed supported by the following theoretical result,
+which reads, under regularity conditions,
+the root of the expected square difference between the best linear predictor and
+the Lasso predictor is bounded about by a constant times the level of noise,
+times square root of the effective dimension s times lower p n divided by n.
+Here, we are averaging over the values of x and
+the bond holds probability close to one for large enough sample sizes.
+The effective dimension s is equal to constant times n
+into the power of 1 over 2a, where a is the rate of decrease of coefficients
+in the approximate sparsity assumption.
+In other words, if n is large and the effective dimension s is much smaller than
+n over log(pn), for nearly all realizations of the sample,
+the Lasso predictor gets really close to the best linear predictor.
+Therefore, under approximate sparsity,
+Lasso and Post-Lasso will approximate the best linear predictor well.
+This means that Lasso and Post-Lasso won't overfit the data, and
+we can use the sample and
+adjusted R squared and MSE to assess out-of-sample predictive performance.
+Of course, it's always a good idea to verify out-of-sample
+predictive performance by using test or validation samples.
+So, let us summarize.
+We have discussed approximate sparsity as one assumption that makes it possible to
+perform estimation and prediction with high-dimensional data.
+We have introduced Lasso,
+which is a regression method that imposes approximate sparsity by penalization.
+Under approximate sparsity, Lasso is able to approximate the best linear predictor,
+and thus produces high quality prediction.

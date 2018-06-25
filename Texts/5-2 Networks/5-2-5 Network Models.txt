@@ -1,0 +1,167 @@
+Welcome back.
+So far, we've discussed various ways to measure or
+quantify the large scale structure of a network.
+But how did these networks come to exist?
+Many of them started very small and gradually grew to the size they are now.
+If you think about how the Facebook network grew over time, people gradually
+joined the network, and edges were added when people became friends.
+This seems like a rather different mechanism than the growth of
+a road network, and
+it stands to reason that the large scale structures are different as a result.
+In this lecture, we'll study network models and
+how they lead to some of the large scale we examined in previous lectures.
+By doing this, we'll get some insight into whether or
+not these models are plausible formation processes for an observed network.
+Having good network models also helps us when studying processes on networks
+such as the spread of a disease.
+Network models allow us to make statements for
+many networks at once without having to analyze each network separately.
+Random graph models are network models that have some specified parameters, but
+otherwise, the edges in the network appear at random.
+A very simple random graph model for
+simple undirected graphs is a model where the number of nodes and
+the number of edges is fixed, and you just place the edges uniformly at random.
+Related to the simple model but
+easier to handle mathematically is the well-known Erdos-Renyi model.
+Instead of fixing the number of edges, we only fix the probability of an edge.
+This means that the expected number of edges is held fixed, but
+the exact number of edges can vary around that number.
+The Erods-Renyi model is one of the best-studied network models
+with very nice mathematical properties.
+One can pretty easily compute the average clustering coefficient,
+the degree distribution, and the diameter of an Erdos-Renyi graph.
+For example, what is the probability of seeing a node of degree 10 in
+an Erdos-Renyi graph with 100 nodes where the probability of an edge is 10%?
+Well, there are 99 possible neighbors, and
+99 choose ten possible ways of choosing exactly ten neighbors.
+The probability that there is an edge to exactly these ten
+neighbors is 0.1 to the power of 10 times 0.9 to the power
+89 since no other edges are allowed to be there.
+The resulting degree distribution looks like this.
+So it does not look at all like the power law degree distributions that occur
+in many real-world networks.
+Similarly, one can also easily compute the clustering coefficient and
+the diameter of an Erdos-Renyi graph.
+It turns out that Erdos-Renyi graphs have very small clustering coefficients and
+very large diameters.
+This is the case, because locally, Erdos-Renyi graphs look like trees.
+So while Erdos-Renyi models are easy to handle from a mathematical point of view,
+they are not very realistic models for most applications.
+In particular, in most applications,
+the presence or absence of edges is correlated.
+Since so many real-world networks across different application domains show
+power law degree distributions, let's think about ways of
+creating network models that have such degree distributions.
+So the easiest way to do this is to fix not just a degree distribution, but
+in fact, the whole degree sequence.
+In other words, instead of only fixing the number of nodes and
+edges of a network, let's fix the degrees of each node.
+So consider this friendship network with ten individuals.
+The configuration model is a random graph model
+that allows to create networks with the same degree as this friendship network.
+So what is this model?
+Each node has a specified degree and
+is represented by a point with its degree mini stubs attached to it.
+Guy, for example, has many friends.
+He has a high degree represented by the many stubs attached to him.
+Now, you match the stubs uniformly at random.
+Meaning, you choose a pair of stubs at random and draw an edge between them.
+Then you choose another pair of stubs from the remaining stubs and
+connect them by an edge, etc.
+So this creates a graph with the desired degrees.
+However, this network model has one issue that might not make it realistic for
+some applications.
+Namely, the resulting networks can contain self loops and multi edges.
+For example, you see here, that Guy befriended himself,
+and I'm now double friends with Justin.
+While self loops or multi edges are realistic for road or
+neural networks, this is problematic for
+modeling a friendship network, the power grid, or a telephone network.
+One option when using the configuration model for
+such applications is to just remove all self edges and multi edges.
+In fact, it can be shown that for large network sampled
+from a configuration model, the number of of such edges is vanishingly small.
+So this can be a good approach in practice.
+Apart from the degree distribution that can be chosen as desired,
+let's analyze other large scale structural properties of networks sampled
+from a configuration model.
+One can pretty easily compute a clustering coefficient.
+It turns out that similarly to Erdos-Renyi graphs,
+the clustering coefficient is very small for
+large network sampled from a configuration model with fixed degree sequences.
+So while the configuration model can achieve power law degree distributions,
+the resulting networks are locally tree-like and
+have small clustering coefficients.
+So how can we create random graph models with large clustering coefficient?
+One idea is to start off with the graph that has a high clustering coefficient,
+and then add in some randomness on top of that.
+So circle and graphs are examples of graphs with high clustering coefficients.
+So how did these graphs look like?
+So you start off with all the nodes arranged around the cycle.
+And now, you connect each node to all its neighbors that are at some distance D.
+For example, take a ten cycle and
+connect each node to the two nodes that are two hops away along the cycle.
+You see that this creates a graph with many triangles, so
+it has a high clustering coefficient.
+However, this looks far too structured to be a friendship network.
+In addition, the degree of each node is the same,
+so there is no power law degree distribution.
+Also, the diameter of this network is very large.
+It does not show the typical small world connectivity.
+Is there a way to remedy this problem?
+Well, in order to reduce the diameter, we need to introduce some short cuts.
+One way this can be done is by choosing some edges at random and
+rewiring them at random.
+Now, doesn't this already look much more like a real friendship network?
+What is really interesting is that rewiring even just a few edges
+reduces the diameter of the network greatly, and you can obtain networks that
+have a high clustering coefficient, and at the same time, also a small diameter.
+So such models give insight into why the small world property is so
+common in real-world networks.
+In real-world networks, even if the underlying network is highly-structured,
+there will always be these links that happen just by chance.
+These links are the one's that create the small-world property.
+Such models are called small-world network models.
+They provide important insight into the creation of the small-world property.
+However, one can show that the degree distributions of networks in this model do
+not follow a power law.
+So what kinds of processes can lead to a power law degree distribution?
+Why do we see this phenomenon so often in real world networks?
+We discussed the configuration model as a way of
+building a network that has a desired degree distribution.
+However, this model does not give us insight into the process that
+led to this particular degree distribution.
+Let's look at the situation where power law degree distributions arise.
+In the 1960s, a researcher named Price studied citation networks.
+Here, the nodes are papers, and
+there is a directed edge from paper one to paper two if paper one cites paper two.
+Highly cited papers gain more attention and get read more often.
+So it is plausible to assume that the probability of citing a paper
+depends on its existing number of citations.
+This logic leads to a network model called the preferential attachment model.
+The model is sequential, nodes are added one after another, and
+an edge is included between the new node and
+an old node with probability proportional to the degree of the old node.
+For citation networks, this means that a new paper cites existing papers
+with probability proportional to their current citations.
+To make sure that any paper has a chance of being cited,
+each paper gets some probability for free.
+Interestingly, it turns out that preferential attachment models lead to
+networks with a power law degree distribution.
+In addition, the exponent of this distribution is at least two,
+which mirrors the exponents observed in many networks,
+such as the world wide web, the internet, or metabolic networks.
+So an intuitive process,
+such as individuals preferring to befriend other individuals
+who already have many friends, can lead to power law degree distributions.
+In this lecture, we've seen various network models.
+It became clear that every model has different strengths and weaknesses,
+and the choice of the model depends on the application.
+Network models are useful in order to find unexpected features in an observed network
+by comparing the observed network to a particular network model.
+Most importantly, we saw how network models can provide us with insight
+into why the small-world property and the power law degree distributions are so
+widespread in real-world networks.
+Finally, network models also allow us to make statements about the whole class of
+networks at once.
+During the next lectures, Guy will discuss processes on networks.

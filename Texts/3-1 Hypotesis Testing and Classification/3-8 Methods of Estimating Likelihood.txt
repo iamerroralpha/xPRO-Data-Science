@@ -1,0 +1,158 @@
+
+On January 28, 1986, NASA's space shuttle Challenger
+was scheduled to be launched from Cape Canaveral, Florida.
+The event was highly publicized, and President Reagan
+was expected to make an announcement about the launch
+on news channels.
+The temperature was near freezing
+on this day, which was unusual for this geographic location.
+Several engineers expressed concerns
+about the safety of the launch.
+Specifically, they were concerned about the reliability
+of so-called o-rings at low temperatures,
+rising the possibility of failure,
+which could lead to a catastrophe.
+However, there were five such rings.
+And all five of them would need to fail for the destruction
+of the Challenger.
+The managers at NASA, who were strongly
+against the postponement of the launch,
+noted that among the o-rings failures observed,
+a few happened at high temperature,
+thereby conjecturing that the threat for low temperature
+was not worthy of postponement.
+After intense discussion, they prevailed,
+and NASA went ahead with the launch.
+Tragically, soon after the launch,
+the Challenger disintegrated and came apart,
+killing everybody on board.
+The post-mortem analysis revealed
+that a failure of all five rings of the shuttle
+were the cause of the disaster.
+Was the disaster avoidable?
+Was there enough evidence for the engineers
+to convince managers at NASA that the performance of o-rings
+at low temperature was a serious vulnerability?
+In this lecture, we discuss the methods
+of estimating the likelihood, namely
+the probability of a particular event, given the data at hand.
+The method has many, many applications across fields.
+And to illustrate the idea, let us go back
+to some of the examples we have introduced
+in our first lecture.
+For the credit card example, we might
+want to estimate the probability that the particular transaction
+is a fraud, given some information
+about this transaction-- for example,
+the distance between the place where the sale took place
+and the residence of the credit card owner; or for example,
+the likelihood that the claim submitted to the insurance
+company is a fraud, given the number of particular procedures
+conducted by the medical provider;
+or the likelihood that the patient will develop
+a serious heart condition given his weight and average blood
+pressure; or finally, going back to the beginning of this class,
+the likelihood that all five o-rings fail,
+given the current temperature.
+This last example will be the subject of a special case
+discussion to be done after we introduce
+the basics in this lecture.
+The method of logistic regression
+allows us to answer these types of questions
+by building the model of the following form.
+Let us discuss the details of this model.
+Here, the symbol e stands for the hopefully familiar Euler's
+Constant, which roughly equals x corresponds
+to an independent or explanatory variable, such as for example
+the distance between the sale and home
+location for the credit card example,
+or the weight of the patient for our second example.
+Letter e corresponds to the event of the interest,
+such as transaction is a fraud, or that a given
+patient develops diabetes.
+The expression, which we read as the probability of the event
+e condition on the value x, is the quantity of interest.
+This is what we want to estimate.
+Finally, the coefficients beta 0 and beta
+are called the regression coefficients, and are
+to be estimated from the data.
+For now, don't worry about how this estimation is done.
+We will explain it later.
+Consider our diabetes example.
+Suppose based on the past medical data,
+the coefficients beta 0 and beta are estimated to be as follows.
+Then according to this model, a patient with a body weight
+of say 135 pounds--
+which is, by the way, my weight--
+has a chance of developing diabetes
+equal to namely approximately 13%.
+Incidentally, approximately 9% of the US population
+are suffering from some form of diabetes.
+So actually this number is not too unreasonable.
+On the other hand, for a significantly obese patient
+with weight, say, 275 pounds, the corresponding likelihood
+is estimated to be as follows--
+namely approximately 23%.
+According to this model, obesity is a significant risk factor
+for diabetes.
+One has to be extremely careful in interpreting this model.
+A more accurate way to express this conclusion of the model
+would be to say that within a group of people with otherwise
+similar characteristics, a patient with body weight 275
+pounds has roughly 23% chances of having diabetes.
+This is very similar to the care needed
+in discussion of conclusions of the usual linear regression
+model.
+In fact, as you probably see, the logistic regression
+has also strong similarity with linear regression model.
+Revealing a linear regression model
+is probably a good idea before continuing.
+But strictly speaking, it is not necessary at this point.
+Let us go back to the expression here.
+Since the numerator is smaller than the denominator,
+the ratio takes [? squarely ?] between 0 and 1.
+And therefore, it is a suitable expression
+for a probability value.
+The function of the form that you see here
+is called logistic function.
+And this is where the logistic regression derives its name.
+In this example, we have used only one independent variable--
+body weight--
+in to estimate the probability of developing diabetes.
+Naturally, some other factors might play a role here.
+For example, genetics.
+Consider, for example, the following logistic regression
+model.
+In this example, we have two independent variables-- x,
+which is before stands for the body weight,
+and y, which counts the number of parents with diabetes,
+and which takes value of either 0 or 1 or 2.
+The coefficients beta w is what we
+denoted by simply beta in the previous example.
+Though its actual value might be different.
+And the coefficient beta g is a new coefficient corresponding
+to the newly introduced explanatory variable y,
+corresponding to the genetic predisposition for diabetes.
+Let us assume that using past data,
+the coefficients are estimated to be as follows.
+Then a patient with a weight of 215 pounds
+and none of the parents suffering from diabetes
+has likelihood of developing diabetes equal to roughly 18%.
+At the same time, a patient with the same weight of 215 pounds
+who has both parents suffering from diabetes,
+according to this model, has likelihood of roughly 25%
+for developing diabetes over the lifetime.
+We see that according to this model,
+the genetics plays a significant role in the likelihood
+of developing this sickness.
+Of course, this is only likelihood.
+While we cannot change our genetics-- well, not yet--
+we can certainly impact other important risk factors such
+as weight, diet, lifestyles, to name a few,
+which are known to play a role in the likelihood of developing
+a sickness.
+Again, if one has access to further data,
+just as in the case of linear regression,
+additional independent variables can
+be used for likelihood estimation
+with better accuracy.

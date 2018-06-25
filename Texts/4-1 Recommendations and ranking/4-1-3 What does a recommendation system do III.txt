@@ -1,0 +1,106 @@
+Tinder, beer, and Guess Who are all fun and games.
+But recommendation systems are also very serious business.
+They have close conceptual ties to the core of a democratic society,
+such as how to run elections or elect governments based on collective opinions.
+This is called Social Choice Theory.
+How does it work?
+We have discussed enough example of what the recommendation system is and
+its utility.
+Now the question is how do we do it?
+How do we go about building it?
+Are Tinder, Pandora, and
+the Amazon recommendation system built on the same principles?
+>> Well. recommendation systems are age-old.
+They way they work historically is by we calling up our friends, people we know,
+and whose opinions and preferences we trust and ask them for suggestions.
+At the core, modern recommendation systems are not much different from this.
+They are automated, they operate at scale, and hence require some sophistication.
+Very crudely speaking, to find what you might like
+we can find other people with similar taste, similar interest, similar opinions,
+and then use that preference or dislike, what I might like or I might dislike.
+Such algorithms are known as collaborative filtering.
+We filter or predict our preferences through collaboration.
+We shall spend quite a bit of time in this module discussing various algorithms for
+recommendations based on this very basic insight.
+This insight, when viewed mathematically, leads to unusual algebraic approaches for
+recommendation.
+It might be worth cautioning while the insight described seems very simple,
+it takes a lot more to actually building a real system, and
+we shall discuss all of this as part of this module.
+So before we go into details,
+lets discuss a few of the nuances involved in building a recommendation system.
+>> Transparency of recommendation systems are important.
+When systems like Amazon product recommendation chooses to display an item,
+it is important for the user to understand what that means.
+For example, it is important to tell them that this is the item
+that they may want to buy together with another item.
+If you're buying an electric snow blower,
+make sure that you get a long extension cord as you will need that.
+When a recommendation for such an extension cord is made,
+it is important that the user understand why this item is recommended.
+In this case, that the cord was frequently bought together with the snow blower.
+Similarly, When you are recommended a movie, like Goodfellas,
+you may want to know that you are suggested it because you watched and liked
+The God Father, not because you watched Sponge Bob with your three year old.
+>> Simple machine learning doesn’t work well for recommendation.
+Remember Pandora, the music streaming company we spoke about earlier?
+It works like this.
+You create a virtual station on Pandora by suggesting the name of a band, or
+a song, or whatever.
+And then Pandora keeps streaming music that corresponds to that station's flavor.
+Initially when Pandora started, they were trying to build such a system without
+really using recommendation system data.
+They didn't have any to begin with.
+Instead they had specialists, specialists that annotated songs based on musical
+characteristics such as electric guitar riffs or minor key tonality and whatnot.
+And then in a blink a very good system that thought that
+BeeGees was like Beatles.
+Not sure if BeeGees fan, or for that matter Beatles fan, would agree with that.
+Looking under the hood,
+they realized that the reason behind such a mess was very simple.
+In early part of their career, the BeeGees were aspiring to become like Beatles,
+in fact they were a Beatles knockoff.
+>> Now, of course, if we looked at the people who listened to those popular
+BeeGees songs, it would be very different from those who listened to The Beatles.
+And this suggests that the importance of behavioral
+data in building recommendation systems, it's truly social.
+To know your preferences, you don't really need to understand why you listen to
+The Beatles, but find out who also likes The Beatles, and see what else they like.
+>> But behavior data is not easy to get.
+Think of Netflix on day one.
+>> Or Pandora on day one, for that matter.
+>> When you do not have any behavioral data,
+it makes it really hard to get going, or you do really poorly in the beginning.
+This is known as the cold start problem.
+There are many ways to get around this, and
+we shall discuss this aspect later in the module.
+Now, as we know Pandora has gone on to become a very successful
+recommendation system.
+So, they really did solve the cold start problem.
+>> Self Fulfilling Prophecy.
+Major flip side of recommendations is that it may not allow for
+discovering new things by chance.
+Effectively, a good recommendation system will keep recommending things
+that are liked or preferred by most, and create a herding phenomenon.
+Newcomers, who are really good, might not get any attention at all,
+this is a typical self fulfilling prophecy phenomenon.
+We'll discuss how to avoid this in a principal matter in this module.
+>> Recommendations are means to an end.
+Looking for a suitable person to date or marry,
+when you don't know exactly what you are looking for, or a new restaurant to eat,
+movies to watch, songs to listen to, or- >> There are businesses opportunities.
+Targeted advertising, product purchase suggestions and what not.
+>> Recommendations should be objective driven.
+Advertising to increase click through rate.
+Product recommendations to increase conversions.
+Recommendations for profit increase might be very different from the recommendations
+that you provide for customer satisfaction.
+>> Building a real system is a lot more complicated.
+Building a real recommendation system requires
+a lot of context specific system design
+in addition to all the basic principles that we will learn in this module.
+So if you have to build a recommendation system that works for you, this module
+will provide you with all the essential knowledge that you need In addition to all
+the knowledge that you have from your domain context or application.
+When put these two together, you will have a functional, high performing,
+recommendation system.

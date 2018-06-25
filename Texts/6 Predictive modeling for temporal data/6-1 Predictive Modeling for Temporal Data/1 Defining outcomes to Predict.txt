@@ -1,0 +1,97 @@
+
+Any predictive modeling endeavor starts with the following three
+steps, first, defining the outcome one wants to predict,
+second, searching within the data for past occurrences
+of this outcome in order to create training examples
+for the model, third, imposing constraints
+on the data that can be used for training the model.
+These constraints are based on how
+we use those predictions in the real world.
+Collectively, these steps make up
+what data scientists call prediction engineering.
+In the next three videos, we will
+go through each of these three steps.
+Let's begin by recapping the type of data we are
+working with in this module.
+The data available to us is a series
+of timestamped observations.
+In the online retail example we have been using,
+this data consists of timestamped recordings
+of each customer's interactions with
+the online retail platform.
+Each recording has the following fields, timestamp, customer-id,
+url-id, product-id, and event-type.
+Lets go through the first step in prediction engineering,
+defining the outcome we are interested in predicting.
+In the introductory video, we use the example prediction
+problem, what department will the customer buy from next?
+Let's consider a more interesting use case.
+Let's say the retailer is interested in predicting,
+will a customer make more than five purchases
+in the next month?
+The retailer will use these predictions
+to send information about deals to the customers who are
+likely to pass this threshold.
+Across domains, online retail, education, medicine,
+when outcomes of interest are specified programmatically,
+they display an interesting structure.
+Their specification usually contains four components,
+an entity about which we want to make
+a prediction, the time-varying column or columns that contain
+the pertinent information, the time
+period for which the prediction is sought,
+also known as the prediction window,
+and finally, an aggregation function,
+which is applied to the values of the time-varying column
+over the specified time period.
+In our example, the entity is the customer.
+The time-varying column is the event-type.
+This column contains all of the information about the checkouts
+that the customer has made.
+The prediction window is one month, defined here as 30 days.
+The aggregation function is, do the total number
+of checkout events over the course of a month
+add up to be greater than 5?
+With all of this in place, at any time t,
+we can calculate the outcome to be positive
+if in the next 30 days there are more than five occurrences
+of event-type is equal to checkout.
+Otherwise, the outcome is negative.
+One important thing to remember is
+that to maximize the ultimate business value,
+it may be necessary to vary these parameters
+within the problem definition, such as the prediction
+window or the threshold we set for number of checkouts.
+For example, the retailer may want
+to make more frequent predictions in order
+to send deals more often.
+To do this, he or she may change the prediction window
+from one month to one week.
+Similarly, the specified amount of purchases
+can be tuned based on the client's specific need.
+It is worth emphasizing that almost all prediction problems
+define a temporal data.
+From predicting whether an engine is
+going to fail to predicting whether a student in a course
+will drop out to predicting whether a patient in an ICU
+will have an acute hypertensive event
+can be defined in this simple, abstract way.
+Now, let's lay out an example problem for you to solve.
+Imagine that the online retailer in a retail example
+is interested in predicting a certain level of customer
+engagement.
+He defines this level of customer engagement
+as a one where the customer has had at least one purchase event
+and at least eight visits to the retail website
+over the course of one month.
+For this problem, write down, a, the time-varying column
+that can be used to compute the outcome, b, the aggregation
+function, c, the time period for the aggregation function,
+and finally, d, the parameters that you think
+can be changed in the aggregation function.
+Now, come up with the justifications
+for the parameters you choose as well as for the way engagement
+has been defined in the problem.
+Note that there is no right or wrong answer.
+It all depends on the business need at hand
+and what the retailer is trying to achieve.

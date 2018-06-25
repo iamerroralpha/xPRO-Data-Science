@@ -1,0 +1,110 @@
+Welcome back.
+During the last lecture, we've introduced the concept of a graphical model, and
+we've discussed the example of gaming in a social network.
+>> In a graphical model, the nodes of the network correspond to random variables.
+And the edges represent dependencies between these random variables.
+>> In the gaming example,
+the data are binary vectors, one vector per game, corresponding to
+a snapshot of game subscription over the whole social network.
+>> Caroline, for example, loves to play Halo, so
+she would have a one in the vector corresponding to the game Halo.
+Probably many of her friends play Halo, as well.
+>> I know, you're more of a slow-paced Settlers kind of person.
+It looks like we'll never be able to be friends.
+>> Aw.
+These binary vectors are samples from a joint distribution
+over all the nodes in the social network.
+Joint distribution is special because it inherits properties from the underlying
+social network.
+Nodes that are connected by paths in the network are dependent since each
+person's decision of playing a certain game is influenced by their friends.
+>> Hm, it's so much more fun to play Halo cooperatively with my friends.
+The new version can be played with up to three other players.
+I have much more incentive to play when at least two other friends play as well.
+Can we take this into account in a graphical model?
+>> Indeed, the graphical model is very versatile, and
+one can easily include higher order interactions.
+In fact, modeling with higher order interactions can be important.
+Here's an example.
+I have two friends who always argue.
+I love going to parties with each one of them separately, but
+I stay away from a party if I know that they will both be there.
+>> But in your example, the three-way interaction has a very different effect
+than for me when playing Halo.
+>> How so?
+>> Well, interactions have weights.
+I am more likely to play Halo when I know that two of my friends are playing.
+>> While it is important to take into account higher order interactions in some
+applications, very often it suffices to consider simple
+models that only have pairwise interactions.
+This means that the interactions are only on the edges of the underlying graph.
+For binary data, such models are called Ising models.
+Ising models were introduced to model ferromagnetism in statistical mechanics,
+and are now used all over the place.
+They are used to model neural spike patterns, likes and
+dislike of YouTube videos or Facebook posts, economic modeling,
+signal processing, computer vision, image segmentation and many other ares.
+>> Well, Ising models are really good models for binary data.
+You wouldn't want to use Ising models for continuous data.
+For example, for weather forecasting,
+I'm pretty sure nobody would be happy with a binary forecast.
+>> The only possibilities would be sunny or downpour.
+>> Exactly, for
+modeling continuous data, Gaussian graphical models are used everywhere.
+For example, for
+wind speed forecasting, modeling the interactions in the stock market, or
+in biology for modeling the interactions between genes and their expression.
+>> It makes sense that Ising models are used in a binary setting.
+But why is the use of Gaussian graphical models so widespread for
+modelling continuous phenomena?
+>> Well, the Gaussian distribution with it's nice bell-shaped form
+is easy to handle mathematically.
+In addition, the central limit theorem from probability theory tells us
+that averages of random variables are normally distributed
+when the number of random variables is sufficiently large.
+This implies that physical quantities that are expected to be the sum
+of many independent contributions often have distributions that are nearly normal.
+>> So this is why people's height is approximately normally distributed.
+Height is believed to be the sum of many independent contributions from various
+genetic and environmental factors.
+>> Yes, and similarly for measurement errors, gene expression and wind speed.
+>> Let's discuss in more detail how we could model of wind
+speed using a Gaussian graphical model.
+We have data from different weather stations across the country, so
+the weather stations are the nodes in the graph.
+What are the edges?
+>> Well, assuming that we know the wind speed in New York,
+then the wind speed in Washington wouldn't provide me with any further
+information about the wind speed in Boston given what I already know from New York.
+So wind speed in Boston and
+Washington are conditionally independent given wind speed in New York.
+>> That makes sense.
+So it seems reasonable to assume that a node is only connected by an edge to
+the closest nodes geographically.
+By the Markov property this implies that the weather in two cities is conditionally
+independent given the weather in all cities between them.
+This seems reasonable.
+>> Well, but maybe we have to be a bit more careful.
+What if two cities are spatially close by, but they're separated by a big mountain?
+>> Then the weather in these two cities is probably conditionally independent,
+given the weather in all the cities around the mountain.
+So we would remove the edge connecting the two cities,
+although they are spatially close by.
+>> So for wind speed forecasting, we can intuitively build a graphical model that
+represents the conditional independence relations that we expect to hold.
+While a meteorologist might be pretty good at doing this,
+we would certainly fail miserably.
+Using our graphical model would probably be a disaster.
+So in the next lecture, we will present principled ways for
+learning the underlying graph from data that does not require domain expertise.
+>> We end this lecture by pointing out a deep property of Ising models and
+Gaussian graphical models.
+It is known as the maximum entropy principle.
+This result tells us that the Ising model and
+the Gaussian model are extremely flexible models.
+In fact, they can capture any pairwise correlation structure that
+can be constructed for binary or for continuous data.
+Not only that, but they are the least constrained, in a precise sense.
+So although the Ising model and the Gaussian graphical model are very simple
+models, this result explains why they're able to model very complicated phenomena,
+and therefore are used in so many application domains.

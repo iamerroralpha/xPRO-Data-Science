@@ -1,0 +1,20 @@
+Hello and welcome to the module on classification and hypothesis testing.
+I'm David Garmanik from Sloan School of Management at MIT.
+I'm also a member of Center for Statistics at IDSS.
+My background is in applied probability, optimization, and algorithms.
+And I regularly teach probability statistics and
+optimization methods to Masters of Business Administration students.
+I will teach this module jointly with Jon Kelner.
+>> Hi, I'm Jonathan Kelner and I'm a professor in the Math Department and
+Computer Science and Artificial Intelligence Lab at MIT.
+My work also focuses on algorithms, optimization, and applied probability.
+And I regularly teach classes on mathematical foundations of probability,
+as well as on the algorithmic and computational techniques required to
+manipulate, understand, and extract meaning from data.
+At the beginning, we gave just one example of a concept commonly called
+classification in the field of statistics and machine learning.
+The goal of classification is to be able to place a given object into
+the appropriate category based on its attributes,
+typically given by data associated with this object.
+In the credit card example, the object is the credit card transaction nd
+there are two assigned categories, legitimate and fraud.

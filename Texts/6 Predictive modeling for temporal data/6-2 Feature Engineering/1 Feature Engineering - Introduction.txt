@@ -1,0 +1,74 @@
+
+After we have specified the prediction problem
+and generated the training examples,
+our next step is to create features.
+We do this using the data between the T start time point
+and the cutoff time point for each training example.
+A feature is a quantitative measurable property
+of a particular entity.
+In our online retail example, one feature
+could be the number of purchases a customer made.
+The customer is the entity.
+And the feature is the number of purchases.
+Feature engineering-- going from data
+all the way to the features-- presents
+a unique set of challenges.
+For one thing, it involves a lot of human effort,
+as experts play multiple roles over the course of the process.
+The first role is generating ideas based on intuition.
+Coming up with variables requires an understanding
+of what might be relevant for the predictive problem at hand.
+As humans, who have ourselves been
+customers in some shape or form, we
+self-reflect to invent features.
+For our retail example, someone might quite naturally suggest
+if a customer is making fewer and fewer purchases as time
+goes on, he or she may not make more than five purchases
+over the next month.
+The next role that humans play is to translate these ideas
+into quantitative values.
+For example, let's take the feature idea
+that we just proposed--
+whether or not a customer's purchase rate is declining.
+We might propose to measure this quantitatively
+by computing the rate of change of purchase amounts,
+or rate of change of number of purchases.
+Often a single idea can be operationalized
+into many variables.
+Finally, as humans, we bring domain expertise.
+For example, a retailer who is an expert
+in the online shopping domain might
+himself suggest a variable that captures whether or not
+the customer responded to a particular marketing campaign.
+This suggestion comes from his or her experiences,
+which have shown that if a customer doesn't respond
+to this campaign, that's a strong signal
+that the customer may stop buying
+from the retailer in the near future.
+To sum up, humans help ideate, and operationalize features,
+and bring their domain expertise into the process.
+Because these things take so much time, effort, and combined
+experience, this process represents
+a foundational bottleneck in any data science endeavor.
+To try to gather as many ideas as possible for features,
+companies often try to crowdsource
+the ideate part of the task.
+One popular data science platform,
+Kaggle, does this by holding competitions.
+Different data scientists will try to build the best features.
+And by the end, the company has many to choose from.
+Features are used to create a machine learning model.
+In our example, we have the customers table
+and the transactions table, which records all transactions
+across all customers.
+This data is too granular, and is not
+ready for machine learning.
+So our goal is to create what we call an "entity feature
+matrix," where each row is a training example,
+and each column is a feature.
+While largely a human-driven endeavor,
+there are tools to assist us in generating features.
+In the next video, we will describe an approach
+to generate features.
+And in our case study, will use a tool called "Feature Tools"
+to generate features for complex data sets.

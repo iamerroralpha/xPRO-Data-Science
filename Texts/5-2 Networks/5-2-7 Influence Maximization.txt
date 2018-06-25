@@ -1,0 +1,116 @@
+Welcome back.
+In the last lecture,
+we talked about modeling the spread of a virus, a piece of information, or an idea.
+We discussed the SI model of contagion, which stands for susceptible or infected.
+Each infected node has one shot to infect each of its susceptible neighbors, and
+this occurs independently for each neighbor with some probability P.
+In this way, the process spreads through the network
+starting with some initial set of infected nodes A.
+For each set of nodes A, the infection spreads in a random way through
+the network, and eventually stabilizes with some final set of infected nodes.
+A very natural question arises.
+If we can choose some subset of individuals to target,
+how do we choose them to maximize the spread of ideas?
+In other words, to whom should we advertise in order to maximize the size
+of the final infected set?
+Because friends recommending a product to their friends can have such
+a significant effect, viral marketing is really effective.
+This question, to whom should we advertise, is not just about making money
+since the same concepts are relevant to public opinion,
+spread of innovation or behavior.
+For example, a climate change organization may want to change public opinion
+about whether or not global warming is a serious and urgent issue.
+It's interesting to think about how in the United States,
+smoking is viewed very negatively, despite being hugely popular several decades ago.
+In Europe things are very different, with many people smoking.
+Whether you're lobbying in Congress to sway the opinion of
+political representatives, or running an ad campaign to change public opinion,
+understanding network effects is important.
+Let's modify our terminology and use inactive and active instead of susceptible
+and infected, since we're thinking about trying to maximize spread and
+I don't really want to maximize the spread of a disease.
+We can formalize the influence maximization question like this.
+Suppose we can choose a set of K initial people to adopt the behavior or
+product, thereby making them active.
+Which subset should we choose in order to have the largest expected number
+of active nodes when the process eventually stabilizes?
+Concretely, suppose we're giving away free tickets to
+the upcoming Justin Bieber concert to a few people
+in order to maximize the number of people who eventually buy tickets.
+A node is active if the individual has a ticket to the concert.
+Because the eventual set of active nodes is random,
+due to randomness in the contagion process, we look at the expected number of
+nodes that are active when the process stabilizes.
+In this lecture we'll think of the influence of a subset of nodes as
+the expected number of nodes that eventually becomes active.
+Choosing a subset of nodes in order to maximize influence is complicated.
+On one hand, it makes sense to choose nodes that are fairly spread out so
+that propagation will occur in more parts of the network.
+On the other hand, unless there's sufficient density of active nodes
+to get the process going, it might just die out.
+It's useful to think about choosing a single active node to maximize the spread.
+Luckily, there's a simple way to figure out how many nodes are expected to
+eventually become active if we have a good model for the contagion process.
+We can simply perform an experiment by simulating
+the process spreading through the network.
+If we do a number of such experiments, and average the number of individuals that
+eventually become active, we get an estimate of the node's influence.
+This is known as a Monte Carlo approach.
+It turns out that we only need relatively few runs of this experiment,
+specifically a number logarithmic in the size of the network,
+in order to get a good estimate of a node's influence.
+Doing this for each individual node in the network is relatively inexpensive.
+Suppose that there are N nodes and M edges.
+Simulating an instance of the contagion process requires that most M computations
+since each edge plays a role in the process it most wants.
+We do this Log (N) times for each of the N nodes.
+So in total, we get on the order of M times N times Log (N) computational cost.
+Unfortunately, this approach doesn't work directly in order to choose K nodes.
+While we can simulate the process starting from any subset, just like for
+a single node, there are way too many subsets.
+Roughly, there are N to the power of K subsets of nodes of size K.
+So if K is 50, and our network is the size 1,000,
+we're talking about 1,000 to the power of 50 sets that we would need to check.
+We'll never be able to search over all possible subsets to choose the best one.
+A way to avoid searching over all subsets of size K
+is to incrementally build up our influential subset A in a greedy manner.
+The algorithm is called greedy because at each step it tries to make the biggest
+possible gain in influence.
+We start by adding to A the single most influential node,
+which as we've just discussed is computationally feasible.
+Next, we find the most influential node given that nodes in A are active,
+and add it to A.
+The key here is that we can find this most influential node in exactly the same way
+as before by simulating the propagation.
+Not only this, but the search over individual nodes to add is efficient,
+because we just have to check in most end nodes.
+The algorithm stops after K iterations when we've added K nodes to our set A.
+The total amount of computation is just K times the amount of computation for
+a single node, so on the order of K times M times N times log N.
+How good is the set A that we've ended up with?
+It turns out that for quite general models of contagion, the influence of the set
+A is guaranteed to be almost two thirds of the best possible subset.
+Of course it's computationally unfeasible to find the best one, so
+this sort of guarantee gives pretty good confidence.
+And in practice, such greedy algorithms often work well.
+Let's say a few words about more general contagion models.
+You might imagine a situation where the likelihood of a node being infected by
+a neighbor can change depending on which subset of neighbors has already attempted
+and failed to infect the node.
+Think of it this way.
+The latest Apple iPhone comes out and
+whenever each of my friends buys it, they tell me about how amazing it is.
+Each subsequent friend telling me about their new phone
+does not result in me independently deciding to buy it myself.
+The tenth friend who tells me about the product will surely have less of an effect
+than the second friend.
+Nevertheless, more general contagion models, such as the so
+called Order Independent Cascade Model, can capture such effects.
+Other models incorporate thresholds for
+an individual to model a situation where I may be more likely to adopt a behavior
+only after several of my friends have adopted it.
+In many real life situations, several processes are competing with one another.
+For example, different viruses are competing simultaneously in your body.
+And videos are competing for our attention as they propagate through Facebook.
+This makes things significantly more complicated, and
+it is still very much an active area of research.

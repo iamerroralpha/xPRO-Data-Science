@@ -1,0 +1,89 @@
+
+So far, we have defined the outcome we're interested in
+and found all the past occurrences
+of this outcome in our data.
+This processing has given us a list as follows--
+entity id, cut-off time, and label.
+We now have an entire list of possible training examples
+to choose from in order to help build our predictive model.
+Our next step is to think more concretely
+about how we would like to use this predictive model
+in the real situation.
+Here are two important considerations and parameters
+that come into play--
+the lead and the training window.
+The lead is the amount of time ahead of the prediction window
+that one would like to make a prediction.
+So what does this mean in practice?
+In our example, the online retailer
+wants to predict whether a customer is
+going to make more than five purchases in the next month.
+The start of the prediction window
+is the first day of the month, and the first purchase
+could happen on any day.
+But the retailer wants to make this prediction in order
+to design a customized deal for this customer
+and needs some time to design such a deal.
+So the retailer would like to have a lead time.
+That is, he would like to make the prediction a week
+before the prediction window starts.
+Let's look at the first training example in the list.
+In this example, we see that a customer, Guy,
+made more than five purchases between August 1st and August
+31st.
+If the retailer could have predicted this outcome
+by July 24th, he would have had enough time
+to design a customized deal for Guy.
+The lead is often tied to the end use of the prediction,
+but it also has implications regarding what data we can
+and cannot use when training the model.
+In the case above, applying a lead of one week implies that
+we cannot train the model using any interactions Guy had with
+the website during the last week of July.
+For this reason, we must shift all the cut-off times by one
+week, moving them to an earlier time point.
+The second consideration relates to how much data
+we want to use in order to develop features for models.
+In our example, we could decide either
+to use one month's worth of Guy's interactions
+prior to the cut-off time, or we could also
+go to another extreme and use six months worth of data,
+or we could settle somewhere in between.
+This decision is based on a few important factors.
+First, we must consider the particular outcome
+we want to predict.
+How important do we think older patterns, say,
+those that happened six months ago,
+will be to this particular prediction problem?
+Second, how much data can we actually process in real time
+when making a prediction?
+The first question is very problem-dependent,
+and it requires domain expertise in order to answer well.
+In some cases, for example, failure prediction
+for heavy machinery, it is helpful to extract patterns
+over a large period, as the signatures
+for upcoming failures seem to manifest over
+long periods of time.
+In other cases, this older data may matter less.
+The answer to the second question
+depends upon how much time it takes
+to process the data and the throughput at which predictions
+are sought.
+Once we select the training window,
+we add another column to our list called T start.
+T start is a time point that marks the start of the training
+window.
+Next, we are ready to use the data between the T
+start and the cut-off time to develop features that we
+can feed into the model.
+We will cover this step is the next video
+on feature engineering.
+This concludes the prediction engineering part of this module.
+Over the past few years, as my research lab
+at MIT and our industrial collaborators
+have explored problems over different domains,
+we have been able to use this framework
+to define our prediction problems and prepare our data.
+Using these techniques, you can define prediction problems that
+are more relevant for your business
+and appropriately prepare your data to solve them.

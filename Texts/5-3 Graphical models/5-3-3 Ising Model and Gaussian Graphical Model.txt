@@ -1,0 +1,172 @@
+
+Hi.
+In this lecture, we're going to talk about methods
+for learning Ising models and Gaussian graphical
+models from data.
+Suppose you have access to data consisting of ratings,
+like or dislike, for 50 YouTube videos
+from everyone at the University.
+OK.
+And let's assume for simplicity that everyone
+has rated each of these videos.
+So we have binary vectors, where each vector
+contains the ratings of each person for a particular video.
+We'll assume that everyone has rated all 50 movies.
+Because the data is binary, and people
+are influenced by the people they interact with,
+it makes sense to model this as arising from an Ising model.
+Wait, but wait graph should we used to describe this model?
+That's exactly the question.
+We need to learn the graph describing
+who interacts with whom.
+Ah, I see.
+And we then also need to learn weights
+for the edges corresponding to strength of interactions.
+That's right.
+But it turns out, that it is often
+possible to first learn the graph structure,
+and then it is relatively easy to determine
+the appropriate edge weights.
+Perfect.
+We have all this data, with each person corresponding
+to a node in a graph, and we need to figure out
+where to put the edges.
+Let's add edges between people whose ratings are very similar.
+Well, this is where things get subtle.
+Just because two people's ratings are very correlated,
+this does not necessarily mean that they directly interact.
+It could be the case, that they simply
+have many friends in common.
+More generally, effects can propagate through the network.
+People who are far apart can still be highly correlated.
+What can we do?
+It seems quite difficult to find the actual structure
+of interactions.
+We know that the graphical model satisfies the local Markov
+property.
+What this means is, that your likes and dislikes are
+conditionally independent from all the other people's
+ratings, given your friends the ratings.
+If we want to test whether a particular set of people
+includes all of your friends, we can
+try to test whether the rest of the nodes
+are conditionally independent of you, given this set.
+Computationally, this procedure is only feasible
+if the size of each neighborhood is relatively small,
+meaning that every person does not have too many friends.
+This involves searching over quite a few subsets.
+This assumption seems problematic.
+Some people have a lot of friends, like Justin Bieber.
+Yeah, that's right.
+Let's think of other ways how we can determine that there
+is no edge between two nodes.
+By the global Markov property, two nodes
+are conditionally independent given a set
+of nodes that separates them.
+In particular, if there is no edge between two nodes,
+they must be conditionally independent given
+all other nodes in the network.
+This gives rise to an algorithm.
+We start with a complete graph, where everybody
+is connected to everybody else, then
+we test for each pair of nodes, whether they are conditionally
+independent given all the other nodes.
+If so, we remove the edge, otherwise we keep it.
+This can be done easily for Gaussian graphical models.
+Specifically, one can estimate the covariance matrix
+from the data.
+Then invert it.
+Any entry, I J, in the inverse covariance matrix
+is 0 up to noise, precisely when I and J are conditionally
+independent given all the other nodes in the network.
+We can use the inverse covariance matrix
+to estimate the underlying graph.
+The entries that are close to 0, can be assumed to be just noise
+and correspond to the lack of an edge.
+OK.
+This nicely shows that there is a trade-off between the number
+of samples and how large an edge weight has to be,
+so that such an algorithm can detect it as an edge.
+If we have a lot of samples, we can differentiate
+between a missing edge with zero,
+and a present edge with a very small weight, like 0.05.
+Let's make this precise.
+Let's take a network with p nodes.
+We've already discussed, that it is
+more difficult to estimate graphs that contain
+people like Justin Bieber.
+Let's denote the highest degree of any node in the network
+by D. It is known that if the number of samples
+is at least D squared times the logarithm of the number
+of nodes P, then one can detect edges
+that have weights as small as the square root of log
+P over N.
+That's a very nice result that holds
+for Gaussian graphical models.
+Why can't we do something similar for Ising models?
+The difficulty with Ising models is due to having binary values.
+If many of your friends influence you rather strongly,
+then whether you take value 0 or 1,
+will be more or less determined by them.
+In that case, you will be influenced very little
+by one additional friend with a weak edge.
+You can think of this as a saturation that
+can occur in binary models.
+In Gaussian models, a weak neighbor
+will have a more noticeable effect,
+since a continuous value always has the freedom to increase.
+OK.
+Let's return to your original idea
+of trying to learn the friends of each person.
+It turns out, that there are methods
+that can do this, and work well for both Ising models
+and Gaussian graphical models.
+These methods are called greedy methods,
+because they try to make as much progress as possible
+with each step.
+The basic idea, is to try to determine
+the neighbors of each node without searching
+over all subsets.
+Let's imagine, we're trying to determine who your friends are.
+Let's keep track of a set S, that we
+think of as possibly being my friends.
+We'll simply start by adding the node that contains
+the most information about me.
+We next add the node that contains the most
+additional information about you,
+given what we've already learned from the one node in S.
+I see, we can keep going in this way, adding at each step
+the node having the most new information about me,
+beyond what's already there in S. But when do we stop?
+Well, once our set S contains all of your friends,
+then each other node is conditionally
+independent of you, given S. That's
+because of the Markov property.
+The reason why this works well, is that each node added to S
+contains useful information about you.
+At every step a certain amount of progress was made.
+OK.
+S may contain a bunch of nodes that are not my friends,
+but not too many.
+And by the Markov property, each of the extra nodes in S
+that are not actually my friends,
+are conditionally independent of me
+given S. They can be removed in a final step.
+Yes.
+Great!
+You can now do this for each node
+to figure out its neighborhood.
+This specifies all the edges that we
+want to add to the graph.
+To find my friends, we added a bunch
+of nodes in a greedy fashion according
+to information gained, and then at the end,
+we removed the nodes they were added incorrectly.
+There are other ways to do this that often work well,
+in practice.
+Where you alternate removing and adding nodes.
+The key to these greedy methods, is that progress
+is made at each step.
+Because these methods add one node at a time,
+they're very fast, and you can scale them
+to very large graphs.

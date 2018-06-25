@@ -1,0 +1,107 @@
+
+In last video, we talked about how
+we can generate three different types of features.
+As data scientists encounter new problems,
+they write software to generate these features one by one.
+To automatically generate features
+for temporal datasets spread across multiple tables,
+we created an algorithm called Deep Feature Synthesis.
+For each of the feature types described previously,
+Deep Feature Synthesis method has a repository
+of primitives and an algorithm to automatically generate
+features using them.
+This algorithm can save significant time
+for data scientists.
+So what are primitives?
+Primitives are reusable functions
+that take a pre-specified type of input,
+do a user-defined calculation, and return
+a specific type of output.
+They are defined agnostic to a specific dataset.
+So they can be reused for different datasets.
+Let's consider an aggregate feature
+where we want to calculate how many transactions a customer
+has on Friday.
+To calculate this feature, we pull all the transactions
+for the customer, parse the timestamp
+to identify the day of the week for each of the event,
+and count the number of times day of the week
+is equal to 5, meaning Friday.
+Now, we can imagine that this feature
+can be relevant for many datasets, not just
+online retail.
+So in Deep Feature Synthesis, its designers
+created a primitive that can be used for all datasets.
+The primitive for the above feature
+can be defined as follows.
+It gets a datetime column as an input.
+It counts the number of timestamps
+whose day of the week is Friday and returns the count
+as the output.
+Once designed this way, it becomes
+part of the library for reuse and is
+part of the family of aggregation primitives.
+It's even given a name, CountFridayEvents.
+These events can be transactions or visits
+to a websites in a different context for a different web
+dataset.
+There are a number of primitives in its library,
+ranging from simple statistical functions
+like mean, mode, and others, to more complex ones, as above.
+Primitives like these that are part of the library
+are classified into two sets based on how they are applied.
+They are, A, transform primitives
+that get applied to a single table
+and, B, aggregate primitives that get
+applied to data split across two tables.
+Let's talk about aggregate primitives in depth.
+We have some more terminology to go through.
+We call the entity type that has a lot
+of data associated with it in other tables the parent entity.
+The associated data forms the child entity.
+In other words, aggregate primitives
+are applied to the data aggregated
+from a child entity for a specific instance of a parent
+entity.
+So in our case, the parent entity is the customer.
+And the child entity is the transactions.
+Each customer has one or more entries
+in the transactions table.
+The Deep Feature Synthesis algorithm
+given this dataset to extract features for the parent
+entity--
+customer in this case--
+will first pick a customer corresponding to a training
+example, pick all the transactions pertaining
+to the customer, drop the transactions
+that are outside the time period--
+t start and cutoff time for this training example.
+This aggregated data slice is ready for aggregation
+primitives.
+The algorithm can then come up with a list of features
+that can be generated given the fields in this aggregated data
+slice and the primitives available in the library.
+Since each primitive has been annotated with the type
+of input it takes, the algorithm checks
+if a column that matches the input type is available.
+Let's say we have two primitives in the library, Mode
+and the CountFridayEvents.
+Mode takes a categorical column and identifies
+the most frequent value.
+So in our dataset, the Mode primitive
+could be applied to the product ID column, URL ID column, event
+type.
+And the CountFridayEvents can be applied
+to the timestamp column.
+Thus, with just these two primitives,
+we can generate four features.
+And they are most frequent product
+visited by the customer, most frequent URL visited
+by the customer, and the most frequent event type,
+and finally, the number of events that were on Friday.
+If we expand the primitive library,
+we can expand the number of features.
+In our case study, you will work with a dataset from the New
+York City taxi system.
+You will try several different primitives
+and generate features for a particular taxi ride.

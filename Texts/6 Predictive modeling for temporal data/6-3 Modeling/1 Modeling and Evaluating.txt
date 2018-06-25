@@ -1,0 +1,91 @@
+
+So far, we have gone through many of the steps involved
+in predictive modeling.
+We have talked about how to systematically define
+a prediction problem, extract training
+examples, and for each training example, extract features.
+Now we will learn how to use what
+we have extracted in order to actually build
+a predictive model.
+By this point in the process, we have a feature matrix
+and an outcome variable.
+The outcome variable is what we are trying
+to predict using the features.
+The type of model we need depends
+on what kind of outcome variable we have.
+If the outcome variable is discrete or categorical,
+we build classification models.
+If the outcome variable is continuous,
+we build a regression model.
+Let's think back to the example problem
+we have been considering throughout this module.
+Will a customer make more than five purchases this month?
+Because we are going after a categorical variable,
+this is a classification problem, more specifically,
+a binary classification problem.
+In module 3, you learned about classification
+and how to build different classifiers.
+These were support vector machines, perceptrons,
+and logistic regression.
+You also learned how to evaluate these classifiers using
+true positive rate, false positive rate, precision,
+recall, and F-score.
+To recap, a classification model
+when trained using a feature matrix and labels
+is able to predict the label for the new set of features.
+In this video, we will cover a few practical aspects
+involved in modeling the feature matrix we assemble.
+These aspects will help evaluate the model's efficacy
+and also help practitioners select
+between multiple modeling techniques.
+Ultimately, a trained model is meant
+to be used in the real world.
+So when we are evaluating a trained model's efficacy
+in practice, we attempt to emulate
+the real-world scenario we're going to try to use it in.
+To do this, we first split the data in two parts,
+one part for training and one part for testing.
+Usually this split is 70% for training and 30% for testing,
+but one can go as high as 90/10, depending
+upon the size of the data.
+Except in certain cases, the data is split randomly.
+We then train the model using the training data,
+use it to make predictions with the test data,
+and assess its accuracy using the appropriate metric.
+Our case, however, happens to be one of those special instances
+where we can't split the data randomly.
+This is because we are using temporal data.
+Let's go through why this is the case.
+As you remember, each of our training examples
+has an associated time.
+We have called it the cutoff time.
+If we were to split data randomly,
+we could potentially have overlapping training
+and testing examples, that is, the last training example may
+have a cutoff time that occurs after the cutoff
+time associated with some of the testing examples.
+This does not represent a real-world scenario.
+Let's see why.
+See that in our case, we had hundreds
+of examples in our feature matrix, which
+started July 1, 2016, and end on September 1, 2017.
+In a real-life situation, a modeler on any particular day
+only has access to data up until that point.
+So in January 2017, the modeler can
+train a model with all the data generated up until that point
+and start using the model starting January 2.
+While training and testing the model that
+will be used in this way, we want
+to emulate these circumstances.
+But if we were to randomly sample the data instead,
+we might get training examples from January 2017,
+along with testing examples from December 2016,
+the month before.
+This is unrealistic and not representative
+of the real-world situation.
+To avoid this, we split the data based on time.
+We sort examples in feature matrix by their cutoff time,
+then choose the first 70% of the examples for training
+and the rest for testing.
+Having made this split, the modeler
+can now train the model.

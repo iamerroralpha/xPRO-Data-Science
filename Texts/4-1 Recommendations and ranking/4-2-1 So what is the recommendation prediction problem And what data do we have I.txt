@@ -1,0 +1,98 @@
+
+Now, that we have a good idea of what recommendation systems are
+and where they are used, let us look
+a little closer at the data science questions behind them.
+Specifically, what does the data look like
+and what do we want to do with it?
+It seems that a simple approach would
+be to consider this problem as a binary question.
+Given a pair, a user and a product,
+should I that recommend this product to this user?
+Yes or no?
+Classification is perhaps the best known machine
+learning problem.
+And specifically answers yes/no questions.
+So we could just use our favorite classification method,
+such as support vector machines or boosting for example,
+in the context of recommendations.
+Actually, we're going to be able to do much more than just
+giving a yes/no answer.
+We're going to be able to rank products.
+And even guess how the user would rate them.
+Let us do the first thing that we should always
+do in data a science, take a closer look at our data.
+Netflix, the video streaming service,
+is a name that is strongly associated
+to recommendation systems.
+Clearly, their goal is to recommend movies
+to their users.
+But the main reason for this is that in 2006, Netflix
+did a superb PR coup.
+They organized the competition with a grand prize
+of one million dollars to the first person
+that would improve the performance
+of their current system by at least 10%.
+While this may seem like a lot of money,
+it was actually a rather economical way
+of getting some of the sharpest minds on the planet
+to work hard on their problems.
+Academics, researchers, engineers, students, or even
+hobbyists, thousands of teams enrolled.
+It was a huge success and started the whole data science
+competition business.
+The problem was simple Netflix released
+a data of how users had rated movies on a scale
+from one to five.
+About 100 million triplets of the form--
+user, movie, rating-- were released to the competitors.
+It was effectively a giant list of the form--
+Bob rated Goodfellas, four; Emily rated Titanic, three;
+Frank rated Dirty Dancing, five.
+This is Frank.
+He really likes Dirty Dancing.
+This is called the training set and competitors
+use it to calibrate, or train, their algorithm.
+Along with the set, Netflix also released
+another million incomplete triplets of the form--
+Ted rated Rio Grande, Soledad rated Deliverance.
+The goal is to predict hidden scores.
+These were real number scores, integer number-- one, two,
+three, four, or five, but the predictions
+could be any number like 4.52.
+This was useful if your algorithm couldn't
+decide between a four or a five, it could mitigate the losses.
+The performance was measured in terms
+of what is called root-mean-squared error.
+Let's parse this term to define it.
+Let's say that a competitor predicts
+3.4, 4.1, and 2.0 but the true scores
+are respectively four, two, and three.
+The errors are 3.4 minus four, which is negative 0.6.
+4.1 minus two, which is 2.1.
+And 2.0 minus three, which is negative 1.0.
+These can be negative and cancel each other,
+so we square them to get the squared errors.
+0.6 squared is 0.362.
+2.1 squared is 4.41.
+And 1.0 squared is 1.0, then we average them
+to get the mean squared error.
+0.36 plus 4.41 plus one divided by three,
+equals approximately 1.9.
+Finally, the root mean squared error is just the square root
+of the mean squared error.
+Square root of 1.9 is approximately 1.38.
+The last square root operation is not very important
+but it allows for the following interpretation--
+on average, the algorithm made an error of about 1.4
+per user movie pair, which is not very good in this case
+actually.
+In 2006, the state of the art Netflix system
+had a score of 0.95 and the winning team
+dropped this number down to 0.85 after three years of hard work.
+Once the missing numbers are predicted,
+we can recommend movies using simple rules.
+For example, we could recommend a movie to a user
+if the predicted score is at least 4.2.
+Towards the end of this video, we'll
+see what else can be done with this predicting numbers
+and if there's something else we should be trying to predict.

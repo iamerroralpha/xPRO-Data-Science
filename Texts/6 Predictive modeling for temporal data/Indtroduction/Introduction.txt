@@ -1,0 +1,139 @@
+
+Hi.
+I'm Kalyan Veeramachaneni.
+In this module, we will cover how
+one goes about building predictive models
+from temporal data.
+Models like this are all around us.
+And we are feeding data to them every day whether we know it
+or not.
+For example, imagine that an online retailer
+is trying to predict what product a particular customer
+is most likely to buy.
+They will build a predictive model
+to figure this out using the data from the interactions
+the customer has had in the past.
+Another example might be an online education platform
+very similar to this one.
+A number of students signed up for the course.
+But as the course progresses, some of them drop out.
+The instructor wants to do something about this.
+He or she may want to predict beforehand who's
+likely to leave the course.
+Then they can intervene and motivate the students
+at the risk of dropping out.
+These two examples and others that fit in this category
+have three things in common.
+First, we are trying to predict whether an outcome of interest,
+like a purchase or dropout, is going to happen in the future.
+Second, there is a set of detailed observations available
+that have been collected over time
+that can be used to learn a model and make a prediction.
+Finally, once the prediction has been made,
+it will be used to take some kind of action,
+like offering a deal to a customer
+or helping a student who is maybe considering dropping out.
+Throughout this module, we will use retail-based scenarios
+to describe each step of the process of deriving
+predictive models from data.
+We'll also go through two case studies,
+stepping through software that is
+used to develop these models.
+Let's first imagine an online retailer who
+wants to predict which department
+a particular customer is likely to buy from--
+for example, clothing home goods, groceries, skin care,
+or electronics.
+If the retailer is able to predict this,
+he can use this information to personalize
+the browser for the customer and highlight
+the products from those departments
+or even offer a special deal.
+So let's go step by step and go through the process
+of building a predictive model to answer this question.
+The first step is seeing what kind of data
+is available to work with.
+The data collected here is a set of transactions
+that the customer has already had with the retail website.
+It comes as timestamped recordings
+for each transaction.
+For example, one recording may look
+like timestamp, customer ID, URL ID, product ID, and event type.
+Each recording, in addition to noting time it occurred
+and the customer who it belongs to, captures the URL at which
+the customer was, the product he was browsing,
+and the event type captures the type of action
+the customer took.
+The event type could be one of these five--
+browse, save for the future, add to the cart,
+check out, and check details.
+A large online retailer might produce
+millions of these interaction recordings on a single day.
+The second step in predictive modeling
+is to get very concrete and specific about defining
+the outcome we want to predict.
+In this case, we would like to answer the specific question,
+which department is the customer likely to buy from next?
+So let's say there are five departments in total--
+clothing, skincare, groceries, electronics, and goods.
+In other words, at any point of time t,
+we would like to predict which of these five departments
+a customer is most likely to buy from next.
+To train a model to predict this,
+we look at the data we have and extract
+what we call training examples.
+Simply put, a training example is made up
+of one past occurrence of the outcome we want to predict
+as well as some amount of data that was generated
+before that occurrence.
+We can use training examples to train a model.
+So in this case, let's say a customer
+brought a product from the clothing department
+on August 1, 2017.
+One trainee example would be made up
+of that purchase as well as all the interactions
+the customer had with the online retailer over a certain amount
+of time prior to August 1.
+Our next step involves searching through past data
+and aggregating a whole list of training examples
+across all customers.
+We call this process prediction engineering.
+Once we have training examples, our next step
+is to identify aspects of customer's past interactions
+that indicate he's about to buy from the clothing department.
+For example, some of these might be how many times
+did the customer click on items in the clothing department
+before making that purchase versus other departments?
+How much time did the customer spend browsing the clothing
+department?
+Each of these telltale aspects is
+computed from the data and forms a variable
+that we can then use in modeling.
+These variables are called features.
+And the process of thinking them up and writing the software
+to extract them is called feature engineering.
+Feature engineering gives us a matrix
+where each variable makes up a column.
+And each row is a training example.
+We will cover feature engineering
+in much more detail in a subsequent video.
+Once we have a matrix of features and the outcome
+we want to predict, we are ready to build a model.
+Models usually take the form f of x
+is equal to y where x is the variables and y is the outcome
+and f is a function that can be applied to x to predict y.
+In previous modules, you have learned
+how to build and assess models when a matrix of this kind
+is given to you.
+To recap from those, if the outcome variable is continuous,
+it is a regression problem.
+And if the outcome variable is discrete or categorical,
+it's a classification problem.
+Building regression models was covered in module 2.
+And classification models were described similarly
+in module 3.
+We will cover this further in a subsequent video.
+And we will also explain how to evaluate
+predictive models that have been developed over temporal data.
+Finally, with the predictive model in hand,
+the retailer is ready to use it to make a prediction.

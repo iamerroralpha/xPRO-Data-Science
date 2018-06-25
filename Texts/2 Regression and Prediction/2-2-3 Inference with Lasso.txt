@@ -1,0 +1,57 @@
+In this segment we discuss how to use loss to answer the inference question.
+Which is how the predictive value of y change
+if we increase the component of t(x) by holding the other components of x fixed.
+The answer is a population regression coefficient Beta 1 corresponding to
+the regressor D.
+And here would like to discuss how to use Lasso to estimate and
+construct confidence intervals for beta 1 in the high dimensional setting.
+We write the regression equation as Y equals beta 1D plus beta 2 w plus epsilon,
+where d is the target regressor and w's our d controls.
+We recall from part one of our module that after portioning out
+we ended up with a simplified regression equation.
+Tilda Y = tilda d beta 1 + epsilon where epsilon is uncorrelated with tilda d.
+Here, tilde Y and tilde D,
+are the residuals that are left after parceling out the linear effect of W.
+As we argued in part one, this allows us to obtain beta 1 as a coefficient
+in the linear regression of tilde Y and tilde D.
+D in the population recovers the partialling-out procedure.
+For estimation purposes, we have a random sample of Yis and Xis.
+Our main idea here is that, we will mimic in the sample
+the partialling-out procedure in the population.
+Previously, when p over n was small, we employed least squares
+as the Prediction method in the partialling-out steps.
+Here p over n is not small, and
+we employed instead the Lasso method in the partialling-out steps.
+So let us explain this in more detail.
+First we round the lasso regression of Yi on Wi and of Di on Wi and
+keep the resulting residuals called check Wi and check Di.
+Second we run the list squares of check Wi on check Di.
+The resulting estimated regression confusion is our estimator check beta one.
+Our portioning out procedure was loss all.
+It relies on approximate sparcity in the two portioning out steps.
+Indeed, theoretically, the procedure will work well if the population regression
+coefficients and the two parceling out steps are approximately sparse,
+with a sufficiently high speed of degrees of assorted values,
+as shown in the conditions that you see here.
+Now we present the following theoretical result which reads, Under the stated
+approximate sparsity and other regularity conditions, the estimation error in
+check Di and check Yi has a negligible effect on check beta 1.
+And check beta 1 is approximately distributed as normal variable with mean
+beta 1 and variance V over n where expression of the variance appears here.
+That is we can say that the estimator check beta 1 concentrates in a square root
+of V / n neighborhood of beta 1 with deviations controlled by the normal law.
+We can use this result just like we used the analogous result for
+the low dimensional case in block one.
+We can define the standard error of check beta one as square root of hat v over n.
+Where hat v is an estimator of v.
+This is our quantification of uncertainty about that one.
+We then provide the approximate 95% confidence interval for beta 1,
+which is given by the estimate check beta 1 + or- two standard errors.
+So let's give a summary.
+In this segment, we learnt how to estimate the target regression estimate,
+beta one, in the high dimensional regression problem.
+We use Lasso to obtain estimates of the outcome Y and
+target regression D net of the effect of the effect of other regressors W and
+then run least squares of one on the other.
+Then we argued that the resulting estimator check beta1 is high quality
+estimator beta1 and we constructed a confidence interval for beta1,

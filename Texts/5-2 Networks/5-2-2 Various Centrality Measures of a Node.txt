@@ -1,0 +1,164 @@
+In the last few lectures, we have introduced networks, given many examples
+of networks, and shown how to represent a network using an adjacency matrix.
+The adjacency matrix representation allows us to use a computer
+to efficiently find various properties of the network.
+In the next three lectures, we will discuss different ways of quantifying and
+computing the importance of nodes, as well as other network properties.
+When presented with a relatively small network,
+our eye is very good at picking up patterns, such as hubs or clusters.
+However, once a network reaches hundreds of nodes,
+it becomes difficult to visualize it.
+The network usually looks like one big hairball.
+So, we want to probe a network, find the important characteristics of the network.
+Not by visualizing it, but
+from computations based on its adjacency matrix.
+In this lecture, we will discuss how to determine important or
+central nodes in a network.
+The importance, or centrality measure of a node, of course,
+depends on the application.
+So, let's return to the example of a social network like Facebook, and running
+an advertising campaign for the upcoming Justin Bieber concert via Facebook.
+Assume we would like to give away one free ticket
+to the most influential person in the network.
+Hoping that this person will then motivate his or her friends to buy tickets and
+go to the concert as well, and these friends will motivate their friends, etc.
+This will result in a cascade of people buying tickets for the concert.
+One strategy is to give away the ticket to the person in the social network
+that has the most friends.
+In a social network, each person is a node, and
+an undirected edge between nodes represents their friendship, so we would
+like to determine the node with the highest number of edges connected to it.
+The degree of a node is defined as the number of edges that are adjacent to it.
+So, in mathematical terms, we would like to determine the highest degree node.
+How can we do this using the adjacency matrix?
+Well, the adjacency matrix contains a one in row i and column j,
+if person i is friends with person j, and a zero, otherwise.
+So, if we want to know the number of friends of person i,
+we just add up all the entries in row i.
+And by computing each row sum, we obtain the degree of each node.
+Then we can give away the free ticket to the node with the highest degree.
+However, as we've already discussed, we might not want to define the importance
+of a person just by the number of friends that this person has.
+If we want to achieve a cascade of people buying tickets for
+the upcoming concert, we should also take into account how important the friends
+of a particular person are, and their friends, etc.
+So, if a person has many friends, but these friends have very few friends,
+then that person might be less influential than a person with fewer friends.
+But who's friends have many friends?
+So, how should we quantify this?
+Well, one way, is by the so called Eigenvector Centrality.
+This centrality measure gives each node a score
+that is proportional to the sum of the scores of all of its neighbors.
+We've already seen that eigenvectors of the adjacency matrix
+can be used to determine if a directed graph is cyclic or acyclic.
+But what do eigenvectors have to do with the centrality or
+the importance of a node?
+Well, we would like to give each node a score
+that is proportional to the sum of the scores of all of its neighbors.
+In order to do this, we need to know the scores of its neighbors.
+Put this way, it's not exactly clear how to start this process,
+since each score depends on the scores of its neighbors, which we don't know.
+So, let's just start things off by guessing a score for each node.
+Since I don't have any background information,
+I will give each node a score one.
+I will store the list of scores of each node in the network as a vector, and
+I'll call this vector X.
+So, Facebook is a network with over a billion nodes.
+So, x is a vector of size one billion.
+Now, we can compute each entry of x
+by replacing it by the sum of the cetralities of all of its neighbors.
+For example, for the entry in x corresponding to guy,
+this means that we have to sum all the entries of x corresponding to his friends.
+Since the adjacency matrix has a 1 in position j of row i,
+if an only if person j is friends with person i,
+we obtain the new score of person i by multiplying row i with x.
+This means that we can obtain the new score of everyone in the network,
+all at once, by multiplying the adjacency matrix with x.
+Okay.
+But we're not done yet.
+We need to repeat this process over and over again.
+In fact, one can show that this process stabilizes.
+Meaning that after many steps, let's say T steps, the vector XT,
+does not change compared to the previous score vector XT minus 1.
+In addition, one can show that the final score vector XT is proportional
+to the eigenvector, corresponding to the largest eigenvalue of the adjacent matrix.
+So, that's how the eigenvector enters into the picture.
+Let's remind ourselves of the definition of an eigenvalue,
+and its corresponding eigenvector.
+So, given a matrix A, V is an eigenvector of A,
+if multiplying by A, doesn't change the direction of which V is pointing,
+it only scales the vector by landa.
+So, the eigenvalue landa, and its corresponding eigenvector V,
+satisfy the equation A times V is equal to landa times V.
+Since the score vector X is an eigenvector of the adjacency matrix,
+it satisfies lambda times X equal to A times X.
+Where lambda is the largest item value of A.
+But this shows exactly that for example,
+my centrality is proportional to the sum of all the centralities of my friends.
+Exactly what we wanted.
+And since eigenvectors can be calculated efficiently, even for
+very large matrices, we can perform this computation even for
+very large social networks, like Facebook, for example.
+So, using the eigenvector centrality measure,
+we might end up giving away the ticket to someone who doesn't have the most friends
+in the network, but who's friends themselves are very well connected.
+And whose friends are friends are also very well connected.
+So, we now know how to find important nodes in a social network
+where the edges are on directed.
+But what about networks with directed edges?
+Take for example, the world wide web.
+Anyone can build a website that links to hundreds of other websites, so
+it's easy to get a high outdegree.
+But it is reasonable to assume that a page is important if it has many pages
+linking to it, or in other words, it has a high indegree.
+Now the direction of the edges play a role, indegree matters,
+while outdegree doesn't.
+This can, in fact,
+can easily be taken care of when computing the eigenvector centrality.
+For directed graphs, the adjacency matrix is usually not symmetric, and this mean
+that it has left and right eigenvectors, which are in general distinct.
+The right eigenvector captures the centrality from the in degree.
+Whereas, the left eigenvector captures it from the out degree.
+To determine the importance of a website, we would use the right eigenvector.
+Whereas, for example, in order to find a cell that is malfunctioning, and
+therefore, secreting a lot of protein signals to other cells,
+then we would use the left eigenvector.
+So, if we're talking about websites, you might wonder, how does Google determine
+the list of suggested websites when you perform a search?
+Does it really use the right eigenvector of the adjacency matrix?
+In fact, it uses a centrality measure that is
+very similar to the eigenvector centrality.
+It's called Page Rank.
+So, the eigenvector centrality has two basic issues that
+are addressed by page rank.
+First, consider a directed acyclic graph, so a graph with no directed cycles.
+Since all of the source nodes in a DAG have no incoming edges,
+their score is zero.
+Now, let's look at all the neighbors of the source nodes.
+Since all of the nodes pointing into these nodes have score zero,
+their score is also zero.
+What this means is that eigenvector centrality of all nodes in a DAG are zero.
+And hence, does not contain any information at all.
+Now, this problem can be addressed pretty easily by giving
+each node a certain amount of centrality for free.
+And that's exactly what a page rank does.
+Now, the second problem of the eigenvector centrality
+is that a node with a high score,
+that points to thousands of other nodes, gives all of these nodes a high score.
+However, when thinking about the world wide web, this is probably not reasonable.
+Since the effect of being linked to from an important website
+is diluted by all the other websites that are also linked to.
+Nobody is going to try every possible link from a page with 1,000 links.
+So, page rank takes this into account by normalizing the scores that a website
+transfers to its neighbors by the number of outgoing edges.
+So, a website will have high centrality.
+If important websites point to it, and
+those don't have too many outgoing links themselves.
+In this lecture, we've discussed how to determine important nodes in
+a social network, and how google sorts websites by importance.
+Eigenvector centrality works well for undirected networks,
+such as a social network, where the edges represent friendship.
+Page rank works well for directed networks such as the world wide web.
+Page rank is a central part of Google's website ranking technology.
+And we saw today how it works.
+In the next lecture, we'll talk about others and neutrality measures.

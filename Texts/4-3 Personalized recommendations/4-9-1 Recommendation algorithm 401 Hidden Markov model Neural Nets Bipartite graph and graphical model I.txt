@@ -1,0 +1,93 @@
+Today we are going to discuss how to design recommendation systems
+using graphical models and neural networks.
+The primary algorithmic approach for recommendation or personalization
+that we have discussed so far has been based on the view of matrix completion.
+We view user preference data as a matrix.
+And the goal of the recommendation algorithm is to complete the matrix
+by filling missing entries in this matrix.
+The view of matrix completion provides us a way to fill missing preference data.
+This view, however, has few limitations.
+First, the matrix completion view assumes
+that the relationship between preferences of users is somewhat simplistic.
+It could be explained by simple relationship that is behind
+collaborative filtering or matrix factorization algorithm.
+In reality this relationship could be quite complicated.
+Second, the matrix completion view assumes that the user preferences are static.
+In reality user preferences evolve over time.
+For example, movies that may seem excellent choice now may not remain
+excellent choice a decade later.
+Today we shall discuss how to address these two challenges.
+We will discuss an approach to address them using formalism
+of what is known as graphical models.
+Okay so, what are graphical models?
+Well, in a nut shell, graphical models provide succinct representation that can
+capture a generic dependency relationship between various objects of interest.
+This representation is of particular interest in statistics and
+machine learning because it is amendable to scalable computation.
+Precisely what we shall discuss is how to use graphical model
+to address these two challenges.
+First, probabilistic graphical models
+will help us capture intricate relationships between user preferences.
+Second, graphical model, with Markovian structure,
+can capture the temporal aspects of user preferences in recommendation system.
+Let us start by discussing how probabilistic graphical models can
+help capture intricate relationship between user preferences.
+For the purpose of explanation, we shall rely on our favorite Netflix example.
+We have users and movies.
+We shall assume that each user either likes a movie or dislikes a movie.
+For example, suppose we have four movies, Casablanca, Iron Man,
+Godfather, and Batman.
+Then we have four nodes in the graph, the edges between these nodes
+should capture the relationship between the movie preferences across all users.
+Intuitively an edge between Casablanca and Godfather might suggest that there is some
+form of relationship between preferences of users for Casablanca and Godfather.
+For each user each node is assigned value plus one or minus one depending on whether
+the particular user likes that movie or does not like that movie.
+As a collection, all users are defining a distribution over +1 and
+-1 value assigned to all nodes.
+It is this distribution that the graphical model captures
+using appropriate edge structure and associated parameters.
+And it is this distribution that is truly capturing the relationship between
+preferences of all users.
+So now let us discuss, what are the parameters associated with the graph?
+To describe them, we shall consider a specific paramaterization for
+such a graphical model, also known as Pairwise Graphical Model.
+In this paramaterization,
+there is a distinct parameter associated with each node and edge of the graph.
+In the four node graph example let us say theta one is the parameter
+associated with node one.
+And so on.
+There are a total of six pairs of edges and
+hence in principle there are six edge parameter associated with them.
+These parameters describe distribution of the four nodes taking plus one or
+minus one values as follows.
+So let us say sigma one denotes the value associated with node one,
+could be plus one or minus one, and so on.
+Then, the probability of the four variables
+having this particular assignment is proportional to the following formula.
+You'll get positive formalized learning.
+Probability is proportional to exponential of summation of two terms.
+The first term is the summation of four elements,
+each corresponding to one of the four nodes.
+The second term is the summation of six elements
+each corresponding to each of the edges.
+The graphical model does describe and cord the relationship between user preferences,
+or movies, through these node and edge parameters.
+For example, if user population is such that all like all the movies,
+the parameterization where edge parameters are equal to zero and
+node parameters equal to infinity.
+Describes the corresponding graphical model.
+That is the graph has no edges.
+In practice, the parameter need to be learned from the observations.
+The model capture relationship across all movies
+therefore at first glance it may appear that we will need to observe
+user's preferences over all movies to learn all these parameters.
+Can we learn parameters of the graphical model from sparse user preferences?
+The answer is somewhat surprisingly, yes.
+It suffices to observe very little data as long as across all users
+we have observed preferences between all pairs of movies.
+We should be able to estimate the pairwise moments of all nodes.
+It means that we should be able to estimate the following.
+The fraction of users that like both movies, that like one movie but
+not the other one, and the fraction of users that dislike both movies.
+Amazing isn't it.

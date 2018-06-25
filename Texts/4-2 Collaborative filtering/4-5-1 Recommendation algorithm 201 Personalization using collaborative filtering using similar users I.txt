@@ -1,0 +1,88 @@
+
+Recall that our problem is to fill out
+a giant matrix using only a tiny fraction of its entries.
+In the case of the Netflix Prize data set,
+each row corresponds to a user and each column corresponds
+to a movie.
+Here's Frank.
+And here are the movies that Frank rated.
+Here's the movie Dirty Dancing that Frank rated 5.
+In the previous video, Devavrat
+showed us a method to rank items or movies
+from noisy observations of their ratings or scores.
+One of the crucial assumptions that he made
+was that there was only one single score for each item
+and, therefore, one single ranking.
+Assume, for example, that the 500,000 users in the Netflix
+data set are all of the same type as Frank.
+So let's call them Frank 1, Frank 2, Frank 3, et cetera.
+They would give the following ratings for the movie
+Pulp Fiction, say.
+Frank 1 would rate it a 4.
+Frank 2 would also rate it a 4.
+Frank 3 would rate it a 5.
+Frank 4 would rate it a 3, et cetera.
+So rather than thinking about all these Franks,
+we might as well think about Average Frank, whose rating
+is 4 plus 4 plus 5 plus 3, et cetera, divided
+by the total number of Franks, which is 500,000.
+This gives the average score for the Franks, say, 4.1.
+So we could then fill out all the missing entries
+for the movie Pulp Fiction by entering 4.1 for all users.
+And this would be good, if all users
+had essentially the same opinion of Pulp Fiction,
+apart from small fluctuations.
+This approach might be good enough for Yelp.
+After all, we're all comfortable with the idea
+that there's a universal skill of good food and culinary
+guides, such as the Michelin Guide or Zagat are
+built on this very premise.
+More generally, we live in a society
+that's obsessed with rankings.
+And the very notions of top 100 places
+to live or top 10 party schools implicitly assumed
+that everyone has the same preferences in these matters.
+Of course, these notions are very subjective.
+And this is where personalisation
+enters the picture.
+Believe me when I tell you that my preferences are
+very different from Frank's preferences.
+I don't like Dirty Dancing.
+I'm more of a Jerry Maguire fan myself.
+But if anyone asks, I'm into action movies.
+I like my Bourne trilogy.
+Now, let's assume that Netflix has only two types of users.
+[? Half ?] of them are versions of Frank,
+who love Dirty Dancing and hate the Bourne Identity.
+And the other half are versions of me
+who have exactly the opposite movie tastes.
+If there are only action movies or chick flicks,
+then the full matrix would now look like this.
+Here, the matrix has been color coded for better visualization.
+A darker color means a higher rating.
+With the extra fluctuations that account for small variability
+among users in movies, it would look more like this.
+The low ratings would be a bunch of numbers closer to 1.
+And the high ratings would be a bunch of numbers closer to 5.
+This picture is somewhat misleading, though.
+You get such a matrix when the first rows correspond
+to users similar to Frank and the first columns correspond
+to action movies.
+In reality, the rows and columns are in a scrambled order.
+And even in this simple case, two types of users, Frank
+and me, two types of movies, chick flick and action,
+the picture is much more complicated
+and looks more like this.
+This picture actually represents the matrix
+that we're trying to reconstruct.
+But remember that we don't observe most of the ratings.
+There are only 1.2% of the entries of the Netflix matrix
+that are known.
+And what we actually have to work with is this.
+In this matrix, white means that we do not observe the entry.
+From this mostly empty matrix, our goal
+is to recover the original checkerboard pattern.
+Good luck with that.
+It turns out that a technique called collaborative filtering
+allows us to solve this problem using a basic machine learning
+method called nearest neighbors.

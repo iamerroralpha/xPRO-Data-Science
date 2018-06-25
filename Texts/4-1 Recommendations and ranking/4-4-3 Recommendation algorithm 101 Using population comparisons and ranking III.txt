@@ -1,0 +1,95 @@
+Let us understand the scoring rule.
+For this, let us consider a scenario where we have only two options, A and B.
+That could be candidates in an election, restaurants, or sports teams.
+Imagine what you are excited about right now.
+I'm gonna think of A and B as sports teams.
+Suppose A and B play ten games between them.
+Out of these ten games, A wins nine and B wins one.
+So what should the scores for A and B be?
+If you follow about simple rule that I described,
+it would suggest that A won 90% of the games and hence its score should be 0.9.
+B won 10% of its games,so its score should be 0.1, simple.
+But what if they A had won all ten games.
+Should we be giving score of one to A and zero to B?
+Think about it.
+This doesn't make sense because implicitly it seemed to suggest that B has
+no chance of winning against A, ever.
+It is true that A is pretty good compared to B.
+Self explanatory in A winning all the ten games.
+But that does not rule out possibility of B not winning once in future.
+It is worth reminding us of our favorite coin example.
+One where we think of outcomes of games between A and
+B is the outcomes of tossing a coin.
+Every time A and B play a game.
+We toss a coin.
+If toss comes up head, A wins.
+If toss comes up tail, B wins.
+Then we're asking the question that if we have tossed coin ten times and it
+has turned up head all the time, does that mean that the bias of the coin is one?
+No.
+Remember We can have a small chance of this happening
+even when bias of coin might be much smaller than one.
+And more so if bias of coin is close to one.
+For example, if bias of our coin was 0.99 then it will take,
+on average, 100 coin tosses to see even one tail.
+Putting it other way, whether your coin has bias of 0.990 or
+0.995, You would most likely see the first ten outcomes as heads in either case.
+And so no way you can differentiate between these two scenarios with
+limited data.
+And the reason why we should not assign one to A and
+zero to B when we see that A has won all ten games.
+All right, so we know that we cannot do that.
+But then what shall we do?
+Well, like most simple questions in life,
+this question has a fascinating history too.
+Let me ask this question another way.
+What is the chance of Sun rising tomorrow?
+Let me try to explain this with the following mind experiment.
+Suppose every day in the morning before Sun rises, I'm sitting and tossing a coin.
+The coin turns up head, we see sun rising.
+If coin turns up tail, we see sun not rising.
+For age of Earth which is roughly 1.6 trillion days, give or
+take, we have seen sun rising every day.
+So we have seen outcome of coin being head 1.6 trillion times.
+Now what is the chance that Sun will not rise tomorrow?
+That is, can we estimate bias of the coin based on our observations thus far?
+Like setting off A and B, where A has won all games,
+we can not rule out a small chance of Sun not rising.
+So the question is, how small is it?
+Pierre-Simon Laplace, a French mathematician and
+physicist asked this very same question in the 18th century.
+He suggests a very simple answer.
+Well, in one extreme case, we will see that sun will not rise tomorrow
+then why not we go with that as our observation and open the biased estimate?
+That is we add a correction of plus 1 to both of our observations,
+that is, number of times sun has risen and number of times sun has not risen.
+Or number of times A has won and the number of times B has won.
+And use them to obtain the bias estimation.
+In the case of our example, we will take the true outcomes of A's loss and
+wins and add plus one to each.
+So in this example, where we had A winning ten games and A losing zero games,
+you will define the score of A as 10 plus 1 which is corrected victories divided
+by 10 plus 2, which is corrected total number of games it has played.
+That is, 11 by 12, rather than 1.0.
+And this will give the score of B similarly 1 by 12, that's it.
+Effectively each option sports team or restaurant is given score equal to
+the fraction of games it wins, with the added plus one correction to allow for
+error introduced due to small sample size as we just discussed.
+This is a reasonable scoring rule.
+What is so tricky about it?
+It's like saying that a team score is equal
+to the proportion of the games it wins.
+Hm, sounds too simple isn't it?
+Because if so you would like your team to keep playing with the weakest team in
+the league and hence it keeps winning all the time.
+Not good or a robust code.
+Defeating a player ranked number one should definitely count for
+more than defeating a player with thousands ranked multiple times.
+In some sense, we want to have a weighted scoring.
+You want to weigh each victory, depending upon whom you have defeated.
+And then average.
+Great, a lot of fun, we have covered so
+much history while dealing with games, coins, and comparisons.
+Is there any hope of having more excitement in the same section today?
+Well, if you doubted that, you were wrong.
+We have a lot more to discuss before we end this section.

@@ -1,0 +1,68 @@
+When you think of personalization,you think of user personalization.
+Each user should have his own recommendation, right?
+We know exactly how to do that.
+Group users according to similar preferences and
+fill the gaps based on users that are close to you.
+In the Netflix example, items were movies.
+To measure similarity between users we compute
+inner products between two profiles of users, that is two rows in the matrix.
+The main limitation of this approach is that these rows are mostly empty.
+Each user has rated a very small fraction of movies.
+We end up multiplying a lot of true ratings by our artificial rating, three,
+that we use as a place holder for empty entries.
+Recall this example.
+Here, about half of the entries were missing, the red entries, and
+that's where we put a three.
+In practice we color code black for a present entry and red for missing entry.
+The picture looks much more like this.
+It's a drop of black in an ocean of red.
+This has pretty drastic consequences when we're taking inner products.
+Let's try to align two such rows on top of each other.
+As you can see, there's very few overlap between the black present entries.
+To measure the extent of this problem, we need a better understanding of how missing
+entries are distributed across the matrix.
+How are these entries field and spread across the movies?
+Did some users rate more movies, or
+did they all rate pretty much the same number of movies?
+Were some movies rated much more than others?
+To answer these questions, let us look at some data.
+Let us start with the number of ratings per users.
+As we can see, it has a really long tail.
+A few users rated up to 40,000 movies, but
+most of them rated a much smaller number of movies.
+This image is consistent with having each user rate each movie
+at random with a probability of 1.2% independently across users.
+In technical terms, this looks like a poisson distribution.
+How about the number of ratings per movies?
+This is essentially the same phenomenon.
+A few movies have received up to 250,000 ratings, but
+most of them have received very few ratings.
+The most rated movies include Miss Congeniality and Independence Day for
+example.
+The impact of the second plot is much more drastic though.
+Indeed, if a few movies have a lot of ratings then they're probably popular,
+which in turn means that they are likely to be watched and then rated.
+Therefore, it makes sense to focus our efforts on these movies.
+For these movies, we have a lot of ratings.
+And therefore, we can take the inner products between columns rather than rows.
+It has a significant advantage over taking in products between rows.
+There are many more collisions.
+Let's make a quick calculation.
+The proportion of entries that are filled for the movies Independence Day and
+Miss Congeniality are about 250,000/500,000, which is about one half.
+Therefore, if we place the two columns next tot each other and compute their
+inner product, we an estimate the number of collisions as follows.
+We have 500,000 times one half for the first column and
+one half for the second column, which is 125,000 collisions.
+That's a lot, and the good news is that we'll get a large number for
+most of the popular movies.
+In turn, this means that we'll have a much more accurate measure of similarity
+between popular movies.
+So rather than doing user personalization, we can do item personalization.
+And it's exactly the same picture as before.
+If Dirty Dancing gets ratings that are similar to Ghost, for example,
+then the missing entries for Ghost should be close to the entries for Dirty Dancing.
+As we'll see in the case studies,
+this item based personalization is much more predictive than the user based ones.
+For exactly the reason that we mentioned before.
+The movies that really matter have a lot of ratings.

@@ -1,0 +1,158 @@
+In this segment, we consider inference for the modern nonlinear regression.
+Recall the inference question.
+How does the predicted value of Y change if we increase a regressor D by a unit,
+holding other regressors Z fixed?
+Here we answer this question within the context of the partially linear model
+which reads, Y = beta D + g of Z + epsilon.
+Or the conditional expectation of epsilon given Z and D = 0,
+where Y is the outcome variable, D is the regressor of interest, and
+Z is the high dimensional vector of other regressors or features called controls.
+The coefficient beta provides the answer to the inference question.
+In this segment, we discuss estimation and confidence intervals for beta.
+We also provide a case study in which we examine the effect of gun
+ownership on homicide rates.
+In order to proceed, we can rewrite the partial linear model in the partialled-out
+form as tilde Y = beta tilde D + epsilon,
+where expected value of epsilon times tilde D equals zero.
+And where tilde Y and
+tilde D are the residuals left after predicting Y and D, using Z, namely.
+Tilde Y is equal to Y minus l of Z.
+Tilde D is equal to D minus m of Z, where L of Z and
+M of Z are conditional expectations of Y and D given Z.
+Our decomposition can now be recognized as the normal equations for
+the population regression of tilde Y on tilde D.
+This implies the Frisch-Waugh-Lovell theorem for
+the partially linear model which states that the population regression coefficient
+beta can be recovered from the population linear regression of tilde Y on tilde D.
+The coefficient is the solution to the best linear prediction problem
+where we predict tilde Y by linear functional of tilde D.
+We can give an explicit formula for
+beta which is given by the ratio of the two averages that you see in the formula.
+We also see the beta is uniquely defined if D is not perfectly predicted by Z, so
+that tilde D has a non-zero variance.
+The theorem asserts that beta can be interpreted as a regression coefficient,
+or residualized Y on residualized D, where the residuals are defined
+by taking out the conditional expectation of Y and D given Z from Y and D.
+Here we recall that the conditional expectations of Y and
+D given Z are the best predictors of Y and D using Z.
+Now we proceed to set up an estimation procedure for beta.
+Our estimation procedure in the sample will mimic the partialling out procedure
+in the population.
+We have an observations on Yi, Di, Zi.
+We randomly split the data into two halves.
+One half will serve as an auxilliary sample,
+which will be used to estimate the best predictors of Y and D given Z, and
+then estimate the residualized Y and residualized D.
+Another half will serve as the main sample and
+will be used to estimate the regression coefficient beta.
+Let A denote the set observation in the auxiliary sample and
+M the set if observations names in the main sample.
+Our algorithm proceeds in three steps.
+In step one, using auxiliary sample,
+we employ modern nonlinear regression methods to build estimators hat l of Z and
+hat m of Z are the best predictors, l of Z and m of Z.
+Then using the main sample, we obtain the estimates of the residualized quantities.
+Check Yi = Yi- hat l (Zi), and
+check Di = Di- hat m(Zi) for each i in the set M.
+And then using ordinary squares, check Yi on check Di will obtain
+the estimate of beta, denoted by hat beta one, and defined by the formula.
+In step two, we reverse the roles of the auxiliary and main samples,
+repeat step one and obtain another estimate of beta denoted by half beta two.
+In step three, we take the average of the two estimates from steps one and
+two obtaining the final estimate at beta.
+Using the formula it can be shown that the four ling result quote, if estimators
+had l of zed and had m of zed provide approximation to the best predictors l of
+zed and m of zed that are sufficiently of high quality, then the estimation error
+in estimated visualized quantities have a negligible effect in hat beta, and
+hat beta is approximately distributed as a normal variable would mean beta and
+variance V over n for the expression of the variance appears in the form.
+In words, we can say that the estimator hat beta concentrate in the square root
+of V over n neighborhood of beta which deviation control by the normal law.
+We can now define the standard error of hat beta and
+square root of hat V divided by n where hat V is an estimator of V.
+The result implies that the confidence interval given by the estimate
+plus minus two standard errors covers the true value beta for
+most realizations of the data sample.
+More precisely approximately 95% of the realizations of the data sample.
+In other words,
+if our data sample is not extremely unusual, the interval covers the truth.
+Given that we can use a wide variety of methods for estimation of L of Z and
+M of Z, it is natural to try to choose the best one using the data splitting.
+In the construction we described we use the auxiliary sample A to estimate
+predictive models using modern non-linear regression methods, we can, in principle,
+use the main sample, m, as the validation or
+test sample to choose the best model for predicting y, and the best model for
+predicting d, following the procedures we explained in the previous segment.
+Or we can use the main sample m to aggregate the predicted models for
+y and aggregate the predicted models for g, using least squares or
+lasso following the procedures we explained in the previous segment.
+The previous inferential result continues to hold if the best or
+aggregated prediction rules are used as estimators had m of Z and
+hat l of Z of m of z and l of z in the algorithm we presented above.
+The required condition for this is that the number of rules we aggregate over or
+choose from is not too large relative to the overall sample size.
+We provide a precise statement of the required condition in the supplementary
+course materials.
+We'll next consider the case study where investigate the problem of
+estimating the effect of gun ownership on the homicide rates in the United States.
+For this purpose, we'll estimate the partially linear model,
+where Yj,t = beta D j, (t- 1) + g of Zj,t + Ej, t.
+Here, the outcome Yj,t is a log of the homicide rate in the county j at time t.
+Dj, t- 1 is a log of the fraction of suicides committed It was a firearm in
+the county j at time t minus one, which we use as a proxy for gun ownership and
+Zj,t are control variables which include demographic and
+economic characteristics of county J at time T.
+The parameter beta here is the effect of gun ownership on the homicide rates
+controlling for county level demographic and economic characteristics.
+To account for heterogeneity across counties and time trends in all these
+variables, we have removed from them the county-specific and time-specific effects.
+Let is now describe the data sources.
+The sample covers 195 large United States counties between the years
+1980 through 1999, giving us to 39 hundred observations.
+Control variables Zjt are from the U.S. Census Bureau and contain demographic and
+economic characteristics of the countries such as the age distribution,
+the income distribution, crime rates, federal spending, home ownership rates,
+house prices, educational attainment, voting patterns, employment statistics,
+and migration rates.
+As a summary statistic, we first look at a simple regression
+of the outcome on the main regressor without controls.
+The point estimate is 0.28 with the confidence interval ranging from 0.17 to
+0.39.
+This suggests that gun ownership rates are related to gun homicide rates.
+If the gun ownership increases by 1% relative to trend, then the predicted gun
+homicide rate goes up by 0.28% without controlling for counties' characteristics.
+Since our goal here is to estimate the effect of gun ownership after controlling
+for a rich set of county characteristics, we next include the controls and estimate
+the model by an array of the modern regression methods that we have learned.
+We present the results in a table.
+For the first column shows the method we used to estimate M of Z and L of Z.
+The second column shows the estimated effect and
+the final column shows 95% confidence interval for the effect.
+The table shows the estimated effects of lagged gun ownership rate
+on the gun homicide rate, as well as the 95% confidence bands for these effects.
+We first focus on the Lasso method.
+The estimated effect is about 0.25.
+This means that a 1% increase in gun ownership rate as measured by the proxy,
+this predicted quarter percent increase in gun homicide rates.
+The 95% confidence interval for the effect ranges from 0.12 to 0.36, similar point
+estimates and confidence intervals obtained by the Least Squares method.
+The Random Forest also gives similar estimates, however,
+the confidence interval for
+this method is somewhat wider, covering the range from 0.7 to 0.42.
+Next, in order to contract best estimate of beta,
+we evaluate the performance of predictors had L of Z sets and had M of Z
+estimated by different methods on the auxiliary samples using the main samples.
+Then we pick the methods giving the lowest average, MSE.
+In our case, ridge aggression and Random Forest give the best performances
+in predicting outcome and the main regressor respectively.
+We then use the best methods as predictors and
+estimation procedures as described above.
+The resulting estimate of the gun ownership effect is 0.24 and
+is similar to that of Lasso.
+And the confidence interval is somehow tighter, now ranging from 0.13 to 0.35.
+Let us summarize.
+In this segment, we have discussed the use of modern nonlinear regression methods for
+inference, the procedure relies on sample splitting in order to avoid overfitting
+which made it hard to control theoretically.
+We applied these inference methods to the case study, where we estimated the effect
+of gun ownership rates on the gun homicide rates in the United States.

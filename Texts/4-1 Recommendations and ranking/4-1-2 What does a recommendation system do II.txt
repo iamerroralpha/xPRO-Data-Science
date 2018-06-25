@@ -1,0 +1,116 @@
+So is that all?
+Do recommendation systems help me find things that I might want to consume?
+>> No, no, we're just scratching the surface, it's tip of an iceberg.
+You see, recommendation system is a very large class of prediction problem.
+At the core of it, it's trying to understand an individual's choice or
+preference or personalized preferences for that matter.
+So wherever it is crucial to understand once choice, things you like,
+things you dislike.
+Recommendation systems are very useful.
+For example, consider online advertisement.
+Like today morning, I visited my New York Times website.
+So, when I was in New York Times website, I was reading my content, but
+hey you know what, on the side of it or
+sometimes in the middle of it, they showed me an advertisement.
+So, now the question is that,
+what advertisement should they show it to me that is already personalized.
+And, this is a recommendation problem.
+>> Absolutely.
+And in this scenario, the question is about determining what you
+as a customer is going to be interested in the most in order to target advertising.
+This is actually very similar to the problem of determining
+what you might like to eat, read or watch, a problem of recommendations.
+One way to look at a recommendation system is that it's trying to match
+people to products, restaurants, movies or ads.
+But more generally, it could match people to people just like in a dating system.
+Think of the website eHarmony for example.
+Here people are seeking partners to date and eventually marry or
+never see again in some instances.
+The goal of eHarmony is to match two people who are likely to be attracted
+to each other.
+We do not know exactly what eHarmony does but
+in principle a system like this is trying to do the following.
+Consider an eHarmony customer.
+Let's call it Devavrat.
+Sorry, that was unfortunate.
+So Devavrat provides information to the site, mostly about himself, but
+also about his preferences.
+Using this information, the system tries to figure out his preferences and
+find potential matches in the database.
+Now, Devavrat may have very high standards.
+And among his matches,
+the system also has to find those for whom Devavrat is, in turn, a match.
+And if we can achieve this perfectly, it's truly remarkable.
+Most of the time,
+people are like Devavrat, they don't even know what they are looking for.
+>> Totally, I did not know what I was looking for til I saw my wife, Salvia.
+Look, I got married.
+Now Tinder, it's another system like this, another dating system of the modern time.
+The way it works, at least in principle, is as follows.
+Tinder is an app.
+You enroll into it and then you are shown
+pictures of other Tinder inhabitants who are in your geographic proximity.
+You swipe to left or right depending upon whether you like the person or
+you don't like the person.
+And the person on the other end, if you like the person, gets notification.
+In principle, Tinder would like to show you exactly those people that you like.
+So you're always swiping on one side.
+But of course, that doesn't happen.
+But it's trying to learn this by asking you question.
+And the brilliance of this system is, the way they're asking you the question,
+they're incentivizing you to answer them correctly.
+You see, you want to answer the likes by sort of the ones you like and
+the ones you don't like.
+Now Philip as a Tinder expert, let me give you advice.
+Get a better headshot so that your wife will like you more.
+>> How about something like this?
+>> Works.
+>> Or maybe the intellectual.
+All right, so we know that recommendation systems are useful for finding people's
+preferences and use them to match them to the choices that they may prefer.
+And that's it right?
+>> Actually no.
+Recommendation systems are like a bottomless pit.
+They have far reaching implications in the operation of work.
+Take any social systems that you can think of.
+Be it infrastructure like transportation, e-commerce, brick and
+mortar retail, entertainment, media, and even financial institution.
+They are all affected by how people make choices.
+What people like, what people dislike.
+After all, it's about people's choice that determines demand.
+And as we all know from basic macroeconomy,
+there are two sides of economy.
+One is supply, and another is demand.
+So if we can understand demand really well, then we can actually
+plan the supply well, and that will make, sort of, operations better.
+So as a matter of fact,
+consider one of the largest operational problem of our time.
+The logistics, or managing supply chain.
+A supply chain that takes goods from the hand of manufacturer,
+from say somewhere far away in China, and brings it to my, or your doorsteps.
+This is the key operational problem that businesses like Amazon,
+in United States, Alibaba in China, Flipkart in India are grappling wit.
+On one hand, as we have discussed in depth,
+the ability to solve the right product recommendations on e-commerce website
+helps consumers make the right purchases.
+On the other end, those exact interactions can help them inform
+what are the things that people like and dislike and
+hence manage supply chain slash manufacturing really efficiently.
+>> Wow, so it looks like recommendation systems really are everywhere.
+Any other aspects that we should discuss?
+>> Actually, it might be fun to discuss that Tinder example again.
+Remember, we are Tinder veterans, without real Tinder accounts.
+Recall the movie Social Network a la Facebook, Zuckerberg.
+Remember the game of Hot or Not?
+So, in an interactive world,
+where individuals are available to engage fully, one way to
+think of a recommendation system is like playing a game of 20 questions.
+I want to know what you are thinking, and
+I want to know that by asking as few questions as possible.
+>> Absolutely,
+it's like playing the game Guess Who against the Gary Kasperov of Guess Who?
+He guesses right in a record number of questions.
+>> Bingo, this is exactly how a recommendation can work
+in an interactive situation.
+Later in this module we will discuss a case study related to selecting beers and
+gathering opinion of people using comparison like questions and answers.

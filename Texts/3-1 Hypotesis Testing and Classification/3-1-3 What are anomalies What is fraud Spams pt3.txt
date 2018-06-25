@@ -1,0 +1,110 @@
+The classification problems we will discuss in this module
+will be the kind sold by in statistical methods based on your medical data.
+This applies to most, but not all of the examples above.
+For example, the criminal justice system example relies more on witness testimony
+rather than hard data and such examples will not be considered in this module.
+Depending on the context, one might deal with situations
+where the data is in abundance, or conversely, is very scarce.
+For example, in trying to design a classifier for
+spam, lots of data is typically available
+in the form of prior emails already categorized as spam versus not spam.
+Conversely, in clinical trials the data comes from experiments conducted on human
+volunteers.
+Such things are very expensive both financially and otherwise.
+As a result, are based on much smaller amounts of experimental data.
+>> But even in the case where the data in abundant,
+one may face a huge imbalance of the data availability in the different categories.
+For example,
+typically only a very small proportion of credit card transactions are fraud.
+Thus, while the amount of data is huge,
+those that fall into the fraud category constitute a much smaller amount.
+Similarly only a tinny number of say images taken from a street camera
+correspond to wanted people such a criminals, terrorists or lost children.
+Furthermore, in trying to correctly classify the type of object
+the implications of misclassification actually may have very different
+consequences with different levels of severity.
+This brings us to the subject of type one versus type two errors.
+When solving a binary classification problem, we encounter two types of errors.
+Consider again a medical fraud example.
+The two categories associated with this example are legitimate and fraud.
+The two types of errors we're about to discuss relate the ultimate classification
+decision made by a classifier to the crack but unknown to the classifier category.
+Suppose for example an insurance company receives a claim
+which happens to be a legitimate one.
+Though of course company has no way of knowing that for sure.
+Suppose further that an automated system designed to make a preliminary
+determination declares the claim to be a fraud clearly making a mistake,
+somewhat arbitrary and somewhat noncreatively.
+We call this type 1 error to contrast it with the following mistake naturally
+called type 2 error.
+A claim which happens to be a fraud though unknown to the classifier is received but
+the classifier determines it to be a legitimate one.
+>> Consider our example of a patient with severe symptoms who
+is rushed to an emergency center.
+Suppose this patient is not having a heart attack, even though he has severe symptoms
+that make the heart attack hypothesis very plausible to doctors.
+Again, this is clearly not something the doctors know a priori.
+Suppose they make an incorrect inference and decide that the patient is having
+the heart attack, and they conduct the treatment appropriate for a heart attack.
+This is a type 1 classification error.
+Conversely if a patient is indeed suffering a heart attack but
+the medical team fails to see this we're dealing with a type 2 error.
+>> Deciding which type of the classification is
+type 1 versus type 2 is clearly somewhat arbitrary.
+And depends on the category which is declared to be the first category and
+which one is the second one.
+This is really up to the classifier, and
+simply is a matter of labeling the classes.
+Typically, in statistics the classes are called null hypothesis and
+alternative hypothesis, and we will talk about this in our future lectures.
+What is important to keep in mind though,
+is the potential difference in severity of making type one versus type two error.
+>> For example, in the case of medical fraud discussed earlier,
+a type one error leads to an inconvenience for
+the medical provider who needs to waste time proving the validity of his claim.
+If this happens to often the provider may stop excepting this type of insurance
+which could cost the insurance company to loose customers.
+On the other hand, a type 2 error, where the insurance company pays for
+a fraudulent claim, leads to a financial loss coming from paying for a false claim.
+It may also lead medical providers to believe they can get away with fraud and
+embolden them to commit further fraud in the future.
+It's a judgment call as to what type of error is more severe, and thus,
+which one needs to be mitigated more stringently.
+But clearly a balance needs to be struck.
+Contrast this with the implications of the two types of errors in the heart
+attack example.
+Type 1 error leads to a healthy patient or a patient suffering from something much
+less severe then a heart attack, receiving the treatment for a heart attack.
+Conversely, type two error results in a patient suffering from a heart attack
+Not receiving the right treatments.
+The potential implications of a type 2 error are very severe,
+possibly leading to death.
+Whereas the implication of a type 1 error, while possibly very unpleasant,
+are usually not life-threatening.
+>> The potential difference of severity of two types of error is important to keep in
+mind since, as we will see later,
+there is a fundamental trade off between the likelihood of two types of errors.
+With a fixed amount of data, one can typically make type one
+errors small only at the expense of increasing type two error and vice versa.
+Balancing the two types of errors should depend ultimately
+on the severity of the implications of these errors.
+Think about the implications of type one and type two errors for
+our other examples.
+Guilty versus not guilty.
+Predator versus not a predator.
+>> A parting thought we would like to discuss in this introductory lecture
+is the importance of a solid scientific approach in applying
+a variety of classification methods,
+such as the ones that we are going to be discussing in future lectures.
+While these methods are based on rigorous statistical foundations, it's easy to
+misuse them and to obtain wrong conclusions by misapplying them as such.
+Such misuse is particularly likely in instances where the party conducting
+the classification analysis has a stake in a particular outcome.
+For example, a pharmaceutical company testing the effectiveness of a particular
+drug or scientists testing a particular scientific hypothesis typically wish for
+one of the two particular outcomes.
+Understanding how to recognize and avoid such bias is a crucial yet
+surprisingly subtle question.
+At the end of this module we'll discuss some frequently occurring examples
+of the misuse of classification methods.
+And we'll discuss ways to prevent them.

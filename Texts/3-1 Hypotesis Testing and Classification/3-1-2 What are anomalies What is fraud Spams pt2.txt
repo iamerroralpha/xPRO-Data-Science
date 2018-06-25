@@ -1,0 +1,64 @@
+The example above, for
+the credit card transaction and fraud detection, is one of the many,
+many examples where a classification problem needs to be solved based on
+the availability of imperfect information usually in the form of some data.
+Another very similar example of fraud detection is medical fraud.
+A medical provider sends an invoice to a health insurance company for
+some services provided to a patient.
+Sometimes unfortunately, the services are fake and
+possibly even the patient was nonexistent.
+The insurance company needs to come up with a quick judgement
+on the validity of the claim, honoring the claims it deems valid and
+declining the claims that look suspicious.
+A set up very similar to the one with the credit card example.
+A slight difference is the timing of the decision and the actual process.
+If the claim is dimmed to be fraud, it is sometimes turned to a human expert
+who can make a further determination regarding the validity of the claim, and
+only upon further investigation make a final determination.
+Whereas in the credit card example, the determination is conducted immediately.
+As before the problem is classifying the claim as legitimate versus fraud.
+>> Let's consider a different example from the healthcare area.
+A patient is rushed to a hospital emergency center with severe symptoms
+including chest pain, shortness of breath, heart palpitations, sweat and
+some other symptoms usually associated with a heart attack.
+The doctors needs to make a quick determination of whether this is indeed
+a case of a heart attack and take the appropriate measures.
+Again this is the example of classification.
+Heart attack versus not heart attack.
+The determination needs to be made rapidly in potently life threatening situation.
+All of the examples above fall into the category of so
+called binary classification, where the goal is to place the given object into one
+of two possible classification groups.
+Other examples of binary classification are determining the gender, male or female
+of a photograph, spam versus not spam for emails, impact versus no impact for
+a potential drug, healthy versus cancerous for tissue in a tumor, global warming
+versus normal temperature fluctuations and geoscience among many others.
+>> The history of humans facing various kinds of classification problem
+is very old.
+Think about the questions enemy versus friend, murderer versus not a murderer.
+Think about any civil or criminal trial.
+The goal of the jury is to solve a binary classification problem.
+Guilty versus not guilty, based on the data, evidence.
+For good or for bad, the binary classification problem in the field of
+criminal justice is typically not solved using statistical methods per se, but
+using different methods such as witness testimony.
+But one can argue that indirectly,
+historical data plays an important role here.
+A person possessing a weapon of murder is far more likely to be a perpetrator
+than the one without a weapon in similar circumstances.
+At the same time, of course,
+other factors play an important role, such as witness testimony or simply prejudice.
+Think about the binary classification outcome of Salem witch trials.
+>> Even animals routinely solve binary classification problems
+when they face a potential threat.
+Upon seeing a creature, they need to make an instant termination of the kind,
+predator versus not a predator, and react rapidly and accordingly.
+The faster and more accurately this classification problem is solved
+the better the chances of survival are for the animal.
+In nature this classification problem is solved by the brain processing the given
+data associated with potential threat.
+Including the visual image, smell, speed of movement, etc.
+One artificial model based on how animals solve such a binary classification problem
+is called the neural network.
+It's intended to loosely model brain activity and
+it will be discussed later in this module.

@@ -1,0 +1,110 @@
+In this unit, we're gonna study a revolutionary,
+exciting, new approach to classification, called, deep learning.
+In contrast to the approaches we've talked about so far, which are, for the most
+part, well understood, no one really knows when, or why, deep learning works so well.
+In fact, truth be told, there's a lot of hype around it, and
+it's sometimes difficult to separate the facts from the fiction.
+What I hope that you'll get out of this unit,
+is a better sense of what new applications deep learning enables, what makes it so
+exciting, but also what are the caveats and dangers that come along with it.
+Deep learning is a major driving force behind
+many of the recent advances in machine learning, and
+it's arguably the reason why today truly is the golden age for machine learning.
+But there are also many subtle issues lurking underneath the facade.
+I think it makes sense to start with the excitement, so why is everyone so
+excited about deep learning?
+Well it's not shallow learning, so that’s good, but even better, it's let to some
+remarkable progress on some of the central problems in machine learning.
+In fact,
+it’s even made its way to into the popular press with attention grabbing headlines
+like, deep neural networks revolutionized the field of speech recognition.
+Google AI algorithm masters ancient game of Go.
+Microsoft says its new computer vision system can outperform humans.
+Deep learning seen as the key to self-driving cars.
+There is substance behind each one of these.
+If you have a smart phone, then chances are,
+the software on it that translates your voice into words uses deep learning.
+It's not that speech recognition didn't have good solutions before deep
+learning came around.
+It's just that the solutions that came from deep learning are markedly more
+accurate, and are fast enough that they can even be done in real-time, so
+that you don't have to wait seconds to have your voice transcribed.
+Another major achievement of deep learning, was mastering Go.
+Go was long thought to be a much harder game for
+computers to play competitively than either checkers, chess, or backgammon.
+In each of those games, we've had terrific computer programs for many years.
+That can beat, or at least complete with, the world's best players.
+But until just this year, our best computer programs for
+Go were nowhere near the top players in the world.
+And now the crown belongs to the machines.
+We'll talk more about this example later in the unit.
+But, what I really wanna talk about are deep learning's applications to
+computer vision.
+Sociologically, that's the example that seem to get everyone's attention.
+See, machine learning is often driven by challenge problems.
+There are wide variety of techniques in machine learning,
+in this module we've seen just a few.
+And in some other modules in the course, we've covered a few more.
+But, that's by no means comprehensive.
+When it comes to machine learning,
+everyone has their favorite tools that they bring to bear.
+But how good are these approaches, compared to each other?
+Within the computer vision community,
+there's a famous dataset called ImageNet, at a yearly competition.
+Let me tell you a bit more about it.
+ImageNet is comprised of 1 million labeled images.
+Each image is labeled with 1 of 1,000 different possible categories.
+Some of these categories are quite specific,
+such as a particular breed of dog.
+Now, this is a really massive collection of images.
+The goal is to train a classifier that can correctly label images with the smallest
+possible error rate.
+Now there's one technicality, that the way we measure error rates,
+is to let the classifier choose five different labels, and
+we count how often the true label of the image in the top five.
+Every time it is, we call it a success, and
+every time it isn't, we call it an error.
+So what makes image classification so challenging, is that it's
+something that humans are quite good at, and machines are relatively bad at.
+The opposite type of problem would be something well defined,
+like computing products of, say, eight-digit numbers.
+Surely, your computer or smartphone is much better than you at this, and
+many other similar tasks.
+But there are still some things that humans are very good at, and
+machines simply haven't caught up to.
+For those of you who have kids,
+remember back to the time when your kid was first learning to recognize animals.
+At first, he may not know the difference between an elephant and a dog.
+Maybe he's seen many dogs in person, but never an elephant.
+So you might point to a picture of an elephant in a story book, and shout, dog!
+But, it takes a very few examples to teach your child the difference between
+elephants and dogs.
+You could show him a few examples of each, and point out the long trunk, and he would
+be able to extrapolate to all sorts of new pictures that he’s never seen before.
+The human mind is amazing, this phenomena is often called one-shot learning,
+because it takes just a few examples to learn entirely new category.
+We're quite far away from having machines that can learn nearly so fast.
+There's been decades of work on computer vision,
+developing a cornucopia of techniques.
+But until recently, the state of the art algorithms can only achieve error rates
+between 25 and 30% on ImageNet.
+This is still quite good.
+If you were to guess five categories randomly for
+each image, your error rate would be 99.5%.
+But it's still quite far away from what humans can achieve,
+which is somewhere in the range between 5 and 6%.
+Some of the categories are so specific, that humans get them wrong too.
+This all changed in 2012 when a team of researchers used deep learning
+to achieve error rates about 15%.
+In fact, even these bounds were quickly improved upon.
+Every year since 2012, the competition has been won by deep learning.
+And the entire field of computer vision has shifted its center of mass towards
+these new techniques.
+The current best algorithms achieve error rates less than 5%, and amazingly,
+perform about as well, if not a little bit better, than humans do.
+This is something that many researchers thought would take decades to accomplish.
+But in this problem, and many others,
+deep learning is rapidly reshaping the boundary of what we think of as possible.
+It's enabling machine learning in a way that's both awesome and exciting.
+But it's also a technology, unlike most of what we've covered earlier,
+that we don't understand the algorithmics behind.

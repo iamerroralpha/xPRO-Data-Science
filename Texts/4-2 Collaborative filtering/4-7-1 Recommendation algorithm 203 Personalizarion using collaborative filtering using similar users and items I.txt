@@ -1,0 +1,129 @@
+
+So we've seen how to personalize recommendations
+by either grouping users according to their past ratings
+or by grouping items according to the past ratings they
+have received.
+I mentioned briefly that the item-based personalization
+is better in practice.
+However, there's something that's
+potentially even better--
+combining both approaches into one recommendation algorithm
+that's both item- and user-based.
+There might be something very specific about why Frank likes
+Dirty Dancing that comes from both the fact
+that he's Frank and the fact that the movie is
+Dirty Dancing.
+It's the user-item combination that really matters here.
+To see how we can leverage this rough idea,
+let's go back to our geometric picture.
+Remember, when we talked about user-based recommendations,
+we thought of users as being clusters in some space.
+In the case of user-item based recommendation,
+this is also the kind of picture that we need to see.
+However, it does not take place in the same space.
+We need to find a space where we can
+see the pairs of user items.
+This is the picture we had for user-based recommendations.
+This idea is nice in principle, but it looks
+great only in two dimensions--
+the x-axis and the y-axis.
+In reality, this picture takes place in a very
+high-dimensional space.
+It has as many dimensions as there are movies--
+about 17,000.
+And there's one problem--
+it becomes difficult to measure similarities accurately
+in high dimensions.
+Recall that each user--
+for example, Frank-- can be seen as a row of lengths--
+17,000-- which represents all Frank's
+potential ratings for all the movies in the database.
+We have seen that the similarity between two users
+is measured by the inner products between their rows.
+Let us look at the most central user we can think of--
+the user that rates all movies a three, the average rating.
+Next, assume that all other users are variations
+around the central user.
+Their ratings for each movie are as follows.
+With probability 1/2, they rate the movie a 3,
+like the central user.
+But with probability 1/4, they rate
+the movie a 4, one point higher than the central user.
+And with probability 1/4, they rate
+the movie a 2, one point more than the central user.
+We can represent each new row as the sum of a row of threes
+for that central user and a row that contains only zeros, ones,
+and minus ones.
+Let us call the first row C for central
+and the second row D for difference.
+Now let us look at the inner product between two such rows--
+C plus D-- and C plus D prime, where D and D prime
+are two separate, different rows taken independently at random.
+Let's run some simulation to see the similarities
+between such users.
+This plot is a histogram of inner products
+between all pairs of 10,000 rows of the form
+D in a product with D prime for D and D prime random.
+We can see from this histogram that most of the inner products
+are between negative 200 and 200.
+This range is not very large, so inner products
+between users from the central cluster
+should stay close to the inner product
+between the central user and itself.
+This is 3 times 3 plus 3 times 3, et cetera, 17,000 times,
+which gives an inner product of 153,000.
+Therefore, 200 is negligible compared to that large number.
+Unfortunately, 200 is still a very large number,
+and it may be difficult to separate this cluster
+from other clusters.
+Indeed, we would like to think of all the users
+that are essentially the same as the central user up
+to these random variations, and therefore,
+as one cluster of user.
+Visually, this cluster may be difficult to single out
+because it overlaps with clusters of other users.
+For example, if we consider a user that rates all the movies
+three except for movies about dancing that are rated a four,
+if we assume that all the dance movies correspond
+to the first columns, the row corresponding to this user
+would look like this.
+Now consider the same type of variations around this user.
+This is our second cluster.
+Let's call it the dance cluster.
+We can create two histograms.
+The first one that has only the pairwise similarities
+between rows from the central cluster--
+that is, variation around the central user
+and pairwise similarities between users
+in the central cluster and users in the dance cluster.
+In our simulation, we assume that there
+are 100 dance movies.
+We can see that there is a huge overlap between the two
+clusters.
+In other words, given a user and a central cluster,
+there are many users in the dance cluster
+that appear to be more similar to the central user than users
+in the central cluster.
+This is a problem.
+We could overcome this problem by only looking at ratings
+for movies about dance.
+In this case, the picture would look like this.
+The two clusters are very well separated.
+
+Moving forward, the main question
+is, how can we automate the selection of dance movie
+without knowing it?
+Well, this is exactly the idea of similarity between movies.
+If they receive a similar rating,
+then chances are that they are about similar topics--
+for example, dancing.
+User-item based recommendation is simultaneously
+performing this clustering of movies and users.
+As it turns out, the problem is completely symmetric.
+I could have told exactly the same story
+by switching the role of user and items.
+We have seen that because the problem is so high dimensional,
+it might be necessary to group or cluster users and movies
+simultaneously.
+This is the subject of user-based recommendations,
+our next video.

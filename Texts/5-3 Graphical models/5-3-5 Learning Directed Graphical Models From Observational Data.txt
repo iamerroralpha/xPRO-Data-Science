@@ -1,0 +1,155 @@
+Welcome back.
+In the last lecture, we introduced directed graphical models and
+the directed market property.
+In this lecture, we will discuss how to learn the underlying directed graphical
+model from observational data, and
+what some of the problems are that we encounter when doing so.
+Let's start off with another example of a directed graphical model,
+where the underlying graph structure is clear from the beginning.
+Here is the Bush family tree.
+Each node corresponds to a person, and a directed edge from node
+I to another node J means that node J is a son or daughter of node I.
+To each node or person, we attribute a random variable.
+Let's assume that each random variable corresponds to genetic information about
+that person.
+The local directed mark of property says that the genome of each person
+is independent of the genome of all its ancestors,
+given the genome of its parents.
+This makes sense.
+For example, the genome of former President George W Bush
+is independent of the genome of his grandfather, given his parent's genome.
+In fact, even conditioning only on his father is sufficient to make Bush Jr.
+independent of his grandfather.
+Because knowing his grandfather's genome does not provide any further information
+about Bush Jr.'s genome, other than what we already know from his father's genome.
+This shows that the directed graph encodes more conditional independence relations
+than the ones given by the local directed Markov property.
+Let's try to establish further conditional independence relations from this example.
+Note that without conditioning, grandfather and
+son would be dependent, since they are related.
+Similarly, the genomes of former President George W Bush and his brother,
+Jeb Bush, are dependent, since they are related.
+However, once we condition on the genomes of their parents,
+then they become independent.
+Because knowing Jeb's genome does not give you any further information about
+George W's genome, other than what you already know from their parents.
+We see that just as for
+undirected graphical models, conditioning on the nodes that lie
+on the path between two nodes renders the associated random variables independent.
+However, unfortunately, for directed graphical models,
+this is not always the case.
+Consider Bush Sr. and his wife, Barbara Pierce.
+Most probably, their genomes are independent, since they are unrelated, so
+these two nodes are independents, although there is a path from Bush Sr.
+to Barbara Pierce through their children.
+However, once we condition on one of the descendants, for example,
+on Bush Jr., then the parents' genome becomes dependent.
+Because everything that Bush Jr. has, but his mother doesn't have, comes his father.
+Related to this observation is also the concept of explaining away.
+So suppose we observe that Bush Jr.
+has a certain genetic trait which is relatively rare.
+Say a specific genetic variant that allows him to jump very high.
+We know he got it from one of his parents, so the probability of Bush Sr.
+having the gene is much higher if we know that Jr. has it.
+And likewise, the probability that Barbara has it is higher knowing that Jr. has it.
+But if we find out that Barbara has the jumping gene, it explains why Jr.
+has the gene, and it's now unnecessary for Bush Sr. to have it.
+Conversely, if Barbara does not have it, we know that for Bush Sr.
+definitely had it, since Jr. had it, and he needed to get it from somewhere.
+In this way, there is dependence between Bush Sr.
+and Barbara, conditioned on Bush Jr. having the jumping gene.
+Consider another example where the nodes are just binary, namely whether it rained
+last night, whether the sprinkler was on during the night, and
+whether the lawn is wet in the morning.
+It is obvious that in this example the underlying directed graphical model
+looks like this.
+While whether it rained last night, and
+whether the sprinkler was on, can be independent events,
+when conditioned on the fact that the grass is wet, they become dependent.
+Knowing also that it rained last night,
+the probability that the sprinkler was on as well is reduced.
+This common and
+intuitively compelling pattern of reasoning is called explaining away.
+So we've now seen two examples of directed graphical models
+where conditioning can make nodes that were previously independent, dependent.
+In fact, this happens whenever you condition on a descendant
+of the two nodes.
+This structure, with two nodes having edges directed to a third node,
+in other words, having a common child is called a v-structure.
+So all these examples of conditional independence and dependence illustrate
+how a directed graphical model, similarly to an undirected graphical model,
+encodes a global set of conditional independence relations.
+Basically, the global directed Markov property asserts that two nodes
+are conditionally independent if on every path that connects these two nodes,
+there is either a descendant that is not conditioned on, or
+a non-descendant that is conditioned on, exactly as we have seen in the examples.
+So this tells us how to read off conditional independence
+relations from a directed network.
+However, what if we don't know the underlying network and
+we would like to learn it?
+So suppose we're given gene expression data, and
+we would like to learn the underlying gene regulatory network.
+Now, from gene expression data,
+we can learn the conditional independence relations.
+So then the question becomes,
+how do we go from conditional independence relations to the directed graph?
+So similarly, as for undirected graphical models,
+we can use the conditional independence relations to learn the underlying graph.
+So we start with a complete undirected graph
+where everyone is connected to everyone.
+Now, if nodes I and J are conditionally independent,
+given some subset of the remaining nodes, then we remove the edge between I and J.
+This procedure results in an undirected graph.
+Now, some of the edges can be directed by finding pairs of nodes that
+are independent, but become dependent by conditioning on a node between them.
+Since conditioning can only make nodes dependent if the condition
+variable is a descendant.
+So what are the problems with this algorithm?
+Well, first of all, it will not be able to orient all the edges.
+While it can infer the v-structures, if we have only two nodes, say smoking and
+cancer, it cannot decide whether the edge points in this direction or
+in this direction.
+In this two-node example, the only thing that the algorithm is
+able to infer is that there is an edge between smoking and cancer.
+In fact, this is not a shortcoming of the algorithm, but
+has to do with the nature of the data.
+From observational data on two nodes,
+it is impossible to decide the direction of the edge.
+One would need to perform an interventional experiment instead.
+Second, to use this algorithm, we assume that there are no unobserved nodes.
+For example, nowadays, it is widely accepted that smoking causes lung cancer.
+However, only a few decades ago, there was a large dispute about this.
+Opponents argue that there is a hidden, or yet, unknown genetic factor that makes
+a person more prone to smoking, and also more likely to develop lung cancer.
+A hidden cause could explain the apparent correlation.
+The occurrence of hidden, or unobserved variables, makes it very difficult for
+any algorithm to learn the underlying network.
+Edges in the network could always be there.
+Just because of a hidden variable, that affects both variables and hence,
+introduces correlation.
+If the goal is to learn the underlying network,
+it is therefore important to take into account as many variables as possible, and
+then be prudent about interpreting the resulting network.
+Finally, there is another problem besides appearance of
+additional edges in the network due to hidden common causes.
+The algorithm could miss out on edges because of cancellation of causal effects.
+As an example, consider a particular medicine
+that cures a certain lung disease, so it has a positive effect on lung functioning.
+However, at the same time, this medicine is extremely strong, and it has a negative
+effect on the immune system, which itself has a negative effect on lung functioning.
+It is possible that for certain medications, these positive and
+negative effects can cancel each other out, leading to data sets where
+lung functioning and taking the medication are independent.
+This would correspond to a directed graphical model where medicine and
+lung functioning point to the immune system.
+So not only did we miss out on an edge,
+we also made a mistake with respect to the orientation of the edges.
+So to summarize, in this lecture, we discussed ways of learning the underlying
+directed network from data on the nodes.
+In particular, we showed that this problem is an inherently difficult problem,
+especially when we only have access to observational data.
+Interventional data provides more insight into the structure of
+the underlying network, but might be impossible or difficult to obtain.
+If we learn the underlying directed network purely from observational data,
+it is important that we're prudent about interpretation of the network,
+specifically with respect to hidden common causes and cancellation of causal effects.

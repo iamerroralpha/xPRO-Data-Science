@@ -1,0 +1,112 @@
+
+Recall that each row of our data matrix
+corresponds to one of the two types of users.
+Even if we observe only very few ratings per row,
+they should be similar for users of the same type.
+To see this, let's take a closer look
+at the similarity between rows.
+It should reflect the similarity between users' preferences.
+For each pair of rows, we can measure the similarity
+by looking at their inner product.
+This notion comes from linear algebra,
+and it's a single number that can be computed as follows.
+First, stack the rows on top of each other.
+Here we only show rows of size 10
+rather than 17,000 for the sake of demonstration.
+Then we multiply each entry of the top row
+by the corresponding entry of the bottom row,
+and add these products.
+Of course, question mark times four
+is not well-defined, so we simply
+replace the question marks by the average rating three.
+When we multiply each corresponding pair of numbers,
+the one on the top with the one on the bottom,
+we get this new sequence of 10 numbers.
+Finally, we add all these numbers to get 101.
+[INAUDIBLE] the inner product between the top row
+and the bottom row is 101.
+What does this number mean?
+Well, it's a matter of proximity between the rows.
+So the larger the inner product, the more similar the rows.
+Back to our Netflix example, a large inner product
+between two rows means that the corresponding users
+have similar preferences.
+In the [? toy ?] example that we've just
+constructed where there are two types of users,
+Frank and me, and two types of movies,
+chick flicks and action movies.
+let's see what these inner products look like.
+We could of course write a long list of inner products,
+but there are a lot of them.
+Actually, this number is the number
+of distinct pair of rows, right?
+For each pair of distinct rows, we
+can compute a new inner product between them.
+For n rows this number of pairs is given by the formula n times
+n minus 1 divided by 2.
+So for n equals 500,000 rows, as in the Netflix prize data set,
+that number would be around $125 billion,
+which is about the number of stars in our galaxy.
+So a list of all inner products would be pretty useless,
+but we can get a good summary of this list using a histogram.
+In our [? toy ?] example, this is what a histogram looks like.
+We can clearly see that there are two different modes.
+This suggests that there are two types of values
+for these inner products, large and small.
+When two rows come from the same user type,
+we get a large value.
+When they come from two different user types,
+we get a small value for this inner product.
+This suggest the following picture.
+The blue dots correspond to users of the first type.
+One that are into chick flicks like Frank,
+and the red dots corresponds to users that
+are into action movies like me.
+Of course, these two dimensional picture is only a cartoon.
+In reality, this picture takes place
+in a 17,000 dimensional space.
+17,000 is the length of each row in the Netflix data set.
+Moreover, the clusters may overlap like this.
+Now that we have made this observation,
+we can devise a personalized recommendation system.
+The idea is simple and consists of using well-known machine
+learning technique called nearest neighbors.
+Since users are clustered into two groups,
+even if they are not exactly the same,
+the ones corresponding to similar rows
+are likely to be users of the same type.
+Assume that Frank is here.
+Then all the users that are in a certain radius
+are of the same type as Frank, chick flick fans.
+and their ratings may be averaged
+without risking to include the ratings of action movie fans.
+And that's personalization.
+Here all recommendations will be personalized
+to each user type, either chick flick fan or action movie fan.
+In other words, all the rows that have a large inner product
+with Frank's are likely to have preferences similar to Frank's.
+Once we have identified the set of users
+that are similar to Frank, we can apply the techniques
+that we saw in the previous video, because for these users
+there is only one single true rating for all movies.
+This rating can be used to output a single ranking.
+It is believed that the Netflix data
+set has at most 15 different types of users.
+In a way this is not such a large number,
+but it's certainly more than two.
+We will see a straightforward extension
+to more than two groups as part of the next video.
+This video was about personalizing recommendations.
+We saw an example where the data contains
+at most two types of users.
+In this toy example, we saw how to identify
+users that are likely to belong to the same group
+by looking at inner products.
+Inner products between the rows of the data matrix
+are a measure of proximity between users.
+Finally we grouped users according to their proximity.
+This is the nearest neighbor technique,
+and we compute in an average rating
+within each homogeneous group.
+Effectively, we have personalized our recommendation
+to each group.

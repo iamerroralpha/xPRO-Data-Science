@@ -1,0 +1,55 @@
+In this segment, we provide an empirical example of using partialling-out with
+Lasso to estimate the regression coefficient beta 1 in the high-dimensional
+linear regression model, Y = beta 1 D + beta 2 W + epsilon.
+Specifically, we are interested in how the rates in which economies
+of different countries grow, denoted by Y,
+are related to the initial wealth levels in each country, denoted by D.
+Controlling for countries institutional, educational, and
+other similar characteristics, denoted by W.
+The relationship is captured by the regression coefficient beta one.
+In this example, this coefficient is called the speed of convergence or
+divergence, as it measures the speed at which poor countries catch up or
+fall behind wealthy countries, controlling for W.
+So our inference question here is do poor countries grow faster than rich countries,
+controlling for educational and institutional characteristics.
+In other words, is this bit of convergence negative, namely, is beta one negative?
+In economics, this question is known as the Convergence Hypothesis,
+which is predicted by the Solow Growth Model.
+The growth model was developed by Professor Robert M Solow,
+a world renowned MIT economist, who won the Nobel Prize in Economics in 1987.
+In this case study,
+we use the data collected by economist Robert Barro and Jong-Wha Lee.
+In this data set, the outcome y is the realized annual growth rate
+of a country's wealth measured by the gross domestic product per capita.
+The target regressor D is the initial level of the country's wealth,
+the controls W include measure of the education levels, quality of institutions,
+trade openness, and political stability in the country.
+The data sets contains 90 countries and about 60 controls.
+So P is approximately 60 and N is 90, and P over N is not small.
+This means that we operate in a high dimensional setting, therefore, we expect
+in this squares method to provide a poor, very noisy estimate of beta one.
+And in contrast, we expect the method based on partialling-out was Lasso
+to provide a high quality estimate of beta one.
+We now present the empirical results in the table that you can see here.
+The table shows the estimates of the speed of conversions beta one,
+obtain value squares and by partialling-out was lasso.
+The table also provides the standard errors and 95% confidence intervals.
+As we expected, the least squares method provides a rather noisy estimate
+of the annual speed of convergence and
+does not allow us to answer the question about the convergence hypothesis.
+In sharp contrast, partialling out via lasso provides a much more precise
+estimate and does support the convergence hypothesis.
+We see that the lasso-based estimate of error 1 Is minus 4% and
+the 95% confidence interval for
+the annual rate of convergence is from minus 7.5% to minus 1.5%.
+Now this empirical evidence does support the convergence hypothesis.
+Let us summarize, in this segment,
+we have examined an empirical example in the high-dimensional setting.
+Using least squares in the setting gives us a very noise estimate
+of the target regression coefficient, and
+does not allow us to answer an important empirical question.
+In sharp contrast, using the partialling out method with Lasso
+does give us a precise estimate of the regression coefficient, and
+does allow us to answer the question.
+We have found significant empirical evidence supporting the convergence
+hypothesis of Solow.

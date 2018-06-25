@@ -1,0 +1,90 @@
+Welcome back.
+In order to answer questions about large networks,
+we need to be able to succinctly represent networks in a computer.
+>> Why can't we just look at the network and figure out what we want from there?
+>> Well, large networks usually look like a huge tangled mess.
+Can you point to the most influential node in this network?
+Okay, so let's discuss how to represent the network in a computer and
+have the computer figure out which node is the most influential one.
+One way to represent this network is by an adjacency list.
+For each node, we list all the nodes it is connected to.
+Here is an example for a small graph and ten nodes.
+With this representation you will easily be able to find the person
+with the largest number of friends.
+However, imagine that I am Facebook, and I would like to suggest friends to you.
+One puristic method is to suggest the person with whom
+you have many common friends.
+In other words, I'm interested in pairs of nodes that have many paths of length
+too connecting them, but are not already connected by an edge.
+It's difficult to see how to do this using an adjacency list.
+>> So let's be more clever about the representation of a network.
+We can also represent a network by an adjacency matrix.
+An adjacency matrix is a two dimensional square array where the rows and
+columns are indexed by the nodes in the graph.
+The entries of the matrix are either zero or one, one in position one,
+two means that there is an edge pointing from node one to two.
+>> In fact, we can even encode the strength of an edge in an adjacency matrix
+by replacing the ones in the matrix by other numbers, where for
+example an edge of strength ten could connect close friends
+where as an edge of strength one could represent acquaintances.
+>> What happens if the network is undirected?
+>> Well, an undirected network can be seen as a bi-directed network,
+meaning that when there is an edge pointing from node one to node two
+there is also an edge pointing back from node two to node one.
+This makes the adjacency matrix symmetric.
+Node I points to node J precisely when node J points to node I.
+So entry I J of the matrix is equal to entry J I.
+>> So let's see how Facebook can use the adjacency matrix to
+efficiently suggest friends.
+Let's take two people in the network.
+Let's see if we should be friends on Facebook.
+In this small network we can easily count the number of shared friends that we have.
+But how do we do these using the adjacency matrix?
+>> Well, this row is you and this row is me.
+In order to count the number of paths of length two between us in the network, we
+need to overlay these two rows and count the number of common once That's exactly
+the result you get when multiplying your row vector with my row vector.
+>> Great.
+So doesn't this mean that by multiplying the matrix with itself,
+we can obtain the number of paths of length two between any two nodes?
+>> Yes.
+Let's go through this carefully.
+When we multiply this by ten by ten adjacency matrix by itself,
+then entry IJ is just the sum over all K, of the product of entry
+AIK with entry AKJ, which is the number of paths of length two between nodes I and J.
+>> So that's cool.
+So Facebook can just take the square of the adjacency
+matrix of the current network.
+Then you look at each row, and pull out the maximal entries that are not yet
+connected by an edge.
+These are good friend suggestions because of the many common friends.
+>> But that means that I can do the same computation if I'm interested
+in finding friends of friends of friends.
+Or friends of friends of friends of friends.
+I just take the third power or the fourth power of the adjacency matrix.
+>> Exactly.
+That's one of the nice features of working with adjacency matrices.
+But can't I use a similar argument to test if a directed network is a DAG?
+>> How so?
+>> Well a DAG is characterized by having no directed cycles.
+A directed cycle is a path from a node back to itself.
+So the number of cycles at length K in a DAG
+is just the sum of the diagonal entries of the Kth power of the adjacency matrix.
+But that's known as the trace of the matrix.
+Hence a directed network is a DAG if, and
+only if, the trace of all powers of the adjacency matrix are zero.
+>> But that doesn't seem easily checkable on a computer,
+since you need to take the powers until infinity.
+Wait a second.
+It's a well known mathematical fact the trace of all powers of a matrix are zero,
+if and only if all of its eigenvalues are zero.
+>> And we know that we can easily compute eigenvalues using a computer.
+Even for very large matrices.
+>> This means that we can check if a network is a DAG
+by just computing the eigenvalues of its adjacency matrix.
+So with this we'll end the introduction to the module.
+We've discussed why networks are important, different classes of networks
+and the kinds of question you can expect to be able to answer after this module.
+Working with large networks is only possible with the help of a computer and
+we presented a convenient way to represent the network in a computer
+that allows to efficiently compute various quantities of interest.

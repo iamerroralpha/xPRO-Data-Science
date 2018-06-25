@@ -1,0 +1,65 @@
+Now that we have a bag of comparisons, between players, teams, restaurants,
+movies, or what not, we want to come up with rankings between all of them.
+This is a tricky question.
+This question has been a difficult puzzle for centuries.
+The essence of the difficulty was captured in the so-called Condorcet paradox,
+which is named after a French philosopher and
+political scientist named Marquis de Condorcet.
+In late 1700s, around the time of French Revolution,
+he was one of the leading thinkers in understanding what is the best way to
+elect leaders in a democratic society.
+Naturally, in elections, we are trying to elect leaders by ranking, or
+ordering them collectively through our votes.
+In presidential elections in US, we cast vote for our favorite candidate only.
+But suppose instead, we were allowed to cast votes in form of comparisons.
+That is, votes would consist of comparisons between pair of candidates,
+precisely the setting we have been discussing.
+And this is the setting that Condorcet was talking about.
+He considered the following hypothetical scenario.
+Let's say there are three options, A, B, and C.
+We can think of these options as candidates, or restaurants,
+or sports teams.
+Now suppose we have three votes, vote one, A's preferred over B,
+vote two, B's preferred over C, vote three, C's preferred over A.
+If we look at only first two votes,
+it naturally suggests that A's preferred over B and B's preferred over C.
+So that means the ranking should be A be first, B be second, C be third, but
+the last vote contradicts this.
+Similarly, if we take any two votes and try to order options,
+we will now perfect ordering, but the remaining third vote will contradict it.
+This is a paradox, because we can not order them in any meaningful way, and
+this is what makes ranking really hard.
+At this stage, if you are wondering whether modern political science or
+the so-called social choice theory has anything to do with
+our world of ranking and recommendations, you are right on the money.
+There has been a very long intellectual history in social and
+political sciences, starting early-1900s.
+And lately, statistics computer science, and mathematics have been active in this
+topic due to various modern questions, such as the topic of our discussion today.
+I would suggest an interested listener to read up a few notable works.
+One, A Law of Comparative Judgement by Louis Thurstone,
+published in 1927 in Psychology Review.
+Two, Social Choice and Individual Values by Kenneth Arrow
+published in 1951, and republished in 1963.
+Back to our Condorcet paradox, clearly it applies to our setting, and
+hence we need to resolve it.
+So how to resolve it?
+Well, one way to resolve this, is to try to assign scores to each option.
+The scores in the setting, like above, will be equal for all options.
+That will be successful resolution of the paradox for
+the particular three vote scenario.
+And when it will make sense, the scores might be different for different options,
+leading to a global ranking.
+Let's start with one such simple approach.
+To recall, we are given a collection of votes or opinions in form of comparisons.
+Given this, we want to assign scores to all options, and
+here's how we're gonna do it.
+The score of an option equal to the number of votes are comparison in which it is
+a winner, divided by the number of votes of comparison in which it is present,
+as either winner or loser.
+Use this score to rank the options.
+The option with highest score is top ranked.
+For option A, it participates in two votes of which it wins in one,
+therefore it's score is 1/2.
+Similarly, a score of B and C will be half, and this resolves that paradox.
+Nobody gets a higher score than other.

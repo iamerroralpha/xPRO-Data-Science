@@ -1,0 +1,123 @@
+Welcome to this module on recommendation systems.
+I am Philippe Rigollet from the Mathematics Department and the Center for
+Statistics at IDSS.
+A large part of my research is devoted to high-dimensional statistics, and
+I also teach courses on this topic at MIT.
+In a nutshell,
+the goal is to find a needle of information in a haystack of data.
+As we will see, the goal of recommendation systems are similar in many ways.
+>> Hello, I'm Devavrat Shah.
+I'm with the Department of Electrical Engineering and Computer Science at MIT.
+I'm member of the Center for
+Statistics at ITSS Institute for Data Systems and Society.
+Philip and I will be your co-instructors for Modular Recommendation System.
+My background is in machine learning, and large scale data processing.
+I teach courses on data topics in MIT regularly.
+I have spent the past decade thinking about extracting meaningful information
+from social data, the data that we generate.
+As we shall see in this module recommendations system represent
+an important large class of societal questions
+that precisely deal with extracting information about people's' preferences.
+What people like, what people don't like, from the data that they provide.
+The goal of this module is to discuss radius challenges associated with
+designing recommendation system from both statistical viewpoint, and
+comprehensible viewpoint.
+>> Before we dive into the subject,
+we should answer an important question if ever.
+What is a recommendation system?
+>> Great question, Philip.
+So in a nut shell,
+a recommendation system is something that helps you find what you're looking for.
+>> I see, like a search engine, for example, Google.
+>> Great point.
+It's a little different than that.
+You see, in Google,
+when you research something, you need to know exactly what you want to look for.
+For example, if there's a restaurant that I know precisely that I wanna go for
+dinner tonight.
+All I will do is in Google search bar I will type the name of the restaurant and
+then boom.
+Google will give me the address of the restaurant, the menu of the restaurant,
+the hours of the restaurant, and what not about the restaurant.
+>> I see but what if I don't know what kind of restaurant I'm looking for?
+Google is not making any recommendations to me.
+>> Great point again, Phillip.
+See, Google search is helping me find answer to the question.
+When I know precisely what question I'm trying to and get answer.
+Recommendation system is less concrete.
+It's a bit mysterious you see.
+Let's take an example of Yelp for that matter.
+Yelp is perfect for recommendation because it's suppose recommend restaurants to us.
+So let's say hypothetically we are new to this great town of Cambridge
+where MIT is, and we need to go for dinner tonight.
+>> Great, let's find a good barbecue.
+>> Well, if you forgot, I'm a vegetarian.
+>> How about we try American, or whatever that is?
+>> Okay, American cuisine it is.
+>> All right, so let's find an American restaurant nearby using Yelp and
+that fits our budget.
+>> In a sense, a recommendation system is also a search engine.
+When I don't know precisely what to search for.
+>> Absolutely, Philip, and here search is more semantic.
+See, the semantic associated with the search intent is up to the interpretation.
+It's a context dependent.
+To a large extent, it's very personalized.
+It's personalized depending on the person who is searching for the answer.
+For example, what a good restaurant might mean to you,
+it may mean not so good to somebody else.
+Or what a good restaurant, to you today, might mean something different yesterday,
+and might mean something different tomorrow.
+>> In a sense a recommendation system is also a search engine
+when I don't know precisely what to search for.
+>> That's absolutely correct.
+The search here is more semantic.
+The semantics associated with this search intent is up to interpretation.
+It's a context dependent and
+to a large extent it's very personalized to the person who is searching.
+For example, what a good restaurant might mean to you,
+may not mean good to somebody else, like me.
+Or what a good restaurant might mean to you today, might mean something very
+different yesterday, and might mean something very different tomorrow.
+It is this semantic aspect of the search that makes designing a recommendation
+system much, much harder than building just a search engine.
+>> So see, here is the top American cuisine restaurant in the area according
+to Yelp users.
+So see, for example, I don't like this restaurant.
+I think it's too loud and it's too expensive.
+Sorry, but I guess I'm not your typical Yelp user.
+>> Indeed, that's exactly what I meant about personalization a few seconds back.
+We'll see that it's a key feature of powerful recommendation systems.
+The recommendation is different for each and every user.
+Customized to ones taste and
+is different depending on the context be it time, place, or even ones mood.
+>> That's correct.
+You see this when you shop on Amazon.
+The site makes recommendations that are based on your past purchases.
+In my case, I'm a huge grilling fan.
+It recommends barbecue items all summer long.
+>> The same applies when you watch TV or other media.
+The Netflix recommendation system has ordered the catalog for you so
+that you don't have to search forever.
+A recommendation system is the primary reason for
+the success of Netflix as a business.
+They have managed to make it's users feel as if there's an infinite pool of catalog,
+even though, actually they're about a really small catalog.
+>> And music too.
+It's pretty hard to keep up with music trends these days and
+recommendation systems help you do just that.
+It tells you what music you might enjoy listening to.
+For example, systems like Pandora or Spotify provide excellent recommendations.
+I've already discovered this band I like called The Arcs
+using Pandora's recommendation system.
+>> But sometimes recommendation is not just for convenience.
+But it is necessity.
+Take for example of YouTube.
+You know how much content that's from YouTube generates?
+Every minute, here's the statistics I came up with.
+Every minute, 300 hours of video is uploaded on YouTube.
+So let's hypothetically assume that you and
+I are going to 100% of our time continue watching YouTube.
+That it will take a million lifetime for
+us to watch content generated in one lifetime.
+In a sense, recommendation system is essential to discover the content that we
+care about on YouTube otherwise we would not be able to deal with it

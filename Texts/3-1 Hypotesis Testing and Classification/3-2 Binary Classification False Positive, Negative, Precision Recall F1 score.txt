@@ -1,0 +1,141 @@
+In the previous section we introduced binary classification,
+in which the goal is to put an object into one of two possible categories.
+Our aim later in this module will be to design effective methods for
+performing this task.
+But in order to do this, it's important to have a well defined notion of
+what it means for a classifier to be effective.
+In this video we'll examine some of the considerations that go into
+evaluating the quality of a classifier and
+I'll present a few of the metrics that are frequently used to do so.
+As a concrete example, let's consider the case we described in the last video
+where a credit card company is trying to identify fraud.
+When presented with a transaction, the classifier has to either label it fraud or
+not fraud.
+We discussed two different ways that the classifier could make a mistake.
+A type I error, where we identify a legitimate transaction as fraud,
+and a type II error, where we label a fraudulent transaction as legitimate.
+It's useful to think of the classification problem as answering the yes or
+no question, is this transaction fraud?
+So that we can then describe the categories as positive,
+corresponding to the answer, yes, this is fraud, and
+negative, corresponding to the answer, no, this is not fraud.
+It's often helpful to arrange the possibilities as a table,
+where the columns correspond to the answer the classifier gives, and
+the rows correspond to the true underlying answer.
+We thus have four possibilities.
+The first is that the transaction was fraud,
+and the classifier correctly labelled it as fraud.
+In this case the true category was positive and
+the label was positive as well.
+We'll call this a true positive.
+The next possibility is a type I error.
+Here, the transaction was not fraud but
+the classifier incorrectly said that it was.
+In this case, the true category was negative, but
+the classifier falsely labeled it as positive.
+So we call these false positives.
+The third possibility is a type II error, where the transaction was fraud, so
+the right answer was positive, but the classifier falsely labeled it as negative.
+So we call these false negatives.
+The final possibility,
+which hopefully is the most common, is that the transaction was legitimate.
+So in this case, the true answer was negative, and
+the classifier correctly labelled it as such.
+We call these true negatives.
+We can then visualize the performance of the classifier by writing in each box
+the number of times that the corresponding possibility occurred,
+forming what is sometimes referred to as the confusion matrix.
+Note that the upper left and lower right numbers correspond to correct answers and
+the upper right and lower left ones correspond to mistakes.
+Now, how should we evaluate the quality of our classifier?
+A natural first guess would be to just look at what fraction of the time it gives
+the right answer.
+However, this number can be misleading, particularly in settings like this one,
+where one of the categories is much more common than the other.
+To see the problem, suppose that 1% of the transactions are fraudulent.
+And suppose that the credit card company's very lazy fraud detection department
+just wrote a computer program that labeled everything as legitimate.
+This is clearly not a very helpful classifier,
+since it never says there's any fraud.
+But it's correct 99% of the time.
+To get a better evaluation, we need an approach that provides more nuanced
+information by the different ways in which the classifier can be right or wrong.
+A common way to do this is to look at two numbers, precision and recall.
+Roughly speaking, precision will tell us how often the classifier is
+right when it says something is fraud.
+And recall will tell us how much of the actual fraud that occurs we
+correctly detect.
+Let's now define these mathematically.
+We define the precision to be the number of true positives
+divided by the number of true positives plus the number of false positives.
+Note that the denominator equals the total number of examples that
+the classifier labeled as positive.
+This number tells us what percentage of the time
+an instance labelled positive was actually positive.
+In our fraud example,
+the classifier labeled 2 plus 8 equals 10 instances as fraud.
+Of these, 2 were actually fraud, so the precision was 2/10 = 0.2.
+We then define the recall to be the number of true positives
+divided by the number of true positives plus the number of false negatives.
+Here, note that the denominator equals the total number of examples in which fraud
+actually occurred.
+This number tells us what percentage of the actual
+positive examples our classifier detects.
+In the fraud example, there were 2 plus 4 equals 6 instances of fraud, and
+the classifier correctly caught two of them.
+So the recall here was 2/6, which is 1/3.
+This number measures how sensitive our classifier is to indicators of possible
+fraud, so it's sometimes called the sensitivity.
+Note, this would actually catch the problem with the lazy fraud
+detection algorithm that we described before.
+The one that describes everything as legitimate,
+since in this cases the sensitivity would be zero.
+Know that there's often a trade-off between these two quantities.
+A more aggressive fraud department that flags a huge number of things as fraud,
+sometimes incorrectly, would have a high recall,
+since it would catch a lot of the fraud that occurs.
+But it would have a low precision,
+since it would also flag a lot of legitimate transactions as fraud.
+On the other hand, a very conservative department that only flags the most
+obvious cases would probably have high precision.
+But it would miss the subtler cases of fraud, and would thus have lower recall.
+How one trades off between these two numbers is a judgement call,
+based on the specifics of the situation.
+It is often most informative to look at both of these numbers separately,
+since they measure different properties of the classifier.
+However, if you want a single number to evaluate the quality of a classifier,
+there's a statistic called the F-score, or
+sometimes called the F1 score, that combines the two.
+Our first attempt at combining the two numbers
+would be to just take their average.
+However, this often isn't quite what we want.
+In particular, suppose we are in the case where the classifier labels almost
+everything as positive.
+Here, the recall would be great, that is very close to one, but
+the precision would be quite small, and thus close to zero.
+This would probably not be a very good classifier, but
+averaging the two numbers produces something close to a half.
+Instead, we would like a way of combining the two numbers that puts more emphasis on
+the smaller value.
+A good choice for this turns out to be what's known as the harmonic mean.
+The harmonic mean of two numbers, x and y,
+is given by 1 over the average of 1/x and 1/y.
+This will always be in between x and y, but
+it will be small if either of the two numbers is small.
+So it's closer to the smaller of the two numbers, in the arithmetic means.
+The F-score is then defined to be the harmonic mean
+of the precision and the recall.
+So it equals 1 over the average of 1 over the precision, and 1 over the recall.
+Simplifying this gives a slightly nicer expression.
+F1 = 2 x precision x recall over precision + recall.
+So in summary, we now have a couple of measures for
+evaluating how good a job a classifier does.
+We defined precision and recall,
+two numbers that capture different facets of the quality of classifier.
+And then we showed how to combine them into an F1 score.
+This gives us a set of statistics we can use so that later we can decide,
+when we have some classifier, how good a job it's doing.
+In the next section, we're gonna switch a little bit and
+talk about hypothesis testing.
+And then we'll come back to how to build effective methods for
+constructing specific classifiers.

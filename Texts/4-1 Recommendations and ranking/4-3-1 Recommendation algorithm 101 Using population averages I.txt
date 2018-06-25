@@ -1,0 +1,109 @@
+Welcome back.
+Today's topic is going to be the first recommendation algorithm.
+Thus far, in this module, we will spend time discussing 1,
+what a recommendation system is.
+2, where a recommendation system can be useful.
+And 3, what is the basic problem of recommendation.
+As we have seen, in its simplest form,
+the problem of recommendation system is filling missing entries.
+For example, we can think of the available data as a sheet of an Excel file.
+So you've got the rows, and you've got columns in your Excel file.
+In the context of Amazon product recommendation,
+rows would correspond to customers, and columns would correspond to products.
+In the context of Netflix, rows would correspond to, again, customers,
+columns would correspond to movies, and the cells or
+the entries in the cells would correspond to the ratings.
+In the context of Yelp, it is about whether a customer
+is going to be interested in eating at a restaurant or not.
+In all set scenarios, a large fraction of entries are actually missing.
+After all,
+each customer ends up eating at a very small fraction of restaurants in a town.
+So if we threw a dart at random on this big Excel sheet,
+It will most likely end up on an empty cell.
+So really, that says data is really sparse.
+In the next few chunks, we shall discuss algorithms for
+filling these missing entries.
+Now to fill these entries, we will leverage structure in the data.
+In today's module, we'll start with the simplest possible structure,
+and then evolve to more complicated structures as we go along.
+The simplest possible structure, the entire population thinks alike,
+eats alike, sleeps alike.
+A bad assumption in general, but excellent place to get started on this long journey
+of designing recommendation algorithms.
+The resulting algorithm is effectively what we shall call population averages.
+Let's start with our classical Yelp scenario.
+Remember, we were looking for a restaurant to have dinner, and Philippe and
+I settled on having an American cuisine.
+So let's assume that you are going to go to Cambridge or anywhere in Boston,
+for that matter, to have American cuisine.
+Let me add a twist to it, you want to celebrate an occasion.
+You have successfully gone through first few chunks of recommendation system, and
+so you're happy to go to an expensive restaurant.
+So now, you search, various restaurants come up as a result.
+Just like a search result, but filtered by your preferences.
+There are too many restaurants qualifying your constraints.
+So now, what?
+Well, you need to order them somehow.
+And this is where recommendation system becomes really useful.
+And this is precisely what Yelp does.
+It provides options for you to rank your results or alter them.
+One of the options is by the proximity, which is not really relevant,
+because remember, we are happy to go anywhere.
+Another option corresponds to how pricey the restaurant is.
+Again, we're keeping only the most expensive restaurant,
+not sure it is relevant either.
+At this stage, we are looking for what restaurant is really good.
+Yelp is ordering for this by suggesting order by rating.
+Great, various people who have been to these restaurants have provided ratings
+to these restaurants between one to five stars, and
+one can use these ratings to produce ranking for restaurants.
+And this is what Yelp is doing in this option.
+So one way to compute these rankings is as follows.
+1, for each restaurant, assign it a score, a score
+which is equal to the average value of the ratings that it has received, okay?
+So for example, if a restaurant has received two ratings, five and one, then
+its average would be five plus one equals to six, divided by two, which is three.
+2, Order restaurants as per their score.
+So restaurants with higher score gets higher rank,
+restaurants with lower score get lower rank.
+That is it.
+In a sense, this is what Yelp is doing when it's showing you that option of
+order by ratings.
+Super easy.
+If you are building a system,
+this can be obtained using a native SQL like database queries.
+In other words, very easy to implement and scale.
+In our Excel sheet visualization, effectively, we are filling out missing
+entries for a given cell by taking the column average of the entries.
+In practice, one has to be a little bit more careful than just taking averages.
+To understand this, we will have a small lesson.
+So suppose you have a coin, a coin like this, which has two sides.
+It has a head, and it has a tail.
+Every time you flip it and toss it like this, it comes up,
+it lands in my hand, and either it's head or it's tail.
+Now you want to understand, what is the chance that this coin,
+when I tossed, comes up head or tail?
+Now, a general belief for all of us is that, well, a coin is built symmetrically,
+so it will be 50% chance it will be head, 50% chance that it will be tail.
+But that may not be necessarily true.
+Somebody might have rigged it,
+maybe the physics of the coin is different, who knows?
+So maybe you and I want to figure out exactly what the bias is.
+Now, in this case, we can verify.
+How can we verify?
+Well, we can measure it.
+We can toss this coin many times and observe its outcome.
+So when I toss a coin once, it comes up head, coin toss twice, tail, head,
+tail, etc.
+Now, while I'm running this experiment,
+at any point, we can state the chance of a head showing up, right?
+Because I can say, in so many tosses, let's say 100 times,
+I have observed 46 times heads,
+which means that 46% chance for it to be sure it's coming up head.
+>> Every time when I toss a coin, and it comes up head, we are assigning score 1.
+Every time tail shows up, we assign a score of 0.
+In that case, all I'm doing is I'm computing average score.
+Now mapping it back to our Yelp setting, if we think of head as like or
+1, and tail as dislike or 0,
+then effectively, average score of a coin, which is the same as
+computing average rating of the restaurant the way we discussed sometime back.

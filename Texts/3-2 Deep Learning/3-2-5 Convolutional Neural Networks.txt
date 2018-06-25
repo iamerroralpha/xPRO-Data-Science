@@ -1,0 +1,50 @@
+Let's talk about some of the architectural tricks of the trade.
+The first and
+arguably most important is the notion of the convolutional neural network.
+Let me explain how the first layer works.
+Let's say that our input is a grayscaled image that's 256 by 256.
+We can break it up into 8 by 8 image patches.
+In total we have a 64 by 64 grid of these patches that comprise the image.
+Now let's consider a linear function on just the 8 by 8 image patch.
+Sometimes this is called a filter,
+in our case a filter is an 8 by 8 grid of weights.
+And when we apply a filter to an image batch
+what we do is we take an inner product between them as vectors.
+So if we apply a filter to each one of the patches we get
+a new 64 by 64 grid of numbers.
+What good is this?
+Remember the intuition is that the first few layers detect
+simple objects like edges.
+We can think of a filter as a naive object detector.
+And instead of having it have different parameters when we apply it to
+each of the different image patches.
+Why not have the same parameters throughout?
+This drastically reduces the number of parameters and
+consequently there are many fewer things to learn.
+If we take this idea to its natural conclusion we get
+convolutional neural networks.
+In the first layer,
+we have a collection of filters, each one is applied to each of the image patches.
+And together,
+they give the output of the first layer after applying a non-linearity at the end.
+This is already a major innovation because it means we can work with
+much larger neural networks.
+In practice, just the first few layers are convolutional, and
+the others are general and fully connected.
+Another important idea is the notion of dropout.
+Here when we compute how well a neural network classifies some image,
+say through the quadratic cost function.
+We instead randomly delete some fraction of the network and
+then compute the new function from the input to the outputs.
+The idea is, if a neural network continues to work
+even if we drop perceptrons from the intermediate layers.
+Then it must be spreading information out in a way that
+no node is a single point of failure.
+Training a neural network with dropout makes the function we learn more robust.
+This is not a precise statement, but it's the prevailing intuition.
+Now, you know the secret sauce of deep learning.
+Sometimes it's hard to wade through what's fact, what's fiction, and what's hype.
+We've done all the hard work and laid out the foundations.
+And now it's time to have some fun.
+In the remainder of the unit,
+we'll cover some of Deep Learning's truly amazing applications.

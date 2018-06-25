@@ -1,0 +1,126 @@
+Hi, in the last several lectures,
+Caroline has discussed various aspects of network structure.
+In this lecture, we're going to introduce a basic class of processes on networks
+called epidemic or contagion models.
+We can think of these processes as modeling propagation of information:
+disease, behavior or opinion.
+The spread of Tweets via re-Tweets would fit within the information category
+with Tweets propagating through the Twitter graph.
+Or you might think about a funny joke told from one friend to another, which
+propagates through society by a social interaction on a friendship network.
+In a similar way, a virus, such as the flu,
+propagates from one person to another.
+In this case, the underlying network might connect to people,
+if they spent time in close proximity, or in the same room.
+Computer viruses are from the mathematical perspective, not all that different
+from biological viruses, and spread from computer to computer through the Internet.
+While we don't necessarily think of behavior as contagious.
+Humans are social creatures and
+various behaviors do propagate it through our social network.
+Our eating or exercise habits, political views, product or
+fashion choices, all propagate through the network of social interactions.
+This raises some basic questions.
+What sorts of models make sense for such processes?
+Can we make predictions about how a process will spread?
+What does this depend on?
+How many nodes will be infected?
+If we observe a process that has just begun,
+what is the probability that we get an epidemic that spreads to a global scale?
+The answers to these questions depend on characteristics of the process and
+on properties of the underlying network.
+While the terminology comes from epidemiology, or
+the study of disease, an epidemic isn't necessarily a bad thing
+if the process is modeling something like music choice or good exercise habits.
+An epidemic can also describe the spread of opinions such as whether or
+not global warming is a serious issue.
+The specific details of a contagion process are often very complicated.
+For instance, the biology of your immune response
+plays a role in determining whether you will fall ill with the flu.
+Modeling the dynamics of a spreading virus by incorporating every possible detail
+is hopelessly complicated.
+So instead, people study simplified models that capture the main properties.
+The models we'll be interested in capture the macroscopic, network-level behavior.
+Perhaps the simplest model is what is known as the SI model.
+S stands for susceptible, and I stands for infected.
+At any point in time each node is susceptible or infected.
+In the simplest setting, nodes deterministically infect their neighbors.
+A better model is probabilistic, where each infected node infects
+each of its susceptible neighbors with some probability P.
+We can think of the spread of information through an online social network.
+The value of P is high for something really interesting.
+Such as a truly hilarious parody of a presidential candidate.
+Conversely, the value of P is lower for a boring an uninspiring parody.
+One way to think about this model is that each of my friends who gets infected
+have an independent opportunity to infect me.
+As long as I'm not yet infected.
+There is just one shot for the infection to spread across each edge.
+Let's suppose that a random node in the network is infected.
+You might want to predict whether a given trend will take off.
+Or whether a YouTube video will go viral.
+Obviously this depends on the value of P
+which captures how contagious the trend is.
+But it also depends on the network structure.
+If everybody has many friends, we'd expect things to spread more widely.
+This is especially clear in the context of the flu.
+The network describing contact between kids in schools is very dense.
+So if one person gets sick, it's not unlikely that everyone gets sick.
+For sparse networks where most nodes have relatively low degree,
+we can get some intuition by thinking about a value P = 1/3.
+This means that each node adjacent to an infected node has probability one-third
+of being infected by the infected node.
+Let's go back to the first infected node, and
+think about the progression of the SI model happening in rounds.
+If this initial node has six neighbors,
+then on average two of them will be infected.
+If each of these have six additional neighbors, then on average,
+each will infect two more, for a total of four at the second round.
+Since each node infects two nodes on average,
+the number of infected nodes grows by a factor of two with each round, and
+the four nodes will, on average, infect another eight.
+Pretty quickly, a huge number of nodes in the network has been infected.
+One thing worth mentioning about the calculation we just did
+is that after the first node,
+we assumed each node has six additional neighbors beyond the one that infected it.
+So if we count this infecting node, we see that the average degree is actually seven.
+Suppose the infection probability P is still one-third.
+But the average degree is low, with nodes only having three neighbors on average.
+Then the expected number of neighbors a node can infect
+once it becomes infected is two neighbors times one-third probability each
+which is equal to two-thirds.
+Each newly infected node on average infects fewer than one new node, so
+the process inevitably dies out.
+This intuition of comparing average degree to the probability of infection, holds in
+a fairly general setting, as long as each of the neighbors infects me independently.
+It holds in network models including the configuration model,
+which Caroline described.
+Roughly we can multiply the average degree in the network and the probability of
+infection across an edge to get the branching number of the infection.
+If it's greater than one the process has the possibility of spreading
+to a macroscopic fraction of the population.
+And if it's less than one, the process dies out.
+In the SI model, once a node is infected, it remains infected forever.
+One natural way to extend the SI model
+is to allow the possibility of nodes to recover.
+This makes sense if we think about recovering from the flu.
+Once you're recovered from the flu,
+your body has developed immunity to that strain, and you won't catch it again.
+So in the SIR model we have an additional state which we call recovered.
+Yet another model is called SIRS.
+Here an infected node recovers and has immunity but
+only temporarily and then goes back from the recovered state to being susceptible.
+This is a reasonable model for the spread of fashions.
+Where the same fashion comes back again and again and again.
+I like to rock climb, and believe it or
+not, in the 80's it was very fashionable to wear hot pink Lycra while climbing.
+A decade later, nobody could believe how crazy people looked.
+But now I'm starting to see more and more climbers wearing bright colored Lycra, and
+I might have to get some Lycra pants myself.
+Although, I may chose to go with neon green instead.
+In the next lecture, we'll discuss how we can use the network structure for
+interventions.
+Which nodes we advertise to in order to maximize the spread of the process.
+While we obviously don't wanna spread a virus if we're thinking about the spread
+of healthy habits, such as regular exercise.
+It is definitely useful to understand how to maximize the spread of such behaviors.
+And of course, any company would like to know how to maximize the effect
+of word of mouth advertising.

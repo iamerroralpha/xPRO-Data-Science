@@ -1,0 +1,145 @@
+So, welcome back.
+In this lecture we discuss various structural characteristics of networks.
+And how these characteristics can be either similar or
+different in networks from different application domains.
+So we've already introduced the degree of a node.
+However, just knowing the maximal or minimal degree of any node in the network
+does not really say much about the whole network.
+It is more illuminating to look at the whole degree distribution of
+a network instead.
+So for each degree, K,
+we compute the fraction of nodes in the network that have degree K.
+Let's discuss how such a degree distribution would look like for
+a social network.
+So the distribution will be very skewed.
+Most individuals have a moderate number of friends, say 100 or 200.
+However, the tail of the distribution is very long.
+Celebrities, like Taylor Swift, have many thousands of friends and
+lead to very high variance in the distribution.
+Other individuals are somewhere in between.
+It turns out that such long-tailed degree distributions are found not only in
+social networks.
+Many different kinds of networks exhibit a similar structure, where most nodes have
+a moderate degree, but there are a few nodes with very high degrees.
+Such high degree nodes are also called hubs.
+They appear, for example, also in the World Wide Web or
+in many biological networks, such as gene regulatory networks.
+Most genes only regulate a few other genes, but a few genes are hubs and
+regulate all kinds of genes around them.
+So mathematically speaking, degree distributions are often right-skewed.
+They have long tails that extend to the right representing few high-degree nodes.
+Such distributions are often better represented on a logarithmic scale.
+On the x-axis we plot the logarithm of the degrees, and
+on the y-axis we plot the logarithm of the fraction of nodes of a particular degree.
+For many networks, something surprising happens.
+Namely, this log law plot often turns out to be linear.
+This means that the fraction of nodes of degree K,
+is proportional to the degree K to some negative power.
+In this case, we say that the degree distribution follows a power law.
+In fact, many networks have a power law degree distribution.
+For example, the World Wide Web, the Internet, citation networks, metabolic
+networks, or protein interaction networks all have a power law degree distribution.
+Also it turns out that the exponent of this distribution
+is usually somewhere between two and three.
+So although networks from different application domains might vary a lot in
+their size, both the number of nodes and also the number of edges, the degree
+distribution is often very similar across different application domains.
+Everything we've done so
+far has concentrated mainly on the analysis of vertices and their properties.
+Let's now turn our attention to the edges in a network.
+The maximal number of edges in a simple graph with n nodes and no multiedges or
+self-loops, is just the number of pairs that can be formed from the N vertices.
+So there's N choose 2 which = N x N-1/2.
+The density of a network is the fraction of edges
+that are actually present in the network.
+Networks in different application domains can have very different behavior in
+terms of their density.
+Let's first discuss the example of a social network.
+So take a small social network, let's say of a school with 1000 students.
+And compare this to the social network, such as Facebook, with 1 billion users.
+How do you think the densities will compare?
+Well, while within the school you might have 20 to 100 friends, on Facebook,
+you might have more friends, perhaps several hundred.
+However, the number of friends is not going to scale with the number of people
+in the network.
+You're not suddenly going to have 1 million times more friends
+just because there are 1 million times more people in the network.
+Such networks with relatively many nodes compared to the number of edges,
+are called sparse networks.
+So social networks are examples of sparse networks.
+And the same holds for the World Wide Web, the Internet, or citation networks.
+So what are then examples of dense networks,
+where the number of edges scales up with the number of nodes?
+Well in fact, most networks that we come across are sparse.
+It is difficult to think of dense networks.
+One example though are food webs.
+Let's think of different sized ecosystems.
+So very simplistically speaking, larger animals tend to eat smaller animals and
+don't differentiate too much between different species.
+So zebra and an antelope are both equally delicious from a lion's point of view.
+So if you take into account more animals in the ecosystem,
+the number of edges will scale proportionately.
+This is an example of a dense network.
+Another network property that relates to edges in the network is clustering.
+Clustering has to do with transitivity of a relationship.
+So for example, since Guy knows Justin and I know Guy, it is not guaranteed,
+but more likely than otherwise that I know Justin as well.
+So in social networks, we expect to see many triangles.
+The Internet and power grids have fewer triangles.
+Here, triangles represent redundancy.
+So let's think about how to quantify this.
+In a network with N nodes,
+the number of triangles is maximized by the completely connected graph.
+This graph has N choose 3 triangles, so
+the density of triangles is just the # of triangles in the network divided
+by the total # of possible triangles, namely N choose 3.
+But does the density of triangles really quantify clustering?
+Let's think of a completely connected subgraph and a bunch of single nodes or
+pairs.
+I would argue that this graph clusters very well,
+although the density of triangles is not that large.
+These people out here, they don't know anyone in this large cluster.
+So we'd expect that there are no triangles between them.
+So rather than using the density of triangles,
+we should use the # of triangles divided by the # of connected triples.
+This really quantifies transitivity.
+It captures the following number,
+namely, how many people that Guy knows do I know as well?
+So the clustering coefficient is an interesting way to quantify
+the large-scale structure of a network, and can be very different for
+different networks.
+So now let's end this lecture with a third global network measure,
+namely the diameter of a network.
+So what is the diameter of a network?
+Well, it is based again on the assumption that information flow between any two
+nodes takes the shortest path.
+Diameter of a network is the maximum length of a shortest path between any
+two nodes in the network.
+So, it's the maximal amount of time that you have to wait for
+information to get from any one person to another person.
+Or in mathematical terms,
+it is the maximal geodesic distance in a given network.
+We've all heard of the notion of small-world, or six degrees of separation.
+Namely the idea that everyone in the world is connected to everyone else
+by at most five acquaintances.
+This is equivalent to saying that the diameter of the global network
+of acquaintances is at most six.
+The origin of the idea of six degrees of separation,
+is an experiment performed by Milgram in the 1960s.
+In this experiment, participants were asked to get a message to a particular
+person, by passing it from acquaintance to acquaintance.
+And surprisingly, while some of the messages never made it,
+the ones that made it arrived in an average of six steps.
+In fact, we see the small-world effect in everyday life.
+It explains why news or gossip can spread super fast in a social network.
+Think for example about how quickly the news spread
+of one of your friends getting married or having had a baby.
+So this brings us to the end of this lecture.
+We discussed different ways to quantify or measure large-scale network structures.
+Namely, we've discussed the degree distribution, the clustering coefficient,
+and the diameter of a network.
+These three measures give complementary insight
+into the large-scale structure of a network.
+In the next lecture, we'll discuss different network models.
+And also analyze how they behave with respect to these global network measures
+discussed in this lecture.

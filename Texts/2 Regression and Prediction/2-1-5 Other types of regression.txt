@@ -1,0 +1,63 @@
+In this segment, we'll briefly discuss other types of regression.
+First, we will introduce regressions introduced by using nonlinear
+functional forms, for example logistic regression.
+Second, we will mention regressions that result from replacing
+the squared loss function by other loss functions.
+For example, using the absolute deviation loss gives rise to median regression, and
+using the estimatric absolute deviation laws gives rise to quantile regression.
+In contrast to linear regression, in nonlinear regression we use a nonlinear
+function of parameters and regressors, say P of X and beta to predict Y.
+For instance, the logistic regression employs the logistic transformation of
+beta X given by the formula that you see.
+This logistic transformation is particularly attractive when the response
+variable, Y, is binary taking on values of zero or one so
+that the predicted values are naturally constrained between zero and one.
+The problem of predicting binary Y is a basic example of a classification problem.
+We can interpret the predicted values in this case as approximating
+probability that Y=1.
+In nonlinear aggression,
+we estimate the parameters by solving the sample nonlinear least squares problem.
+Where we minimized the average squared error for predicting Yi by p(Xi, b).
+In the case of binary outcomes, we often estimate the parameters by maximizing
+the logistic log-likelihood function for
+the binary outcomes Yi conditional on Xi as you see in this formula.
+We previously used the squared error loss to set up the best linear predictor.
+Sometimes we call this approach the linear mean regression, because the best
+predictor of Y under squared loss is the conditional mean of Y given X.
+So what if we use the absolute deviation loss instead?
+Then we obtain the least absolute deviation regression or
+median regression, because the best predictor of Y
+under absolute deviation loss is the median value of Y conditional on X.
+We define the linear median regression by solving the best linear prediction problem
+under the absolute deviation loss.
+Where in the population we use the theoretical expectation and
+in the sample we use the empirical expectation instead.
+Just like mean regression, median regression can also be made nonlinear
+by replacing beta X with some nonlinear function p ( X, b ).
+Regarding the motivation, median regressions are especially great for
+cases when the outcomes have heavy tails or outliers.
+The median regressions have much better properties in this case than
+the mean regressions.
+If we use an asymmetric absolute deviation loss, then we end up
+with the asymmetric absolute deviation regression, or quantile regression.
+Specifically we define the linear Tao quantile regression by solving the best
+linear prediction problem under the asymmetric absolute deviation loss.
+In the population we use the population expectation and
+in the sample we use the empirical expectation instead.
+The weight Tao that appears in the definition of the absolute deviation loss
+specifies that Tao times 100-th percentile of Y given that we are trying to model
+linearly.
+Quantile regressions are great for
+determining the factors that affect the outcomes in the tails.
+For example, in risk management,
+we might predict the extremal conditional percentiles of Y using the information X.
+This type of prediction is called the conditional value-at-risk analysis.
+In medicine, we could be interested in how smoking and
+other controllable factors X affect very low percentiles of infant birth weights Y.
+In supply chain management, we could try to predict the inventory level for
+a product that is able to meet the 90-th percentile of demand Y
+given the economic conditions described by X.
+In this segment, we have briefly overviewed non-linear regressions
+as well as quantile regressions and their uses.
+In the next block of our module, we will consider modern linear and
+nonlinear regressions which are motivated by high-dimensional data.

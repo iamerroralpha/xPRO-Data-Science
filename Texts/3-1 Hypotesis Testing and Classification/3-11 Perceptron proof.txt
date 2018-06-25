@@ -1,0 +1,142 @@
+In this section, we'll prove our previous claim that the perceptron algorithm
+makes at most one over gamma squared total mistakes, where gamma is the margin.
+I should mention that this section may be slightly more mathematically
+involved than the others.
+I think it provides a lot of insight into why the perceptron algorithm works, so
+I decided to include it.
+But nothing we do later will rely on the details of this proof.
+So if you skip this or you don't fully follow the details,
+it won't cause any problems with the later material.
+Okay, so let's now see the proof.
+Our starting assumption is that there's some linear classifier that classifies
+all of the x sub i correctly with margin gamma.
+With some gamma greater than zero.
+We can describe this classifier by giving its weight vector w star,
+which we'll normalize to have norm one.
+Because of this normalization, the distance of a point x sub i from
+the hyperplane is just given by the absolute value of w star dot x sub i.
+The margin assumption says that w star dot x sub i is greater than or
+equal to gamma whenever l sub i is one and w star dot x sub i is less than or
+equal to negative gamma whenever l sub i is negative one.
+Now, let w sub tb the way vector after the algorithm has gone on for t iterations.
+The idea of the proof is that we're gonna keep track of the dot product w sub t
+dot w star which corresponds geometrically to the component
+of w sub t in the direction of w star.
+If w sub t perp is the component of w sub t that is perpendicular to w star,
+as shown here, then the length of w is given by the Pythagorean theorem.
+Which tells us that the norm of w sub t squared
+equals the sums of the squares of these two components.
+So the norm of w sub t squared = (w sub t
+dot w star) squared + norm w sub t perp squared.
+Since the norm of w sub t perp squared is always at least 0,
+this tells us in particular that the norm of w sub t squared
+is always at least w sub t dot w star squared.
+So the norm of w sub t is always at least w sub t dot w star.
+Geometrically, this is just saying that the length of the whole vector,
+w sub t is at least the length of the component in the direction of w star.
+Now the idea behind our analysis is to show that w sub t
+dot w star will go up a lot every time we make a mistake.
+If we then show that the total length of w sub t doesn't go up too much overall this
+will mean that we couldn't have made too many mistakes.
+Let's make this precise.
+In step t we see the point x sub t and
+predict the label by looking at the sign of w sub t dot x sub t.
+If our prediction is correct, we don't change our weight vector.
+So, w sub t plus one equals w sub t.
+And the dot product of our weight vector with w star doesn't change.
+The interesting case is when we make a mistake.
+Our first claim is that this will substantially increase the dot product
+with w star by making w sub t plus 1 dot w star greater than or
+equal to w sub t plus gamma.
+To show this, let's first suppose that we have a false negative in step t.
+This means that we predict negative, but l sub t equals positive 1.
+So we then update our weights by setting w sub t
+plus one to equal w sub t plus x sub t.
+So w sub t+1.
+w star equals w sub t.
+w star which equals, w sub t.
+w star + x sub t w star.
+Our margin assumption has that x of i.
+w star is greater or equal to gamma.
+Whenever l sub i is 1.
+So the right had side is at least w sub t dot w star plus gamma.
+Geometrically, this says that the assumption that w star correctly
+classifies the point of margin gamma, means that x sub t has to have a component
+of at least gamma in the direction of w star.
+So adding x sub t increases the component in the w star direction by at least gamma.
+The case of a false positive is similar, just with some signs flipped.
+A false positive means that we predict positive when l sub i = -1.
+And we update our weights by setting w sub t +1 = w sub t- x sub t.
+So we get that w sub t + 1 dot w-star = (w sub t- x sub t) dot w-star.
+Our margin assumption says that x sub i dot w-star is less than or
+equal to negative gamma whenever l sub i = -1.
+So we get that the right side is at least w sub t, dot w star, minus negative gamma.
+Which again equals w sub t plus gamma.
+So in both cases,
+we got that the dot product, increases by at least gamma, as we claimed.
+Now our second claim is that the total length of the weight vector,
+doesn't increase too much overall.
+Again, nothing changes when we classify the point correctly, so
+we really only have to worry about the case where we make a mistake.
+In this case, we'll show that when we make a mistake,
+the squared length of the wave factor never increases by more than 1.
+That is, that the norm squared of w sub t plus 1 is less than or
+equal to the norm squared of w sub t plus 1.
+Showing this just takes a few lines of algebra.
+Let's first do the case of a false negative.
+In this case, we classify x sub t as negative, so w sub t is less than or
+equal to 0.
+And we set w sub t +1 to equal w sub t +x sub t.
+The norm squared of the vector is just the dot product of the vector with itself.
+So the norm of w sub t +1 squared = w sub t+1 dot w sub t + 1.
+Which we can expand out as w sub t dot w sub t + x
+sub t dot x sub t + 2w sub t dot x sub t.
+The first term is just the norm squared of w sub t and
+the second is just the norm squared of x sub t.
+So this equals the norm squared of w sub t + the norm squared of x sub
+t + the last term, 2 w sub t dot x sub t.
+Now, remember that we normalized x sub t to have a norm 1.
+So the norm of x sub t squared just equals 1.
+And w sub t dot x sub t is negative.
+So we gather the norm of w sub t plus 1 squared equals the norm of w sub t
+squared plus 1 plus something that's less than or equal to 0.
+So it's at most the norm of w sub t squared plus 1 [INAUDIBLE].
+We can interpret this geometrically as well.
+The fact that we classify x sub t as negative means that the dot product
+between x sub t and w sub t is less than or equal to 0.
+Which means that the angle between these two vectors is at least 90 degrees.
+And x sub t has length 1.
+If the dot product is 0, the angle's exactly 90 degree.
+And the norm of w sub t + x sub t squared is exactly equal to the norm of w sub t
+squared + 1, by the Pythagorean theorem.
+And this is the worst case,
+since the vector only gets shorter if the angle is more than 90 degrees.
+The case of a false positive is again the same, with some signs flipped.
+This time, w sub t dot x sub t is positive,
+and the norm of w sub t + 1 squared = (w sub t- x sub t) dotted with itself.
+Which expands out to the norm of w sub t squared + 1- 2
+times the positive number w sub t dot x sub t.
+Which again, is at most the norm of w sub t squared +1 as we want it.
+Now, we can put these two claims together to bound the total number of mistakes
+made by the algorithm.
+Suppose that we run our algorithm for say m steps and
+we make a total of k errors along the way.
+At the beginning of the algorithm, we start with a weight of 0.
+So the initial dot product, w sub 1 dot w star equals 0.
+Claim one tells us that the dot product increases by at least gamma
+every time we make a mistake.
+So if we make k mistakes,
+we know that the product at the end, w sub m dot w star, is at least k times gamma.
+On the other hand, claim two tells us the norm of w sub m squared.
+Goes up by, at most, 1, each time you make a mistake.
+So the norm of w sub m squared is, at most, k.
+And therefore, the norm of w sub m, is, at most, the square root of k.
+Now, as we said earlier, since w star has norm 1, the dot product,
+w sub m.w star is the length of w sub n's component in the direction of w star.
+And this can't be bigger than the length of the whole vector w sub m.
+So, w sub m dot w star is less than or equal to the norm of w sub m.
+Putting these all together, the yet that k gamma is less than or
+equal to w sub m dot w star which is less than or
+equal to the norm of w sub m which is less than or equal to the square root of k.
+So k gamma is less than or equal to the square root of k, which means that k
+is at most 1/gamma squared, which is what we originally claimed.

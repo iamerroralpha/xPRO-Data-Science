@@ -1,0 +1,182 @@
+
+So far we have identified users and items
+to their corresponding row or column, respectively.
+For example, for us, Frank was only a partially filled row
+of movie ratings.
+Frank is so much more than this row, but what really matters
+is what the recommendation system knows about him.
+Since we live in the era of big data, trust me,
+the system knows a lot.
+Given more data, it seems natural
+that one would just want to increase
+prediction accuracy, right?
+In the Netflix example, if we just
+had more user movie ratings, then one
+would simply be able to build a recommendation algorithm
+for Netflix using the same user item based recommendation
+techniques that we have developed previously.
+What if the extra data does not consist of rating
+but still contains relevant information?
+It should still be able to help.
+The main guiding principle to use such additional information
+is to refine your model.
+Indeed, just like we started with a completely homogeneous
+and admittedly dull model that assumed that every user movie
+pair was giving the same rating, all the way to the more
+refined user item based recommendation algorithm,
+we can refine this model even further.
+The idea is to use side information to first group
+users and items into more homogeneous groups
+and then work on each group separately.
+To illustrate this point, consider the following diagram.
+We start with a large pool of users
+and a large pool of movies.
+Then we use that information to group or cluster
+homogeneous users into, say, three groups
+and homogeneous movies into, say, four groups.
+Then on each pair of groups we perform
+a user-item based recommendation as we've learned how to do.
+That's using only pass rating.
+So what kind of information is available?
+One thing for sure is that it should
+be relevant to our clustering purposes, which
+is to say that it should have enough information
+to discriminate users and items according to preferences,
+at least partially.
+In this sense, not all data is created equal.
+And it makes sense to keep in mind that when
+deciding which data to collect for this purpose.
+In practice however we collect as much data as possible
+and apply a variable selection or dimension reduction
+technique to keep the relevant information.
+Take for example the Amazon recommendation system.
+What does it know about Frank?
+Well, it knows not only products that he purchased but also what
+product he's looked at-- in particular the dance-related
+items--
+for how long he's read reviews, how much money he
+spends on weekends, et cetera.
+Overall, by now, Amazon has probably
+figured out that Frank is into dancing, what his income is,
+and whether he is a compulsive buyer.
+Frank is probably not the only Amazon customer
+with these features, and Amazon may
+be able to identify users that are similar to Frank
+with respect to those features.
+The same is true for items.
+Amazon knows a lot about items beyond their ratings--
+price, category, weight, color, et cetera.
+This is the information used to cluster items.
+Let us take a closer look at how clustering can be done.
+There are many clustering techniques available out there,
+but all of them start from one simple idea.
+Represent the objects to be clustered by a vector--
+this is just an ordered list of numbers--
+and then measure the similarity using inner products.
+We've done this in this very module when the vectors were
+the rows or columns of ratings, completing
+with the average rating three when entries were missing.
+When we have side information, we can create a new vector.
+For example, we can summarize the side information
+about Frank in the vector F equals 1, 0, 1, 24,
+152, et cetera.
+Which means, for example, that Frank had looked at gardening
+equipment, the first number 1, has not
+looked at cooking books, the number
+0, has looked at movies, the second number 1,
+has spent 24 minutes browsing through dance equipment,
+spent $152 on this last purchase, et cetera.
+Amazon may even have convinced Frank
+to subscribe to their credit card
+and even know his buying pattern outside of the Amazon web site.
+At the end of the day, the vector F
+that contains the side information that Amazon
+has collected about Frank is gigantic
+with hundreds of thousands of entries,
+and some are more relevant than others.
+Let's say that one of these entries,
+for example, is that Frank has purchased a flight to Vegas
+with his Amazon credit card.
+Is this relevant or not?
+You could sit here and debate about this question
+from a socioeconomic point of view,
+but we might as well let the data speak.
+There are many ways to select variable
+in a data-driven fashion, with the ultimate goal
+to get a better clustering.
+Some of them are covered in other modules of this course,
+but to name a few, we could use spectral clustering where
+the goal is to find a projection of the data before clustering;
+sparse methods where the goal is to simply keep
+only the most relevant side information;
+locality-sensitive hashing, which
+is part of the broader family of approximate nearest neighbors.
+Most of these methods are coded in standard software,
+but a few tweaks may be needed to adapt them
+to your specific purposes.
+To conclude, let us note that the clustering described above
+is a bit of a blunt tool and often needs
+arbitrary decisions.
+What if we have a continuum of users?
+How do we decide when to stop putting users
+in the first cluster and start putting them in the second one?
+Rather than making this ad hoc choice,
+we can simply weigh users.
+We put more weights on users that are
+more similar to a given user.
+There are many ways to incorporate weights
+into recommendation systems, but here is a rather simple one
+to fix ideas.
+Recall that in absence of side information
+we computed similarity between users
+by looking at inner products between their rows of ratings,
+and that we can do the same with their vectors of side
+information, perhaps after variable selection.
+This gives us two inner products that we
+call IPR, for inner product between ratings,
+and IPS for inner product between side information.
+We can now combine the two by looking
+at the new hybrid similarity measure defined
+by IPR plus t times IPS.
+Here, the parameter t is positive
+and represents how much weight we want
+to put on the side information.
+For small t, the similarity measure essentially
+disregards side information.
+And for larger and larger t, it takes more and more side
+information into account.
+Choosing t is more of an art than a science.
+The best choice of t will depend on how good your side
+information is and should be done in light of data.
+Interestingly, there is an other interpretation
+of this hybrid similarity measure.
+This is the measure we get if for each user
+we concatenate the row of ratings
+with the vector of side information, where
+each coordinate is multiplied by the factor square root of t.
+It is easy to see that when we take
+the inner product between the two longer rows,
+we recover the hybrid similarity measure.
+We can also use different values of t for different users
+and choose this value from side information itself.
+We can use more complicated combinations.
+The hybrid measure that we've just defined
+is set to be linear.
+It is a linear combination of IPR and IPS.
+We could instead use nonlinear functions.
+And this is what we do when we cluster first and then
+recommend.
+In this case, the rule to compute a hybrid similarity
+measure is as follows.
+If IPS is larger than a threshold,
+then use IPR as a measure of similarity.
+If IPS is smaller than a threshold,
+then you zero as a measure of similarity.
+The role of t here is replaced by the threshold
+which has to be chosen in a data-driven way too.
+To summarize, we have seen that recommendation systems often
+have side information about users and items available.
+This information can be used to refine our model.
+That is remove some homogeneity assumptions.
+Practically, this is done by incorporating side information
+when computing similarity between users or between items.

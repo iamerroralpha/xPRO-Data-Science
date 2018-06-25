@@ -1,0 +1,85 @@
+Is personalization using comparison data.
+We have come quite far in learning about recommendation or personalization.
+Starting from the simplest personalization algorithm
+that utilized population level information.
+In the last few chunks, we have discussed various ways to develop
+highly personalized recommendation algorithm's.
+The algorithms we discuss they're primarily doing matrix completion.
+I suggest you do check the part of this module on ranks centrality again,
+especially if you want to remind yourself
+how to calculate the chance of sun not rising tomorrow.
+Now coming to the question of interest for the day.
+We shall discuss this question again in the context of Netflix.
+There are a collection of users and movies.
+Each user expresses preferences over movies in the form of
+pairwise comparisons.
+Imagine Netflix showing the user a pair of movies and
+asking user which of these two movie did she like more?
+Of course, Netflix already has such data,
+as a user might have rated few movies already.
+And the rating of movies implicitly provides comparison
+between the rated movies.
+For example, if I rated movie Casablanca, 5, and One Flew Over the Cuckoo's Nest, 4.
+Then I'm suggesting that I look Casablanca over One Flew Over The Cuckoo's Nest.
+Okay, so for each user, we know that she has expressed preferences
+in form of comparisons between a few pair of movies.
+From this data, for each user, we want to figure out the ranking
+over all the movies for which she has not provided any preferences or ranking.
+In the setting of matrix completion, we wanted to predict unknown ratings.
+Here, we want to predict the order or
+ranking between all the movies for which we have no preference data for each user.
+So clearly this seems like a much taller order than just matrix completion.
+I will convince you that that is not really any different from matrix
+completion.
+It is almost like matrix completion with few twists and turns.
+First let us transform our data in matrix form.
+As before, in our matrix we have rows that correspond to users.
+Each column does not correspond to movies anymore.
+Instead, each column corresponds to an ordered pair of movies.
+For example, consider an entry.
+Let us suppose it's row corresponds to me as a user.
+And it column corresponds to a pair of movies.
+Casablanca or One Flew Over the Cuckoo's Nest.
+Therefore if there are N movies in total,
+in principle we have N multiplied by N-1 divided by 2 columns.
+For N equals to 3, this will turn out to be 3.
+For N equals to 10, this will be 45 and so on.
+Now each entry in the matrix is either plus 1 or minus 1.
+Of course, if it is missing, then we do not know what it is.
+But it will always be, either plus one or minus one.
+For example, if entry for row corresponding to me as a user,
+and column corresponding to Casablanca or
+One Flew Over The Cuckoo's Nest is equal to plus one.
+Then it means that, I like Casablanca over One Flew Over The Cuckoo's Nest.
+And -1 means that I like One Flew Over the Cuckoo's Nest over Casablanca.
+Therefore for each user we will have a row with some +1s and some -1 entries.
+The remainder of the row will be blanks, there is unknown values.
+Ideally we're going to predict +1 or -1 for each of the blank entry.
+So that it leads to ordering of movies for which user has not expressed preferences.
+For example, if for movie Iron Man and Superman, I have not provided preferences.
+That is the entry corresponding to column, Ironman compared to
+Superman is unknown, w want to predict it to be plus 1 or minus 1.
+As we shall see, we may end up predicting it to be a number between plus 1 and
+minus 1 rather than a number equals to plus 1, or minus 1.
+And from this you would like to produce ranking over
+all movies with unknown preferences.
+Again in the example above, if there were only two movies, say Ironman and
+Superman, with unknown preferences we're really trying to figure out
+whether Ironman is preferred over Superman or the other way around?
+And this is easy because we can look at the predicted value
+which will be between minus 1 and 1.
+If it is greater than 0 we shall say Superman is prefered over Iron Man.
+If it's less than 0 then we shall say Iron Man is preferred
+over Superman and that's it.
+The question is what happens when we have more than two movies.
+In a nutshell, we have two challenges.
+One, how to predict this value between minus 1 and 1, for each pair of movies.
+Two, given these predicted values, how to compute ordering, or ranking,
+between all the movies with unknown preferences.
+Short for
+one, we will use the matrix completion algorithm like collaborative filtering.
+And for two, we will use rank centrality.
+Nice, right?
+No extra work today.
+We will use what we have already learned.
+I love when this happens, and today is that day.

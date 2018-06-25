@@ -1,0 +1,134 @@
+In the last few lectures, we discussed undirected, graphical models and
+how to learn the underlying network structure in these models.
+We discussed friendship networks, and
+observed that friendship is usually by directed.
+If I call you a friend, then you usually call me a friend as well.
+So it makes sense to model social networks as undirected networks.
+However, in other applications,
+we might care about the direction of the relationship.
+In fact, in many applications we are interested in determining cause,
+effect relationships.
+During this and the next lecture, we will discuss directed graphical models.
+We talked about weather last time, so
+let's start by discussing a small example related to weather.
+Supposed that we measure five variables in the course of a month.
+Namely maximum daily temperature, average daily wind speed, amount of daily
+solar radiation, average daily cloud cover and average daily ozone values in Boston.
+They are directed relationships among these variables, for
+example, ozone pollution has created near the Earth's surface
+by the action of daylight UV rays on ozone precursors.
+In addition, during heatwaves ozone values rise because
+plants can't absorb as much ozone.
+Finally, high wind speed disperses ozone precursors, and
+hence, often leads to lower ozone values.
+Assuming wind doesn't transport ozone into town.
+So we obtain a directed graph with radiation,
+temperature, and wind pointing to ozone.
+Should there also be a directed edge pointing from cloud cover to ozone?
+Well although ozone values are associated with cloud cover
+this association is most likely form through radiation.
+So we would not add the directed add ship.
+This directed graphical model represents our belief that ozone values
+are a function of radiation, wind speed and temperature plus some noise.
+And that knowledge about cloud cover does not increase our ability
+to predict ozone values.
+If we already have access to data on radiation, temperature, and wind speed.
+So in this example, we made use of the main knowledge to construct the graph, but
+there might also be other edges connecting these variables that we missed.
+Since I don't have the necessary domain expertise to be sure the model is a good
+one I would not want to predict the ozone levels based on this limited model.
+During the next lecture we will discuss methods for learning the underlying
+directed graphical model without requiring any domain expertise.
+So let's discuss another example where the direction of the edges in the network
+is crucial.
+There is a lot of talk about gene therapy these days.
+In order to develop a gene therapy successfully, one needs to have
+a very good understanding of how a gene affects all the other genes.
+One can measure the expression of each gene in many individuals,
+meaning how much protein each gene produces.
+In order to develop successful gene therapies,
+one needs to know which genes up or down regulate each other.
+This can be represented by a directed network where the nodes are the genes and
+a directed edge pointing from gene one to gene two means that gene one up or
+down regulates gene two.
+For developing gene therapies just knowing
+the underlying undirected gene association network is definitely not sufficient.
+So in these two examples we have hinted at what a directed graphical model is.
+Just ask for undirected graphical models
+each node in the network is associated with a random variable.
+The directed edges describe dependencies between the random variables.
+Or to be more precise, like for undirected graphical models,
+missing edges represent conditional independence relations.
+So what kind of joint distribution on the random variables does a directed
+graphical model encode?
+It's actually a very intuitive model, the joint distribution over all the nodes and
+the network, factors in such a way that each node only depends on its parents.
+Meaning, that the distribution of each random variable is
+only a function of the nodes that point into it plus some noise.
+So how can we use this information to learn the underlying network?
+This definition says that if I could go into the network and
+intervene at a particular variable
+then this will only have an effect on old variables downstream.
+So by performing such interventional experiments,
+we could find out which nodes are downstream from another node.
+And little by little, learn the underlying directed graph.
+Performing such interventional experiments is possible when studying, for example,
+gene regulatory networks.
+One can knock out a particular gene, meaning one makes this particular gene
+inoperative and one can then analyze how the expression of all other genes changes.
+If the expression level of a gene B changes when knocking out gene A,
+this means that gene B has to be downstream from gene A.
+Gene B might not be connected to gene A by a directed edge, but
+there must be a path from gene A all the way to gene B.
+Possibly through gene C, D, E and F.
+And the expression of all these genes on the path
+changes as well when we intervene on gene A.
+Such gene knock out experiments are routinely performed
+in order to determine some of the links in the gene regulatory network.
+However, a human has about 20,000 genes and
+one can imagine that knocking out one gene after another is pretty laborious.
+So for large networks, it is difficult to perform interventional experiments
+to determine the complete underlying directed network.
+In other applications,
+it is not even possible to perform interventional experiments.
+Think about the weather application.
+If we could keep radiation, temperature, and wind speed fixed and
+vary the cloud cover, we could very easily determine
+if there is an edge pointing from cloud cover to ozone.
+However, tuning variables in such applications is not possible, and
+we have to rely on observational data in order to infer the directed edges.
+Similarly, in various applications related to human diseases, although theoretically
+possible, it is ethically inappropriate to perform interventional experiments.
+For example in the documentary Super Size Me,
+Morgan Spurlock performed an experiment on himself.
+He ate three times per day at McDonald's for a whole month and
+analyzed the effect of fast food on his physical and psychological well-being.
+Well Morgan Spurlock decided for himself to perform such an experiment.
+It would be ethically problematic to perform a similar interventional
+experiment and assign a group of people to eat at McDonald's every day.
+This shows the need for methods that can learn the underlying directive graphical
+model from observational data.
+So we've discussed various methods for
+learning an undirected graphical model using the undirected Markov property.
+Remember that the Markov property describes the conditional independent's
+relations induced by the graph.
+Now is there a similar notion for directed graphical models?
+So for directed graphical models the so
+called directed Markov property allows us to read off the conditional independence
+relations that hold in the joint distribution directly from the graph.
+The directed Markov property basically says that any
+node is conditionally independent from its ancestors, given its parents.
+So to illustrate this, let's return to the weather application.
+The missing edge between cloud cover and ozone means that ozone values and
+cloud cover are independent given the parents of ozone, namely radiation,
+temperature and wind.
+While this is a local statement similarly as for
+undirected graphical models there is also an equivalent global statement
+which describes when two sets of nodes are independent given a third set of nodes
+based on separation statements in the graph.
+To summarize, in this lecture we introduced directed graphical models,
+discussed examples of applications of directed graphical models and
+introduce the directed Markov property.
+During the next lecture, we will introduce also the global version of the directed
+Markov property, and discuss methods for
+learning the underlying directed graph from observational data.

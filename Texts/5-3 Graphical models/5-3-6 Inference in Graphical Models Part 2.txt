@@ -1,0 +1,106 @@
+Welcome back.
+In the last lecture,
+we discussed how computing the posterior distribution at a node, given observations
+of some node's values amounts to computing the marginal in a different model.
+So, our goal is to compute the marginal at a node.
+What exactly does it mean to compute a marginal of a node v?
+Remember, that the marginal v just means the probability distribution of v
+if we just look at node v and ignore everyone else in the network.
+This intuition corresponds exactly to the mathematical operation of
+computing a marginal.
+We start with the joint probability distribution over the vector variables,
+X1 through Xp.
+Let's suppose we're trying to find the probability that X1 = +1.
+This is obtained by summing the joint probability over all values of the other
+variables, X2 through Xp since we don't care what values those variables take.
+Doing such a summation is feasible for a small network of 20 nodes or so.
+But with more nodes, we quickly run into trouble.
+This summation that we wrote down is over P minus 1 variables,
+each of which takes value plus 1 or minus 1.
+Meaning that there are 2 to the power P-1 terms in this summation,
+such an exponential dependence in P means that it's hopeless to actually
+compute this sum in most practical situations.
+Looking at the numbers of terms and the sums suggest that it's difficult
+to compute marginals, but perhaps there's a smarter way to add things up.
+Unfortunately, computing marginals in general using using models is
+computationally hard in a rather strong sense assuming widely believed
+conjectures in the theory of computational complexity are true.
+This means that we can't hope to solve the problem for every single using model in
+any graph, but most real world scenarios are easier to deal with.
+Specifically, there are a variety of methods that work well to compute
+marginals or posteriors in many restricted classes and
+models that are useful in practice.
+We'll get started by considering an important special case
+where the network has a path or chain structure.
+In probabilistic language, this is known as a Markov Chain.
+From the global Markov property for undirected graphical models,
+if you condition on an arbitrary node,
+the variables to the right are conditionally independent of
+the variables to the left since these two sets are separated by the node.
+Let's suppose we want to compute the probability that node 1 is equal to
+plus 1.
+There's a remarkable way to do this that amounts to dynamic programming.
+Imagine for a second that we already know the marginal in node 2 or
+the probability that node 2 is plus 1.
+In that case, we can just look at the two cases.
+Node 2 is plus 1 or -1 and
+compute the probability that node 1 is plus 1 in either case.
+This sort of local relationship is exactly the information contained in the model
+specification.
+The problem, of course is that we also don't know the marginal at node two.
+The key is, it's enough to know the probability for
+X2 = +1 or minus 1 given the value of node 1.
+We can pretend that node two tells node one.
+If you're +1, then I'm +1 with probability 0.7 and -1 with probability 0.3.
+And if you're -1, then I'm +1 with probability 0.4 and
+-1 with probability 0.6.
+We'll call this the message from node two to node one.
+How would node one use this information?
+Like you denote the probability of node 1 is +1.
+From the law of total probability, we can compute the probability that X2 is 1,
+which equals the probability that X2 is 1, given that X1 is 1 times
+the probability that X1 is 1 plus the probability that X2 is 1,
+given that X1 is -1 times the probability that X1 is -1, but
+this is equal to 0.7 times q+0.4(1-q).
+We use this in a moment.
+So, just remember that we know the marginal at known two in terms of q.
+We also know from the graphical model specification,
+without doing any computations, the probability that X1 is +1,
+given that X2 is +1, suppose it's 0.2.
+Now by Bayes's rule, this is equal to the probability that X2 is +1,
+given that X1 is plus 1 times the probability that X1 is +1
+divided by the probability that X2 is +1.
+The first quantity on the right is part of node 2's message to node 1 and
+we assumed it was equal to 0.7.
+The probability that X1 is +1 is what we're interested in and
+we used q for this.
+The denominator, we solved for a minute ago and was 0.4+0.3 times q.
+We can solve for q, which is the quantity we wanted.
+The probability that X1 is plus 1.
+We still haven't said, how node 2 can figure out this message to send to node 1.
+What we can say, though is that node p,
+which sits at the other end of the chain can send such a message to node p minus 1.
+This is because for each value of Xp minus 1,
+node p can figure out the probability of being plus 1 or minus 1.
+It's at the end and there are no other nodes to affect it.
+By a similar computation to what we did for node 1 a moment ago, node p-1 can
+compute the message to send to node p-2, given the message from node p.
+The general principle is the message from a node v along an edge can be computed
+once the incoming messages to v along all the other edges have been received.
+In this way, the messages are passed from one end of the chain to the other
+allowing us to compute the marginal at node one.
+Of course,
+node one could send a message to node two similar to the one node p started with and
+the sequence of messages can go to the right eventually reaching node p.
+Each intermediate node can compute its marginal once it has received
+the appropriate messages from its two neighbors by using Bayes rule.
+The total number of messages is twice the number of edges
+since each edge has a message going in either direction.
+So, the total computation time is linear in the number of nodes.
+This simple and efficient message passing algorithm
+is an instance of the belief propagation or some product algorithm.
+We've seen that it can compute the marginals of each node.
+And therefore,
+the posterior probability at each node given partial observations of other nodes.
+Next time, we'll see how this generalizes beyond the chain graphs to
+tree structured graphical models as well as touch upon other inference algorithms.

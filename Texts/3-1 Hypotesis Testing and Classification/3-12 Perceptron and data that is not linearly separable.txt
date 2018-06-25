@@ -1,0 +1,197 @@
+We've seen that we can use support vector machines for
+binary classification, as long as our training data is linearly separable.
+However, as you might guess, not all data sets are linearly separable.
+And we'd really substantially limit the applicability of our techniques if these
+were the only classification problems that we could handle.
+For instance, we could get data from some experiments and
+these experiments maybe should lead to nice linearly separable training data.
+But possibly they have experimental errors that lead to a few errant data points in
+our training data.
+Or we could be in a setting where there's a good classifier but
+is just isn't the hyperplane.
+In this section,
+we'll give a brief overview of some of the simple modifications that allow us to
+apply support vector machines in these more complicated settings.
+In the first case, where we want a linear classifier, but
+there's no hyperplane that perfectly classifies the training data,
+the idea is just to slightly modify our goal.
+Instead of requiring our hyperplane to cross by all of our points in some given
+margin, we'll make a penalty function that zero for
+a point that is classified by the hyperplane with this margin and
+that penalizes points that violate the constraint.
+And we'll make the size of the penalty depend on how bad the violation is.
+Then given some margin,
+we can look for the hyperplane that has the smallest penalty.
+Note that there's a tradeoff here.
+If we demand a larger margin, we should expect more violations and
+thus a larger penalty so we have to somehow decide how to balance the two.
+There's also some discretion in how we choose our penalty function.
+Researchers have studied how to make these choices, and there's some simple,
+commonly used penalty functions that work very well in practice.
+And in fact, for these penalty functions,
+it turns out we can actually find the optimal hyperplane using algorithms that
+are almost the same as the ones we used in maximum margin setup.
+Let's now talk about the second problem I mentioned which actually seems to be
+a bit more problematic.
+This is the problem where there is a right classifier, but
+it's just fundamentally not a hyperplane.
+For instance, it could be that the best way to classify the data is by looking at
+some higher degree polynomial instead of a linear function.
+To see how this could happen,
+let's look more carefully at the example I showed before.
+In this case, any linear separator that we try
+will miss-classify a significant faction of the trait data.
+Here's a picture of what this would look like.
+However, we would correctly classify all the training data and
+get what visually seems to be the right classifier
+by looking at the degree two polynomial x squared + y squared, labeling a point as
+positive when it's bigger than one and negative when it's smaller than one.
+Unfortunately, our whole approach was tuned into finding a hyper plan so
+seems like we need to start from the scratch and try with all of the theory and
+all the algorithm that we have.
+Before completely anew if we wanna get to classifier that has some other shape.
+Like the ones we got to be higher.
+Our priority we don't even know if we can do this on a reasonable way.
+Our algorithms, like the perceptron algorithm we described, or the convex
+programming methods that I mentioned, were all really about linear separators.
+Priori, it actually seems quite possible that finding the best classifiers with say
+degree two polynomials could just be fundamentally harder, and end up being too
+hard a problem, one that we can't solve with any efficient algorithm.
+However, as you may have guessed, this isn't the case.
+There is a beautiful trick that actually lets up use what we know about support
+machines directly to find a whole bunch of different types of non linear classifiers
+without having to start from scratch.
+The basic idea is really simple.
+Remember that when we set up the problem,
+we have to choose how to encode our data as feature vectors.
+But this was a design decision, and
+there are a lot fo ways we could've made this choice.
+For instance, instead of making the coordinates of the future vector be x and
+y, I could have taken them to be out of 100x squared and 74cos y, or x + y and xy.
+Or I could have even put them in three dimensions,
+with coordinates say xy and x cubed times y.
+In general, we can apply any function that we want to our data points, and
+use the results as our feature vector instead.
+Now, how we make this choice has a huge effect on what a linear classifier looks
+like, what its margin is, and how well it performs and
+different choices can actually lead to very different answers.
+In fact, we already took advantage of this freedom a little bit
+when we were describing the perceptron algorithm.
+Right at the beginning of the algorithm we decided that it was easier to
+only work with hyperplanes through the origin.
+The only way were able to get away with this was by adjoining a dummy
+coordinate of one.
+That is by applying a function that takes a vector x
+to a new vector x,one in a space that's one dimension larger.
+This then broadens the types of classifiers we could get by taking
+hyperplanes through the origin.
+Any classifier we could have gotten in the original setup by using some
+arbitrary hyperplane that might not have gone through the origin, can now be
+expressed as a hyperplane through the origin in this higher dimensional space.
+One thing to note here is that by lifting the points to a higher dimensional space,
+we actually gave ourselves the ability to describe more classifiers
+as hyperplanes through the origin.
+Intuitively, we can describe a hyper plane through the origin in d dimensions,
+by giving a weight vector with d coordinates.
+By throwing in a dummy coordinate, we put our vectors into d plus one dimensions.
+So we now describe a hyper plane with d + 1 numbers.
+So, by lifting our points up into a space, with one more dimension, we gave ourselves
+one more degree of freedom, to use in describing our hyper plane.
+But that just seems like a little technical convenience to avoid working
+with numbers other than 0 on the right hand side of our equations.
+The idea of the kernel trick is to really exploit this freedom.
+If we wanna look for classifiers whose values are delineated by
+something other than a hyperplane, we'll apply a function f
+that maps our original points to some new points, so that these more complicated
+classifiers on original points are just linear classifiers applied to the new one.
+To see how this could work, lets go back to the example we had before.
+If we had somehow encoded our points differently, say like this.
+Then we could have gotten a much better result with a linear classifier, as shown.
+Now this is pretty adhoc, but
+there's actually a more systematic way that we can proceed.
+Instead of describing a point with two numbers, X and
+Y Let's describe it as six numbers.
+One, X, Y, X squared, Y squared, and XY.
+Formally, we can think of this as a function that takes X,
+Y to a new vector with six coordinates.
+Let's call them Z one through Z six.
+By applying the function f written here.
+This didn't really add any information.
+We're still just giving a more complicated way of encoding
+the original numbers X and Y.
+But now we hae six degrees of freedom for
+our hyper planes through the origin which we can describe
+by saying the linear function c1z1 plus c2z2 up to c6z6 equal 0.
+But if we applied this linear function to f of xy for one of our original points
+we get c1 plus c2x plus c3y plus c4x2 plus c5y2 plus c6xy.
+But this is the general form of a polynomial of degree at most two applied
+to x comma y.
+So, by choosing c one through c six, we can describe and quadratic polynomial.
+And the linear classifiers applied to z give quadratic classifiers applied to x
+comma y In particular if we let c1 = c4 = c6 = 1 and then set the rest to zero,
+we get the classifier that returns positives if 1+z4+z5 which equals 1+x
+squared+ y squared is positive and then negative otherwise,
+which was exactly the one that looked like the right choice for our sample.
+This is actually kind of remarkable if we want quadratic classifiers,
+we don't need to start over.
+We can get them by just applying a function that lift our points up
+into some higher dimensional space, and then look for linear classifiers.
+We actually could've done this more generally.
+If we wanted degree functions, we just need to include the degree three.
+X cubed, XY squared, X squared Y, and Y cubed.
+In general,
+if we want degree K classifiers, we just need to apply the function that writes
+a point by listing all the monomials of degree at most K.
+We can then just apply our SBM algorithm to the results.
+So we don't need to do any additional thinking grees.
+All we have to do is just apply a function and
+use the SVM machinery that we already have.
+And there was nothing that forced us to use polynomials.
+If we wanted to describe some other sort of classifiers,
+we could have just applied some other function to our training data instead.
+Now you might worry that the computational problems is getting a lot harder, since
+were getting a lot more coordinates.For example they are on the order of
+d to the k mono nomials of degree k in d variables, so this gets big in a hurry.
+However, it turns out that we don't always need to
+explicitly work with these really high conventional representations.
+If we look carefully at the perceptron algorithm or
+at a lot of the other algorithms we're finding FEM's.
+It turned out that we can actually describe in a way that doesn't
+specifically need to know the coordinates of the data themselves.
+Instead it just needs to be able to compute dot products, f(xi) and f(xj).
+So if we want to find linear separators after applying the function f, we just
+need to be able to compute dot products of the forum f of x sub i dot f of x sub j.
+Often, there's a way to do this that doesn't require us to actually compute
+all the coordinates.
+In particular, for the function f that takes a point to all monomials of degree
+up to k If we scale the coordinates by some appropriate constants,
+the dot product of f(x sub i) and
+f(x sub j) turns out to just be given by (1 + x dot y) raised to the dth power.
+To find this we just need to compute the dot product x dot y.
+We never actually need to write out this long list of variables.
+This is obviously a lot faster,
+and it lets us handle cases that would be way too complicated otherwise.
+So, to abstract a little and sum everything up,
+the idea was that we would get more complicated classifiers by applying
+a function F to our feature vectors, and then using SVMS on the results.
+Instead of computing F of x for
+all points, we actually just need to compute the dot products,
+K of x of i comma x of j, which we'll say equals F of x of i dot and F of x of J.
+And we call this the kernel trick.
+This kernel is all we actually need to be able to run our algorithms.
+This idea is called the kernel trick and
+it lets us apply our SVM machinery to get non linear classifiers.
+This is an extremely powerful tool.
+But I just like to conclude with one.
+One quick caveat, remember that when you have more parameters,
+you need more data to properly fit them, otherwise there's a risk of so
+called overfitting where you get a really complicated function to describe
+your data, but this function is fairly useless on new data points as shown here.
+When using these kernels, it actually gets easier to do this
+since we're introducing a lot more possibilities for our classifiers.
+One thus has to use some care in applying them and
+they have to be used judiciously to avoid overfitting.
+There's a beautiful theory that studies the tradeoffs in doing this.
+But it's slightly beyond the scope of this course.
+In general, you should think of the goal as trying to work with as few degrees of
+freedom as you can, while still being able to describe a classifier.

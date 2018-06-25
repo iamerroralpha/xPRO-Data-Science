@@ -1,0 +1,74 @@
+Hi, In the last several lectures we've introduced graphical models.
+We've seen that they're flexible in powerful way
+to model complex systems including networks.
+We also talked about learning graphical models from data.
+We'll suppose that we have either a learning model from data or
+alternatively we have domain knowledge that has allowed us to specify a model.
+In either case, in the next couple of lectures,
+we will assume that we have a known graphical model.
+Graphical models are useful,
+not only because they are flexible in modeling network phenomena,
+but also because they facilitate answering statistical questions.
+Specifically, there are a variety of fast algorithms
+that have been developed over the last few decades to make predictions or
+compute other statistical quantities of interest in a graphical model.
+Let's go back to one of the examples we considered before.
+Suppose we have data consisting of ratings, like or dislike, for
+50 YouTube videos from everybody at a university.
+People are influenced through their network of friends.
+And since friendship is an undirected relationship
+we'll assume an undirected graphical model.
+Remember that the graph structure in code the structure of statistical independence.
+Mainly, that each person rating is conditionally independent
+of everyone else's given the ratings of their friends.
+The Ising Model is appropriate since we have binary data.
+This is the canonical discrete graphical model.
+But everything we will discuss generalizes the other graphical models.
+Each node in our graph, let's say there are P nodes for
+P people, has a variable associated with it.
+Node I has variable xI, which takes values minus 1 or plus 1.
+One data sample from the model corresponds to everyone's choice of like or
+dislike for a particular video and is, therefore,
+a binary vector of length equal to the number of people, P.
+Now suppose that we've learned an Ising Model for
+people's preferences from the data.
+Beyonce releases a new video, and 15 people have rated the video.
+Other users haven't yet seen the video, and we want to predict each user's rating.
+This is useful, so that we can recommend the video to people who might like it.
+We have information about 15 people,
+and each of these people is statistically dependent with their friends but
+there's a network effect where a nodes preference is dependent also with non
+neighbors due to propogational long paths and also effects can combine or add up.
+It's not at all obvious how to use the information we've observed
+in order to make predictions for other users, but
+that's exactly what the graphical model does.
+It captures the statistical interaction between variables and
+tells us how to combine the pieces of information we've observed.
+From a statistical perspective, our goal is to compute the posterior distribution
+for a particular node, given our observations.
+This will be a number telling us how likely this node is to like or
+dislike the new Beyonce video conditional on the information we've observed
+It turns out that is enough for us to figure out how to compute
+the marginal distribution at a node in a using model, without conditioning at all.
+The marginal, at a node,
+V, is just the probability distribution of the variable Xv.
+It is described by the probability that Xv is equal to plus 1 or minus 1.
+If the probability of Xv equals plus one is two-thirds,
+then the probability of Xv equals minus one is one-third.
+Because the probabilities have to sum to 1.
+And this completely describes the distribution of Xv.
+Essentially, the marginal node v describes what you'd see if you only observed node
+v, and ignored everybody else.
+So despite there being a large network in the background we zoom in on one person.
+We might ask what's the probability that Caroline will like the next YouTube video?
+In order to incorporate the observed information for some nodes, we can just
+fix the observed variables in the model to either like or dislike it turns out that
+we get a new easing model on the remaining nodes once we fix these variables.
+And in this new model, a marginal end node describes the posterior probability
+we were after originally.
+So the basic problem we need to solve is computing the marginal end node, and
+the model where we haven't observed any of the nodes values.
+The reason why we need to do a computation to find the marginal at a single node,
+even though we haven't observed any of the other values,
+is that some nodes have a bias towards plus one or
+towards minus one and this propagates through the network.

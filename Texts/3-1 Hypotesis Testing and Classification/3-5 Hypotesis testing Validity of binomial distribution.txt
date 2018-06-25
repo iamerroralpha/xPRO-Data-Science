@@ -1,0 +1,94 @@
+In the discussion of hypothesis testing, we have considered only
+one example involving normally distributed random variables.
+But the hypothesis testing method is much broader than that, and
+allows you to test the validity of the probability distribution itself.
+Let us illustrate this in a special case when the underlying distribution is
+binomial.
+In the beginning of the lecture, we mentioned an example of using hypothesis
+testing for the analysis of police racial profiling and
+possibly testing the hypothesis that the police is particularly
+biased against people of color when they pull over drivers on the road.
+Let us say that in the year of 2015 among the drivers stopped by
+the police 35% were black drivers.
+The actual figures are somewhat different and
+you can find some of these figures on the Bureau of Justice Statistics website.
+One way to think about the statistics is that if one draws a random driver from
+the list of all drivers stopped by the police in the year of 2015,
+there’s a 35% chance that this driver is African American.
+Since this percentage is higher than the percentage of black drivers among
+all the roughly 200 million drivers in the US, this already suggests a bias.
+But let us imagine the following situation.
+Community organizers in several towns across several states,
+claim that in fact the situation is worse in their communities than it is in the US
+on average, however disturbing these averages are on their own.
+They claim that even if one accepts for the sake of argument
+that racial profiling is non-existing from a statistical point of view, in the US on
+average the police precincts in their towns do rely on racial profiling.
+To support their claim, the data was provided for two precincts,
+which we just call Precinct A and Precinct B for simplicity.
+The data shows that during the year of 2015, out of approximately
+12,567 drivers stopped by the police, in fact 4,513 were black.
+4,513 divided by 12,567 is approximately 0.359,
+which is larger than 35% and hence the claim of racial profiling.
+For the second Precinct B among 15,687 drivers stopped 5,562 were black.
+Again, 5,562 divided by 15,687 is approximately 0.354,
+which is also larger than 35% and the claim of racial profiling is made again.
+How can we asses the statistical validity of these claims?
+We do this by conducting the hypotheses test.
+We take as our null hypothesis, namely the hypothesis to be tested, that
+the drivers pulled over by police in these precincts are as likely to be black as for
+the statistics across US suggest.
+Namely, a driver pulled over by police in these precincts is black
+with 35% likelihood, as is the national figure.
+We set Type 1 error threshold alpha to be 5%,
+this is up to the person conducting the test, of course and
+different error rates may be considered, but let us accept if for now.
+Assuming the validity of this hypothesis, we will compute the likelihood
+that among 12,567 drivers in Precinct A at least 4,513 were black.
+Namely at least as many as was the number of black drivers actually pulled over.
+If this probability is greater than 5%,
+we accept the hypothesis as valid with 5% error rate and say that the exceedance of
+35% rate in this precinct is just a statistical fluctuation.
+If it is less than 5%, we will reject this hypothesis and
+say that the number of black drivers actually pulled over was unusually high.
+We will conduct a similar analysis for Precinct B.
+How can we compute these probabilities?
+If the 35% hypothesis is true, then according to the binomial distribution,
+the likelihood that out of 12,567 drivers at least 4,513 were black can
+be computed using the following formula for binomial distribution as follows.
+Take some time to convince yourself that we have applied the formula for
+the binomial distribution correctly.
+This might look horrendous but in fact most statistical softwares and
+many other non-statistical packages such as MathLab will find and
+compute this expression in a split sec.
+The answer in this case is 0.016 or about 1.6%.
+We conclude that under the null hypothesis, no profiling.
+The likelihood that out of 12,567 stopped
+drivers 4,513 were black is approximately only 1.6%.
+Since this is below 5% selected for Type 1 error tolerance,
+we must reject the hypothesis.
+Thus, according to the data, it is unlikely, only 1.6% chance,
+that the black drivers were stopped at the same rate as in the US on average.
+This of course does not legally prove the presence of racial profiling,
+just indicates the statistical evidence for it.
+What about Precinct B?
+Using a similar analysis the likelihood that out of 15,687 stopped
+drivers at least 5,562 are black is given by the following expression,
+which is evaluated to be approximately 11.4%.
+Since 11.4% is higher than 5%, we must accept the null hypothesis.
+Namely, according to the statistical analysis,
+there is no evidence of racial profiling in Precinct B.
+Of course again, this is just a statistical analysis.
+In the reality, such an analysis might suggest a further investigation
+where profiling appears to take place according to the statistical evidence.
+As far as the analysis can either confirm the presence of profiling or
+not find any evidence of it.
+The statistical tools can simply assist in the identifying, relatively quickly,
+precincts where there is some statistical evidence of profiling.
+From the methodological perspective, we just gave an example of testing your
+hypothesis regarding the validity of a certain distributional assumption,
+binomial distribution being the case.
+One can naturally apply it to other types of distributions, such as uniform,
+geometric, Poisson distribution and many others.
+The method is very general.
+It is also very useful, I hope I have convinced you of that.

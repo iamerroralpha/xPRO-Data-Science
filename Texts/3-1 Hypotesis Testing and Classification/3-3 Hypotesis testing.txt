@@ -1,0 +1,25 @@
+Today, we will introduce a very important statistical concept.
+Hypothesis testing.
+The meaning of the term hypothesis testing is precisely what it says.
+Using a data observed from a distribution with unknown parameters,
+we hypothesize that the parameters of this distribution take particular value and
+test the validity of this hypothesis using statistical methods.
+We test a hypothesis.
+The method of hypothesis testing has many applications.
+Say a new drug for
+lowering blood pressure was just produced by a certain pharmaceutical company.
+Does the drug has a meaningful effect on lowering the blood pressure
+as the company claims?
+Is the impact larger than that of the competitive drugs.
+A community organization claims that the police in a certain precinct is prejudiced
+and tends to stop disproportionally many people of color during traffic patrols.
+They have produced some data to support their claim showing
+much larger number of people of color stopped than say, on average, across US.
+A car manufacturer claims to have achieved a significantly lower emission rate
+than those of its competitors and has provided data to support their claim.
+The data supporting these kinds of claims
+is naturally subject to a lot of uncertainty.
+And one can never be completely certain whether or
+not the claim has any validity to it.
+One has to rely on statistical methods to draw such conclusions.
+Today, we introduced some of this methods.

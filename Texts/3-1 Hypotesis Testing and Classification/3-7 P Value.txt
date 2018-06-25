@@ -1,0 +1,162 @@
+In discussing the hypothesis testing method, we have introduced in particular,
+a method for accepting or
+rejecting a hypothesis which is selected to be the null hypothesis.
+The method was based on introducing some measurement of the observed sample
+such as its sample mean and computing the probability that this measurement
+falls within some declared region such as for example,
+an interval around the mean which is claimed by the null hypothesis.
+The life of the interval was engineered so
+that the probability of falling outside of this interval,
+which as you may recall is called type 1 error, achieves the target value alpha.
+Usually taken to be, for example, 5% or 1%.
+In a case that this measurement indeed falls outside of the interval,
+the hypothesis is rejected otherwise, it is accepted.
+Thus, if the hypothesis is true the likelihood
+it is rejected equals value alpha.
+There is a certain limitation of this method.
+This mechanism provides an acceptance rejection rule for
+the hypothesis, but does not provide any sense of the strengths of the measurement
+in either supporting or rejecting the hypothesis.
+If we were to have two measurements of the sample and
+say based both of them the hypothesis should have been rejected,
+which one has stronger evidence for rejection?
+To gauge the strength of evidence for either supporting or
+rejecting a hypothesis we introduce now a new and important concept of p-value.
+A formal definition of the p-value sounds something like this.
+The p-value is the probability of observing an outcome which is at least as
+hostile or adversarial to the null hypothesis as the one observed.
+Did you get this?
+Probably not.
+So let us discuss an example.
+Let us recall our example of a manufacturing device lifetime.
+Recall, that the null hypothesis in this particular example
+stated that the mean lifetime of the manufacturing device is 9.4 years.
+Then we computed a magic number
+0.396 which had the property that if the computed sample mean is
+within 0.396 lifetime units from 9.4, then the hypothesis is accepted.
+Otherwise, it is rejected.
+Suppose you have actually gathered two samples,
+one with 50 elements with a sample mean equal to 8.96, and
+another one with 60 elements, with sample mean equal to 9.81.
+First note that according to each of this measurement
+the null hypothesis should be rejected.
+Verify this on your own.
+Each of this measurements will be associated with some p-value
+which we now describe how to compute.
+Take first 8.96 sample average.
+What is the probability that when we generate a different and
+independent sample average of 50 observations
+we get the value less than 8.96 if the null hypothesis is true.
+Before we answer this let us discuss why we want to compute something like this?
+We want to have a sense of how unlikely it is to obtain a sample average of 8.96.
+Now the probability for observing exactly 8.96 is practically zero.
+So instead,
+we're asking to compute the likelihood of observing something even worse than 8.96.
+And this is our approximate measurement of the unlikelihood of seeing the number
+as far from the claim mean of 9.4 as 8.96.
+Now worse can mean two things.
+One is natural getting a number smaller than 8.96.
+But there is a complimentary worse,
+the difference between 8.96 and 9.4 is negative 0.44.
+Then getting a sample of 9.4 plus 0.44,
+namely 9.84 is as bad as the one of 8.96.
+So getting a measurement above 9.84 in this sense is
+also worse than getting the number 8.96.
+Now let us compute the probability of getting a measurement either
+below 8.96 or above 9.84.
+I say that this probability is the probability
+that the standard normal variable which we denote by capital Z here.
+Takes at most the following value for the sigma equals
+to 1.43 is a standard deviation of the device under the null hypothesis.
+I'll let you figure out why this is the case.
+On your own we have done similar deviations already several times, so
+you should be able to do that yourself.
+From the standard normal distribution table we find that the probability
+that the standard normal rounding variable x value below a negative
+2.175 is about 0.015 which is about 1.5%.
+So our answer is twice that much namely 0.03 or 3%.
+We conclude that the p-value for our sample is 3%.
+Inwards, the likelihood of getting a sample which is as far from the hypothesis
+as the one observed is 3%.
+Since the p-value of 3% is kind of small, kind of.
+We will be inclined to reject this hypothesis.
+Notice that there is a simple relationship between the p-value and our acceptance,
+rejection rule say based on the type one error alpha equal to 5%.
+The hypothesis is accepted if the p-value exceeds 5% and
+rejected if it stays below 5%.
+A similar rule applies if the value of the type one error is said to be 1%.
+Often the p-value is defined as probability of being worse than observed
+only in one direction, in this case being below 8.96.
+So in our example because the normal distribution is symmetric about its mean,
+the actual p-value would be only half of the 3% corresponding to this probability
+namely only 1.5%.
+The one-sided version of the p-value is particularly useful when the distribution
+is not symmetric around its mean as we are about to see in our next example.
+It is important to be explicit in what the p value stands for
+when conducting a statistical test.
+So far it seems like we have not done anything new here.
+But wait a minute,
+we have the second sample of 60 observations with average 9.81.
+The difference of 9.81 and 9.4 is 0.41.
+As a result, the p-value is computing using the following formula.
+From the standard normal distribution, we find the answer to be
+twice 0.013, namely 0.026, that is 2.6%.
+We conclude that the p-value for the second sample is only 2.6%.
+It is still below the 5% cutoff so the rejection is called for, but its value of
+2.6% is even lower than the value of 3% for the value of the first sample.
+So the p-value of the second sample provides, so
+to speak, even stronger evidence against a null hypothesis.
+If we had two samples, one with say, p-value of 11% and
+one with say, 18%, the null hypothesis would be accepted based on both.
+But arguably,
+the second p-value gives us stronger evidence supporting the hypothesis.
+So it is natural to call p-value the strength of the test,
+a sample mean in our case.
+The larger the p-value, the stronger is the evidence supporting the hypothesis.
+The smaller is the p-value, the stronger is the evidence against the hypothesis.
+Now let us turn to our other example,
+testing the binomial distribution in the context of racial profiling.
+Recall that in precinct A,
+from 12,567 drivers stopped by the police, 4,513 were black.
+Whereas the national figure is approximately 35%.
+We have computed that under the null hypothesis stating that the likelihood
+that a random driver stopped by the police has 35% chance of being a black driver,
+the probability of having at least 4,513 black drivers is 1.6%.
+That was below 5% selected value for alpha as a type one error and
+the hypothesis was rejected.
+Since the binomial distribution is not symmetric.
+So it is approximately symmetric since it can be approximated
+by the normal distribution.
+Let us compute the one sided p-value namely the probability of observing
+an outcome even more hostile to the null hypothesis than the one observed.
+Guess what?
+We have already computed it.
+It is 1.6%.
+Indeed, since the observed value was 4,513,
+then the p-value is the probability of having at
+least 4,513 stopped drivers to be black, which we have computed to be 1.6%.
+For the precinct B, the one-sided p-value is the probability that at lease 5,562
+drivers out of 15,687 were black, which we have computed to be approximately 11.4%.
+Then the p-value for this experiment is 11.4%.
+There is a lot of discussion as to what extent one should rely on p-values of say
+5% or 1%.
+Type 1 errors for accepting or rejecting hypothesis in various fields.
+These are just useful tools and they need to be used with extreme care and
+never applied blindly.
+The context of the underlying statistical estimation
+should almost invariably guide the application of the maths.
+In our last lecture in this module, we will show examples
+of how the application of methods such as hypothesis testing and
+p-value can be misused, and lead to wrong conclusions.
+And I finish this part of the lecture by offering you the following challenge.
+The p-value is naturally a random variable, as it is the probability of
+a observing a value smaller than the observed sample average.
+Since the simple average is a random variable so
+is the probability of seeing the value below it.
+What is the distribution of this random variable?
+Well, there is a magic answer.
+The distribution of the p-value is uniform in the interval between 0 & 1 when
+the distribution corresponding to the measurement is continuous.
+This is not obvious at all.
+But try to derive this fact.
+It is a good brain challenge.

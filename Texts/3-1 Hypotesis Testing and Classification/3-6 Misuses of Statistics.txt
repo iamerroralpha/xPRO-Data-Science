@@ -1,0 +1,169 @@
+Let us say you are managing a manufacturing firm which produces
+a certain electronic device.
+And the industry standard for the lifetime of this device is to have let's say,
+lifetime of at least nine life years.
+Your engineer claims the device produced by your company fits the standard and
+in fact has average lifetime of 9.4 years.
+And a standard deviation of 1.43 years.
+To support his claim he gives you sample of lifetimes for
+50 devices with various actual lifetimes.
+In practice, one does not need to wait for
+ten years to test the lifetime of the device, but instead there is a procedure
+to estimate its projected lifetime using a certain manufacturing process.
+The details of this process are besides the point in our skit.
+You have computed the average of the projected lifetimes for
+the sample provided by your engineer, and found it to be 9.6 years,
+which is above the industry standard of 9 years, which is good.
+Your goal is to test the following hypothesis.
+The lifetime of the device follows a normal distribution
+with mean equal to 9.4 and standard deviation equal to 1.43 years.
+Since the mean value in this hypothesis is 9.4 which is greater than 9,
+confirming this hypothesis would be good news as far as meeting
+the industry standard is concerned.
+So, our hypothesis is as follows.
+How can you test this hypothesis?
+First some notation.
+When you introduce and test some hypothesis,
+a convention is to call it a null hypothesis, and denote it as follows.
+Now let's do actual testing.
+This is done by first assuming that the hypothesis is true,
+selecting a certain measurement error value C.
+And computing the probability that the outcome, namely the average of these 50
+observations falls within C units of the claimed value of the mean value of mu.
+Which in our case, was claimed to be 9.4.
+If we choose our measurement error to be,
+say, 0.3 lifetime years, then we need to conclude the following probability.
+How can we compute this probability?
+Well again, we can use the trick of manipulating x bar in the standard,
+normal random variable as follows.
+As in our discussion of confidence intervals,
+the random variable x bar minus mu over sigma divided by square root of n,
+is actually a standard normal random variable.
+Let's denote it by Z for convenience.
+Then we have to compute the following.
+And we have everything we need to compute this probability.
+We have n, which in our case is 50.
+We have sigma, which in our case is claimed to be 1.43.
+And we have c, which we have chosen to be 0.3.
+So we need to compute the following probability which we can find in the table
+for standard normal distribution.
+It is approximately 0.861 or roughly 86%.
+Let's summarize what we found.
+We have computed that when a sample of 50 observations
+from normally distributed random variable with mean value equal to 9.4 years, and
+standard deviation equal to 1.43 years is drawn.
+The probability that this sample falls within 0.3 units from the mean
+value of 9.4 equals 0.861, namely about 86%.
+Wait a minute.
+Where did we use in this computation that our
+actual observed average of 50 estimated lifetimes was 9.6?
+This is the where we can use it to test the validity of the hypothesis.
+Falling within 0.3 units of the claimed mean value
+of 9.4 occurs with 86% likelihood if the hypothesis is true.
+Our observed average is 9.6,
+which is in fact within 0.2 units from the claimed mean value of 9.4.
+Since 0.2 is in fact smaller than 0.3,
+we'll say that we accept this hypothesis and we do so with 95% confidence.
+If you or your engineer collected a different sample with, say, average 9.05,
+and would want to use this average to test the same hypothesis,
+you would do the same thing.
+Compute the difference of 9.05 and
+the claimed mean value of 9.4, which is negative 0.35.
+Since negative 0.35 in absolute terms is larger than 0.3,
+the hypothesis should be rejected.
+Notice that you have rejected the hypothesis even though your observed
+average was 9.05, which is higher than the industry standard of 9 years.
+You still reject the hypothesis because the hypothesis was about the mean
+of the distribution, and not meeting the industry standard per se.
+There's something unnerving about this method.
+Whether we accept or reject the hypothesis depends on the data we observe.
+For different samples, we may either accept or reject the same hypothesis.
+But the samples come from data and this is the only thing we have access to.
+We can only draw our conclusion from observed data.
+There is no crystal ball to tell us whether the claimed value
+of 9.4 years of lifetime is correct or not.
+In fact, there is no such thing as the correct mean value.
+Since the concept of the distribution underlined observed values
+is entirely in our head, and it is used as a convenient conceptual device
+to test the validity of our conclusions.
+There is something else which is perhaps annoying in this example.
+The confidence level in our hypothesis testing example
+was computed to be approximately 86%.
+This was an implication of choosing somewhat arbitrarily
+the error value of 0.3 years for the lifetime duration of the device.
+Well this is something we can deal with.
+We can choose the target level of confidence say 95% and
+compute the implied error value.
+This is very similar to what we have encountered in
+our discussion of confidence levels.
+To achieve the target value of 95%, Namely the error rate of 5%.
+Let us first denote this error rate by alpha.
+Now we can compute the implied error value c as follows.
+From the table, as we recall,
+there is a magic number of 1.96 for the following idea.
+We conclude that the following is true.
+Looks familiar?
+It should.
+In our case, we use the fact that sigma is hypothesized to be 1.43 and
+the sample size is 50, and find that the value of c is 0.396 like this.
+We summarize this as follows.
+We accept our hypothesis of mean value of 9.4, and
+standard deviation 1.43 with 95% confidence level if our observed
+sample average falls within 0.396 units from the claimed value of 9.4.
+Recall that the sample brought to you by your engineer had average value of 9.6
+units, which is within 0.2 units of the claimed mean value.
+0.2 is smaller than 0.396 so the hypothesis should be accepted.
+If the observed average was 9.05, as in our second example,
+then since the difference of 9.05 and 9.4, which is negative
+0.35 is still smaller than 0.396, the hypothesis should still be accepted.
+It was though, rejected before.
+What has changed?
+You've guessed it.
+The error value of 0.3 chosen by us was more stringent that the error value
+of 0.396 implied by 95% confidence level.
+Thus, there is something else here which is perhaps unnerving
+in the discussion above.
+The same hypothesis with the same data and
+thus the same average value might be accepted or
+rejected depending on perhaps somewhat arbitrarily chosen confidence level.
+But maybe this is not so bad since it allows for
+choice of confidence level in different areas in different industries.
+For example, when dealing with drug manufacturing or anything else which
+relates to human lives and well being, for example airline safety.
+One might want to desire a very high level of confidence of let's say,
+99% or even 99.9%.
+Industry experts in the government do about worry about setting such standards.
+At the same time,
+say in retail industry if your goal is test the hypothesis of mean value of
+the number of online customers in order to see if it say significantly exceeds
+the mean value of the number of customers visiting your brick and mortar stores.
+Making a mistake in testing this hypothesis is at worst would lead to
+poorer management decision.
+Say closing your chain of physical stores and focusing entirely on online industry,
+but not loss of human lifes.
+Unless as a company manager, you feel suicidal
+about your poor management judgement which obviously you should not.
+We have mentioned earlier the convention of calling the hypothesis,
+which is being tested, a null hypothesis.
+It is time to discuss another related concept called type 1 error,
+which has implicitly already surfaced in our discussion.
+Note than even when the hypothesis is true, say in our example
+the mean value was indeed 9.4 and standard deviation was indeed 1.43.
+There is a chance that the hypothesis is rejected simply because the sampled
+average was unusually far from the true but unknown to us mean value of 9.4.
+In fact, we have set up our testing framework in such a way that
+the likelihood of this rejection of the true hypothesis equals 5%.
+The error of rejecting a true hypothesis is called type 1 error,
+which in our case is 5%.
+This is contrasted with type 2 error.
+Type 2 error corresponds to the case of accepting by mistake a hypothesis
+when it is wrong.
+For example, accepting the hypothesis that the mean lifetime of the device 9.4,
+when in fact, it is not.
+To estimate the probability for such an error, one naturally has to formulate
+the meaning of something like, 9.4 is not the right mean.
+Namely, one has to formulate what is called an alternative hypothesis, for
+example something like this.
+The lifetime mean value of the device is at least 10.5.
+To contrast it with null hypothesis,
+such a hypothesis is called alternative hypothesis, and it is denoted like this.

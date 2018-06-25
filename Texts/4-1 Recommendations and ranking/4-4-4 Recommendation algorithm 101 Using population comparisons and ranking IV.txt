@@ -1,0 +1,133 @@
+The big question is how do decide these weights.
+To answer this question,
+let us take another look at the same example of two options.
+We have A and B as our two options.
+They help play 10 games out of which A has won 9, B has won 1.
+The character numbers are 9 plus 1 equals 10 in favor of A,
+1 plus 1 equals to 2 in favor of B.
+The scores were, therefore, 10 by 12 in favor of A, 2 by 12 in favor of B.
+There's another way to get to the same answer.
+Let us design a dynamical system to compute our scores.
+Think of a scoring machine if you like.
+We have two state A and B at each time we will be either be standing in state A or
+standing in state B.
+At each time, we decide to stay where we are or
+we decide to change our state at random.
+The rule of this random movements are as follows.
+If you are at state A, then we stay at state A, with probability 10 by 12,
+or we go to the B, with probability 2 by 12.
+If we are at state B, on the other hand,
+then we stay at B with probability 2 by 12, and go to A with probability 10 by 12.
+We run this experiment for a long time and observe
+the fraction of times we are in state A or fraction of times we are in state B.
+These fractions are scores of A and B of respectively.
+Effectively we have designed what is called a Markov Chain, over two states,
+A and B.
+A transition rules between these states were designed so
+that the fraction of time spent in A and the fraction of time spent in state B,
+in the long term, but precisely equal to 10 by 12 and 2 by 12 respectively.
+If we carefully examine the transition rule it suggests that fraction of time
+spent in state A equals 10 over 12 times fractional
+time spent in A plus 10 over 12 times fractional time spent in B.
+Since fractional time spent in
+A plus fractional time spent in B is equal to 1 by definition,
+we have that fractional time spent in A is equal to 10 by 12, voila.
+Now, this gives us a general approach to design weights we were looking for.
+In general, there are more than two options.
+To explain this, and it starts with simple case of three options first.
+A, B, and C, how creative?
+We can create a graph of these three nodes,
+a node each corresponding to each options.
+As before, A and B have played 10 games, of which A has won 9, B has won 1.
+For B and C, they have played 4 games, out of which each one of them have won 2 each.
+For A and C, they have played 6 games, of which C has won 4, A has won 2.
+As before, we can set pair wise corrected proportions for each of them.
+A versus B would be 10 over 12 in favor of A.
+B versus C, 3 over 6 in favor of B.
+C versus A, 5 over 8 in favor of C.
+All right, so we've got our data.
+As before, we want to design a dynamical system, a scoring machine.
+Where we can work between states A, B, and C.
+At each state, the rules of the transition to the next state
+are determined by which state we are standing in.
+And the other state to which we want to jump.
+This utilizes the outcomes of pairwise games.
+For example, if we are currently at state B,
+next time we will be at state A, proportional to 10 by 12.
+And at C, proportional to 3 by 6.
+That is how often A defeated B and therefore,
+we will go from B to A proportion to that number.
+And that is how often C defeated B and that is why we go from B to C that often.
+To make sure that these numbers always add up to less than 1,
+we will multiply all of these numbers by a third.
+This normalization number that is one-third here is obtained by looking at
+maximum number of neighbors, any node or any state has in this graph.
+In our case, all 3 nodes are connected, and hence, it's 3.
+Once we have this, we get the following effective transitions.
+When we are at B, in the next time, we go to A.
+The chance 10 by 12 times one-third, which is 5 over 18.
+We go to C, one-half times one-third which is one-sixth.
+And then we remain at B rest of the time which turns out to be 10 over 18.
+The similar manner, we can design rules for A and C.
+In particular, if we look at transitions from A to B and
+C to B the transition rate should turn out to be 1 over 18 and 1 over 6 respectively.
+This gives us a weighted formula.
+In the long run, the fraction of time spent in B is equal to 10 over
+18 times fraction of time spend in B plus 1 over 18 times fraction
+of time spent in A plus 1 over 6 times fraction of time spent in C.
+That is, rearranging this term,
+we obtain fraction of time spent in B equals fraction of time sent in
+A plus 3 times fraction of time spent in C all divided by 8.
+Similarly, looking at A and C, we get two more such equations
+that relates to fraction of time spent in each of these states.
+The weights are coming from the relative wins and
+losses between the options or teams.
+These fractions will be the scores of options.
+Examining the equation for score of B again, score of B equals to,
+one-eighth times score of A plus three-eighth times score of C.
+This score naturally incorporates the fact that score of B is 3
+by 8 times the score of C and 1 by 8 times the score of A.
+The weights are coming from how often B
+has been relatively victorious over A and C.
+And if indeed score of C will be high, then score of B will be high, and
+vice versa.
+As we can see, when there are more than three options,
+the rules can be defined in a very, very similar manner.
+The resulting ranking algorithm that we just learned is called Rank Centrality.
+Recapping the algorithm, it is computing scores as follows.
+We have a network of states.
+Each corresponds to possible options such as sports team or restaurants.
+A pair of nodes have connections between each other if they have been compared
+once or more.
+At each time step, we are at one of these nodes in our machine.
+And we transition to any of the neighboring state next time but
+probability that is proportion to how often that neighbor has defeated us,
+the current state.
+So we are likely to go towards the winners more.
+And less likely to go towards losers.
+And then we assign the score of each node as a fraction of time we spent
+in that particular node as part as dynamics in a long term.
+In the language of Markov chain, this fraction of time is called
+the steady state distribution of this design, the Markov chain.
+Given this algorithm, a restaurant that is new, but has been compared
+very favorably to an old, well known Michelin three star restaurant
+might have a very high score and thus resulting into really meaningful scores.
+In summary, in this section, we discussed the following topic.
+In many scenarios, the preference data available is not necessarily with ratings,
+it is comparisons such as those in sports.
+Comparisons are more absolute way to capture preferences compared to ratings.
+Comparisons can be easily derived from ratings.
+When preferences are comparisons,
+obtaining global ranking from them is not easy.
+Condorcet's paradox is a nice example that explains this difficulty.
+We discussed a simple fraction of wins as a scoring rule to decide ranking.
+Naturally, it turned out to be too simple and it needs a weight adjustment.
+We used a dynamic system,
+a machine, Also known as Markov Chain in probability to design such an adjustment.
+The algorithm that we describe is known as the Rank Centrality.
+In the process, we also touched upon the questions of,
+what is the chance that sun will rise tomorrow?
+And if it indeed does, we will see you in the next section and we'll discuss
+how to move beyond the simple algorithm that is just based on population view, and
+start making algorithms really personalized.
+Thank you.

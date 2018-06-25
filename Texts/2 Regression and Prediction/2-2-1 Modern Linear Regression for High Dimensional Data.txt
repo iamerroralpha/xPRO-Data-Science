@@ -1,0 +1,85 @@
+We begin a new block of segments where we consider modern linear regression for
+high dimensional data.
+We consider the linear regression model Y equals Beta X plus Epsilon where Beta X
+is the population best linear predictor, or BLP, of Y using X.
+Or simply the population linear regression function, and
+epsilon is uncorrelated with X.
+Here, the regressor X is p-dimsensional, that is, there are P regressors and
+the sample size is N, and P is large, possibly larger than N.
+One reason for having high dimensional regessors in our model
+is the increasing availability of modern rich data, or quote unquote, big data.
+Many modern data sets are rich in that they have many recorded features or
+regressors.
+For example, in house pricing and
+appraisal analysis, we can make use of numerous housing characteristics.
+In demand analysis, we can rely on price and
+product characteristics, and in the analysis of court decisions,
+we can employ many of the judges' characteristics.
+Another reason for having high dimensional regressors in our model
+is the use of constructed regressors.
+By this we mean that if Z are raw regressors or
+features, then the constructed regressors, X,
+are given by the set of transformations, P(Z), who's components are Pj(Z).
+We sometimes call this set of transformations a dictionary.
+For instance, in the wage example, we used quadratic and
+cubic transformations of experience, as well as interactions, or products,
+of these regressors with education and geographic indicators.
+The use of constructed regressors allows us to build more flexible and potentially
+better prediction rules than just linear rules that employ lower regressors.
+This is because we're using prediction rules Beta X equals Beta P(Z) that
+are allowed to be either linear or nonlinear in the raw regressor Z.
+We now know that we still call the prediction rule Beta X linear
+because it is linear with respect to the parameters Beta.
+And with respect to the constructed regressors X equals P(Z).
+We next ask the following related question.
+What is the best prediction rule for Y using Z?
+It turns out that the best prediction rule
+is the conditional expectation of Y given Z.
+We denote this prediction rule by g of Z and
+we call it the regression function of Y on Z.
+This is the best prediction rule among all rules, and
+it is generally better than the best linear prediction rule.
+Indeed, it can be shown that g(Z) solves the best
+prediction problem where we minimize the mean squared prediction error,
+or MSE, among all prediction rules m(Z) linear or nonlinear in Z.
+Now by using beta P(Z) we are implicitly approximating the best predictor g(Z).
+Indeed, it can be shown for any parameter b shown the MSE for predicting Y with b(Z)
+was equal to the MSE for approximating G g(Z) with b'P(Z) plus the constant.
+That is, the mean squared prediction error is equal to the mean squared
+approximation error plus a constant that doesn't depend on B, so
+that minimizing the former is the same as minimizing the latter.
+We now conclude that the BLP beta P(Z) is the best linear approximation, or
+BLA, to the regression function g(Z).
+By using a richer and richer dictionary of transformations,
+P(Z), we can make the BLP beta P(Z) approximate g(Z) better and better.
+We can illustrate this point by the following simulations.
+Suppose that is uniformly distributed on the unit interval, and
+the true regression function g(Z) is the exponential function of 4 times Z.
+Suppose we don't know this and
+we use the linear form beta P(Z) to provide approximations for g(Z)?
+Suppose we use P(Z) that consists of polynomial transformations of Z,
+consisting of the first P terms of the polynomial series 1,
+Z, Z squared, Z cubed, and so on.
+We use this dictionary to form the BLA or BLP beta P(Z).
+We now provide a sequence of figures that illustrate the approximation properties of
+the BLA or BLP corresponding to P(Z) equal to 1, 2, 3 and 4.
+With P equal 1, we get a constant approximation to the regression function
+g(Z), and as we can see, the quality of this approximation is very poor.
+With P = 2, we get a linear inside approximation for g(Z), and
+as the figure shows, the quality of this approximation is still very poor.
+With P = 3, we get a quadratic in Z approximation for g(Z),
+and now, the quality is quite good all of a sudden.
+This explains why using the linear transformations over [INAUDIBLE]
+regressors is a good idea.
+Now with P equals 4 we get a cubic in Z approximation for
+g(Z) and the quality of approximation becomes simply excellent.
+This further stresses the motivation for
+using nonlinear transformations Over all regressors in linear regression analysis.
+In summary, we provided two motivations for
+using high-dimensional regressors in prediction.
+The first motivation is that modern data sets have high dimensional features
+That can be used as regressors.
+The second motivation is that we can use nonlinear transformations of features or
+raw regressors and their interactions to form constructed regressors.
+This allows us to better approximate the ultimate and best prediction rule,
+the conditional expectation of the outcome given raw regressors.

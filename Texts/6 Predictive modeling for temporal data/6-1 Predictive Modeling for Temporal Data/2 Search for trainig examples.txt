@@ -1,0 +1,73 @@
+
+At this stage, we have the time-varying column,
+the aggregation function, and the prediction window in hand.
+Our next step is to look for all past occurrences
+of this outcome.
+These occurrences and the data that leads up to them
+form what we call training examples, because they
+will be used to train a model.
+To find all of these past occurrences,
+we will write a scanning algorithm.
+A simple version of this algorithm
+would work as follows.
+First, we select the data pertaining
+to an instance of an entity.
+In our particular case, that is a customer.
+Looking at the time-varying column of interest,
+we then select all of the data points
+in the column that fall within the time period
+we have already specified as a prediction window.
+We then apply the aggregation function to this data.
+Next, we annotate the prediction window
+with the output of the aggregation function.
+The output represents the outcome
+we are interested in predicting.
+We also call this label.
+We then add the occurrence to the list specified
+as entity ID, cutoff, and label, where
+entity ID represents the ID of an instance of an entity--
+for example, customer ID.
+Cutoff time is a time corresponding
+to the start of the prediction window.
+Cutoff time also represents the last time point
+at which data can be used for learning a model.
+Finally, we shift over in time and repeat this process
+from step one.
+The output of the algorithm is a list where each entry contains
+the three-tuple--
+entity ID, cutoff time, and label.
+Let's consider our example, in which
+we are predicting whether a customer will
+have more than 5 purchase events in the next month.
+The timeline shows the recordings
+we have for the customer, which spans
+six months of interactions.
+Symbols indicate the type of event.
+Starting with the first recorded interaction
+the customer has in the data, we first
+form the prediction window, which spans one month.
+We calculate whether the number of purchase events
+within that window is greater than 5.
+If the answer is yes, we annotate the window as 1.
+If not, we annotate it as 0.
+Then we shift and use another chunk
+of data that starts at the end point of the first prediction
+window.
+We repeat this process until we run out of the data.
+In this way, we get four training examples,
+and the list is as follows.
+We can then repeat this for every customer in our data.
+Several variations of the above algorithm exist.
+In practice, they may involve additional considerations,
+such as should we have more than one training
+example per entity, in our case, per customer?
+If we allow multiple training examples,
+should we have a gap between two subsequent training examples?
+Do we allow overlapping prediction windows?
+Often these decisions have an effect
+on the number of training examples
+we can create from the data.
+They also may bias the learning.
+For example, if you pick multiple training examples
+from the same customer, we revise the algorithm
+to learn patterns specific to that customer.

@@ -1,0 +1,57 @@
+
+In the last video, we have covered
+how features can be generated using deep feature synthesis.
+Let's wrap up this unit by going through a few more concepts.
+Something we haven't yet discussed
+is, why is it called deep feature synthesis?
+The name comes from the algorithms recursive aspect,
+and the fact that it can generate
+new features that are computations over the existing
+ones.
+So what does that mean in practice?
+Consider the same example of customers and transactions.
+Let's consider another table called Region.
+This table has the region ID and the name of the region.
+It has eight entries--
+north, south, east, west, northwest, and so on.
+Let's say there is an additional column in the Customers table
+that shows the region to which each customer belongs.
+In this set up, the Region table is a parent entity
+to the Customers table.
+Thus, there is now a hierarchy emerging.
+The Region table is a parent to the Customers table,
+and the Customers table is a parent to the Transactions
+table.
+So when creating features for region,
+we can aggregate the data from the Customers
+table for a particular region and apply
+aggregation primitives.
+But before we do that, we can first
+create the features for the customers
+using the Transactions table.
+Let's say we created the Count Friday Events
+feature for every customer in the customers table.
+We append this column to the Customer table, which
+gives us a number of transactions
+each customer had on Fridays.
+Now let's consider a simple primitive mean.
+For the Region table, we can aggregate all the customers
+that belong to that region and apply
+the mean primitive to the Count Friday Events
+column, thus, creating a feature for the region, which
+is the average number of Friday events
+that customers in this region have.
+In English, this feature is, on an average,
+how many transactions do customer
+from this region complete on Friday?
+You can see why this feature might be useful.
+It could be used to predict weakened demand in each region.
+This process of generating features using already
+created features is called stacking.
+The feature, which is the mean of the number of events
+on Friday across all customers, is a feature with depth
+two, since it exploited relationships two levels deep.
+In our case study, we will use this algorithm
+to generate features for data from the New York City Taxi
+Ride System, and we will demonstrate how deep features
+can improve the model accuracy.

@@ -1,0 +1,132 @@
+For some other subtle ways that misapplication of
+statistical techniques can lead to an incorrect conclusion
+lets turn to an example in the setting of scientific research.
+If you read the paper or browse the Internet,
+there's no shortage of advice, supposedly backed by some scientific study
+about the health effects of some food or behavior.
+You could find say, red wine prevents heart disease, or antioxidants make you
+live longer, cigarettes cause cancer, coffee causes cancer,
+coffee prevents cancer, or maybe, some obscure berry causes weight loss.
+Some of these assertions like the link between cigarettes and cancer,
+stand the test of time, get confirmed by other scientific experiments and
+become acknowledged as true scientific facts.
+For others, new studies don't find the same effect or
+maybe they even find the opposite one.
+And a literature goes back and forth with seemingly conflictory claims.
+This isn't just a problem with nutrition literature, you can find
+similar examples in the literature discussing the best treatment for
+medical problem, the genetic basis for disease, or the existence of telepathy.
+You can find such conflicting evidence,
+even in clinical trials published in top scientific journals.
+Researchers who have studied this phenomenon have found surprisingly high
+rates of nonreplicability for scientific results.
+And some have even proposed the possibility that in certain fields,
+a majority of the published research findings could actually be false.
+This should be pretty surprising, since these studies are rigorously refereed.
+And they're usually accompanied by p-values and confidence intervals and
+tables of data that provide a veneer of the epistemological comfort conveyed by
+modern science.
+What I'd like to do now is give a few examples of the commonly made mistakes
+that can cause these problems.
+Consider the following scenario.
+Suppose we get frustrated with all the conflicting claims that we're reading.
+And we want to decide once and for all which foods cause or
+prevent heart disease.
+To do this, we collect data on the 100 most common foods that people eat and
+their incidence of heart disease.
+Of course, designing this study is complicated.
+People lie about their eating habits.
+It's not always clear whether someone does or doesn't have heart disease.
+People eat foods in different quantities, etc.
+For simplicity, let's just set this aside and assume that we're able to successfully
+assign p values to hypotheses of the form, food x causes heart disease.
+We then take all the foods that have p greater than 95% and
+we'll report them as causing heart disease with 95% confidence.
+Now, here's the problem.
+Say that something has a p value of 95% means that under the null hypothesis
+that there's no effect, the chance of the observed outcome is at most 5%.
+Let's suppose that none of the foods that you test actually have
+any effect on heart disease.
+This means that for each of the hundred foods,
+the null hypothesis that the food does not cause heart disease holds.
+However, if you get false positives for each with a probability of 5%,
+you'd actually expect to find an apparent effect for five of the hundred foods.
+Even worse, if the false positives for
+different foods are independent, the probability that at least one
+food appears to have an effect is actually very high.
+It turns out to be about 99.4%.
+So even though the 95% constant seem quite good,
+the chance of you reporting a spurious effect is extremely high.
+The problem here is what you might call hypothesis shopping.
+Instead of fixing a hypothesis and testing it, we looked at our data and
+tried to find a hypothesis that would pass the test.
+This probabilistic phenomenon, where we're simultaneously testing a large number of
+hypotheses, can occur fairly easily under less contrived conditions.
+For instance,
+imagine testing each of five variants of a drug on five different types of cancer and
+then looking at how the effects breakdown by age, gender and ethnicity.
+It's easy to find even more extreme examples in scientific settings.
+For example in genomics,
+scientists often want to figure out what genes cause the disease.
+A way to start looking for these is with what's known as a genome-wide association
+study, where they cross-reference the incidence of the disease with tens of
+thousands of genes, looking for the handful of genes that cause it.
+If they call some correlation significant and
+it clears the 95% confidence bar, you'd expect thousands of false positives,
+that is genes that exhibit a seemingly statistically significant correlation but
+don't actually have anything to do with disease.
+Compared to just a handful of true positives,
+corresponding to the actual genes they are looking for.
+Of course, good researchers carefully correct for this, by for
+example, requiring much higher probabilities or just using these studies
+to identify candidates and then carefully testing them by other means.
+But it's easy to miss this and to make mistakes.
+Alternatively, suppose you set up an observational experiment where you set
+something up and just look to see if anything interesting happens.
+There are a lot of potentially interesting behaviors.
+So you might actually expect something interesting to happen just by chance.
+This last one actually leads to a very subtle way that these biases can creep
+into the literature.
+In general, it's pretty hard to get a good journal to accept a paper that says
+I did the following experiment and nothing interesting happened.
+People are much more likely to publish papers that describe some new and
+exciting phenomena.
+If one uses 95% as the cut off for something for
+being significant, you'd get something significant by chance 5% of the time.
+But people are often much more likely to report their findings when they see
+something significant.
+So if people don't properly correct for
+this, you'd expect a lot more than 5% of the interesting phenomena that
+are submitted for publication to have occurred by chance.
+This is particularly acute if you have a bunch of groups of people studying
+the same phenomenon.
+For instance, suppose that some food has no effect on whether you get cancer or
+not in actuality, but people think that there are some reason that it might.
+Suppose that this results in 50 groups of people
+independently performing experiments to test this hypothesis.
+Of these, you wouldl expect that few groups seeing an effect that clears
+the 95% confidence bar, maybe two or three.
+These groups don't know about the others, so
+they excitedly submit their work for publication.
+The other 40 something groups don't see anything interesting and
+many of them don't even bother do publish this sort of finding.
+This means that all anybody ever sees is that two or three groups independently
+observe the phenomenon with 95% confidence, which if they were the only
+ones looking at the question, seems extremely unlikely to happen by chance.
+This isn't even a mistake on their part, if they don't know about the other groups,
+they might not have any obvious reason to worry about this sort of problem.
+One reason that we're mentioning these sorts of issues is that they can
+become particularly common in the context of so
+called the big data, if you're not careful.
+There's really a very thin line between data mining and hypothesis shopping.
+As illustrated by the genome wide associations study example, bigger data
+sets make it possible to look for increasingly large numbers of patterns.
+Moreover, the complex machine learning techniques are looking for
+increasingly complex patterns, which makes it even easier to find something seemingly
+significant that occurs just by chance.
+The techniques we've described are powerful, and their math is sound, but
+it's important to make sure that you're using them correctly.
+When used correctly,
+they let people do things that otherwise wouldn't be possible.
+But if you don't combine them with the appropriate skepticism and common sense,
+it's easy to make mistakes and reach the wrong conclusions.

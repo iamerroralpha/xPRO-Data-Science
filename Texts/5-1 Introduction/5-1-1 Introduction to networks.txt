@@ -1,0 +1,147 @@
+
+Welcome to the module on networks.
+I am Caroline Uhler from the Department
+of Electrical Engineering and Computer Science
+and the Center for Statistics at IDSS.
+My research has centered on graphical models,
+causal inference, and applications
+of the statistical methods to genomics.
+And I also teach courses on these topics at MIT.
+I'm Guy Bressler.
+I'm with the Department of Electrical Engineering
+and Computer Science at MIT, and the Center for Statistics
+at IDSS.
+Caroline and I will be your co-instructors
+for the module on networks.
+My research is on machine learning and network
+algorithms, and I teach courses on these topics at MIT.
+The goal of this module is to discuss a variety of network
+problems, both from the statistical and algorithmic
+perspectives.
+There's a lot of talk about networks these days.
+So what exactly is a network?
+At a high level, a network is a collection of interacting
+agents, or elements.
+For example, the world wide web is a large network.
+You navigate in this network by surfing from one page
+to another page.
+Pages are connected via links.
+These links are what makes the web useful.
+The pages in isolation are not as interesting.
+Ah.
+So networks are found everywhere,
+because fundamentally, the most interesting phenomena
+are about interactions between basic entities.
+I suppose this becomes especially clear when
+thinking about social networks.
+Many of us use Facebook, a network
+where you are connected to your friends
+and they are connected to their friends, and so on.
+There's not much to do on Facebook
+if you don't have any friends.
+In fact, not only the things you interact
+with in your daily life are networks, even you
+yourself are composed of networks.
+For example, each of our brains is one large network
+of neurons that are connected to each other.
+A single neuron its pretty useless, but amazing complexity
+emerges from the interactions between neurons.
+OK, so I'm convinced that networks are important,
+but what sorts of questions can we
+hope to answer by studying networks?
+We want to understand how network properties give rise
+to observed phenomena.
+This will allow us to make predictions,
+and to better design new networks.
+The structure, or shape of a network
+can have a big effect on the whole system.
+How so?
+Thinking, for example, about news
+spreading in a social network.
+Certain people are very influential,
+and effectively propagate information.
+Don't you remember the last time your tweet got re-tweeted
+by Justin Bieber and it went completely viral?
+Well, Justin Bieber always re-tweets my tweets.
+In order to quickly spread information in a network,
+it is important to understand which
+network structures increase or decrease efficiency.
+This can then be used to design, or improve networks,
+such as power grids, transportation
+networks, or to add important links to a website.
+Of course, the appropriate notion of efficiency
+depends on the setting.
+Still, regarding network structure,
+there is a whole other set of questions regarding prediction.
+For instance, Facebook predicts who's
+friends with whom based on its available data,
+and it makes suggestions to each user
+based on these predictions.
+Similarly, Google can use the network
+of links between websites to make predictions
+for websites that are of interest to you based
+on previously visited web sites.
+This is, of course, related to the Recommendation Systems
+module.
+While networks are interesting in and of themselves,
+it is the processes that take place on networks
+that make them come to life.
+Conceptually, it is often useful to separate the network
+structure from the process on them.
+We can think about the fact that Justin Bieber
+has a lot of connections as a network-structured property.
+But then we can study the propagation of a tweet
+by re-tweets.
+Network structure helps determine
+the behavior of the processes that occur on it.
+The propagation, or cascade of effects,
+is what makes a network behavior surprising, and often seemingly
+unpredictable.
+These processes can exhibit quite intricate behavior,
+but modeling the processes occurring on a network
+allows us to answer questions about them.
+OK, so let's make this concrete.
+Imagine we own a concert venue, and we
+want to advertise for an upcoming concert.
+Like the upcoming Justin Bieber concert?
+Exactly.
+So instead of just advertising on the radio
+or via ads on Google, I want to initiate an advertising
+campaign by a social network.
+This can potentially be a lot more effective at lower costs,
+because it's possible to target the right set of people.
+And also, people put emphasis on information obtained
+from people they trust.
+One way to do this would be to give free tickets
+to a few selected people in exchange
+for them making a post about the upcoming concert.
+Because we can't give away too many tickets,
+we have to choose very carefully to whom we give tickets.
+Let's imagine that we're only giving away a single ticket.
+To whom should we give it?
+We should choose the most influential person.
+OK, so let's give the free ticket
+to the person with the most friends.
+Well, you can just count how many friends
+a person has to determine how influential they are.
+It might be the case that most of these friends
+have very few friends themselves,
+and news about the concert wouldn't propagate
+beyond this single hub.
+We want to choose someone who has many friends who
+are themselves influential.
+So I want to study how to define a useful notion of influence,
+and think about how to compute it for a given network.
+This all makes sense.
+Properties of the network help determine
+how the processes on it behave.
+But there are a lot of networks out there,
+and a lot of possible processes.
+In order that we don't have to study
+these questions for each network separately,
+we want to understand what are the characteristic structures
+and important features of various types of networks?
+For example, what makes a social network
+different from the food web, or a recommendation system?
+In this module, we will study different models for networks
+and processes on networks.

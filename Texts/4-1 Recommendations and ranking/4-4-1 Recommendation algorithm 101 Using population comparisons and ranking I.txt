@@ -1,0 +1,92 @@
+Today we are going to discuss our second recommendation algorithm
+of how to obtain ranking using population comparisons.
+In the last section,
+we discussed our first recommendation algorithm based on population averages.
+It was super easy.
+In the context of restaurants, we assigned each restaurant a score that is equal
+to the average value of all the ratings it has received and
+then used that to rank them.
+We discussed various adjustments to it, but in a nut shell that was it.
+In many scenarios, we do not have access to ratings and
+even if we might have ratings, we might not want to use them as is.
+This section discusses such widely present scenario.
+When preference data is available in form of comparisons.
+Consider your favorite sport, say American football.
+Well where the ball is kept in your hand during entire period rather than by foot.
+Or actual football, or soccer.
+Tennis, cricket, chess, or even baseball.
+In any of these sports,
+the ultimate question that we all as fans are trying to answer is,
+how can we rank teams or individual players based on the outcomes of games?
+The games are always played between two teams, like the New England Patriots and
+New York Giants.
+Or two players, like Roger Federer and Andy Murray.
+The outcome of the games is usually one of the teams, or
+players, wins, and the other loses.
+This is precisely a comparison between two teams, or players.
+For example, if Federer defeats Murray,
+that it is a comparison between Federer and Murray, in favor of Federer.
+Or if Patriots defeat the Giants, then it is a comparison between the Patriots and
+Giants, in favor of Patriots.
+Given all these comparisons or
+outcomes of games, we want to stitch them together across teams or
+players to eventually obtain a ranking or ordering between all of them.
+That is what happens in any sports championship or tournament,
+such as US Open tennis tournament.
+Clearly this is like the situation where we wanted to rank all restaurants.
+But instead here,
+we want to rank them based on comparisons rather than ratings as before.
+Comparisons are not like ratings.
+There is no easy way to take population averages of them.
+This requires some careful thinking.
+That is exactly what we will do in this section.
+Before we go down the part of figuring out how to rank teams or
+players based on outcome of games,
+it is worth pointing out that this view is very useful even in ranking restaurants.
+When we have ratings for restaurants.
+Recall the restaurant scenario.
+Each restaurant was given ratings by different patrons who visited them and
+were kind enough to provide their views.
+It is just like re-watching movies and then rating the movies.
+Now the problem with rating is that it is phenomenally subjective.
+You and I might like food in restaurant equally but
+I might be stingy in giving ratings and you might be very liberal.
+What that means is that rating of four that you give,
+is different from the rating of four I give.
+Or depending on the mood of the day, I might be more or
+less liberal in giving my rating.
+In a sense, there is nothing absolute about ratings.
+To explain this important nuance, I would like to play a small game with you.
+Suppose I give you a blue color square and
+ask you, tell me the hexadecimal code of this.
+You'll wonder what is that?
+This is like me asking you to rate the restaurant or my orthopedic surgeon
+asking me during my visit, on a scale of 1 to 10, please rate your pain.
+How do I know what nine means?
+Or for that matter, I'm not even sure what is the difference between eight and nine.
+And I wonder every time I'm asked this question,
+should I tell him a high number so I can get his attention?
+Well, a better situation is going to an optometrist who asked you,
+compare this scenario versus that scenario.
+Which one provides you better vision?
+And through a sequence of such comparisons,
+we find the perfect eye power leading to somebody like me,
+able to see clearly and without any headache talking to you.
+This is like asking question.
+Which one of two different blue squares is more blue?
+It's very easy to answer for you and me.
+And it is definitely not more absolute than asking for ratings.
+Back to setting up restaurants.
+If we are asked to compare two restaurants, when asked preference for
+West Bridge or Catalyst, it means the same to me and the same to you.
+And therefore, we can use comparison data between restaurants to rank them as well.
+But this is the place where you say wait,
+Yelp has collected ratings on restaurants rather than comparisons.
+Now what to do?
+No worries.
+Ratings provide comparisons.
+Suppose I have rated West Bridge four-star and Catalyst three-star.
+Then I have implicitly compared West Bridge and Catalyst,
+in favor of West Bridge.
+Okay so we are all comfortable with the fact that even in the restaurant setting,
+we have comparisons even though it was not obvious to start with.

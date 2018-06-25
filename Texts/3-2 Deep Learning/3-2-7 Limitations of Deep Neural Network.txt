@@ -1,0 +1,63 @@
+I hope that I've given you a sense of the excitement surrounding the networks.
+But now it's time to take a sobering look at a more frightening aspect.
+In the examples we've seen,
+deep learning has been able to conquer some very hard challenge problems.
+And that's a great reason for being optimistic that they'll lead to practical
+self-driving cars very soon and all sorts of other technological advances.
+But there's an important worry.
+When we talked about fitting a deep network's parameters,
+we discussed the difference between convex and non-convex functions.
+The truth is that we don't really understand
+why things like gradient descent work so well and
+even then, the actual features that it finds are difficult to interpret.
+We can't readily take a deep neural network that we've learned and
+see why it's working so well.
+This leaves a lot of room for manipulation.
+Following the work of what if we start with an image of a deep
+network successfully classifies?
+How much do we have to change the image to change the label that the network assigns?
+Let's say I give you an image and a target label, say ostrich.
+I want you to fool the deep network into thinking that the image is an ostrich,
+even though it's very clearly not.
+As usual, we represent the image as a high dimensional vector x.
+Now we can look for the smallest vector R,
+which we think of as a perturbation to the image.
+So that when the deep network is applied to X plus R,
+the output has a 1 in the ostrich category and 0s in all the others.
+Finding such an R is a non-convex optimization problem.
+But, as usual, there are approaches for approximately solving it, nonetheless.
+Obviously, if I'm allowed to change the image entirely, then I can make
+the deep network think it's an ostrich by making the picture be of an ostrich.
+The question is, how small can the perturbation be?
+It turns out that you can get away with the perturbation that's imperceptible
+to the human eye.
+Now let's put that into perspective.
+Much of the initial excitement of deep learning came from the fact that now we
+are able to classify images automatically with error rates that
+are even slightly better than what humans can achieve.
+But the classification function that they've learned is so discontinuous and
+unwieldy, that changes that ought not to change the category.
+In fact, you wouldn't even see them as a change to the image at all, can be used to
+fool the deep network into thinking the image is whatever category you like.
+In fact what's even more frightening is that the same perturbation works across
+many neural networks.
+So you could think that if I don't know what neural network you've learned, and
+don't have access to the millions of weights and
+biases that define your model, I won't be able to fool it.
+But it turns out that I could learn my own neural network even using a subset of
+the training data that you've used, find the perturbation for
+a given image that makes my network think that it's an ostrich, and
+the same perturbation would work for yours too.
+So all this time we've been talking about deep neural networks being able to compete
+with, or even out perform humans.
+If they can find new moves in the ancient game of Go,
+then why not solve other sorts of decision making problems for us?
+We could imagine relying on them to keep us safe on our daily commute
+in self driving cars.
+Or diagnosing us based on our symptoms and medical history.
+Or even estimating the credit risk of an individual by incorporating
+more information than currently goes into your FICO score.
+But all of these wonderful possibilities come with a caveat that
+if we don't understand why deep learning works,
+the classifiers we learn might be subject to all sorts of nefarious manipulations.
+Or might learn unfair and uncontrollable biases in how they make decisions.

@@ -1,0 +1,142 @@
+It is now time to discuss methods for
+estimating the parameters of logistic regression.
+Namely the parameters such as beta 0, beta, beta w, and beta g.
+As we noted earlier, these parameters are estimated using historical data.
+In particular, the data will be used in combination with a so
+called maximum likelihood estimation.
+Let us first describe the general principle in abstract terms and
+then illustrate it with a simple example.
+Suppose, we have a collection of the data in the following form.
+Here X1, X2 and all the way to Xn are observations for independent variables.
+And Y1, Y2 and all the way to Yn indicate whether the event of interest takes place.
+In particular, Ys only take values 1 and 0.
+Here, the convention is that Yi takes value 1, if the event took place for
+the ith element of the sample, and takes value 0, otherwise.
+Now, remember,
+that according to the logistic regression model with one independent variable,
+we have the following relationship between the observations and data.
+Say, for example, that Y1 equals 1, then we have the following relationship.
+On the other hand, say, for example, that Y3 equals 0.
+Then according to our model, we have the following.
+So, that we don't have to indicate what case we are dealing with,
+observe that we can combine both cases as follows.
+Please take some time to understand the meaning of this expression and
+convince yourself that the trick works
+regardless of whether the value of Y equals 1 or equals 0.
+One crucial assumption is that the observations are independent,
+just like it is a common assumption in the linear regression case.
+This is often the case in practice.
+Say, once again, X corresponds to individual's weight and
+Y indicates whether the patient has diabetes.
+It stands to reason that these observations are independent.
+If this is the case, the probability of observing a particular outcome for
+all individuals from 1 to n simultaneously is the product of probabilities for
+individual outcomes.
+And can be represented by the following expression.
+Now recall that the values of Xs and Ys are actually known to us.
+These are what we have collected in our data sample.
+The only unknowns are beta 0 and beta coefficients, which we want to estimate.
+The maximum likelihood estimation is a principle
+which suggests that the best estimation of beta0 and beta are those which makes
+the expression on the right hand side of the equation as large as possible.
+In words, one could say, the best estimate for beta 0 and beta are those
+which make the likelihood of this particular outcome as large as possible.
+If this was too abstract, no worries.
+Let us turn to a concrete example to illustrate this idea.
+Imagine, that we have the following data on some individuals.
+Their body weight and whether or not they have developed diabetes.
+For simplicity, we will consider the case of a small data size,
+consisting of only ten data points.
+But naturally, in practice, you would want
+to use methods with a larger number of data samples for better accuracy.
+The left column simply gives the list of body weights for the ten people.
+The right column indicates whether the corresponding individual has diabetes.
+The value 1 stands for the case when the answer is yes, does have diabetes.
+And the value 0 stands for the case when the answer is no, does not have diabetes.
+For example, the individual with weight 186 pounds
+corresponding to the first row in the table does not have diabetes.
+And the individual with a weight 156 pounds corresponding to the third row of
+the table does have diabetes.
+Then according to our formula, we need to find beta 0 and
+beta, which maximize the following expression.
+Take some time to study this expression, and
+convince yourself that we have applied the formula correctly.
+Now ignoring the term where we multiply by 0s,
+we can simplify the formula as follows.
+So, we need to find beta 0 and beta which make this expression as large as possible.
+How can we do this?
+Well, one straightforward approach is to try all possible values of beta 0 and
+beta within some range, by say, iterating over small increments.
+For example, try all beta 0 and beta between -10 and
+10 with increments say 0.01 and select the pair which gives the largest value.
+This method however, has several important limitations.
+Number one, we cannot be sure that our range between -10 and
+10 includes optimal values.
+Number two, our increments can be too crude.
+Select and say, increment of 0.01 for beta 0, might be too refined and
+at the same time too crude for the second coefficient beta.
+Finally, when we have more than one independent variable,
+recall that in our second example, we had two independent variables, body weight and
+the number of parents with diabetes.
+The time to try all values within their fixed range might be too large for
+practical purposes.
+So, how do we find the best values?
+This brings us to the third and last part of this lecture.
+Algorithms for estimating regression coefficients.
+There is a short answer to the task of finding the best regression coefficients,
+beta 0 and beta.
+Simply use one of the standard statistical packages.
+Most of them have the capability to do so.
+In fact, I would recommend to use one of them until you become a sophisticated
+practitioner of statistics.
+But we would like to leave the lead, so to speak, and
+share with you the main ideas for the method.
+This method will be discussed in some of the later lectures, so
+it is worth discussing it now as well.
+The secret is that the expression we'll need to maximize in terms of beta 0 and
+beta is actually very nice if we instead take the logarithm of this expression, and
+as a result, get the following formula.
+It turns out that this new function of beta 0 and
+beta, even though it involves a complicated combination of logarithms and
+exponents, falls into a very nice class of functions called concave functions.
+Let us imagine we have the function of just one variable.
+Now the expression we need to maximize has two variables, namely beta 0 and beta.
+But let us imagine for
+now that we're dealing with the function of only one variable.
+Such a function is called concave, if it has the following shape.
+The definition of a concave function is that whenever we draw a horizontal line
+between any two points on the curve, the line stays entirely below the curve,
+like this.
+Or like this.
+The concave function is particularly nice when it comes to finding
+its largest value, namely solving the maximization problem.
+There is a variety of methods, including the so called Newton's method or
+the gradient descent method, which find the maximum values for such functions.
+These methods work by finding larger and
+larger values of function by small incremental improvements,
+sort of like what you see on this picture illustrated by small arrows.
+Until the value of x corresponding to the largest value of the function f of x
+is found, like this.
+The crucial concavity property guarantees that these steps will converge to
+the point which is the maximum point for the function f.
+There is a very similar nice class of functions called convex functions,
+which look like this.
+And which are good for finding a minimum point on the function instead.
+Let us imagine, we have access to the statistical software,
+which applies one of these methods, and indeed finds the values of beta 0 and
+beta which maximize the expression of interest here.
+I have done it myself, and
+found that the best values after some rounding are as follows.
+To summarize, according to this model,
+the logistic regression model prediction of the impact of body weight on
+the likelihood of developing the diabetes is given by the following formula.
+Naturally, the numerical values for beta 0, and beta,
+we have derived above, depend on the data we have used for the estimation.
+When the data changes, the estimation values for the parameters change as well.
+There are many additional questions worth discussing regarding logistic regression
+model, such as confidence intervals for the regression coefficient,
+statistical significance, relevant ranges, dealing with outliers for
+which we simply do not have time in this course.
+For now though, let us turn to a very important real life application of
+the method to the reliability analysis of O-rings for Challenger space shuttle.
+Was there enough evidence to convince NASA managers that the launch was too risky?

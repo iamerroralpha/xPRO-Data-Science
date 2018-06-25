@@ -1,0 +1,94 @@
+Now let's talk about how to apply gradient descent to a deep neural network.
+We have a cost function that we'd like to minimize.
+Let me mention a technicality that we haven't addressed so far.
+When we talked about perceptrons,
+we described them as a linear plus nonlinear part.
+We took the threshold function to be our nonlinearity.
+But there are many other reasonable choices like a sigmoid function.
+For what we talk about next, you should think sigmoid.
+Our perceptrons compute a linear function of their inputs,
+using their weights, adding a constant term called the bias and
+feed this value into a sigmoid function to get their output.
+The reason it will be important to work with sigmoids is that
+these functions are smooth and de-frenchable.
+Or as the derivative of a threshold is everywhere either 0 or undefined.
+In any case what we've talked about so far is using grading decent to minimize or
+approximately minimize a non-convex function.
+Our functions come from computing the quadratic cost function
+on the output of the last leg.
+And it depends on all of the weights and biases inside the network.
+The gradient is a measure of how changes to the weights and
+biases change the value of the cost function.
+And we know we want to move in the direction opposite to the gradient
+because we want to minimize the cost function.
+The main question now is, how do we compute the gradient?
+In the context of neural networks,
+we can compute the gradient using what's called back propagation.
+The equations that define back propagation are quite a mouthful, and
+involve a lot of matrix vector notation.
+The intuition is much simpler, though.
+What back propagation is really doing
+is using the chain rule to compute the gradient layer by layer.
+Let's get into the intution?
+Imagine in the M outputs of our our neural network are a1, a2 up to am.
+And these are parameters that we feed into the quadratic cost function.
+Then it's straightforward to compute the partial derivative
+of the cost function with respect to any of these parameters.
+Now the idea is that these m outputs are themselves based on
+the weights in the previous life.
+If we fix the IF output, it's a function of the weights coming into
+the ith perceptron in the last layer, and also of its bias.
+We can compute again how changes in these weights and biases affect the ith output.
+This is exactly where we need the nonlinear function, in our case,
+the sigmoid, to be differentiable.
+Back propagation continues in this manner,
+computing the partial derivatives of how the cost function changes.
+As we vary the weights in the layer based the partial derivatives that we've
+computed for the weights and biases in the layer above it.
+That's it, that's back propagation.
+Now we have all the tools we need to apply deplar.
+We talked about how to build up complex nonlinear functions from perceptrons
+as building blocks.
+We talked about how to cast the problem of fitting its parameters
+as an optimization problem, albeit a non-convex one.
+And we talked about how to compute the gradient in a layer wise manner
+using back-propagation.
+Now let me say a few more words about what we've learned so
+far before we start to apply.
+Why does gradient descent on a nonconvex function work at all?
+In lower dimensions, it seems obvious that it really does get stuck.
+The truth is that no one knows why it seems to work in high dimensions.
+There's several possible explanations.
+Maybe these functions are closer to convex than we think.
+And are at least convex on a large region of space.
+Another factor is that what it means for
+a point to be a local minimum is much more stringent than higher dimensions.
+A point is a local minimum if every direction you try to move him,
+the function starts to increase.
+Intuitively it seems much harder to be a local minimum in higher dimensions
+because there are so many directions for you to escape from.
+Yet, another take away from this discussion is that when you apply back
+propagation to fit the parameters,
+you might get very different answers depending on where you start from.
+This just doesn't happen with convex functions.
+Because wherever you start from, you'll always end up in the same place.
+The globally optimal solution.
+Also, neural networks first became popular in the 1980s.
+But computers just weren't powerful enough back then, so
+it was only possible to work with fairly small neural networks.
+The truth is, that if you're stuck with a small neural network and
+you wanna solve some classification task,
+there are much better approaches such as support vector machines.
+But the vast advances in computing power
+has made it feasible to work with truly huge neural networks.
+And this is a major driving force behind their resurgence.
+Lastly, in our discussion about hierarchical representations.
+We talked about some of the philosophy in connections to neuroscience.
+There is at best a very loose parallel between these two subjects.
+And you're advised to not take this too literally.
+In the early days, there was so much focus on doing exactly what
+neuroscience tells us happens in the visual cortex
+that researchers actually stayed away from gradient descent because it wasn't, and
+still isn't, clear that the visual cortex can implement these types of algorithms.
+As one of my colleagues says, they got caught up in their own metaphor and
+were missing out on better algorithms just because they weren't neurally plausible.

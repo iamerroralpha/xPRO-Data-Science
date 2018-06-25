@@ -1,0 +1,192 @@
+Today, our goal is to discuss how
+one might go about building an actual recommendation system.
+A recommendation system in production environments such as that in Amazon,
+Netflix, or
+YouTube is a lot more than what we have discussed thus far in this module.
+To begin with, recommendation system is a service that is integrated as
+part of an interactive data driven system that operates in real time and at scale.
+For example, in the context of YouTube, the primary purpose of the system
+is to deliver different media content to the user.
+The rule of the recommendation system is to identify which media content
+get displayed on the user's interactive interface
+every time the user performs an action.
+Now any such real time interactive data human system has three
+key function components that strongly interact with each other.
+One, sensing platform.
+Two ,storage and computation infrastructure.
+Three, intelligence processing algorithms.
+The sensing platform is the one that provides ability to
+interact with the end user or customer in real time in terms of both collecting data
+as well as delivering appropriate data including recommendations.
+The storage and computation infrastructure makes it feasible
+to store the collected information about user behavior in real time,
+as well as perform meaningful computation in real time and at scale.
+The intelligence processing algorithms utilize the data collected
+via sensing platforms and store it in the storage infrastructure.
+It performs appropriate data processing using clever algorithms
+such as those discussed in this module to extract meaningful information and
+make decisions such as recommendations.
+These decisions including recommendations,
+are delivered to the end user through sensing platform while storing or
+logging them in the storage infrastructure for future use.
+The primary purpose of this module and the course at large has been explaining
+what are the appropriate algorithmic approaches for intelligence processing.
+The singular focus of this course has been the use of foundations from statistics and
+machine learning to arrive at these algorithms in a principled manner.
+We believe that this approach would enable the listener to be able to develop
+principled algorithms for intelligence processing, for the task faced by her.
+Today, we shall briefly discuss few guidelines on how
+one might go about actually building such an interactive system, that can scale and
+operate in real time.
+Imagine that your system such as Amazon or Netflix or
+YouTube is serving tens of or hundreds of millions or even billions of customers.
+An excellent example is that of Google search engine.
+As per some statistics,
+more than 2 million searches are performed every second.
+It is this web scale that we are thinking of designing the system for.
+For such a system, let us start by thinking about the sensing platform.
+In the modern environment, end users of the system end up interacting
+through effectively, some form of web interface.
+The end user might be using a web browser or a mobile app, but in a nutshell,
+in any of these contexts, our system interfaces through what is known as API,
+that is Application Program Interface.
+The key here is to make sure that the user interface, be it mobile app or
+web interface, utilizes the correct API in the correct place.
+For example, when a user clicks on a media content displayed,
+a request is sent to the API with appropriate message.
+In response, the API should provide streaming connection
+to the content of interest, and the user interface needs to change so
+as to display this incoming stream of content and potentially displaying
+additional information such as the recommendations received.
+This aspect of system design falls under what is known as developing user interface
+or in short, UI.
+Currently, the use of JavaScript framework is very popular for
+designing highly interactive web interfaces.
+The creative aspect of designing UI is an extremely important topic and
+way beyond my artistic skills.
+A good system designer may want to think very carefully about the design aspect.
+In a nutshell, from the perspective of building system,
+is all about providing the right set of APIs and defining them carefully.
+Now that we have APIs that interact with users by
+exchanging appropriate data between users and system, it is time to discuss
+how should the API support it's promised functionality to the user interface.
+We wanna think of designing APIs such that potentially,
+hundreds of thousands requests per second are received.
+Usually, the APIs are hosted through an array of web servers
+sitting behind appropriate load balancing infrastructure.
+The web servers upon receiving request, end up performing various tasks.
+This primarily includes storing or
+logging the information received and obtaining information within the system
+which might be precomputed to send the response back to the user.
+The logging or storing of data, requires a good infrastructure
+that can handle a high volume of data, and request reliably.
+Apache Kafka is an open source example of such an infrastructure,
+also known as Publish and Subscription, or Pub/Sub infrastructure.
+Data may be stored in a robust, distributed file system as a data log for
+both archival purposes as well as making structure data analysis.
+Open source example of such a file system is the hadoop file system.
+To make structured create efficiently,
+such data maybe stored in a file format such as Arcade.
+These files can be queried in a standard database form
+using open source infrastructure like Spark SQL.
+For the purpose of computation, the data that is logged or
+some processed form of it is required to be accessed in a random access manner.
+For this purpose, use of robust distributed databases are needed.
+An open source example of such a database is Apache Cassandra.
+Now moving to computation infrastructure.
+The computation or
+processing infrastructure is required to perform various computational tasks.
+On one hand, it may be needed to perform basic tasks in running the data pipeline.
+On the other hand, it may be needed to perform complex algorithmic tasks
+to produce meaningful recommendations.
+In either case, to deal with the scale of data and hence of computation,
+it is essential to utilize distributed computation infrastructure.
+Architecturally, the Map Reduce is a popular solution.
+It is no surprise that engineers at Google have popularized such an architecture.
+In fact, they have been the pioneers in developing such web scale infrastructure.
+The efficient realization of such architecture is provided by open sources
+like hadoop or, more recently, Spark.
+In a nutshell, this requires thinking of algorithm as composition of small,
+atomic tasks, each operating on small amounts of data.
+Cleverly interleaved collection of such tasks, performed in a distributed and
+parallel environment, can lead to a desired solution.
+For example, let us consider implementing recommendation algorithms in
+such a framework.
+If we think of basic algorithm based on population averages
+in the context of restaurant recommendation, effectively,
+we want to compute averages rating for each restaurant.
+One way to divide this into multiple small tasks that can be performed in parallel
+is to create a separate task for
+computing average rating for each restaurant separately.
+Each of these small tasks have to make query to get all ratings related to
+the restaurant of interest and then take average of these ratings, that's it.
+Such computation can be done easily.
+After all, we are potentially adding a small collection of numbers.
+We have a distributed implementation of our first algorithm this way.
+Now let us think about a more complicated algorithm like
+item-item collaborative filtering, in this context.
+We can do the same, but it will require performing some pre-processing beforehand.
+Recall that in the item-item collaborative filtering algorithm and
+apply to our restaurant setting.
+We estimate the missing rating of a given restaurant for a given user
+by taking the weighted average of ratings of other restaurants that are similar.
+Therefore, if we had a way to find top few similar restaurants for
+given restaurant very quickly, maybe through one query to some
+form of data base, then we can create tasks, one for each restaurant and
+run each of these tasks in a distributed parallel environment.
+The big question is, how do we pre-process data so
+that we can find restaurants similar to a given restaurant of interest very quickly?
+As if we are making a query database, and we want to make sure that
+this pre-processing can be performed in a distributed parallel environment as well.
+Well, the answer to this question lies in a very deep connection between computer
+science and mathematical analysis.
+More precisely, this boils down to creating a data structure
+known as Nearest Neighbor Index on all restaurants with respect to
+the similarity that collaborative filtering algorithm cares about.
+In effect, this requires mapping each restaurant to a point in Euclidian space,
+of very small dimension.
+Remember our world is three dimensional in Euclidian space.
+This mapping respects the similarity structure induced by collaborative
+filtering algorithm, that is, for a given restaurant, the closest restaurant in
+the Euclidian space are those that are most similar to it.
+Once we have such mapping, searching for closest restaurant is very easy.
+It's just as if I asked you to go and look for your closest neighbor,
+all you have to do is take a few steps in every direction and
+then find out the first one you meet, and then report back to me, that's it.
+Now one such class of pre-processing algorithms
+that achieve this magical mapping are known as Locality Sensitive Hashing and
+they're pretty efficient to implement.
+Finally, let us think about implementing algorithm based on
+finding the singular value decomposition of matrix.
+Now at the core of such linear algebraic algorithms,
+one requires performing multiplication between matrices.
+The matrix could be very large.
+For example, think of a rating matrix with hundreds of millions to maybe billions of
+users and tens to hundreds of millions of product.
+This matrix has 10 to the power 17 entries in principle.
+This is prohibitively large.
+Therefore, to perform matrix multiplication at such a scale,
+it requires clever division of data and computation in smaller tasks.
+Indeed, such a division can be performed and
+can be scaled using the Map Reduce like architecture.
+We will not discuss the details here, but it can be an interesting exercise for
+a listener to think about how to multiply two extremely large matrices
+using very small memory footprint.
+Summarizing, to build a recommendation system usually is an integral part of
+an interactive real time system, requires carefully thinking about sensing platform,
+storage & computation infrastructure, and intelligence processing algorithms.
+The primary purpose of this course at large has been,
+developing principled approach for processing algorithms.
+Today, our interest was to briefly discuss how these algorithms
+fit in the broader ecosystems of the overall data processing system.
+We briefly touched upon various popular open source solutions for
+different aspects of the system design.
+I would strongly recommend an interested listener
+to look at various open sources available under the Apache software foundation.
+Finally, a parting remark.
+Today, we have computation infrastructure available for
+rent through various cloud platforms.
+Therefore, it may make sense to utilize them to get off the ground quickly,
+without worrying much about maintaining such systems.
+And as time progresses, depending upon the scale and
+requirement, one may evolve to maintaining such infrastructure on one's own.

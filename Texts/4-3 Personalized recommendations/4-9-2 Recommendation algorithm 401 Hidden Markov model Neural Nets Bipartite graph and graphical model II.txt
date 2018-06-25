@@ -1,0 +1,114 @@
+So how does one precisely estimate the parameters?
+One approach to estimate graphical model is called moment matching.
+We start by assuming some choice of parameters for each node and edge.
+We first compute the induced moment by the graphical model using given choice
+of parameters, and compare it with the empirically observed moment.
+If there is a mismatch, it's likely change the node and
+edge parameters to reduce the mismatch.
+And repeat this process til we find a good match.
+That's it, very simple.
+It is important to compute the moments induced by a graphical model
+in a tractable manner.
+A popular approach to do so is the belief propagation algorithm.
+I would suggest an interested listener to follow other parts of this course where
+graphical models are discussed in detail.
+So we have leaned a probabilistic graphical model of presentation
+of user preferences.
+How can we use it for the purpose of recommendation?
+Consider a user suppose she has liked only Casablanca, and
+that's all we know about her preferences.
+Now we want to recommend her movies from the remaining movies.
+Using graphical model, we can compute probability of her liking any other movie,
+conditioned on the observation that she liked Casablanca.
+This is effectively assigning scores to each movie.
+We can use these scores to order movies and recommend them to her.
+That's it.
+Computing the score, as described earlier, requires computing distribution
+of each node, subject to few observations from the entire graphical model.
+This is not a straightforward computational problem,
+a good computationally efficient algorithm for this is again the belief propagation,
+and this is exactly where graphical model representation
+comes to our rescue to allow for efficient computation.
+Now we shall discuss the second challenge we had outlined in the beginning, how to
+capture the temporal relationship between user preferences using graphical models.
+If you like movie Goodfellas,
+then a good recommendation algorithm such as the probabilistic graphical model.
+A bow may suggest that you will like Godfather Part I, Part II, and Part III.
+The question is, which one of these should be recommended first?
+As it is popularly believed Godfather Part II was the best among all three parts, and
+I think I believe that too.
+And if this was captured by user preferences,
+then our system might end up recommending Part II as the movie to watch for
+a user who has not yet watched Godfather Part I.
+And this does not make sense, because If you have seen Godfather trilogy
+then you know that watching them in order is crucial.
+To make such a distinction,
+the recommendation system has to take the temporal aspects into account.
+Most user who would have provided their preferences for
+Godfather movies would have watched part one first and then part two later.
+Therefore, if system utilized the temporal aspect of the user preferences,
+then such a problem would be solved.
+And that is what we will do next.
+Precisely, we shall describe how to use a hidden Markov model to solve this problem.
+We know that the so-called recursive neural network
+can be similarly utilized for this purpose as well.
+And it seems like companies like Spotify uses such an approach for
+recommending songs to its users.
+In hidden Markov model, there is a notion of time.
+For each time instance there is a hidden state and there's an observed state.
+The hidden state is assumed to take one of the finitely many values.
+The value of hidden state at time t plus 1
+depends on the value of the hidden state at time t.
+The probabilistic relationship between consecutive hidden state
+is homogenous across time.
+In this sense, the evolution of hidden state can be viewed as a Markov chain and
+this is why it is called the hidden Markov model.
+Now hidden states are not observed,
+well that is the reason why they are called hidden.
+Each time depending on the value of hidden state an observation is made, in our movie
+example, an observation would correspond to the movie preference of a user.
+For example, suppose a user has expressed the first preference as she liked
+Goodfellas and the second preference that she disliked Iron Man.
+Then the observed state at time one correspond to she liking Goodfellas.
+The observed state at time two corresponds to she disliking Iron Man.
+In a nutshell, each user's preferences over time provide assignment to
+observed state of the hidden Markov model.
+Different user preferences are of different length, and
+hence we have observation of a hidden Markov model of different length,
+depending upon each user.
+The goal is to learn the probabilistic relationship describing
+the evolution of hidden states as well as the probabilistic relationship
+between the observed state and the hidden state at any given time.
+A popular approach to learn this relationship
+is known as the Baum-Welch algorithm.
+An interested listener will be able to find the precise algorithm description in
+other parts of the course.
+Now we shall discuss how to use of such a hidden Markov model for
+recommendation to a given user.
+As before, suppose a user has expressed liking for
+Goodfellas and disliking for Iron Man.
+Then we know that the observed state at time one is Goodfellas is liked,
+observed state at time two is Iron Man, disliked.
+Given this, using the learned hidden Markov model,
+we can compute the likelihood of any given model and
+liking being observed as a state at time three.
+This provides score for each of the movie, for
+which user has not provided her preferences.
+You can use the score to provide recommendations.
+If the data is rich enough and algorithms have done their job right,
+then in the example above, it may suggest higher score for
+Godfather Part I, rather than for Godfather Part II.
+Even though at population level Godfather Part II might be liked more.
+That is the recommendation system would have worked well
+by understanding the importance of order in which sequels should be watched.
+In summary, recommendation system based on view of matrix completion have two major
+limitations.
+One, they do not capture complex user preference relationship.
+Two, they do not capture temporal aspects.
+Graphical model can help us address these limitations in
+computationally efficient manner.
+We can use pairwise probabilistic graphical model
+to capture more intricate relationship.
+We can use hidden Markov model to capture the temporal aspects of user preferences.
+The use of neural network is very similar to the way we
+describe the use of graphical models today.

@@ -1,0 +1,112 @@
+Welcome back.
+We'll now have three lectures on graphical models.
+This lecture is on undirected networks and the processes on them.
+>> We will introduce a natural dynamical process on an undirected network and
+observe how this gives rise to joint distribution
+over the nodes of the network.
+Such a joint distribution is known as an undirected graphical model.
+>> In the next lecture,
+we'll study the two most important undirected graphical models.
+Namely, the Ising model, and the Gaussian graphical model.
+Finally, in the third lecture on graphical models,
+we'll talk about how to learn the underlying network from process data.
+>> We will see later that the same graphical models framework
+can be used to make predictions from partial information.
+>> Undirected graphical models sound very useful.
+How should I start thinking about these models?
+>> Let's start with undirected network, for
+example, consider a social network such as Facebook.
+Remember that the graph is undirected, because friendship is bidirectional.
+Let's consider the gaming industry, we all know it's a multi-billion dollar industry.
+So it would be great if we were able to predict
+how a game spreads in a social network or who is likely to play.
+>> So let's consider a game that costs $1 to play each day.
+This game is played online, so
+it's possible to compete directly with your friends.
+It's more fun to play if your friends are playing too.
+But at the same time, if relatively few of your friends are using it,
+then it may not be worth spending $1 that day.
+>> Yes, and some people may really like the game and will play no matter what.
+And other people are busy and
+may give it a try only if many of their friends are playing.
+>> Okay, so each day each person decides to play or not,
+and there is some randomness.
+Although having friends that play the game is an incentive to play,
+it's not a deterministic process.
+And we'll imagine that this process continues for a while.
+>> Now we'll observe a snapshot of the state of the system
+on some particular day.
+So who is playing that day, and who is not playing.
+This corresponds to a list or a vector with one binary entry per person,
+1 or 0, corresponding to play or didn't play that day.
+>> Perfect, so we have this vector.
+Whether I played or not depends on whether or not my friends played and
+some randomness.
+If I didn't have any friends at all,
+what I do is independent of everything else in the network.
+>> But luckily you have many friends.
+>> Okay, so what each person does depends on what their friends do and
+this process evolves over time.
+At the beginning, when a new game is launched people try it out randomly.
+The network structure does not play a role yet.
+However, if you let the process evolve long enough, then the distribution over
+the social network and who is playing, and who isn't playing, reaches a steady state.
+>> A graphical model precisely captures the joint behavior, or
+joint distribution, of the process once it has reached a steady state.
+So to be more specific, imagine you get a binary vector of who played and
+who didn't play that day for many different games.
+So you have one binary vector for each game.
+Then the interaction between individuals in
+all of these vectors is governed by the same underlying social network.
+>> I see, so each particular vector from different games can be very different.
+But the statistical dependence between the people playing or not is the same for
+different games.
+>> Exactly, the joint distribution inherits its statistical structure from
+the underlying network.
+Now, suppose I don't have information about a particular user, you, for
+instance, and I want to predict whether you will play today.
+>> Well, whether or not I play will be based on whether my friends play, so
+you could use this information to make a prediction.
+>> Yes, and once I know whether each of your friends played or not.
+Additional information about other people in the network
+does not help me make my prediction.
+This is because the effect from someone multiple hops away in the network
+must pass through your friends in order to have an effect on you.
+>> Put differently, a given node's value is statistically independent from
+the rest of the nodes conditional on its neighbors.
+>> This is known as the Markov property or, more specifically,
+the undirected Markov property.
+It turns out that under mild conditions, this implies a more general statement,
+namely that any two sets of nodes are conditionally independent,
+given the values of a set of nodes that separates them.
+>> To be more precise, a set of node C separates A and
+B if all paths from A to B pass through C.
+>> It's a quite remarkable fact that under mild conditions,
+such as the positivity of the distribution, the local statement
+that a node is conditionally independent of the rest, given its neighbors,
+is equivalent to this global statement in terms of graph separation.
+>> So we've discussed how conditional independent statements correspond to
+separation statements in the graph.
+However, it is important to emphasize, the two nodes can be highly dependent, yet
+still not have an edge between them because they interact via other nodes.
+Edges in a graphical model capture only direct interaction.
+>> I see, so let's be more specific.
+You and Justin Bieber are not, maybe yet, friends in real life, so
+you are not connected by an edge.
+However, whether you and Justin play a particular game could be dependent,
+since you might have common friends.
+However, since you don't know each other personally,
+we can always find a set of people that separate you from Justin.
+And conditional on these people, whether you and Justin play a certain game,
+becomes independent.
+>> To summarize, a graphical model describes the joint distribution
+of random variables with the nodes of the graph.
+And variables satisfy the Markov property with respect to the graph.
+>> One way such distributions arise is through processes on networks.
+In our example, the joint distribution of people playing a particular game
+is described by a graphical model.
+>> Because the interactions occur through the links of the network,
+the graph underlying the graphical model that describes the conditional
+independence of the joint distribution is the social network itself.
+>> In the next lecture we'll see two specific examples of graphical models, and
+get some insight into the power and flexibility of these models.

@@ -1,0 +1,145 @@
+Hi, we've talked about various aspects of graphical models including learning models
+from data and efficiently computing various statistical quantities.
+In this lecture, I'll describe a specific graphical model structure
+known as the Hidden Markov Model.
+And then in the next lecture,
+we'll discuss an inference algorithm called the Kalman Filter.
+We'll make use of these concepts in the case study on GPS navigation.
+Hidden Markov models, or HMMs for
+short, have been fundamentally important in many applications involving speech,
+handwriting, text, music and bioinformatics.
+What do these applications have in common?
+Well most of them involve temporal or time-series data while in bioinformatics
+one often deals with genomic data that is by its nature sequential.
+The basic idea behind HMMs is that there are some process,
+which you can think of as occurring over time, and we do not have access to it.
+Instead, we get only noisy observations of the process.
+This in itself is pretty general and can describe virtually any noisy data problem.
+But in an HMM we make the additional assumption
+that the process is a Markov process.
+Let's be concrete and consider a simple example.
+Each day, I bike or drive to work.
+And my choice is influenced by the weather,
+which we'll assume is either sunny or rainy.
+You have data from the parking garage for
+when I park my car there over the past year.
+And what you'd like to figure out is what the weather was for each day.
+A basic model for the weather would be to assume that the weather today
+depends on yesterday's weather.
+But conditional in yesterday's weather,
+today's weather is independent of previous days.
+This means that the weather, sunny or
+rainy, evolves according to a Markov chain.
+It might be the case that if it's sunny today,
+it's sunny again tomorrow with probability 0.8 and rainy with probability 0.2.
+And if it's rainy today then it's sunny tomorrow with probability 0.8 and
+rainy with probability 0.2.
+So the weather stays the same with probability 0.8 and
+switches with probability 0.2.
+In graphical model notation, this looks like a chain graph with a node for
+each day and the variable at each node for the weather on that day.
+We might use variable Xt to indicate the weather on day t.
+The Global Markov property implies that conditional on any node, the part of
+the chain to the right is independent of the part of the chain to the left.
+Put another way, the future is independent of the past given the present.
+Now you don't observe the weather nodes, X1, X2, etc, and instead you
+observe whether I drove that day or not which we'll denote by Yt for day t.
+So to each node Xt in the Markov chain, we connect a new node,
+Yt whose variable indicates whether or not I drove to work that day.
+That's it.
+This is a graph of a hidden Markov model.
+Notice that it is a tree graph since there are no cycles.
+One thing that's worth emphasizing is that in this graphical model,
+the edges indicate statistical relationships.
+In some of our earlier examples of graphical models, all of the nodes
+represented the same sort of data, such as like or dislike for a YouTube video, and
+edges represented interactions between people in a social network.
+Here we have observed whether I biked or not, and
+this is a different sort of variable then the one saying whether or not it's sunny.
+But there is an edge because of the fact that I bike or
+not depending on the weather.
+HMMs have been used for decades in speech recognition.
+Let's have a look to see how this model is used in that context.
+In a basic language model, each word in a sentence depends
+only on the preceding word, so the sequence of words forms a Markov chain.
+You can also have each word depend on the previous three words or n words,
+more generally.
+And the same framework works there.
+We'll focus on the model where each word depends only on the preceding word.
+Of course, the computer or
+phone listening to your voice doesn't know the words you're saying.
+It just hears the sound of the words you produced.
+So these words, or waveforms, are the observed nodes.
+To do speech recognition, the hidden Markov model is used to
+figure out the words that you're saying just from these observed nodes.
+The fact that we're using an HMM means that the graph structure is specified, but
+we still need to specify the Markov chain for the words.
+We have a sequence of words, X1, X2, X3, and so on, and
+maybe X1 is I and X2 is like.
+The model then specifies the probability that X3 is the word cats, or
+any other word, according to model parameters which
+give the conditional probability of each possible word given the previous word.
+So for any time T, we have to specify the probability that XT is equal to some value
+WT, conditional on XT- 1 = WT- 1.
+The remaining part of the model that we need to specify is the probability of
+observing Y1 given X1, Y2 given X2, Y3 given X3, and so on.
+This will indicate how does the word cats sound if X3 is the word cats.
+It's a noisy observation model.
+Our HMM for speech recognition is specified by the Markov
+transition probabilities between words as well as the observation model.
+You can think of all of these as being described by a list of model parameters.
+The first fundamental question is how does one learn the parameters?
+The answer to this depends on the application.
+For language you can look at a large corpus of text documents and
+compute word transition frequencies to use in a model.
+In other applications, including in computational biology,
+there is no way to directly observe the hidden variables.
+We only have access to the observational data.
+Even in this case,
+one can learn parameter values via a heuristic algorithm called the Baum-Welch
+algorithm which is just an instance of the expectation-maximization algorithm.
+Let's now go back to our original motivating question and
+imagine that we have a known model and
+we want to use it to infer the most likely values of the hidden state variables.
+In our speech processing example, your phone listens to your voice and
+wants to figure out what are the words you've said.
+Let's lump all the state, or hidden, variables into one vector, X, and
+the noisy observations into Y.
+We want to find a good guess for X, and
+the best guess is the maximum probability assignment to X given Y.
+Using Bayes' rule, we write P(X|Y)
+= P(Y|X)P(X)/P(Y).
+We observe Y, so the probability of Y is some constant that does not depend on X.
+This means that if we want to find the most likely X we can forget about Y and
+just find the X maximizing the probability of Y given X times the probability of X.
+The same basic message passing ideas we outlined for general geographical models
+apply here to allow efficiently computing these quantities.
+In the context of HMMs, this goes by the name of the Viterbi algorithm.
+I'll mention a couple of other uses of HMMs.
+The exact same model can be used to describe product inventory in a store
+where I observe point of sale data, and
+the hidden variables indicate quantity of product in stock.
+The number of bags of French roast coffee at the grocery store, for
+example, evolves over time according to a Markov chain.
+The grocery store may only have easy access to purchase data and restock data.
+Because of loss or theft,
+they don't actually know the number of bags of French roast sitting on the shelf.
+They can use an HMM to estimate this number.
+HMMs have also been very useful for
+various text processing tasks including part of speech tagging.
+Here, you observe the words themselves and
+the hidden states indicate the part of speech of the word.
+You have a Markov model describing sentence structure.
+If the last word was a noun, what's the likelihood that the current word
+is a noun, verb, adjective, preposition, and so forth.
+The reason why this is interesting is because many words can have multiple parts
+of speech with different meaning for each.
+Think about the word bear, as in grizzly bear, as compared to bear in the sentence,
+I can only bear listening to punk rock for at most five minutes.
+Figuring out the part of the speech is an important first step in semantic
+understanding in text.
+Let's summarize.
+A hidden Markov model is a probabilistic model with latent or
+hidden variables describing the unobservable state of the system.
+This state evolves according to a Markov process.
+We then observe some noisy data that depends on the state of the system.

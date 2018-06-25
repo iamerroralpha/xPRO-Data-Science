@@ -1,0 +1,39 @@
+It's a beautiful sunny day and you just arrived at Schiphol Airport in Amsterdam.
+A sparkling European airport suggests the start of a great three day vacation.
+Tired from a long overseas flight you walk into a cafe and
+order a fresh cup of coffee with a apple Danish but your Visa card is declined.
+The credit card company suspects a fraudulent transaction.
+And in order to prevent the fraud it stops it.
+You walk to the nearest ATM to get some local currency.
+Perhaps, only to discover that your cash withdrawal is declined as well.
+>> A few months later, during a business trip to Toronto,
+you receive a phone call from your credit card company.
+The operator wishes to inquire about the legitimacy of a transaction on your credit
+card that was attempted the previous evening,
+in which someone tried to use the card to purchase some liquor in New Jersey.
+Yesterday evening you were en route to Toronto, and
+you certainly did not intend to buy any liquor.
+Your card was in your possession at all times, but the operator informs you that
+these days it's not hard for criminals to copy the information on a magnetic strip
+to a different card, which was probably what occurred.
+Luckily, the bank figured out that the purchase was almost certainly fraudulent,
+and it stopped the transaction.
+>> The two examples above are really two faces of the same coin.
+Your credit card company constantly needs to check the legitimacy of
+the transaction credit cards.
+The verification needs to be done rapidly in a matter of a split second.
+It needs to approve the transactions the company deems to legitimate, and
+decline the ones it suspects to be fraud.
+>> In the first example, a legitimate transaction was declined by your bank,
+creating a major inconvenience on your end.
+>> But in the second example, an illegitimate transaction was thankfully
+declined by the bank, saving you from the frustration of dealing with a fraud and
+possibility of even a financial loss.
+>> Credit card companies constantly deal with assessing the likelihood
+that a given transaction is illegitimate.
+Need to minimize the risk of either declining legitimate transaction or
+allowing a fraudulent one.
+In this module, we'll introduce statistical methods that assist companies
+in assessing these types of risks.
+It'll be our first example of a very common category of questions which we'll
+refer to as binary classification.

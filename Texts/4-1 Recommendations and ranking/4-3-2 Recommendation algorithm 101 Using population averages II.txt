@@ -1,0 +1,87 @@
+Now, let's consider this setting.
+In this setting our intuition suggests that this way of measuring
+the chances of head is the right thing.
+And indeed in probability theory this is known as the Law of Large Numbers.
+If we toss a coin enough times then the measured score of the coin becomes
+arbitrarily close to the actual chance of seeing the head.
+So this way of measuring the bias or the score of a coin is a perfect thing to do.
+Maybe there was a reason why we considered the population averages as an algorithm to
+begin with.
+But this is good when you have a lot of data.
+It is assuming that there's a lot of ratings
+in the case of restaurants that are available.
+In reality we have very limited data for some restaurants.
+Consider a newly opened restaurant.
+It might have only a few ratings.
+Therefore, we may need to worry about what happens
+to such an estimator when we have very few observations.
+Back to coin setting, suppose we have only one observation.
+So let's say I toss this coin first time and first time I saw head.
+Now what?
+Well, my estimator would say the bias of this coin is one in favor of head.
+That does not make sense because I have just got one observation.
+Since no matter what the bias is my estimated bias would be one or zero,
+independent of the coin's actual chances.
+And this is clearly wrong.
+And it's clearly wrong in the sense that I have got so few observations so
+I need to correct for them.
+Okay?
+Again, in the case of restaurants,
+each restaurant has a different number of ratings.
+So simple average is definitely not the best estimator.
+It needs correction, correction due to a limited number of observations.
+Just the way estimating the bias of a coin needs a correction.
+What should we do?
+This is where another principle of probability comes to our rescue.
+It is known as the central limit theorem.
+It states that the error in the average estimator
+of the bias compared to the true bias behaves in a very specific manner.
+To be precise, let's consider the normalized error.
+That is, estimated score minus the true score
+divided by the square root of the number of observations.
+This normalized estimator or errorr has a distribution called Gaussian or
+normal distribution with mean 0.
+This is named after a famous German mathematician named Carl Friedrich Gauss.
+Gauss lived from 1777 to 1885.
+He's also referred to as Princeps mathematicorum.
+In Latin it means one of the greatest mathematicians since antiquity.
+Now here's how Gaussian distribution looks like.
+The variation in the estimation or the amount of
+error varies as true score x (1- true score).
+Therefore, if true score is 0 or 1.
+That is, truly always tails or heads, that is, always disliked or liked.
+Then error is 0.
+Totally makes sense.
+Effectively in that case, one coin toss is enough.
+On the other hand,
+if the true score is close to half, then error is going to be large.
+The problem is, we do not know a priori which is the situation.
+So we have to assume the worst possibility.
+That is, error is the largest.
+In that case, the key takeaway from this mental experiment is that the error
+behaves like 0.5 / square root of # of Observations and number of samples.
+Therefore the true score is most likely 1 larger
+than the estimated score- 0.5 / square root of # of samples.
+And smaller than the estimated score +
+0.5 / square root of # of samples.
+This suggests a robust approach to order or rank or rate restaurants.
+One, assign scores to restaurants as average rating-
+constant / square root of # of ratings that the restaurant has received.
+Now here what is the constant c?
+In the case of the coin it was 0.5.
+We shall discuss briefly how we choose c.
+Two, use this score to rank order the restaurants as before.
+This way, if there is a restaurant which is new and
+has been rated very, very highly by very, very few people.
+Think of the owner and his friends.
+It will not be able to fool the system.
+On the other hand, if the restaurant is truly remarkable
+because its average is high based on a very large number of reviews.
+Then of course the correction would be very small,
+in which case average score would dominate.
+Now coming to the choice of constant c.
+Well, in the case of Yelp example,
+choice of c = 2.5 is great because the ratings are between 1 to 5.
+All right, this is great.
+Now we have found a solution to combat the challenge of sparse data.
+And the solution is, again, very simple.

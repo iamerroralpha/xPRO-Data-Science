@@ -1,0 +1,168 @@
+
+The nagging question that should be on your mind
+is how do we set the parameters of a deep neural network.
+So far, we've been thinking about them
+as functions that map a high dimensional vector
+to multiple outputs, and we constructed
+these functions hierarchically.
+But that only describes the class of functions
+that we're working with, not how to find the best
+function for some image classification task
+that we actually want to solve.
+Our first goal is to cast the problem
+of finding good parameters as an optimization problem.
+The catch is that not all optimization problems
+are created equal.
+There is an important class of optimization problems called
+convex optimization problems for which
+we have many good algorithms, and we understand quite well
+when and why they work.
+But life is not so easy in the case of deep neural networks.
+The optimization problems that come out
+will be non-convex and unwieldy.
+We'll talk more about this issue later,
+but first, let's work towards defining the optimization
+problem we'll be interested in.
+Returning to the image net example,
+our deep neural networks have n inputs and 1,000 outputs,
+one for each category that we'd like to assign images to.
+What we're hoping for is that when
+we feed in a picture as an n dimensional vector,
+that the output in the last layer contains a 1
+in the correct category and 0's in all the other categories.
+This is sometimes called the one hot encoding.
+Now, what if you give me all the parameters of a deep network?
+How could I evaluate how good these parameters are?
+I could take each one of the 1 million examples in ImageNet,
+feed each picture into the network,
+and check whether you got the correct label.
+To be concrete, let me introduce what's
+called the quadratic cost function.
+Let's say the input is some vector x and it's true label
+is category j, then the output that I would like to get
+is all 0's except for a 1 in the j of output [? bit. ?] Now,
+I could penalize you by how far off your output
+is from this idealized output.
+If on input x, you output a1, a2 up to am.
+As your m output bits, I could take
+as a penalty aj minus 1 squared, plus the sum of all
+the other ai's squared.
+This is a function that evaluates the 0
+if you get exactly the correct output,
+and evaluates to something non-zero
+if you get the wrong category.
+What we've done is we defined a cost function.
+If you give me the parameters of the deep neural network,
+I can evaluate how good it is by computing
+the average cost on a typical example from ImageNet.
+Now if we want to find a good setting of the parameters,
+why not look for the setting of the parameters that
+minimizes this average cost.
+This is an optimization problem.
+We have an explicit function that depends on the parameters,
+as well as the training data, that we'd like to minimize.
+It turns out, that if you find a setting
+of the parameters that works well
+on the training examples, i.e.
+Has low average cost, it achieves low error
+on new sets of examples that you give it too.
+This can be made mathematically precise,
+but it's too much of a digression to get into here.
+In any case, we have what we're after.
+We have an optimization problem that, if we could solve,
+would find good parameters.
+Is there just some off the shelf way
+that we can plug-in any optimization
+problem we'd like to solve and get the best answer?
+Absolutely not.
+The difference between what optimization problems are
+easy to solve and which are hard is
+one of the foundational issues in theoretical computer
+science.
+We don't need to delve too much into that,
+so let me tell you just what you need to know.
+First, what types of optimization problems are easy?
+Let's start with the one dimensional case
+to keep things as simple as possible.
+What if I give you some function, f of x, and I
+want you to find the x that minimizes it.
+Here, x is a real variable, so it can take on any real value.
+There's an important class of functions
+called convex functions.
+There are many ways to define convex functions,
+but let's start with an example.
+Take f of x equals x squared--
+that's convex.
+Now, why is it convex?
+It's convex, because whenever you
+take any two points on the curve and draw a line between them,
+the line lies entirely above the curve, except at the endpoints.
+That's one definition of convexity.
+It's not the best definition for our purposes,
+but it's the easiest one to start with.
+A definition that's more natural for us
+has to do with its second derivative.
+A function is convex if, and only if, its second derivative
+is always non-negative. [? Modular ?] issues,
+like what if it's second derivative is not defined.
+So what's an example of a non-convex function?
+Let's take, f of x equals x minus 1 squared,
+times x minus 2, times x minus 3, as our example.
+There are points on the curve where the derivative is 0,
+and it's positive before and negative after.
+This definitely means that its second derivative
+is negative around here.
+The real question is, why is this bad?
+The important point is that convex functions
+have no local minima that are not also global minima.
+There is nowhere that you can get stuck if you're greedily
+following the path of steepest descent
+that isn't actually the globally optimal solution.
+But in the non-convex case, you absolutely can get stuck.
+In our second example, you could get
+stuck at x equals 1, which achieves f of x equals 0,
+even though there are x's which make the function negative.
+What's abstract?
+What's going on here?
+If you have a convex function, and you're at some value x,
+and you're searching for the value that
+minimizes f, what you would do is take the derivative at x.
+If it's negative, you would take a step
+to the right, increase x.
+And if it's positive, you would take a step to the left.
+If you choose the step size correctly,
+this is guaranteed to converge to the global minimizer
+of the function.
+As you may notice, you need to decrease
+the magnitude of the step based on how large the derivative is.
+Now, what happens if you try the same strategy
+on a non-convex function?
+All you can say is that you reach a local minimum,
+but, in general, it will not be the global minimum.
+All of these ideas can be extended
+in a straightforward manner to higher dimensional spaces.
+Instead of taking the derivative,
+you would take the gradient.
+The gradient points in the direction of largest increase
+for the local linear approximation.
+And wherever you currently are, you
+would take a step in the direction opposite
+to the gradient.
+When you have a convex function in high dimensions,
+this is, again, guaranteed to converge
+with a globally optimal solution.
+When you have a non-convex function,
+it might only converge to a locally optimal solution.
+Or even worse, it could get stuck in a saddle point, which
+is not a local optima, but for which the gradient is 0.
+So what we're going to do is use gradient descent
+to find the best parameters for our deep neural network,
+even though the function we're trying to minimize
+is non-convex.
+We're taking an algorithm that's guaranteed
+to work in the convex case, that we know does not always
+work in the non-convex case, and using it anyways.
+One of the greatest mysteries is that it still seems to work.
+What it finds is not necessarily the globally optimal solution,
+but even the locally optimal solutions it finds
+are, seemingly, still good enough.

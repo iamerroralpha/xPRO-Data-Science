@@ -1,0 +1,159 @@
+
+Welcome back.
+In order to study networks, it will
+be useful to be precise about what we mean.
+Mathematically speaking, a network
+is an object called a graph.
+It consists of nodes, also called vertices.
+And there are edges that connect the nodes.
+For example, in a social network, each node is a person,
+and an edge between two people represents their friendship.
+So let's discuss some more examples of networks.
+We've already mentioned the World Wide
+Web, where each node is a page, and the edges
+correspond to hyperlinks.
+Similarly, the internet is a network.
+Here, computers are to nodes, and the edges
+are network protocol interactions.
+Power grids consist of generating stations,
+substations, and transmission lines connecting them.
+Another example of a physical network is the road network.
+Traffic flowing through the network is a network process.
+Also, most biological processes occur on networks.
+For example, a neural network consists of neurons
+that are connected by synapses.
+Neural activity, specifically the pattern
+of electrical signals or spikes, is a network process.
+Another example is a gene regulatory network.
+Here, the vertices are the genes,
+and the edges represent regulatory effects.
+In phylogenetic trees, the nodes are species,
+and the edges just represents a direct evolutionary path.
+In a food web, the nodes again are species,
+but now the edges are drawn between predator and prey.
+In a recommendation system, relationships
+between items where users can be represented by networks.
+Finally, another example is the citation network
+with each node representing a research article and edges
+representing citations.
+So after seeing all these examples of networks,
+it's useful to try to categorize them.
+The World Wide Web, for instance,
+is different from the internet in a basic way.
+How so?
+Well, the World Wide Web is a directed network,
+whereas the internet is an undirected network.
+Edges in directed networks have a direction.
+A website can link to another website
+that does not link back.
+An edge in the internet represents a communication
+channel.
+This is typically bi-directional,
+so we use an undirected edge in this case.
+Food webs are directed networks, given
+by the predator-prey relationship, and similarly
+for citation networks, gene regulatory networks,
+and phylogenetic trees.
+We don't see many gazelles eating lions,
+so directed sounds accurate.
+On the other hand, internet, power grids, neural networks,
+road networks, and metabolic networks are mostly undirected.
+Although with that said, if there is a one way street,
+you'd represent that with a directed edge.
+In Facebook, friendship is an undirected relationship,
+so you'd use an undirected graph.
+Twitter, in contrast, allows you to follow people without them
+necessarily following you.
+So it is best represented by a directed graph.
+Even with undirected networks, there
+is a distinction between the type of network representing
+internet or power grids and neural networks or road
+networks.
+How so?
+while neural networks can have multiple connections
+between any two neurons, power grids
+have at most one edge between any two nodes,
+and they don't have any self loops.
+Such networks are known as simple networks.
+Directed networks can also be categorized further
+based on whether or not they have cycles.
+Networks that don't have any cycles in the underlying graph
+are called trees.
+Examples are phylogenetic trees.
+If a directed network has no directed cycles,
+then it is called a directed acyclic graph,
+or DAG for short.
+Note that one can have a cycle in the graph, just not
+a directed cycle.
+Yeah, for example, food webs are usually
+DAGs since there is an underlying hierarchy.
+Smaller animals usually don't eat larger animals.
+Also, citation networks are usually
+DAGs since a paper typically only cites earlier papers.
+The information in a recommendation system
+can be represented by a network with a special structure known
+as the bipartite graph.
+In Netflix, we would have users on one side,
+and movies on the other side.
+Each user would have an edge to the movies
+that they have rated.
+The graph is called bipartite if the nodes can be partitioned
+into two sets so that there are only edges between the two
+sets and not within a set.
+So we've now introduced some of the most important classes
+of networks and given many examples of networks
+we encounter on a daily basis.
+We should also mention the different kinds of data that
+can be collected on a network.
+For example, in the World Wide Web,
+we can collect data on which page was
+accessed from which other page.
+This data tells us about the presence of an edge.
+Alternatively, we can collect data just on the nodes,
+say, how often was a particular web site visited.
+This also contains information about the underlying network.
+So let's wrap up by summarizing some
+of the questions we might be interested in when
+studying a network.
+What would you like to know about the social network?
+For one, I would like to be able to identify people,
+like Justin Bieber, in order to spread my tweets
+as efficiently as possible.
+Great, so one question we will discuss in this module
+is how to identify important nodes or edges in a network
+and what makes a node or an edge influential.
+More generally, we will talk about properties
+or characteristics of networks.
+We will learn about the kinds of structures
+that can be used to distinguish and identify
+different classes of networks.
+So another question I'd love to answer
+is I had a cold last week, and I want
+to know who I should blame for this.
+How do we infer how a virus spread on a network?
+How can we infer how neighbors in a network
+influence each other?
+These are also questions that we will discuss in this module.
+Also, you might not remember who exactly you met with last week.
+But maybe, we can recover the underlying network describing
+who interacted with whom just from data
+on how the virus spread.
+Similarly, we might be able to recover the links between web
+sites just from data on how often each website is visited.
+Learning the underlying network from data
+generated by a process on the network
+is another theme in this module.
+Finally, we want to be able to make predictions,
+either regarding the future or for nodes
+that we did not observe using the underlying network
+structure and data on a particular process.
+Was a certain person infected by the virus?
+Or how likely is she to catch it in the future?
+How likely is a new link between two web sites going to be used?
+We do not know the answer because the link does not yet
+exist, but a prediction will help us
+to decide if we should add it.
+Whether we're interested in the spread of a virus, an idea,
+or a tweet, the same basic ideas will
+allow us to understand what's going on
+and to make predictions about unobserved quantities.

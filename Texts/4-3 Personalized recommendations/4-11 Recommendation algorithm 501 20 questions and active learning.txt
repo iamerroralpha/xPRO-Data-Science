@@ -1,0 +1,169 @@
+
+Netflix or Amazon are both web-based services,
+and this is why they are able to collect vast amounts of data
+with minimal efforts.
+However, our algorithms themselves
+did not exploit any aspect of being online.
+Indeed, even if Netflix suddenly lost internet access
+and, therefore, connection with their users,
+they could still run the user item
+based recommendation system and predict missing ratings
+accurately.
+What ability do we gain by being online as opposed to offline?
+Well, we can interact with the users,
+get the information we need to move on to our next goal.
+Consider the following silly example.
+Let's say that Netflix has just bought the rights
+to add the movie Moneyball to their catalog,
+but they are not sure what to make of the site
+information that comes with it.
+Is it a sports movie?
+A finance movie?
+A teen movie?
+It has Jonah Hill in it.
+A chick flick?
+It has Brad Pitt in it.
+Let's say it's difficult to automatically predict who
+is going to like this movie.
+What Netflix could do is to recommend it to key users
+and adjust recommendations according
+to their feedback in real time.
+This is called active learning.
+This is in contrast to passive learning,
+where Netflix would select a large group of users
+and wait for everyone's feedback before making adjustments.
+The advantage of active learning over passive learning
+has been demonstrated empirically and mathematically.
+Active is always better and is implemented
+in many aspects of our lives.
+Perhaps one of the first places where it was used
+was in clinical trials that are now run in phases.
+If a drug performs well on the first patients,
+it will be used more aggressively
+on subsequent ones.
+But if it has disastrous effects,
+the dosage may be adjusted in future phases
+or the trial may be canceled altogether.
+The idea behind active learning is quite simple.
+Collect formation as often as possible,
+not only to make future decisions,
+but also to guide future information collection.
+Web interfaces are a wonderful tool to perform exactly that.
+Perhaps the most primitive form of active learning
+is the 20 questions game, where a person chooses a subject,
+say, an actor, and a player must guess in 20 questions who
+this person is.
+If you've played this game, you know
+that you should split the population
+you have in mind by about half at every question.
+For example, let's say the first question may be, is this person
+a man or woman?
+Or is this person dead or alive?
+Et cetera.
+As you are getting further down the game,
+you refine your questions.
+Let's say that you have used your first questions
+to establish that we are talking about a dead male actor who
+plays in Westerns.
+You may want to ask whether he was involved in politics.
+We train at this game from a young age by playing guess who,
+for example.
+And there are websites that are freakishly good at this game
+actually.
+So how are computers so good at this game?
+Well, they know how to split the candidates into halves
+very accurately.
+This is called the bisection method.
+Why is it working so well?
+Let's say that you were playing this game and start
+with a population of n candidates.
+After one good question, you are left
+with n/2 plausible candidates.
+After another good question, we are
+left with n/4 plausible candidates, etc.
+After k questions, we are left with n over 2
+to the k plausible candidates.
+To be sure of your guess, you need
+to have isolated at most one subject.
+In other words, you need to ask k questions such
+that n over 2 to the k is at most 1.
+Solving for k by taking logarithms,
+this translate into k larger than log n,
+where the logarithm is in base 2.
+For example, if you started with 1 million candidates,
+you actually need 20 questions to be sure to win.
+The main difficulty of the game is, of course,
+to pick questions that split the remaining candidates exactly
+in half.
+But computers are good at this.
+Let us go back to a more serious game, Tinder.
+There are about 50 million regular users on Tinder.
+So in principle, your soul mate could
+be identified in 26 questions.
+However, the success of Tinder is
+based on precisely asking a very simple question,
+yes or no, say, hot or not.
+Note that the question is not, is your soul mate body
+mass index above or below 20?
+This would be boring and Tinder would lose customers.
+Finding your soul mate based on yes/no questions
+seems like an impossible task.
+It's like having a 3-year-old play the 20 question game.
+Is it Nemo?
+Is it grandpa?
+Is it mittens?
+Et cetera.
+It's the complete opposite of the bisection method.
+Instead of splitting the population of size n
+into two parts of size roughly n/2,
+it splits it into two parts of size n minus 1 and 1
+respectively.
+Unless we're very lucky, it's clear
+that we need n questions, rather than
+log n questions in this case.
+Yet, Tinder does it and others also do it.
+Kittenwar.com is a website that ranks the cutest kittens
+by only asking which is nicest out of two photos.
+The beer mapper is another such example.
+It's an app that's trying to find what kind of beer
+you like by only asking which beer you prefer out
+of two choices.
+For the beer mapper algorithm, the goal is to find two beers,
+say beer A and beer B, such that by knowing if a user prefer
+beer A to beer B, one gets a lot of information
+about the beer preference of that user.
+Let's say that the goal is to identify
+the user's favorite beer.
+Then in the spirit of the bisection method,
+the goal is to eliminate half of the candidate beers
+after each comparison.
+How can we do this?
+Well, the beer mapper starts from a geometric representation
+of beers that is based on ratings and descriptions
+of beers that were written by beer experts on the website
+ratebeer.com.
+It looks like this.
+Beer mapper picks two beers that split the landscape of beers
+into halves.
+Say, for example, the user prefers the beer on the left.
+So we know that the user's favorite beer
+is in this region.
+Then we pick two more beers from that new region and repeat
+until we have narrowed our candidate beers to one
+beer, the user's favorite beer.
+Using slightly more complicated techniques,
+we can find a user's ranking of beers
+rather than a single beer.
+Here, the goal is to please the user in this landscape
+and declare the closest beer his favorite beer,
+the second closest, second favorite, etc.
+Placing this user can be done using
+a method similar to the bisection method
+that we've just described.
+The bisection method can go a long way
+when we're searching for a needle in a haystack,
+a soul mate in Tinder, or beer in an app.
+In this case, it is good to keep in mind that active learning
+can be very useful, in particular,
+it can be used to establish preferences
+in the context of personalized ranking.

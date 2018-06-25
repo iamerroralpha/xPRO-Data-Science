@@ -1,0 +1,108 @@
+During the last lecture, we discussed two different centrality measures.
+Namely the eigenvector centrality and the PageRank.
+These centrality measures are useful for finding important nodes in order to
+advertise in social networks or for ranking websites in the World Wide Web.
+But they're less appropriate for other applications, so in this lecture we
+discussed other centrality measures as well as their applications.
+Let's consider the problem of deciding in which city to build a new airport.
+You would first map out all airports that are close by and
+determine their region that the new airport would serve.
+Then it would be reasonable to choose the location of the new airport, so
+that it is most central in terms of average travel time to and
+from the airport to the cities in the region.
+So, in this application, the vertices are the cities in the region, and
+the undirected edges carry edge weights, naming the travel time between two cities.
+So the adjacency matrix is symmetric, and
+the entry's of the matrix are zero, if there's no direct street
+connecting to said these without passing to us third city.
+Otherwise the value and adjacency matrix is equal to the travel time.
+Although there are usually many possible ways to get from one city to another,
+it is reasonable to assume that people take the shortest route.
+This is also called the geodesic path.
+So the goal in this application is to find the city
+that has the shortest average geodesic distance to all other cities.
+Thinking about airport location you might want to appropriately scale the distances
+by the size of the cities.
+This can be done but it's easier to avoid scaling things the first time around.
+So, how do we compute geodesic distances from the adjacency matrix?
+Well we've already discussed how to compute lengths of paths between
+any two nodes, for example, the adjacency matrix squared
+contains the travel times between any two cities that cross through a third city.
+More generally, the adjacency matrix A to the power K contains the travel
+times between two cities on a path that goes through K minus one cities.
+So the geodesic distance of city I and
+city J is the minimum non-zero value of the I-J entry of entry
+of the adjacency matrix A to some power K and we range over all K's.
+So this is another very nice example of how we can use the adjacency matrix
+to gain a lot of useful information.
+To end the discussion about where to build a new airport, let's denote by DIJ,
+the geodesic distance between city I and city J.
+So for each city,
+we can compute it's average geodesic distance to all other cities.
+If we have N cities, than this is 1 divided
+by N-1 times the sum of geodesic distances to all other cities.
+And we will choose to build the airport in the city with the smallest average.
+This measure of importance of a node is called the closeness centrality and
+similarly to the eigenvector centrality discussed during the last lecture,
+there are various variance of the centrality measure.
+To give another example, we all know how quickly rumors spread, and in particular,
+how quickly the message in a rumor gets distorted.
+If the goal is to reach as many people as possible with an accurate message,
+a reasonable strategy might be to start spreading the message from a person
+with a high closeness centrality who on
+average has a short geodesic distance to all other members of the community.
+So we now discuss closeness centrality and
+different applications where one might be interested in this centrality measure.
+However, in other applications, we might not be interested in identifying the most
+centrally located node in terms of distances.
+We might instead want to identify possible bottlenecks of the network.
+So how should we define a bottleneck?
+So, a bottleneck can be defined as a node whose removal from the network
+will most disrupt the information flow in the network.
+Equivalently a bottleneck is a node
+through which the largest quantity of information flows.
+We can identify such nodes by something called the betweenness centrality.
+The betweenness centrality makes various assumptions
+to approximate the amount of information that flows through each node.
+It assumes that information flows at constant speed along the edges and
+that information takes the shortest path.
+Then the amount of information that passes through each node
+is proportional to the number of geodesic paths that go through that node.
+This measure is called the betweeness centrality.
+So we've already seen how to compute geodesic paths.
+Now a very efficient algorithm to compute the shortest paths between
+all pairs of nodes is the so-called Floyd-Warshall algorithm.
+It's an example of dynamic programming.
+So, at it's heart, is the following idea.
+Let's start with just three nodes.
+So here it's easy to find the shortest paths between any two nodes.
+Let's save these paths.
+Now we add the fourth node.
+So the shortest path between nodes one and
+two is either the shortest path that we already found in the small graph or
+there is a new shortest path that also uses node four.
+That path can be written as a sum of two paths.
+Namely one from node one to node four, possibly using node three.
+And then one from node four to node two, possibly using node three.
+So you can see how you can find the shortest paths in larger and
+larger graphs by only knowing the shortest paths in smaller subgraphs.
+In many applications it is important to be able to find nodes with high betweeness
+centrality.
+In social networks, for example, these are the people who have a lot of
+power to change messages that are being passed around.
+In transportation networks, such as an airline flight network, these nodes, or
+in this case airports, are the most vulnerable nodes for attacks and
+need to be well protected.
+Until now we've only talked about centrality measures of vertices.
+But we could equally well talk about centrality measures of edges.
+For example, in many applications, such as road networks or
+power grids, it is important to determine the edges that could become bottlenecks.
+The importance of an edge can be defined equivalently to the betweenness centrality
+of a node by the number of geodesic paths that pass through this edge.
+So to summarize, in this lecture, we have discussed two additional measures of
+centrality namely the closeness centrality and the betweenness centrality.
+Centrality measures can be used to identify important nodes or
+edges in a network.
+Now during the next lecture,
+we will move away from determining the importance of single vertices or
+edges, and discuss more general structural properties of the whole network.

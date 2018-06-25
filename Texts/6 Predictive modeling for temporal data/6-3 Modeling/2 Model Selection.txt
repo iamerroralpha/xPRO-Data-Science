@@ -1,0 +1,54 @@
+
+Let's now consider how model selection problem
+is handled in practice.
+As we learned in module 3, there are several ways
+to build a classifier.
+In addition to the three classifier types described
+in that module, there are others like decision trees,
+random forests, and Naive Bayes classifiers.
+Once you have chosen model types,
+there are numerous software packages
+available to help you to do actual modeling.
+In our case study, we will use one such package
+called scikit-learn.
+But even with that, it can be difficult to decide which model
+type to go with.
+Let's say our user has trained two different models--
+a logistic regression model and a support vector machine model.
+To assess these models, he uses a metric called F-score.
+He finds that the support vector machine
+model does really well when assessed on the training data
+when compared to the logistic regression model.
+But when he assesses the models on the test data,
+he finds that the logistic regression model
+does better instead maybe because the support vector
+machine model may have overfit the data.
+It is important to note that in a real life situation,
+the modeler will not have access to the test data,
+and we'll have to decide which model to use just
+using the training data.
+To do this, practitioners employ what we call cross-validation.
+Here is the gist of how it works.
+First, we split the data even further
+into multiple mutually exclusive subsets.
+Let's say we split the data into k subsets.
+We then train logistic regression model
+on the k minus 1 subsets, and test it on the k-th subset
+and assess it using the accuracy metric we originally chose.
+We then repeat this process each time
+changing the subset we use for testing,
+and, thus, repeat the steps about k times.
+At the end, we have k values for accuracy metric.
+We can then calculate the mean and the standard deviation
+of these values.
+Let's set those numbers aside for now.
+We then repeat the same process for the support vector machine.
+And again, gather the mean and the standard deviation
+for the accuracy metric.
+Now to make the selection between these two models,
+one can simply choose the model that has the higher average
+accuracy assuming the goal is to maximize the accuracy.
+Model validation and selection is a heavily researched topic
+in machine learning, and there are several ways to do this.
+In this video, we just went over one such way,
+which is called k-fold cross-validation.

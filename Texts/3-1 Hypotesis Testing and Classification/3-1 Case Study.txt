@@ -1,0 +1,180 @@
+Now, we turn our attention to the Space Shuttle Challenger disaster that occurred
+in January 28, 1986.
+Through this case study, we would like to highlight how the application of the tools
+you have already learned, specifically logistic regression, could have allowed
+the management of NASA to potentially arrive at the different conclusion
+when deciding whether to postpone the launch of the shuttle on that fateful day.
+We should note that some of the details, data, and circumstances are different from
+those that actually took place and were simplified for the discussion purposes.
+The high level ideas are the same, though.
+Some background.
+Up until January 28, 1986,
+the Challenger had been launched 24 times with no catastrophes.
+A catastrophe can occur, in particular, if the collective failure of
+all these so-called O-rings that we have discussed at the beginning occurs.
+However, 7 of these 24 launches had experienced at least one O-ring failure.
+During one of such launches, in fact, three of five rings failed.
+One launch had two O-rings failed, and five launches had a single failure.
+So collectively, there were ten O-ring failures.
+On the day of the 28th launch, which had already been postponed a few times
+due to bad weather and other technical difficulties, the temperature
+at the launch site, Kennedy Space Center, Florida, was unusually cold with morning
+temperature close to 30 degrees Fahrenheit minus one degree Celsius.
+Some engineers expressed concerns about the launch in such cold weather given
+that there was no data to certify this successful launch at those temperatures.
+It was eventually decided to go ahead with the launch.
+Tragically, Challenger experienced a catastrophe were all of the five O-Rings
+failed leading to the destruction of the shuttle and killing everybody on board.
+The launch and the subsequent disaster was broadcasted live
+on television to a large audience across the United States, making headline news.
+President Reagan made a special announcement in place of the original
+scheduled State of the Union Address.
+When reviewing data from the previous 24 launches,
+the team at NASA, which notably did not include a statistician,
+decided to look at the temperature at the time of launch for all O-ring failures.
+Effectively, they looked at the plot shown here.
+This figure is the scatter plot for the temperatures at launch and
+the number of O-rings that failed.
+There were two launches with one failure, which occurred at
+temperature 70 degrees Fahrenheit, which is indicated by a bigger blue circle.
+Notably, this is data only for
+the seven launches when the failures of O-rings did occur.
+This plot appears to hint that there is no significant relationship
+between the temperatures and O-ring failures given that the failures
+have not exclusively occurred at lower temperatures.
+However, as we said, this analysis ignores valuable information available from
+the 18 other launches where no failures occurred.
+A complete plot looks like this.
+The marks in red show launches where no O-ring failures were detected
+while those in blue represent one or more O-rings failures as before.
+The picture now appears quite different, doesn't it?
+It is clear that higher temperature tend to result in safer launches while
+there is a skew towards lower temperatures of O-ring failures.
+Alas, the absence of this more complete analysis could have provided
+deeper insight to inform NASA's decision
+as to weather to go ahead with the launch on the morning of January 28th.
+In fact, in the aftermath of the disaster,
+one of the recommendations of the investigation commission
+was to have a statistician be a part of the control team.
+Savvy students such as yourself would not accept a scatter plot as confirmation of
+the relationship between the O-ring failures and temperatures.
+Indeed, while the scatter plot visually depicts a relationship,
+we now have a tool to be more rigorous than that.
+Since this problem involves a binary classification, that is failure,
+no failure, and
+we have an independent variable, that is temperature at time of the launch.
+It appears that logistic regression might come in handy to establish a relationship
+between independent and dependent variables and
+crucially help predict the probability of failure given the core temperature
+of the morning of January 28, 1986.
+Now, let's see how we might build such a model.
+First, let us look at the following table, which gives the number of failed O-rings
+for each of the 24 launches along with temperature during the launch.
+First, note that for each of the 24 past launches,
+we have 5 independent data points since the shuttle has 5 O-rings.
+For example, two launches took place at 70 degrees Fahrenheit with no O-ring failures
+during either of the launches.
+So we have collectively 10 data points, 5 for each launch
+corresponding to this temperature, which is classified as no failures.
+All in all, we have 24 * 5, that is 120 data points from past launches.
+For our dependent variable Y, we have the binary states.
+No failure or failure, which can be represented as zero or
+one, where zero corresponds to no failure and one corresponds to failure.
+So out of these 120 data points, we have ten failures,
+value 1 in column Y and 110 no failures, value zero in column Y.
+For the independent variable X, this problem only has the temperature
+at the time of the launch in degrees Fahrenheit.
+Our data is shown here.
+We are interested in the likelihood of O-ring failure.
+That is Y equal to one, given the lowest temperature on January 28, 1986.
+The temperature on that morning was 36 degrees Fahrenheit.
+Specifically, we are interested in the following likelihood.
+The probability that Y equals 1 conditional
+on the temperature X equals 36.
+According to our logistic regression model, this is expressed as follows.
+The probability that Y equals 1 given that X equals 36 is as follows.
+In order to determine this probability,
+we need to use logistic regression to determine the coefficients beta zero and
+beta using the 120 data points from past launches.
+Using logistic regression library in your favorite environment,
+R, Python, etc., using the 120 data points,
+we'll get the following maximum likelihood values for the coefficients.
+The coefficients we are most interested in is beta, because it helps us determine
+the relationship between the temperature at launch and the failure of O-rings.
+At the 95% significance level, the confidence interval for
+beta is from -0.5 to -0.2, which does not include zero,
+implying that the coefficient for beta is significant.
+Alternatively, the P-value for this coefficient is 0.002,
+which is less than 0.05 and confers the same information about the significance of
+temperature in determining the no failure versus failure of O-rings.
+This is already something.
+We have determined with 95% confidence that temperature does impact
+the likelihood of O-ring failure.
+The negative sign for the coefficient beta tells us that the temperature
+in O-ring failures are inversely related as we have intuitively determined earlier.
+Specifically, all things being equal, the odds of failure decrease by roughly 14%
+when the temperature increases by one degree Fahrenheit.
+We can find this from the following derivation.
+Similarly, the odds of failure increase by roughly 16%
+when the temperature decreases by one degree Fahrenheit.
+Note that these are the proportional changes of odds and
+not the actual probabilities.
+We now turn our attention to answering the questions we set out for ourselves.
+What is the probability of failure for
+each of the 5 rings on the morning of January 28,
+1986 given that the temperature at launch was 36 degrees Fahrenheit?
+We'll use our logistical regression model to answer this question.
+First, the probability that one can create O-ring fails,
+let's say the O-ring labeled OA is found to be as follows.
+The probability that Y is equal 1 conditional that x is equal to 36 is as
+follows.
+There is almost 90%.
+This is quite significant probability of failure.
+But does that also answer our question about the probability of catastrophe?
+Recall that there are five O-rings, and
+we'll have to determine the probability of failure for each of them
+individually in order for us to determine the probability of a catastrophe.
+We need to determine the probability of failure for all five such O-rings.
+The failures of O-rings at a given temperature are independent events,
+thus the probability of a catastrophe is the probability of one of the O-ring
+failures multiplied by itself five times.
+Namely, it is 0.89 raised to the power 5, like this.
+According to our logistic regression model,
+the probability of a catastrophe on that fateful morning was as high as 57%.
+Had such an analysis has been performed before approving the launch, it is quite
+unlikely the decision to launch would have been taken by the management of NASA.
+For reference, the table below shows the probability of failures for
+individual O-rings in the corresponding probability of a catastrophe
+at various temperatures according to our model.
+Caution.
+While it may seem like logistical regression alone could have prevented
+the Challenger disaster from happening, we must use caution in our conclusions.
+There are several reasons why the logistic regression model presented here
+must be accepted with some caution.
+The model we used is very simple.
+It only incorporates a single independent variable,
+temperature, at the time of launch.
+For a system as complex as the Space Shuttle Challenger,
+it is hard to believe that the management and the engineering teams would be happier
+relying on such a single variable logistic regression model
+to predict the probability of failure of a very complex engineering system.
+To get the reliable likelihood of failure, one would need to take into account as
+much complexity of the real system as possible.
+But this arguably simple model would still raise enough flags to stop the launch and
+perhaps to do a far more rigorous analysis.
+Notice that while we insisted on using all of the data available to the teams at
+NASA, there was not a single data point that included a launch
+temperature close to the 36 degree Fahrenheit observed on January 28, 1986.
+As such, the model is extrapolating the relationship based on available data to
+a region, which is significantly outside of the available data.
+We can counter this by suggesting to use
+a 55 degree temperature as a benchmark as opposed to 36 degree temperature.
+After all, launches did take place at temperatures lower than 55 degrees.
+The likelihood of a single O-ring failure, according to our table,
+is 0.34 at this temperature and the likelihood of a catastrophe
+is 0.34 raised to the power five, which is about half a percent.
+Would you proceed with the launch with such odds of failure,
+especially given that the actual temperature was much colder?
+In summary, while our estimate of 57% likelihood of a catastrophe can be rightly
+criticized, there was certainly enough evidence that the likelihood of
+the disaster was significantly high and the launch should have been postponed.

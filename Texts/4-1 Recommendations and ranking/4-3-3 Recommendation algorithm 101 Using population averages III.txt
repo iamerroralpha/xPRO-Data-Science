@@ -1,0 +1,89 @@
+You are thinking through this carefully, and
+playing a bit of devil's advocate at this stage.
+Is there any situation where the solution that we just found is not good?
+Can you be too conservative?
+To answer this, let us consider an example.
+Suppose a brilliant but lesser known chef opens up a new restaurant.
+Everyone who goes to the restaurant raves about it.
+In a few weeks it gets four reviews, few genuine,
+four reviews on Yelp which are all five stars.
+In this case, double correction would suggest that the score of this restaurant
+should be, well, 5, which is the average.
+Minus correction,
+which is 2.5 / square root of number of samples, here it being 4.
+So it turns out to be, if you do the calculation, 3.75.
+Well, this would mean that when we order restaurants by this adjusted score.
+This new restaurant is potentially unlikely to show up in even top-ten
+restaurants.
+Because there would be many veteran restaurants with average score of 4.
+Will this prevent this restaurant from ever becoming a top restaurant on Yelp?
+No, not really.
+Since hopefully over time enough people will visit the restaurant.
+And then this would naturally bring
+it to the top because correction would become smaller and smaller.
+On the other hand, our conservative correction
+will prevent it to be discovered early on by various Yelp users.
+And this would make it longer for this restaurant to become popular.
+So this suggests that our conscious conservative correction is preventing
+some kind of exploration among users early on.
+If we wanted to encourage some form of exploration then we should do
+optimistic correction rather than the conservative correction.
+That is the adjusted score should be average rating plus,
+not minus, plus, constant / square root of # of reviews.
+Is that it?
+Are there other corrections that can benefit scores of restaurants at
+the population level?
+Well, for one, the freshness of ratings or reviews is important.
+This is especially important in the context of restaurants.
+As time progresses, the restaurant can become better or worse,
+depending on many factors.
+Including changes in chef, management, or whatnot.
+Therefore, it may make sense to put more weight on recent restaurant ratings,
+compared to those further in the past.
+So how do we account for this?
+In computing average rating, we shall assign weights to the ratings.
+You see, before, we assigned uniform weight to each review or rating.
+But now, we can assign weight to each review or rating depending upon its age.
+For example, if we think of half-life,
+remember half life the way we think of in nuclear physics?
+Let's think of a half-life of a restaurant as 3 months.
+That is, this is time scale at which changes in restaurants become relevant.
+Then we can define normalized age of review as actual age of review / 3 months.
+So for example, if the restaurant had a rating 12 months back,
+then the normalized age would be 4.
+And then the weight of the review would be exponential of (-4).
+Says that as age increases, the rate decreases.
+Now, the new weighted average score would be computed as follows.
+(weight review 1 x score review 1) + (weight review 2 x score review 2)...
+/ weight of review 1 + weigh review 2...
+Okay? Again,
+remember previously weights were uniform, that is, equal to one.
+Now we are gonna change that.
+And correction in this average score would be given by, as before,
+a constant divided by square root.
+But not square root of just number of samples.
+But a weighted sum of the reviews.
+That is, weight review 1 + weight review 2..., there's a small twist.
+We will also divide this number by the maximum of
+the weights among all end reviews.
+Again, if you remember when weights of all reviews were equal in the earlier setting.
+This will be nothing but the square root of number of samples.
+In summary, in this section, we learned the following.
+The average rating or
+score is an excellent proxy of the restaurant's true score.
+That is, we learned the algorithm of population averages.
+Now, due to a limited number of reviews or ratings in the context of restaurants,
+it needed an adjustment.
+Conservative adjustments suggest reducing rating depending upon the number of
+reviews.
+Fewer reviews leading to more reduction.
+More reviews leading to smaller reduction.
+Optimistic adjustments suggest increasing
+rating depending upon the number of reviews.
+With fewer reviews leading to more increase.
+The freshness of ratings is very important to take into account.
+Weigh recent ratings more compared to older ratings.
+So this is the end of the section on how to use population averages.
+In the next section, we are going to understand how to use population averages
+when data is in the form of comparisons.
+Thank you.

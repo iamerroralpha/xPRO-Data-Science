@@ -1,0 +1,117 @@
+In this segment, we overview other penalized regression methods and
+also discuss cross-validation, which is a method to choose tuning parameters for
+the prediction rules.
+We are interested in prediction in the linear model Y = beta X + epsilon,
+where epsilon isn't correlated with X.
+And we have random sample of Yi and Xis.
+Our generic predictor will take the linear form hat f of x = hat beta x.
+The idea of penalized regression is to choose the coefficients hat beta,
+to avoid overfitting in the sample.
+This is achieved by penalizing the size of the coefficients by
+various penalty functions.
+Ideally, we should choose the level of penalization
+to minimize the out-of-sample mean squared prediction error.
+We first consider the Ridge method.
+The Ridge method estimates coefficients by penalized least squares, where we minimize
+the sum of squared prediction error plus the penalty term given by the sum
+of the squared values of the coefficients times a penalty level, lambda.
+We can see this in the formula given here.
+If we look at the formula, we notice that analogous to the Lasso, Ridge penalty
+presses down or penalizes the coefficients without sacrificing too much fit.
+In contrast to Lasso, Ridge penalizes the large values of coefficients much more
+aggressively and small values much less aggressively.
+Because Ridge penalizes small coefficients very lightly,
+the Ridge fit is never sparse.
+And unlike Lasso, Ridge does not set estimated coefficients to zero, and so
+it does not do variable selection.
+Because of this property, Ridge predictor hat beta X is especially well suited for
+prediction in the dense models,
+where the beta js are all small without necessarily being approximately sparse.
+In this case, it can easily outperform the Lasso predictor.
+Finally we noted in practice, we can choose the penalty level lambda in Ridge,
+by cross-validation which we will discuss later in this segment.
+A Ridge and Lasso have other useful modifications or hybrids.
+One popular modification is the method called the elastic net.
+Here we estimate the coefficients by penalized least squares
+with penalty given by the linear combination of the Lasso and
+the Ridge penalties as you see in this formula.
+In the formula, we see that the penalty function has two penalty levels,
+lambda 1 and lambda 2, which could be chosen by cross-validation in practice.
+Now, let us look at the formula carefully.
+We see that the elastic net penalizes large coefficients
+as aggressively as Ridge.
+And we also see that it penalizes small coefficients as aggressively as Lasso.
+By selecting different values of penalty levels, lambda 1 and
+lambda 2, we could have more flexibility for
+building a good prediction rule than with just Ridge or with just Lasso.
+We also note that the elastic net doesn't perform variable selection,
+unless we completely shutdown the Lasso penalty by setting penalty level lambda
+2 equals zero.
+Elastic net works well in regression models,
+where regression coefficients are either approximately sparse or dense.
+Another useful modification of Lasso and Ridge is the lava method.
+In the lava method, we estimate the coefficients by the penalized least
+squares as shown in this form.
+If we look at the formula carefully, we see that, just like previously,
+we are minimizing the sum of squared prediction errors from predicting outcome
+observations Yi with a linear and Xi prediction rule plus a penalty term.
+However, unlike previously, we are splitting the parameter components into
+gamma j, + delta j, and penalize gamma j like in Ridge and delta j like in Lasso.
+There are two corresponding penalty levels, lambda 1 and lambda 2,
+which can be chosen by cross-validation in practice.
+Now, because of the splitting, lava penalizes coefficients least aggressively
+compared to Ridge, Lasso, or elastic net, because it penalizes large coefficients
+like in Lasso and small coefficients like in Ridge.
+Lava never sets estimated coefficients to zero, and so
+it doesn't do variable selection.
+The lava method works really well in sparse + dense models,
+where there are several large coefficients and
+many small coefficients, which are not necessarily sparse.
+In these types of models, lava significantly outperforms Lasso, Ridge or
+elastic net.
+We have all ready mentioned cross-validation several times during
+the course of the segment.
+Cross-validation is an important and common practical tool
+that provides a way to choose tuning parameters such as the penalty levels.
+The idea of cross-validation is to rely on the repeated splitting of the training
+data to estimate the potential out-of-sample predictive performance.
+Cross-validation proceeds in three steps,
+which we've first described in words as follows.
+In step 1, we divide the data into K blocks called folds.
+For example was, K equal to five, we split the data into five parts.
+In step 2, we begin by leaving one block out.
+We fit the prediction rule on all other blocks,
+we then predict outcome observations in the left out block and
+record the empirical mean squared prediction error.
+We repeat this procedure for each block.
+In step 3, we average the empirical mean squared prediction errors over blocks.
+We do these steps for several or many values of the tuning parameters, and
+we choose the best tuning parameter to minimize the average mean squared
+prediction error.
+Let us now consider more formal description of cross-validation.
+We randomly select equal sized blocks B1 through Bk to randomly partition
+the observation indices one through M.
+We then fit a prediction rule denoted by hat f sub -k or X and theta.
+Where theta denotes tuning parameters such as penalty levels, and
+hat f sub -k depends only on observations that are not in the block Bk.
+The empirical mean squared error for the block of observations Bk is given by
+the average squared prediction error for this block, as shown in this formula.
+In this formula M is the size of the block.
+The cross validated MSE is the average of MSEs for
+each block as shown again, in this formula.
+Finally, the best tuning parameter theta
+is chosen by minimizing the cross validated MSE.
+We now provide some concluding remarks.
+First, we note that in contrast to Lasso, the theoretical properties of Ridge and
+other penalized procedures are less well understood
+in the high-dimensional case, yet.
+So it is a good idea to rely on test data to assess their predictive performance.
+Second, we note that cross validation is a good way to choose penalty levels, but its
+theoretical properties are not completely understood in high-dimensional case yet.
+So again, it is a good idea to rely on task data
+to assess the predictive performance of cross-validated rules.
+Finally, we may want to ask a question here.
+How do the penalize regression methods work in practice?
+In the next part of our module we will assess the predictive
+performance of these methods in a real example,
+where we will also compare these methods to modern nonlinear regression methods.

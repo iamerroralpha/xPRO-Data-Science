@@ -1,0 +1,127 @@
+To get started, we should review some key concepts related to the, so
+called, confidence intervals.
+The confidence intervals are intended to provide us with probabilistic level of
+certainty about our conclusions,
+regarding parameters of some probability distribution.
+Let us introduce it somewhat more formally.
+Suppose you have several observations, X1, X2, and so
+on, Xn from the probability distribution.
+Suppose you have a prior knowledge that this is a normal distribution, but
+with some unknown mean value, mu.
+Supposed at the same time you happen to know the standard deviation, sigma, for
+this normal distribution.
+This is not as unreasonable as it may sound.
+As you may recall, we denote such distribution as follows.
+Our goal is to estimate mu, a natural estimation for mu is simply the average of
+our observations, which we denote by x bar, like this.
+Naturally, the actual value of X bar, practically,
+will never equal to the mean value mu.
+Our hope is, though, that the estimation is not too far.
+But, how far is too far?
+This is where the concept of confidence interval helps.
+Let us use the property of the normal distribution, which says, that in fact,
+X bar itself also has a normal distribution, with the same mean value,
+mu, and standard deviation, equal to sigma over square root of n.
+Namely, the standard deviation of X bar is this.
+Using our notational convention, X bar then has the following distribution.
+It is very important to understand, that while X bar is intended to estimate
+the unknown mean value, mu, it is actually a random variable with this distribution.
+For such a random variable,
+we can compute the probability that it falls in a certain range.
+For example, we can compute the probability that it does not exceed
+the actual, but unknown to us, mean value of mu by, say, two units.
+Namely, our estimation is now two units greater than the actual mean value.
+Here's how we compute this probability.
+First we write it like this.
+And now we rewrite it like this, and now we rewrite it further,
+in the following, admittedly, weird way.
+Why in the world we would want to do something like this?
+The answer is that, what we have on the left-hand side, namely this expression,
+is actually a standard normal random variable.
+That is, it is the normal random variable, with mean 0 and
+standard deviation equal to unit.
+Using our notation, this is, to convince yourself of this,
+you need to recall some of the basic properties of the normal random variable.
+Like, what happens to it when you multiply it by some number,
+and observe that the mean of X bar is mu, and
+the standard deviation is sigma divided by the square root of n?
+Namely, recall that X bar has distribution as follows.
+The second part of the magic, is that the expression, which you see here,
+magically does not involve the unknown value mu.
+It involves sigma, which we know,
+and the sample size, n, which we certainly know, since this is just a sample size.
+So we just need to compute the probability that a standard normal
+random variable does not exceed the following value.
+But this we can do,
+either by consulting the so-called standard normal distribution table.
+Search Google for this, for example, or
+applying any standard statistical packages.
+Let us do an example.
+Say you have collected a data set consisting of 40 observations.
+In this case, the sample size, n, is 40.
+Suppose you happen to know that the standard deviation of this distribution,
+from which the sample is generated, is 6.8.
+From this, we can immediately find that, from the standard normal distribution
+table, we'll find that the probability that the standard random variable
+does not exceed this value, is approximately 0.968.
+You have computed the average of these 40 observations, and
+let us say you found it to be 4.7.
+Then according to our derivation, the true, but unknown, mean value mu,
+is at least 4.7 minus two, which is 2.7, with probability 0.968.
+We also say that our confidence level of this statement is 0.968, or roughly 96%.
+In this example, we have assumed the knowledge of the standard deviation sigma.
+Usually in practice, we do not have it, but we can still
+estimate it from data using the following expression, which we denote by sigma bar.
+Here, X1, X2, and so on, Xn are your observations.
+Just like X bar is perhaps the most reasonable estimation of the actual, but
+unknown, mean value mu.
+This formula gives perhaps the most reasonable estimation for true, but
+unknowns standard deviation [INAUDIBLE], Why?
+This is outside of the scope of this lecture, but
+I invite you read about this in one of the statistics books.
+This substitution appears to rely on circular reasoning.
+Shouldn't we have confidence intervals for sigma bar first, before we use it for
+our computation of confidence intervals for the mean value mu?
+The answer is that, when the sample sizes are reasonably large, usually at least 30,
+the estimation for
+sigma bar is far more accurate than the level of error we will encounter for mu.
+So, this substitution is a reasonable one.
+There is a deeper theory behind this, which relies on the so-called,
+t-distribution, which we'll skip today.
+In the example above, we have obtained an estimation from mu,
+which is only one sided, namely, it is at least 2.7.
+Ideally, we would like to have an estimated from above and from below.
+Additionally, often we want to have a target level of confidence level,
+such as 0.95 or 0.99, rather then whatever comes out here, like 0.968.
+This can be done by, sort of, reverse engineering our interval, so
+that the resulting certainty equals the target we need.
+Say we want to have confidence level of 0.95.
+Here's how we can find the corresponding confidence interval.
+The derivation here is terse, and I invite you to take some time to parse it, or
+consult a statistics book for a more detailed explanation.
+But it is worth trying to parse it yourself first.
+So our goal is to find a value c, such that the following is true.
+We can rewrite this equivalently as follows.
+And, if you find the right value for c, for this to be the case,
+our 95% confidence interval would be of the form X minus c, to X plus c.
+Now saying that this relationship is true, is the same as the following being true,
+which is the same as the following being true.
+From the standard normal distribution table, I can find the magic number, 1.96,
+which satisfies the following property.
+We obtain that the following must be the case, from which we find the formula for
+c as follows.
+Since we know the standard deviation, which in our example was 6.8,
+and since we know the sample size, which in our case, is 40.
+We can compute c as follows, we conclude that the true, but unknown,
+mean value mu lies within approximately 2.1 units from X bar,
+which is 4.7 with confidence 0.95, namely 95%.
+This interval is in fact defined by 2 values, the lower value here,
+and the upper value here.
+We can summarize our conclusions as follows, the true, but unknown,
+mean value mu is at least 2.6, and at most 6.8, with 95% confidence.
+The interval length might appear as too wide.
+This is perhaps true, but
+sometimes even a very wide interval can provide an extremely useful information.
+When, for example, you want to figure out whether the mean value equals 0 or not.
+That is, you hypothesize that the mean value is 0 and you want to test it.
+In other words, you want to conduct a hypothesis testing.

@@ -1,0 +1,130 @@
+Welcome back.
+In the last lecture, we saw how to efficiently computer marginals,
+or posteriors,
+on a chain graph using belief propagation, a simple message passing algorithm.
+In this lecture, we'll see how to apply the same reasoning
+to more general settings, as well as mention a few other approaches.
+Our discussion about the chain graph revolved around each node passing messages
+to each of it's neighbors along the lines of if you are plus one
+then I am plus one with probability 0.7 and minus one with probability 0.3.
+And if you are minus one then I am plus one with probability 0.4 and
+minus one with probability 0.6.
+Each node can compute the message to send out along an edge
+once messages from all the other edges have been received.
+This process starts at the ends of the chain since those nodes just have
+one adjacent edge and don't need to wait for any other messages.
+And then the messages are passed across the chain.
+Each node can compute its marginal once it has all the messages from its neighbors.
+The first observation is that exactly the same belief propagation algorithm
+works if the graph is a tree structure instead of just being a chain.
+A tree is a graph with no cycles.
+Fundamentally, the algorithm needs to start with nodes of degree 1 which in
+our chain was just the ends of the chain, and in a tree these nodes are the leaves
+the belief propagation algorithm has appeared in various guises, initially in
+statistical physics and later in machine learning and artificial intelligence.
+It provably computes the marginals for
+each of the nodes in a graphical model with a tree structure.
+Now, suppose that we want to find the single vector of likes and
+dislikes that is most probably for the new Beyonce video.
+It turns out that we can use a very similar message passing algorithm
+called max-product to compute the maximum probability assignment to the nodes.
+This time the messages are of the form,
+if you're a plus 1 then, in the maximum probability assignment, I'm a minus 1.
+And if you're a minus 1,
+then in the maximum probability assignment I'm a plus 1.
+Of course, the messages can take all possible combinations.
+Just as before, if we want to find the maximum probability assignment
+taking account the observations for values of some of the nodes, we can find
+the maximum probability assignment in a new modified graphical model.
+Belief propagation works on a tree.
+But let's think about what happens on a cycle.
+This is problematic because there's nowhere to start.
+None of the nodes have degree one, all of them have two neighbors.
+But even if we did have a place to start, for
+example we could attach a leaf to the cycle, the algorithm can run into trouble
+because the messages just go around and round the cycle.
+So it's not completely clear what to do in a cycle.
+Let's think about the message passing algorithm we've discussed from
+the perspective of each known individually.
+Once messages from all neighbors except one have arrived,
+the message is computed and passed to the one remaining neighbor.
+In principal,
+these local update rules can be carried out on a graph that is not a tree.
+Meaning it has cycles even if it's not guaranteed to give the right answer.
+Of course it's not clear how to initialize the values when there are cycles but
+this didn't stop people from trying to run an algorithm on graphs and cycles.
+You can just start things off with random messages and then run the algorithm for
+a while until it hopefully converges to something close to the correct answer.
+Since cycles are also called loops, the belief propagation algorithm is often
+called Loopy Belief propagation when run on graph with cycles.
+It often works quite well in practice.
+There are various heuristics that are used to improve stability and
+performance of the algorithm such as adding damping factors to the messages.
+Message passing algorithms form a useful class of algorithms
+because they run very fast and can often be implemented in a distributed manner.
+Some other types of algorithms for computations involving graphical models
+include Markov Chain Monte Carlo algorithms and variational methods.
+In the remainder of this lecture we'll briefly touch upon these algorithms.
+Let's start with Markov Chain Monte Carlo called MCMC for short.
+Again, let's suppose that we want to compute the marginal in a node
+since computing a posterior probability, given partial observations,
+reduces to this problem.
+The idea behind MCMC is that if we can generate independent
+samples from the joint distribution, described by the graphical model,
+then we could easily estimate marginals, as well as other statistical quantities.
+Remember that the marginal that a node v in an easy model
+is described by the probability that Xv is plus 1.
+Call this probability q.
+If you had samples from the entire joint distribution over p variables,
+you could estimate the value of q by throwing away all the variables except
+Xv from each sample.
+Then we'd just be left with a bunch of samples of x of e and
+we could estimate q by the empirical average.
+This is just like estimating the bias of a coin by flipping it many times.
+>> The outcome of coin toss is head.
+>> So we wanna figure out how to produce samples from the joint distribution.
+Each sample is a vector of length P of plus or minus ones.
+A markup chain describes evolution over time of this vector.
+Let's think about people logging into Facebook and
+deciding to make a post or not.
+People randomly log into Facebook one by one and if their friends make a post,
+they're more likely to read post or respond.
+Of course there's randomness in this process since you might not post
+even if many of your friends did and
+conversely you may just post regardless if you've got something important to say.
+You might want to show off a picture surfing a big wave in Hawaii.
+But in any case, you post or
+not depending on the state of your friends, plus some randomness.
+This simple mark up chain where each node updates, depending on the state of it's
+neighbors, is called the Gibbs Sampler or Glauber Dynamics.
+It turns out that after sufficiently many updates the joint distribution observed
+by taking a snapshot of the vector is the one we're looking for.
+We can just run such a mark up chain for awhile and get a sample.
+Then we run it for awhile longer and get another sample.
+In this way we can produce as many samples as we want.
+The key question is for how many samples do we have to run the Markov Chain
+in order to get a sample that's close to the correct distribution?
+This amount of time is known as the mixing time of the Markov chain, and
+depends on the structure of the network underlying the graphical model,
+as well as the nature of the interactions in the model.
+MCMC algorithms are very easy to implement, but often take a long time to
+run They're a good first thing to try, especially in complicated models.
+Because they are sure to give an accurate answer, given enough time to run.
+So they work well in many situations, but can sometimes be too slow.
+Variational methods can be quite a bit faster.
+The basic idea is to approximate the true model by a much simpler one.
+And them perform computations on the simpler model.
+One form of approximation,
+called Mean Field Variational Bayes, replaces the true distribution
+by one that is close in a distance called Kullback-Leibler Divergence.
+Let's call our simpler model, q.
+The idea is to solve a certain, fixed-point equation for
+q, and then compute in this simpler model.
+I won't be saying more about variational methods but it's good to know that they
+exist and provide sometimes faster alternative to MCMC.
+In the last few lectures we've discussed several algorithmic approaches to compute
+predictions and other statistical quantities in a graphical model.
+In the next lecture we'll focus on a particular graphical model structure
+Has been tremendously useful in many applications,
+particularly involving temporal data.
+You may have heard of it before, it's called the hidden Markov model.
