@@ -1,0 +1,99 @@
+We'll start out by looking at the linear regression problem at
+the population level.
+This means that we have access to infinite amounts of data, and
+therefore we can compute theoretical expected value of population averages such
+as expected value, or expected value of Y times X.
+Later for estimation purposes,
+we will have to work with a finer sample of observations drawn from the population.
+But right now we focus on the population case to define the ideal quantities.
+We shall try to construct the best linear prediction rule for
+Y using a vector of X, with components denoted by Xj.
+Specifically given such X, our predicted value of Y will be beta prime X,
+which is defined as the sum of beta js times Xjs.
+Here the primary vector beta consists of components beta js, and
+we commonly call this parameter the Regression Parameter.
+We define beta as any solution to the Best Linear Prediction problem,
+abbreviated as BLP in the population.
+Here we minimize the expected or mean squared error that results from
+predicting Y, using linear rule given by b prime X.
+Where b denotes a potential value for the parameter vector beta.
+The solution, beta prime X, is called the Best Linear Predictor of Y using X.
+In words, this solution is the best linear prediction rule among
+all the possible linear prediction rules.
+Next we can compute an optimal beta by solving the first order conditions of
+the BLP problem, called the Normal Equations,
+where we have expected value of (Y- beta prime X) = 0.
+Here we are setting to 0 the derivative of the objective function with respect to b
+that will minimize.
+Any optimal value of b satisfies the normal equations, and
+hence we can set beta to be any solution.
+Under some conditions such solution will be unique, but
+we don't require this in our analysis.
+Next, if we define the Regression Error as epsilon = (Y- beta X), then
+the normal equations in the population become expectation of epsilon times X = 0.
+This immediately gives us the decomposition Y = beta X + epsilon,
+where epsilon is uncorrelated to X.
+Thus beta prime X is the predicted or explained part of Y, and
+epsilon is the residual or unexplained part.
+In practice, we don't have access to the population data.
+Instead we observe a sample of observations of size n,
+where observations are denoted by Yi and Xi, and i runs from 1 to n.
+We assume that observations are generated as a random sample,
+from a distribution F, which is the population distribution of R, Y, and X.
+Formally this means that the observations are obtained as realizations of
+independently and identically distributed copies of the random vector Y, X.
+We next construct the best linear prediction rule in sample for Y using X.
+Specifically, given X, our predicated value of Y will be hat beta prime X,
+which is the sum of hat beta js times Xjs.
+Here hat beta is a vector with components denoted by hat beta js.
+We call these components the Sample Regression Coefficients.
+Next we define the linear regression in the sample by
+analogy to the population problem.
+Specifically we define hat beta as any solution to the best linear prediction
+problem in the sample.
+Where we minimize the sample mean squared error for
+predicting Y using the linear rule b prime X.
+Here we denote the sample mean, or empirical expectation,
+by the symbol E sub n, which simply is the sample average notation.
+In words, the empirical expectation is simply the sample analog of the population
+expectation.
+We can compute an optimal beta hat by solving the sample normal equations,
+where we set the empirical expectation of Xi(Yi- beta hat prime Xi) = 0.
+These equations are the First Order Conditions of the Best Linear Predictor
+problem in the sample.
+By defining the In-Sample Regression Error, hat epsilon, as (Yi- hat beta
+prime Xi), we obtained the decomposition of Yi into sum of two parts.
+Part one, given by hat beta prime Xi, represents the predicted or
+explained part of Yi.
+Part two, given by hat epsilon i, represents the residual or
+unexplained part of Yi.
+Next we examine the quality of prediction that the sample linear
+regression provides.
+We know that the best linear predictor of our sample is beta X.
+So the question really is, does the sample best linear predictor hat beta X
+adequately approximate the best linear predictor beta X?
+So let's think about it.
+Sample linear regression estimates P parameters,
+beta 1 through beta p, without imposing any restrictions on these parameters.
+And so intuitively, to estimate each of these parameters,
+we will need many observations per each such parameter.
+This means that the ratio of N / P must be large, or P / N must be small.
+This intuition is indeed supported by the following theoretical result, which reads.
+Under regularity conditions, the root of the expected square difference between
+the best linear predictor, and the sample best linear predictor, is bounded above
+by a constant, times the level of noise, times square root of the dimension p / n.
+Here we are averaging over values of X, and
+the bound holds with probability close to 1 for large enough sample sizes.
+The bound mainly reflects the estimation error in hat beta,
+since we are averaging over the values of X.
+In other words, if n is large and p is much smaller than n, for
+nearly all realizations of the sample,
+the sample linear regression gets really close to the population linear regression.
+So let us summarize.
+First, we define linear regression in the population and in the sample through
+the best linear prediction problems solved in the population and in the sample.
+Second, we argued that the sample linear regression, or
+best linear predictor, approximates the population linear regression, or
+best linear predictor in the population very well when the ratio p / n is small.
+In the next segment we will discuss the assessment of prediction
+performance in practice.

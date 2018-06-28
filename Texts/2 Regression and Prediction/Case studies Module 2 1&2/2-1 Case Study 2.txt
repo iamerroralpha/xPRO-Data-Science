@@ -1,0 +1,47 @@
+In this segment,
+we consider the case study of the gender wage gap in the United States.
+Here we ask and answer the following question.
+What is the difference in predicted wages between men and
+women with the same job-relevant characteristics?
+We work with the U.S. current population survey data for the year 2012.
+We first take a look at the following descriptive statistics for
+the subsamples of single men and single women
+with education attainment equal to high school, some college, or college.
+The min hourly wage is $16 for men, and about $15 for women.
+So the difference is $1, without controlling for
+job relevant characteristics.
+If we take a look at some of these characteristics, we see that on average,
+men have more experience, but women are more likely to have college degrees, or
+some college education.
+We also see the geographical distribution for men and women is similar.
+We next proceed to answer our question.
+We estimate the linear regression model that we have introduced.
+Our outcome Y is hourly wage, and
+our target regressor D is the indicator of being a female.
+And our control's W's are the job-relevant characteristics.
+We consider two specifications for the controls.
+In the basic model, our W's consist of education and
+regional indicators, experience, experience squared, and experience cubed.
+In the flexible model, our W's consist of controls in the basic models and
+all of their two-way interactions.
+We now go to the empirical results.
+In the following table,
+we see the estimated regression coefficient, its standard error and
+the 95% confidence interval for both basic and flexible regression models.
+The results for the two regression models is very close degree.
+The estimated gender gap in hourly wage is about -$2.
+This means that women get paid $2 less per hour on average than men, controlling for
+experience, education, and geographical region.
+The 95% confidence interval arranges for -2.7 to minus $1.
+We conclude that he difference in the hourly wage for men and
+women who have the same recorded characteristics is both statistically and
+economically significant.
+To sum it up, we applied the ideas we discussed so
+far to learn about the gender wage gap.
+The gender wage gap may partly reflect gender discrimination
+against women in the labor market.
+It may also partly reflect the so called selection effect,
+namely that women are more likely to end up in occupations that pay somewhat less.
+For example, in teaching.
+This segment concludes our discussion of the classical linear regression.
+Next, we will briefly discuss other types of regression.

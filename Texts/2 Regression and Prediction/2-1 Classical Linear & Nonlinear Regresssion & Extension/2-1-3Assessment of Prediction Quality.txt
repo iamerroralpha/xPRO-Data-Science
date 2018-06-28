@@ -1,0 +1,85 @@
+In this segment, we have two learning goals.
+Goal 1 is to understand the analysis of variance, or ANOVA, in the population and
+in the sample.
+Goal 2 is to assess the out of sample predictive performance
+of the sample linear regression.
+We begin with the population case.
+Using the decomposition of Y into the explain and the residual part.
+And the normal equations that we derived in the previous segment,
+we can decompose variation of Y into the sum of explain variation and
+residual variation, as shown in the formula.
+We next define the population mean squared prediction error,
+or MSE, as the variance of the population residual.
+The expectation of epsilon squared.
+We also define the population R squared as the ratio of explained variation
+to the total variation.
+In other words,
+the population R squared is the variation of Y explained by the BLP.
+And as such, it is bounded below by 0 and above by 1.
+The analysis of variants in the sample process analogous.
+We simply replace population expectations by the empirical expectations.
+Using the decomposition of Yi to explain and the residual part, and
+the normal equations for the sample.
+We can decompose the sample variation of Yi into the sum of explained variation and
+residual variation.
+The former is given by the sample variation of this sample best in
+a predictor.
+And the latter is given by the sample variation of the residual.
+We can define the sample MSE as the sample variance of the residuals and
+we can define the sample R squared as the ratio
+of the X-plane to the total variation in the sample.
+We know that when P/N is small,
+the sample linear predictor gets really close to the best linear predictor.
+Thus when P/N is small, we expect that sample averages of y
+squared beta hat xi squared epsilon hat i squared to be close to
+the population averages of Y squared, beta X squared, and epsilon squared.
+So in this case, the sample R squared and the sample MSE
+will be close to the true quantities, the population R squared and MSE.
+When P / N is not small,
+the discrepancy between the two sets of measures can be substantial.
+And the sample R squared and
+the sample MSE can be very poor measures of predictability.
+For example, when p = n, we can have sample MSE = 0 and
+sample R squared = 1 no matter what the population MSE or R squared are.
+The following simulation example will support our reason.
+In this example, Y and X are statistically independent and
+generated from the normal distributions with mean need 0 and variance 1.
+The means that the true linear predictor of Y given X is simply 0 and
+the true R squared is also 0.
+Suppose the number of observations is N, the number of regressors is P.
+If p = n, then the typical sample R squared will be 1.
+Which is very far away from the true number of 0.
+This is an example of extreme over fitting.
+If p= n / 2 then the typical sample r squared is about half which is still
+far off from the truth.
+If p = n / 20, then the typical sample r squared is about 0.05 which is no
+longer far off from the truth.
+We can now see that using sample R squared and
+MSE to judge predicted performance could be misleading when P over N is not small.
+So the question is, can we design better metrics for predicted performance, and
+the answer is yes.
+The first proposal is to use the adjusted R squared and MSE.
+We first define the adjusted MSE by rescaling the sample MSE by a factor of n
+over n- p.
+And then making the corresponding adjustment to the sample R squared.
+The re-scaling will correct for over-fitting but
+under rather strong assumptions.
+A more universal way to measure predictive performance is to perform data splitting.
+First, we use a random part of data, say half of data, for estimating or
+training the prediction rules.
+Second, we use the other part of data to evaluate the predictive performance or
+the rule, recording the out-of-sample MSE or R squared.
+Accordingly we call the first part of data, the training sample.
+And the second part, the testing or validation sample.
+Indeed suppose we use n observations for training and m for testing or validation.
+Let capital V denote the names of observations in the test sample.
+Then the out of sample or test means squared error is defined as the average
+squared prediction error, where we predict yk in the test sample by head beta xk.
+Where hat beta was computed on the training sample.
+The out of sample R squared is defined accordingly as 1- the ratio
+of the test MSE to the variation of the outcome in the test sample.
+So let us summarize.
+First we discussed the analysis of variance, in population and in the sample.
+Second, we define good measures of predictive performance,
+based on adjusted MSE and R squared, and based on data splitting.
+And next we will discuss a real application to predicting wages.

@@ -1,0 +1,119 @@
+In this segment,
+we'll discuss the quality of prediction that the modern methods provide.
+We begin by recalling that the best prediction rule, for
+outcome Y, using features or regressor Z,
+is the function g of Z equal to the conditional expectation of Y using Z.
+Modern regression methods, namely Lasso, Random Forest,
+Boosted Trees, Neural Networks, when appropriately tuned and
+under some regularity conditions, provide estimated prediction rules
+hat g (Z) that approximate the best prediction rule g(Z).
+Theoretical work demonstrates that under appropriate regularity conditions and
+with appropriate choices of tuning parameters, the mean squared approximation
+error can be small once the sample size n is sufficiently large.
+These results do rely on various structured assumptions, such as sparsity
+in the case of Lasso, and others to deliver these guarantees in modern,
+high dimensional settings where the number of features is large.
+From a practical standpoint, we expect that under these conditions, the sample
+MSE and R squared will tend to agree with the out-of-sample MSE and R squared.
+We can measure the out-of-sample performance empirically by performing data
+splitting, as we did in the classical linear regression.
+Recall that we use a random part of data, say half of data, for estimating or
+training the prediction rules.
+We use the other part of data to evaluate the predictive performance of the rule,
+recording the out-of-sample MSE, or R-squared.
+Accordingly, we call the first part of data the training sample, and
+the second part of data the testing or validation sample.
+Indeed, suppose use n observations for training and m for testing or validation.
+And let capital V denote the indices of observations in the test sample.
+Then the out-of-sample or test mean squared error is defined as the average
+squared prediction error, what will predict Yk in the test sample by hat
+g(Zk), where the prediction rule hat g was computed on the training sample.
+The out-of-sample R square is defined accordingly as 1 minus the ratio
+of the test MSE to the variation of the outcome in the test sample.
+We next illustrate the ideas using a dataset of 12,697 observation
+from the March Current Population Survey Supplement 2015.
+In this data set, the outcome observations, Yi's, are log wages of
+never-married workers living in the United States, and the feature Zi's consist of
+a variety of worker characteristics, including experience, race, education,
+23 industry and 22 occupation indicators, and some other characteristics.
+We will estimate or
+train two sets of prediction rules, linear and non-linear models.
+In linear models, we estimate the prediction rule of the form
+hat g(Z) equals hat beta prime X, with X generated in two ways.
+In the basic model, X consists of 72 raw regressors Z and a constant.
+In the flexible model, X consists of 2336 constructive regressors,
+which includes the lower regressor Z, four polynomials in experience and
+all two-way interactions of these regressors.
+We estimate hat beta by linear regression or least squares and
+by penalized regression methods.
+Namely Lasso, Post-Lasso, Cross-Validated Lasso, Ridge, and Elastic Nets.
+In nonlinear models, we estimate the prediction rule of the form hat g(Z).
+We estimate them by Random Forest, Regression Trees, Boosted Trees, and
+Neural Network.
+We present the results in the table that you see.
+We report the results for
+a single equal spread of data to the training and testing part.
+The table shows the test MSE in column one as well as the standard error for
+the MSE in column two, and the test R-squared in column three.
+We see that the prediction rule produced by Random Forest performs the best here,
+giving the lowest out-of-sample, or test MSE and the highest test R squared.
+Other methods, for example,
+Lasso, Cross-Validated Elastic Net, Boosted Trees, perform nearly as well.
+They all perform similarly with the test MSEs being within
+one standard error of each other.
+Remarkably the simple classical OLS on a simple model
+with 72 regressors performs extremely well, almost as well as Random Forest.
+Since the performance of OLS done on a simple model
+is statistically indistinguishable from the performance of the Random Forest,
+we may choose this method to be the winner here.
+Other the hand, classical OLS done on a flexible model with
+2335 regressors performs very poorly.
+It provides a prediction rule that is very noisy and imprecise.
+Penalized regression methods on the flexible model such as VASA,
+do much better because they are able to reduce the imprecision,
+while leveraging the low approximation error of the flexible model.
+Pruned regression tress and simple neural networks (with a small number of neurons)
+don't perform well here.
+This is because these methods provide an approximation to the best prediction rule
+that is too crude, resulting in too much bias relative to other methods.
+Given the results presented,
+we can choose one of the best performing prediction rules.
+For example, we can select the prediction rule generated by least squares on
+the simple model, or the prediction rule generated by Lasso on the flexible model,
+or the prediction rule generated by the random forest.
+We can also consider aggregations or
+ensembles of prediction rules, which combine several prediction rules into one.
+Specifically, we can consider the aggregated prediction rule of the form
+tilde-g(Z) = sum over k running from 1 to K of tilde alpha k hat gk(Z).
+Where hat gk is our prediction rules obtained using the training data,
+including possibly a constant, and tilde alpha ks are the coefficient
+assigned to the different prediction rules.
+We can build K prediction rules from the training data.
+We can figure out the aggregation coefficients,
+tilde alpha ks, using the test validation data.
+If the number of prediction rules, K, is small,
+we can figure out the aggregation coefficients using test data by simply
+running least squares of outcomes on predicted values in the test sample.
+Where we minimize the sum of squared prediction errors on predicting Yi
+by the linear combination of prediction rules in the test sample.
+If K is large we can do the Lasso aggregation instead,
+where we minimize the sum of squared prediction errors of predicting Yi
+by the linear combination of prediction rules in the test sample
+plus a penalty term which penalizes the size of the coefficients.
+Let's illustrate this idea in our case study.
+Here we consider aggregating prediction rules based on past Lasso, Elastic Net,
+Random Forest, Boosted Trees, and Neural Network.
+We estimated the aggregation coefficients using Least Squares and Lasso.
+From the estimated coefficients reported in this table,
+we see that most of the weight goes to the prediction rules generated
+by Least Squares on a simple model and by the Random Forest.
+Other prediction rules receive considerably less weight.
+Moreover, the adjusted R squared for the test sample gets improved from 35%
+obtained by the Random Forest to about 36.5% obtained by the aggregated method.
+So let us summarize.
+We discussed the assessment of predictive performance of modern linear and
+non-linear regression methods using splitting of data into training and
+testing samples.
+The results could be used to pick the best prediction rule or to aggregate
+prediction rules into an ensemble rule which can result in some improvements.
+We illustrated these ideas using recent wage data.

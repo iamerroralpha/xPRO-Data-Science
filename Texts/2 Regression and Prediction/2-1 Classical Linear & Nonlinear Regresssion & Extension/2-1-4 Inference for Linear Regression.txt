@@ -1,0 +1,98 @@
+In this segment, we provide an answer to the inference question.
+To recall the question, we partition vector of regressors X into D and
+W, where D represents the target regressors of interest, and
+W represents other regressors, which we sometimes call the controls.
+We write Y = the predicted value which is beta 1D + beta 2W plus noise.
+And now we recall the inference question.
+Which is how does the predicted value of Y change if we increase D
+by a unit holding W fixed?
+For instance,
+in the wage example, the inference question can be stated as follows.
+What is the difference in the predicted wage for a man and
+woman with the same job-relevant characteristics?
+The answer to this question is the population regression coefficient beta 1
+corresponding to the target regressor D.
+In the wage example, D is the female indicator and
+beta 1 is called the gender wage gap.
+Next we attempt to understand better the meaning of beta 1
+using a tool called partialling-out.
+In the population, we define the partialling-out operation
+as a procedure that takes a random variable V and creates a residual to the V
+by subtracting the part of V that is linearly predicted by W.
+So we can write tilde V as V- gamma V where gamma indexed by
+vw solves the problem of best linear prediction of V using W.
+Here we use notation argument that does not solution of the minimization problem.
+It can be shown that the partialling-out operation is linear.
+So if we have Y = V + U, then tilde Y = tilde V + tilde U.
+We now apply partialling-out to both sides of our regression equation
+to get the partialled-out version which implies that we obtain the decomposition
+which reads tilde Y = beta 1 tilde D + epsilon,
+where epsilon is uncorrelated with tilde D.
+This decomposition follows because partialling out eliminates all the Ws,
+and also leaves epsilon untouched, since epsilon is linearly unpredictable by X,
+and therefore by W by definition.
+Moreover, since tilde D is a linear function of X, epsilon and
+tilde D are not correlated in our decomposition.
+Now recognize our decomposition as the normal equations for
+the population regression of tilde Y and tilde D.
+That is, we've just obtained the Frisch-Waugh-Lovell theorem,
+which states that the population linear regression coefficient beta 1 can be
+recovered from the population linear regression of tilde Y on tilde D.
+Beta 1 is a solution to the best linear prediction problem,
+where we predict tilde Y by a linear function of tilde D.
+We can also give an explicit formula for beta 1,
+which is given by the ratio of two averages that you see in this formula.
+We also see that beta 1 is uniquely defined
+if D is not perfectly predicted by the Ws.
+So the tilde D has a non-zero variance.
+The Frisch-Waugh-Lovell theorem is a remarkable fact which is useful for
+both interpretation and estimation.
+It asserts that beta 1 can be interpreted as a regression coefficient
+of residualized Y on residualized D, where the residuals are defined by taking out or
+partialling-out the linear effect of W from Y and D.
+We next proceed to discuss estimation of beta 1.
+In the sample, we will mimic the partialling-out in the population.
+When p over n is small we can rely on the sample linear regression,
+that is on ordinary in these squares.
+When p over n is not small using sample linear regression for
+partialling-out is not a good idea.
+What we can do instead is do penalized regression or
+variables selection, which we will discuss later in this module.
+So let us assume that p over n is small.
+So it is appropriate to use the sample linear regression for partialling-out.
+Of course, by the Frisch–Waugh–Lovell theorem applied to the sample instead of
+the population, the sample linear regression of Y on D and
+W gives us an estimator hat beta 1, which is numerically equivalent
+to the estimator obtained via sample partialling-out.
+It is still useful to give the formula for hat beta 1 in terms of
+sample partialling-out where we use checked quantities to denote the residuals
+that are left after predicting the variables in the sample with the controls.
+The population partialling-out is replaced here by the sample partialling-out
+where V replace the population expectation by the empirical expectation.
+Using the formula, it can be shown that the following results calls.
+If p over n is small, then the estimation error in the estimated
+residualized quantities has a negligible effect on hat beta 1, and
+hat beta 1 is approximately distributed as normal variable with mean beta 1 and
+variance V over n where the expression of the variance appears over here.
+In words, we can say that the estimator hat beta 1 concentrates in a square root
+of V over n neighborhood of beta 1 with deviations controlled by the normal law.
+We can now define the standard error for
+hat beta 1 as square root of hat V over n, where hat V is an estimator of V.
+This result implies that the interval given by the estimate +- 2 standard
+errors covers the true value of beta 1, for most realizations of the data sample.
+Or more precisely approximately 95% of realizations of the data sample.
+If we replace 2 by other constants, we get other coverage probabilities.
+In other words,
+if our data sample is not extremely unusual, the interval covers the truth.
+For this reason, this interval is called the confidence interval.
+For example, in the wage example,
+our estimate of gender hourly wage gap is about -2$ and
+then 95% confidence interval is about -1$ to -3$.
+Let us summarize, first we interpreted beta 1 as the regression
+coefficient in the univariate regression of the response variable and
+the target variable, after we have removed the linear effect of other variables.
+Second, we noted that this result is useful for interpretation and
+understanding of the regression coefficient.
+This result will also be super useful for setting up inference in modern
+high-dimensional settings which we will discussed later in this module.
+And next, we will carry out a case study for our wage example.

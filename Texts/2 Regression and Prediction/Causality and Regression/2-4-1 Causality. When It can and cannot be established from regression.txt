@@ -1,0 +1,115 @@
+In the previous lectures, we learned about the classical and
+modern regression methods and their uses for prediction and inference.
+This segment is about the use of regression to infer causal relations and
+answer causal questions.
+The causal questions are important and they arise in many real-world problems,
+especially in determining the efficacy of medical treatments, social programs and
+government policies, and in business applications.
+For example, does a particular drug cure an illness?
+Or, do more lenient gun laws increase murder rates and other types of crime?
+Or, does the introduction of a new product raise profits of a company?
+We begin by noting that regression uncovers correlation or
+association between outcome variables and regressors.
+However, correlation or association
+does not necessarily imply a causal relation unless certain assumptions hold.
+The association between outcome variable Y and a regressor D formally means that D
+predicts Y, namely the coefficient in the linear regression of Y when D is not zero,
+or that, more generally, conditional expectation of Y given D is not constant.
+This is what the regression analysis gives us.
+So why doesn't association between Y and D necessarily imply that D causes Y?
+Here is a contrived example.
+Suppose we conduct an observational study on people's us of pain-killers and pain.
+We record the outcome variable Y, which is whether a person is in pain, and
+a regressor variable D,
+which is whether the person has taken a pain-killer medicine.
+It's likely that people will take these pills when they are in fact in pain and so
+we are likely to find that D indeed predicts Y so
+that the regression coefficient of Y on D is positive.
+Y and D are associated but D does not cause Y as we know from the clinical
+trials in medicine that establish that pain killers actually work to remove pain.
+An ideal way to establish a causal relation from the regression analysis is
+to rely on data from a randomized control trial.
+And in the mass control trials we have the so called random assignment or.
+Remember the treatment variable T is a sign or
+generic D that is independent of specific outcomes.
+Specifically in randomized control trials or
+experiments we have a group of treated participants and the untreated ones.
+The letter called the control group, and there are no systematic differences
+between the two groups when the trial starts.
+After the trial is completed, we record the outcomes of interest for
+participants in the two groups, and carry out the regression analysis to estimate
+the regression equation Y = alpha + beta D + u.
+Here the regression coefficient beta D measures the causal input, or
+the treatment, on average outcomes.
+And so beta is called the average treatment effect.
+Under random assignment we don't need to use any additional regressors or controls.
+However we may use additional controls to improve the precision of estimating
+the average treatment effect better.
+This is called the Co variate adjustment method.
+Specifically we may set up a linear or partially linear model
+Y equals beta G plus G of zed plus epsilon and carry out inference variable using
+the inference methods that we have learned in this module.
+The randomized control trials represent the golden standard in proving that
+medical treatments and social programs work, and for
+this reason they are very widely used in medicine and in policy analysis.
+And randomized control trials are also widely used in business applications,
+under the name of AIB testing.
+To evaluate whether new products and services raise profits.
+But if we don't have access to the data from the randomized controlled trials.
+What if we work a data set that is pure observation.
+Under what conditions can we claim that we've established a causal relationship.
+A sufficient condition is that D, variable of interest is generated as if randomly
+assigned, conditional on the set of control Z.
+This is called the conditional random assignment, or conditional exogeneity.
+There is condition on Z,
+variation in D is as if it were generated through some experiment.
+As in a randomized control trial.
+In this case, we can also apply the partial linear regression model,
+Y = beta D + g(Z) + epsilon, and
+beta D indeed measures the causal effect of D on average outcome controlling for Z.
+We then apply the inference method that we have learned to beta, and
+construct confidence intervals.
+One note that we would like to make here is that under conditional random
+assignment, or conditional unlike under pure random assignment, controls must
+be included to ensure that we measure the causal effect and not something else.
+Under pure random assignment, we do measure the causal effect and
+not something else whether or not we include the controls.
+So on the conditional random assignment or
+conditional exogeneity, regression doesn't cover causal effects.
+For example,
+recall our case study of the impact of gun ownership on predicted gun homicide rates.
+We did find that there that increases in gun ownership rates lead
+to higher predicted gun homicide rates, after controlling for
+the demographic and economic characteristics of various counties.
+If we believe that the variation in gun ownership rates across counties
+was as good as randomly assigned, after controlling for these characteristics,
+then we should conclude that the predictive effect is a causal effect.
+If we don't believe that this variation is as good as randomly assigned,
+even after controlling for all these characteristics, then we shouldn't
+conclude that the predictive effect we've found Is a causal effect.
+Similarly, in another case study,
+we studied the impact of being female on the predicted wage.
+We did find that females get paid on average two dollars less per hour
+than men, controlling for education, experience, and geographical location.
+If we believe that the variation of gender conditional on these controls
+is as good as randomly assigned, then we should conclude that the predictive
+effect is a causal effect, which is the discrimination effect in this context.
+However, if we don't believe that this variation is as good as randomly assigned,
+then we should not claim that this effect is due to discrimination.
+As you can see, making causal claims from the observational data is difficult and
+the success really depends on being convincing at persuading ourselves and
+others that the assumption of conditional random assignment or
+conditional exogeneity holds here, the burden of persuasion lies entirely on
+the data scientist, if indeed she or he is willing to make the causal claim.
+I would like to conclude this module with some parting remarks.
+In this module we studied the use of the classical and modern linear and non-linear
+regression for purposes of prediction and inference, including causal inference.
+The material in this module is very difficult and
+if you've managed to navigate through it you have done extremely well.
+If you are interested in having additional reading and
+in replicating the case studies yourself, I have the following materials for you.
+First I have a complete set of slides.
+That accompany the video lectures.
+And second, I have data sets and programs written in R that carry out the studies.
+I encourage you to check and try those out.
+With this, let me say goodbye, and wish you luck in your data science adventures.

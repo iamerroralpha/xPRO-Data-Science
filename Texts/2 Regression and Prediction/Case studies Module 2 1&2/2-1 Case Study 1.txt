@@ -1,0 +1,57 @@
+In this segment, we will examine a real example where
+we will predict worker's wages using a linear combination of characteristics.
+And we will assess the predictive performance of our prediction rules
+using the adjusted MSE and R squared, as well as out of sample MSE and R squared.
+Our data for this example comes from the March supplement of U.S.
+Current Population Survey for the year 2012.
+We focus on the single workers with education level equal to high school,
+some college, or college graduates.
+The sample size is about 4,000.
+Our outcome variable Y is hourly wage.
+And our X are various characteristics of workers,
+such as gender, experience, education, and geographical indicators.
+The following table shows some descriptive statistics.
+From the table, we see that the average wage is about $15 per hour.
+42% of workers are women.
+Average experience is 13 years.
+38% of college graduates, 32% have done some college work, and
+30% hold only high school diploma.
+You can also see geographical distribution of workers across major geographical
+regions of the United States.
+We consider two predictive models, Basic and Flexible.
+In the Basic Model, X consists of the female indicator D, and
+other controls W, which include the constant,
+experience, experience squared, experience cubed, education, and regional indicators.
+The basic model has 10 regressors in total.
+In the flexible model, regressors consist of all the regressors in the basic model,
+plus, their two-way interactions or products.
+An example of a regressor created by a two-way interaction
+is the experience variable times the indicator of having a college degree.
+Another example is indicator of having a high school diploma times
+the indicator of working in the Northeast region.
+The flexible model has 33 regressors.
+Given that P over N is quite small here, the sample linear
+regression should approximate the population linear regression quite well.
+Accordingly, we expect the sample R squared to agree with adjusted R squared,
+and they should both provide a good measure of out-of-sample performance.
+The following table shows the results for the basic and
+the flexible linear regressions.
+The sample and adjusted R squared close to each other for
+both basic and flexible models.
+We also see that the predictive performance of the basic and
+flexible regression models is quite similar with adjusted MSEs and
+R squared not being very different from each other.
+The flexible model is performing just a tiny bit better,
+having slightly higher adjusted R squared and slightly lower adjusted MSE.
+Next, we deport the out of sample predicted performance measured by the test
+MSE and test R squared.
+Here, we report the results for of the data into the training and testing sample.
+The numbers reported actually vary across different data splits, so
+it is a good idea to average the results over several data splits.
+By looking at the results for several splits,
+we can conclude that the basic and flexible models perform about the same.
+In this segment, using a real example,
+we have assessed predictive performance of two linear prediction rules.
+They both performed similarly,
+with the flexible rule performing slightly better out of sample.
+Next, we will proceed to discuss the Inference Problem.

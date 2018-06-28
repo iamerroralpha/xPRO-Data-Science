@@ -1,0 +1,45 @@
+Hi, I'm Victor Chernozhukov, professor in the Department of Economics and Center for
+Statistics at MIT.
+My research in teaching for this econometrics and
+mathematical statistics was much of recent efforts
+due added to the use of machine learning methods for causal Inference.
+In this module, we will discuss regression in classical and modern versions.
+Regression analysis is about discovering correlations between the outcome,
+y and the set of regressors x, which sometimes are also called features.
+In this module, y is always the real random variable and
+x is the vector of random variables, with components denoted by X1 through Xp.
+Where we always assume that a concept of one is included as one of the components.
+We denote the transpose of a vector by the prime sign.
+For example, suppose our y is hourly wage which varies across workers, and
+x is the retro regressors which include variables that measure education,
+experience gender, and other job relevant characteristics.
+When we are interested in the effect of a particular component of x and
+y, we show partition axis for D and W, where D will be the target regressor and
+W will be called the controls of components.
+The purpose of the regression analysis is to characterize the statistical
+relation y to x.
+Namely, we want to answer two question.
+Question one, or the prediction question.
+How can we use x to predict y well?
+Question two, or the inference question.
+How does the predicted value of y change if we change a component of x,
+holding the rest of the components of x fixed?
+In our wage example,
+the predictions questions becomes how to use job relevant characteristics,
+such as education, experience, gender and others, to best predict the wage?
+An inference question becomes for example, how gender affects the predicted wage?
+This allows us to uncover gender discrimination if it exists.
+In this module, we will discuss classical and
+modern regression tools that answer these two questions.
+We'll now give a preview of some of the empirical findings from a case
+study in which we will examine our wage example
+using data from the US current population survey in 2012 for single workers.
+We will address the two questions post.
+Number one, we will construct a prediction rule for
+a hourly wage which depends on the job relevant characteristics linearly.
+We will assess the quality of the prediction rule
+using our sample prediction performance.
+Number two, we will find that an average women get about $2 less an hourly wage
+than men with the same experience and other recorded characteristics.
+This is called the gender wage gap in labor economics and
+measures in part gender paid discrimination
