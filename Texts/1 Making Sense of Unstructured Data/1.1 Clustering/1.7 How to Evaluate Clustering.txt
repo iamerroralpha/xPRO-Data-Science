@@ -1,0 +1,148 @@
+
+Welcome back.
+In the previous video, we define the K-means clustering problem
+and described an algorithm that you
+might use to get a solution to the K-means clustering problem.
+This algorithm is often called the K-means algorithm,
+or Lloyd's algorithm.
+Now that we have a clustering algorithm in hand,
+we have to think about how to evaluate its output.
+Our discussion won't be specific to the K-means algorithm.
+But that's certainly one of many cases
+where we want to know how good our output is.
+Before we talk about how to evaluate a clustering of data,
+let's think back to the supervised learning
+problem of classification.
+In this case, we're given a set of data with labels.
+And we want to predict the labels for some new data.
+For classification, evaluation is straightforward
+if we have enough data.
+We typically set aside some data where we know the labels.
+The data points we feed to the algorithm,
+together with their labels, will typically be called
+the training data.
+The data points we set aside for evaluation purposes are often
+called the test data.
+We use our classification algorithm
+to predict the labels on the test data
+and compare to the true labels.
+Then, we have an absolute universal scale.
+What percentage of the test data points
+did the algorithm get right?
+We can easily compare other algorithms.
+A better algorithm gets more labels right.
+But we can also see whether an algorithm on its own is good
+or not.
+Did the algorithm get a suitable proportion of the labels
+correct?
+Sometimes in clustering one may have access to a ground truth
+clustering of the data.
+In the archeology example, perhaps in some cases,
+the artifact clusters were known.
+So we can compare to the known clusters.
+Or perhaps someone was paid to cluster some images
+into segments by hand.
+It's still not quite as easy to evaluate the clustering
+as a classification would be since any permutation
+of the labels leads to an equally good clustering.
+The only thing that defines the clustering
+is whether two data points belong to the same cluster
+or to different clusters.
+Measurements like the Rand Index and Adjusted Rand Index
+help us measure whether the clustering found
+by our algorithm really captures the information in the ground
+truth clustering.
+They do so by counting the pairs of data points
+that belong to the same or different clusters
+according to the algorithm and the same or different clusters
+according to the ground truth.
+Then they normalize appropriately.
+Measures like the Rand Index are called external evaluations
+because they require outside information about a ground
+truth clustering.
+The problem of evaluation is typically
+even trickier in clustering.
+Because there's rarely any ground truth information
+that we can use for testing.
+If we already knew the clustering, we'd be done.
+So how do we evaluate whether a clustering is good
+or whether one clustering is better than another?
+You might think, well, we can check
+what the value of the K-means objective function
+is across different clusters.
+This will let us compare two clusterings.
+But it doesn't tell us whether a particular clustering
+is good or not on its own.
+It also might not capture exactly the patterns
+we're really trying to find in the data
+as we'll see later in this video as well as in future videos.
+So how do we evaluate whether a clustering is good?
+The short answer is, no one agrees.
+But the longer answer is that researchers have developed
+a number of useful heuristics.
+The first, and perhaps most useful observation,
+is that we are often trying to find
+some particular meaningful latent pattern
+in our data via clustering.
+Since we have a conception of what that pattern is already,
+we might be able to check if we found it by visualizing
+the results of the clustering.
+For instance, when we saw the archeology data,
+it was obvious what the cluster should be. ,
+Similarly consider again the image segmentation example.
+We would like our clustering to distinguish
+the three different types of objects in the image.
+And we can easily check this by visualizing
+the clustering of pixels.
+Or consider the topic modeling example
+where we clustered words together.
+We can list out the clusters of words and ask ourselves,
+do these words go together?
+Do they form a cohesive topic?
+Or are they words that don't really
+have a meaningful association?
+Another option is to use special tools for visualization
+like the GGOBI tool.
+We might have a data set where D, the dimension,
+is much higher than two.
+For instance, we might have collected data
+on a large number of different health metrics,
+like age, daily calories consumed, daily water consumed,
+weekly alcohol consumption, weekly miles driven,
+weekly exercise and minutes and so on.
+But this data isn't an image or a text data set.
+So it might be hard to plot meaningful pictures
+of the data.
+Tools like GGOBI help us find meaningful visualizations
+of high dimensional data for evaluating the clustering.
+While these methods are often more
+qualitative than quantitative on their own,
+they can be made more quantitative
+by incorporating some form of crowdsourcing.
+For instance Amazon Mechanical Turk workers
+could be asked to weigh in on the quality of the clustering.
+But even with the help of Amazon Mechanical Turk,
+or other crowdsourcing platforms,
+human evaluation can be expensive in terms
+of both time and money.
+So it's worth considering other automated forms of evaluation.
+By contrast to external evaluations,
+there are a number of measures for internal evaluation
+that depend only on the data at hand.
+The basic idea of these measures is typically to make sure
+that data within a cluster are relatively close to each other
+and data in different clusters are relatively far
+from each other.
+An example of this is the silhouette coefficient.
+Another example is to split the data set into two data
+sets applying clustering to each and comparing
+the clusterings found across the two sub data sets.
+There are also a number of measures for evaluation
+that are specific to a certain domain or application.
+In this video, we've discussed some of the ways
+to evaluate the output of the K-means algorithm
+and clustering algorithms more generally.
+So what if I evaluate my output and I'm not totally satisfied?
+What are some potential problems with the K-means algorithm
+and how can it be improved?
+We'll answer these questions in the next few videos.

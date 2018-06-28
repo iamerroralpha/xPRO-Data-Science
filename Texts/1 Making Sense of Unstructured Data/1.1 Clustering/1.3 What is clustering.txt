@@ -1,0 +1,127 @@
+Hi, and welcome to the sub-module on clustering.
+So far in this module on unsupervised learning, we've introduced the concept
+of an unsupervised learning problem in data analysis.
+We learned that unsupervised learning means finding hidden patterns in data when
+we aren't given any labels.
+We saw in the previous videos that there are a lot of different problems that
+we can solve with unsupervised learning.
+But there's one special problem that stands out over decades now as being
+the most popular version of unsupervised learning.
+And this problem is called clustering.
+What is clustering?
+In clustering, our goal is to group data according to similarity.
+Let's examine each of these three key words, group, data, and
+similarity in more detail to find out what clustering is really about.
+Let's start with data.
+Imagine that I'm leading an archaeological dig.
+And every time someone on my team unearths an artifact,
+I have them record the position of the artifact.
+In particular, I can put down some marker near the archeological site.
+And we can record how far north and
+how far east each artifact was found relative to my marker.
+This is the artifact location.
+The location for one artifact will be a data point for us.
+When I list all of the location of the different artifacts that's my data set.
+Maybe I have some colleagues who are historians.
+I consult with them before my archaeological dig, and
+they tell me that three families lived in the area that we're exploring.
+I bet you're already able to identify where the three families live, and
+which artifacts belong to which family.
+Let's slow down this process to understand what you're implicitly doing.
+First, there's a notion of similarity here.
+In this archaeology example, we say that two artifacts are similar, or
+close, if they are close in physical distance.
+In other words, if they are close in distances the crow flies.
+For instance, these two artifacts are relatively close.
+The distance between them is the length of this line.
+And these two artifacts are relatively far.
+The distance between them is clearly much larger.
+Second, when you think of where the three families live,
+you're grouping the data according to this distance.
+You're assigning each data point to one, and only one, family group.
+So that data points that are physically close, tend to belong to the same group.
+That is, you're grouping together similar data points.
+When we assign each datapoint to one, and
+only one group like this, we call the groups clusters.
+Here there are three clusters, one for each family.
+Clustering them is the unsupervised learning problem where you take your
+data and assign each data point to exactly one group, or cluster.
+And, of course, we want these clusters to be meaningful.
+We want them to give us some interesting insight into our data set.
+In this example, we imagine the clusters correspond to three
+different families who used to live in the area.
+The data points in any cluster are pottery shards or other items that we believe
+a single family discarded when they lived at this spot.
+Identifying the items that we think belong to one family will let us perform
+further scientific, or anthropological, or historical analysis of the artifacts.
+Now remember, in an earlier video we discussed the difference between
+supervised and unsupervised learning problems.
+There's a supervised learning problem that is somewhat similar to, but
+not the same as, clustering.
+That problem is called classification.
+In classification, like in supervised learning in general, we're given labels.
+For instance, consider our archeology example.
+If we were running classification on this data, we might not only know that there
+are three families, but we might know their names as well.
+Maybe the names are Lannister, Stark, and Targaryen.
+Classification is what we called our supervised learning problem
+when the labels are categorical.
+Remember, this means that the labels had no order,
+like the family names I just mentioned.
+Now, let's go back to our archaeology example.
+If we had a classification problem here,
+we'd have been given a bunch of data points with labels.
+For instance, you might imagine each family actually made a lot of pots
+with a sigil, or other identifying mark.
+Then our goal would be to find labels for any remaining unlabeled artifacts.
+That is, our goal will be to predict labels for
+new data points given the labels at all data points.
+By contrasting clustering, we don't know the families or their names.
+We might know that there are three families.
+But we don't know anything at all beyond that number.
+And none of our artifacts come with labels.
+We have to discover how to group the artifacts from their locations alone.
+Labels may be hard to come by for various reasons.
+In the archeology example, we just might not be lucky enough for families from
+thousands of years ago to have carefully labeled their pottery for our benefit.
+On the plus side, clustering let's us find hidden groupings in data
+even when we can't run classification.
+But just as we saw when we compared supervised and unsupervised learning,
+clustering can be a more difficult undertaking than classification,
+since we don't have the information contained in the labels.
+You might be thinking to yourself at this point, well,
+that archaeology problem was easy.
+I could find the clusters myself.
+Why did I need a computer to do it?
+But it's not always so easy.
+Here we have two dimensions to each data point, the distance north and
+the distance east.
+Often, we are dealing with much higher dimensional data.
+In this case, we can't just make a picture of our data and look at it.
+Also, in the archeology example, we could plot each data point and
+look at them all at once.
+Well, you'll notice we had a lot less than a hundred data points in this example.
+If we had billions of data points, it wouldn't be so
+easy to visualize what's going on.
+Also, in this case, our data was numerical, each location was a number.
+That made it easy to make a picture and
+easy to see the distance between two points.
+But sometimes, our data isn't numerical.
+It might take the form of words, or pictures, or genomes or
+something else entirely.
+And again, it isn't so
+easy to immediately see the hidden patterns in these types of data.
+But it will turn out that we can still get a lot of information from clustering.
+Finally, you might have hundreds or
+thousands of different data sets that need clustering.
+In this case, you simply don't have the time to find and
+write down all the clusters by yourself.
+It would be better to automate the process.
+In the remainder of this sub-module,
+we'll talk more about why clustering is both an important and a difficult problem.
+We'll see many more practical examples of clustering.
+We'll learn algorithms that let you find clusterings
+hidden in data in an automated way.
+We'll talk about why clustering has been so popular for so long.
+But we'll also talk about the limitations of clustering, and
+why you might be interested in other types of unsupervised learning problems as well.

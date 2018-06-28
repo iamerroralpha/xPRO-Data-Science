@@ -1,0 +1,101 @@
+As we have seen, graph clustering can be useful to understand community structure
+in a large network.
+But how do we compute that?
+What is important here is the global connectivity structure of the graph.
+To capture that connectivity structure, we will see that,
+once more, eigenvectors can be really useful.
+They encode an impressive amount of information about
+the structure of the graph.
+We almost just need to read it out to find the clusters.
+The resulting methods are called spectral methods, and more more precisely,
+spectral clustering.
+The spectrum of a matrix is the set of its eigenvalues.
+We've seen eigenvectors for PCA, but what is the matrix for
+a graph that gives us the magic eigenvectors?
+The matrix is the so called Laplacian of the graph.
+Let's construct it step by step to see what it is.
+Here's an example graph for illustration.
+We number the nodes one through n.
+For a graph with n nodes, the Laplacian is an n by n matrix.
+It has one row and one column for each node.
+The entry in row i and
+column j corresponds to a potential edge between nodes i and j.
+If there's an edge, the entry is -1, otherwise it's 0.
+The entries on the diagonal are the degrees of the nodes.
+The degree of a node is the number of edges that it meets.
+Often this Laplacian is normalized by appropriately dividing by the degrees or
+the square root of the degrees.
+One can also define all of that for graphs.
+Now what is so special about this matrix?
+We'll see.
+Let's have a look at the eigenvectors of the Laplacian.
+Remember, each eigenvector comes with an eigenvalue.
+We'll sort them by the eigenvalues in increasing order.
+We will be interested in the largest and the smallest one.
+The smallest Eigen value is always 0.
+In fact, here's our first structural relation.
+The number of 0 eigenvalues is exactly the number of disconnected parts of the graph.
+These parts are called connected components.
+For example, this graph has three connected components and this one has one.
+Let's assume our graph is one component and let's have a look at the eigenvectors.
+The eigenvector for eigenvalue 0 is the all once vector.
+That's the same for all graphs, and hence pretty uninteresting.
+So let's go on to the second smallest eigenvalue and vector.
+Each item vector has n entries, one for each node in the graph.
+Here are two graphs, and we color code the notes by the value in the item vector.
+Now this is interesting.
+The values in the eigenvector reflect the graph's vector.
+Close by nodes have similar colors.
+In fact, we could find a threshold to partition the nodes.
+All nodes with values above the threshold go in one group and
+all others in the other group.
+If we do this here, we actually find a meaningful clustering in the graph.
+This eigenvector has a lot of good information for us.
+What about others?
+The nest few eigenvectors complement that information.
+Here's a graph with four natural clusters.
+Our second eigenvector partitions this nicely into two groups,
+each consisting of two clusters.
+The color coding for the third eigenvector also reflects clusters in the graph, but
+partitions the graph differently.
+If we take this information for
+both eigenvectors together, we can easily find all four clusters.
+This seems extremely useful.
+The eigenvector is kept to the graph structure.
+In fact, they gave us more.
+Remember, our nodes do not have feature vectors.
+Now, we can give each node one feature value from each eigenvector and
+we suddenly have vectors.
+These new features are called an embedding.
+PCI also gave an embedding.
+For PCI, we use the vectors with the largest eigenvalues.
+Here, the smallest ones will be important.
+What do these features mean?
+Just like we plotted the fetus from PCA, let's take the second and
+third smallest eigenvectors and use them as coordinates for the nodes.
+Here's what this looks like.
+Nodes that are connected are positioned close by on the plane.
+Our embedding here wants to minimize the stretch of the edges.
+And clusters in the graph become clusters in 2D.
+So far, we've used the eigenvectors with lowest eigenvalues.
+What about the ones with the largest eigenvalues?
+Here is what happens if we use these as an embedding.
+They have the opposite effect.
+They maximize the stretch of the edges.
+Nodes that are connected are placed far away on the plane.
+This is the same graph, but looks so different.
+Is there an explanation?
+In fact, the eigenvectors minimize or maximize a different score.
+Remember, each node gets a value.
+For each edge, we take the difference of the adjacent node values and square that.
+We do this for all edges and sum it up.
+The eigenvectors with small eigenvalues minimize these differences.
+They give similar values to connected nodes.
+And the difference can be viewed as the stretch of the edge.
+The eigenvectors with large eigenvalues maximize the difference,
+they get very different values to connect the nodes.
+Overall, we see that the eigenvectors and
+eigenvalues contain a lot of valuable information about the graph structure,
+as we may suspect now, they are very useful for clustering.
+In fact, they contain even more information about the number of paths
+between any two nodes or about the importance of nodes and edges.

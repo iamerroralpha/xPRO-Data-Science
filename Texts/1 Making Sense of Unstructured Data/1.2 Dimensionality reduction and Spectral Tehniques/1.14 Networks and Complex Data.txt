@@ -1,0 +1,77 @@
+In the past few sections, we have already seen many interesting and
+very useful methods to find grouping structure in data.
+For example, the k-means algorithm.
+In the next few sections,
+we’ll see other very interesting tools that tell us a whole lot about our data.
+In particular, some of these work even if you can't apply k-means.
+So, let's quickly recap a few things.
+For clustering and many other tasks, our data comes in form of data points.
+Each data point is a feature vector.
+You can think of it as a string of numbers and each number describes a feature.
+For example, in the introductory email example, each email is a data point.
+It is described by the words it contains.
+So, we have a huge vector and each entry in this vector corresponds to a word.
+The number for each word means how often this word occurs in the email.
+With such representations, we can use k-means, but
+then we are not always so lucky.
+Let's think about some examples.
+The feature vectors can contain too much useless information or noise.
+We may not have such vectors at all.
+In such cases, we may be able to construct new features from whatever we had.
+Sounds weird?
+Well, soon, we will see how to do that.
+First, let's look at some examples.
+Data can contain a lot of measurements.
+That is each data point is a huge feature vector with many entries.
+Think of a person being a data point and the descriptions,
+the variation in the person's genome.
+That can be a lot or think of a collection of images that are face portraits.
+Each image is a data point and is described by a few hundred thousand
+pixels, but then some pixels will be more meaningful than others.
+If you look at the upper right corner of face board read images that is most
+likely going to be not so relevant, it is constant or
+varies randomly across images since it's background.
+So, there's not a whole lot of information.
+The important information is how the images deviate in the major way from some
+average image.
+For example, there will be variations in here.
+Glasses, beard and so on.
+These major access of variations are what captures that data in a more meaningful
+way and maybe there are actually matched your axis and pixels.
+Why?
+Some groups of pixels tend to vary together,
+because they belong to some subregions like eye brows and chin.
+These few trends can help compress the data.
+Similarly, user ratings can be much more easily understood with patterns.
+My ratings for movie can be understood more easily,
+if you know that I like comedies or action movies.
+Finding and recognizing such patterns can help reduce the complexity in the data
+to reduce noise, and bring out important trends, and also to compress it.
+We will see some important methods for finding such patterns and
+then sometimes we do not even have feature vectors.
+Think back about the social network of monks that Sampson recorded back in
+the 60s.
+The monks are our data points and we want to find groups of friends among them.
+Similarly, of course, for much larger networks like Facebook.
+Can we use k-means to find groups here?
+It's going to be hard.
+We don't have any feature vectors.
+All we know is who talks to whom.
+So, we have placed the monks and we have relationships who talks to whom.
+This gives us a graph.
+We can draw all the monks on paper and draw lines between those who talk.
+The structure of points and lines is a graph.
+The lines are called edges.
+This graph tells us a whole lot about the patterns in our data.
+Groups of friends will have lots of edges between them and
+between such groups, there are not many edges.
+We will see how a little bit of math will magically find us the groups in the graph.
+In fact, for all of the problems I mentioned on a high-level,
+the same approach will work.
+We are going to create new features that represent our data point.
+These new features reveal a lot about the hidden structure in the data.
+Each data point can be represented by those new features.
+Where do they come from?
+We construct them by looking at the entire data.
+Sounds like magic?
+We will soon see how the magic works.

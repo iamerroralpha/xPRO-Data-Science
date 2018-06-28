@@ -1,0 +1,111 @@
+
+We will now look at one of the most widely used methods
+for finding major patterns in data, principal component
+analysis, or PCA.
+It is most often used when each data point contains
+a lot of measurements, and not all of those may be meaningful,
+or there's a lot of covariance in the measurements.
+In the last section, we came across some examples,
+genomic data, or images.
+PCA describes data by summarizing it
+in typical patterns.
+These are the principal components.
+Let's look at a concrete toy example
+that illustrates what kind of information we may extract.
+Here, we see a matrix of ratings for holiday destinations.
+Each of your friends has given a rating to four holiday places.
+We have first, a spa hotel in the Alps.
+Second, a Hawaiian beach.
+Third, a trekking tour in the Himalayas,
+and fourth, a deep sea scuba diving class.
+Anne really likes the spa in the Alps, Bill is up for Hawaii,
+while Maggie loves the Himalayas.
+Can be better understand this data?
+Are there underlying patterns?
+Each person here is a data point and their features
+are the ratings.
+We want to find patterns such that each person's rating can
+be explained as a combination of patterns.
+These patterns are the principal components.
+Each principal component is a vector.
+Here, the two principal components
+are in order of importance and slightly rounded.
+Component one is minus 1, plus 1, minus 1, plus 1.
+And component two is plus 1, plus 1, minus 1, minus 1.
+Do these patterns tell us anything?
+Pattern one has high ratings for trekking and scuba
+and low ratings for beach and spa.
+We could say pattern one corresponds
+to the amount of adventure for each place.
+If I like adventure, pattern one tells my likings.
+Pattern two prefers Alps and Himalayas over beach and scuba.
+This pattern expresses a liking for mountains.
+Now, each person's ratings can be expressed by other two
+patterns and a mean rating.
+And ratings, for example, are approximately the mean rating
+minus 6.7 times the adventure pattern
+plus 2.2 times mountains.
+She has a negative coefficient for adventure.
+She tends to rate adventurous things low.
+And she likes mountains over sea.
+Indeed, she rates the Alpine spa the highest.
+We can do this with each person, and the coefficients
+for each pattern are telling.
+In fact, these two patterns pretty much
+explain people's ratings here.
+Instead of four features, one rating for each location,
+we now have only two, adventure and mountains.
+We can now also visualize the data.
+For each person, we compute the two coefficients,
+one for each pattern, and plot each person
+as a data point on these two axis.
+Such visualizations can be tremendously helpful.
+Here, natural clusters emerge.
+Maggie and Jenn are really adventurous,
+whereas Chris and Bill want to relax at the beach.
+We just saw an example of principle component analysis,
+or PCA.
+It finds the major axis of variation in the data.
+These were our patterns.
+Each data point can be expressed as a linear combination
+of these patterns or components.
+Let's briefly look at two other famous real world examples.
+First, components of face images.
+We treat each image as a vector.
+We take the pixelized columns and stack them
+on top of each other.
+We can find a blurry average face.
+Equally, we can find a few principal components.
+We see each component looks like a ghostly face.
+These components have been termed Eigen faces.
+The Eigen comes from the verb eigenvector,
+as we will see in the next section.
+Each face image is then an overlay
+of rated versions of these components.
+For each image, we only need to know its coefficients.
+This is useful for compression, but also
+for understanding the space of face images.
+Our final example is a study from genetics.
+It asks, can you see someone's origin from their DNA?
+Researchers collected data from roughly 1,400 Europeans.
+Each person is described by his or her genetic variations.
+That is, 200,000 features.
+The researchers found the two principal components
+of the data and plotted each person,
+just like we did with our ratings.
+In the plot, the data points form clusters.
+In these clusters, we can see the map of Europe.
+The two principal components came only from genomic data
+and still, the map emerges.
+We see that indeed, the principal genetic variations
+in Europe are highly related to geography.
+PCA indicated that for us.
+Let us recap.
+The principal components capture major patterns,
+and each data point can be expressed by these components.
+We have created new features.
+Typically, a few components are enough.
+If each component describes a feature,
+we have reduced the number of features.
+This is called dimensionality reduction.
+Next, we will see how to compute the principal components.

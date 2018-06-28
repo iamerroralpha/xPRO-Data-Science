@@ -1,0 +1,85 @@
+So far, in our data, each data point was described by a set of features.
+Now, we no longer have that luxury.
+Take a social network.
+We may know nothing about the people in there, so we have no feature vectors.
+But we know who talks to whom, that is, who is connected.
+In the Internet, two websites are connected, if one links to the other.
+Then there are biological networks, computer networks, and
+data represented as networks, such as images.
+So our data is given as a network or a graph.
+Each data point, for example, a person in a social network, is a node in the graph.
+The connections are edges.
+We can draw this on paper by drawing dots for nodes and and lines for edges.
+We may have weights on the edges.
+The larger the weight of an edge,
+the stronger is the connection between the two nodes.
+While small graphs on paper may still be easy to get,
+making sense of a huge social or biological network is much harder.
+The first thing to understand may be the community structure of the network.
+Are there dense groups of friends for example?
+We may also want to partition other networks into well connected groups.
+We lot from cluster analysis and the graph.
+In social networks, the cluster structure affects how epidemics spread.
+Cluster analysis of dynamic social networks
+teaches us about the formation of friends and opinions.
+In Biology, clusters of proteins can be indicative of functionality.
+And in science clusters of coauthor networks indicate research topics.
+There's a lot of other examples.
+In fact, we'll see that we can even use graphs to cluster data that is
+given as feature vectors and even in cases for key means fails, this happens for
+example if the data forms some sheets or curls.
+Let's try to make this a bit more formal, what is a cluster in a graph?
+There are in fact many definitions, but
+many of them share some intuitive criteria.
+Let's have a look at those.
+Intuitively, a cluster consists of points that are well connected with each other.
+That is, there are lots of edges between them.
+The number of edges within a cluster is also called the volume.
+The volume per node is the density.
+We want this to be large, that's the first criteria.
+Second, between different clusters there should not be many edges.
+After all if there were many edges,
+why would you not declare this a single cluster?
+This separation of clusters is measured by the cut value.
+If we wanted to cut out the cluster from the graph, we would
+need to disconnect the edges that connect the cluster with the rest of the graph.
+The cut value is the number of edges we need to cut or their rates.
+So we could just find a group of nodes with a low cut value.
+Is this a good criterion?
+Certainly, most clusters have a low cut value.
+But there are clusters that have an even smaller cut.
+Look at this outline node, it has only one edge so
+it's cut value is one, that's super low.
+And hence, by our definition, makes a good cluster.
+Maybe that's not exactly what we were aiming for.
+Instead combining cut and
+volume strikes a balance between the size of the clusters and their separation.
+Popular examples of such combined criteria are conductance and normalized cut.
+Both divide the cut by a measure of volume.
+We want to minimize this criteria.
+If the cluster is small or has small volume then the denominator is small and
+the criterion is large.
+If the cluster is large then the other cluster,
+that is the remaining nodes, is small.
+By this measure, good clusters are not too small, internally well connected and
+separated from the rest of the nodes.
+Clusters can also be seen in the so called adjacency matrix.
+We can construct a matrix that has a row and a column for each node.
+The entry n row I and column J is one, if there is an edge between row I and
+J, and its there otherwise.
+If your other nodes, or rows and
+columns by cluster, then the matrix has a block structure.
+Typically we do not know the clusters, and the nodes are shuffled arbitrarily.
+So the structure is hidden in what looks like chaos.
+There are many other flavors of clustering.
+For example, modularity measure indicates how high the density of
+edges is within groups, compared to a baseline graph where edges occur randomly.
+Or, sometimes,
+if the graph is massive, we are only interested in very local clusters.
+For such local clustering, we don't need to look at the entire graph.
+Finally, in correlation clustering, we have information for pairs of points.
+If they are similar, they should be in the same cluster.
+If they should be separated, we draw a negative edge between them.
+We then cluster points to respect as many of these given relationships as possible.
+Here, we'll continue with the goal of finding dense, well separated clusters.
+Next, we'll see how to do it.

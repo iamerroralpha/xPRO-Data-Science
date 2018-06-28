@@ -1,0 +1,94 @@
+In the previous section we have seen how we can explicitly use eigenvectors to
+recover hidden communities in a graph, and in fairly complex data in general.
+Next, we will explore another very related criterion for finding communities.
+There is one difference,
+in the previous approach we needed to specify the number of communities.
+Our next method does that automatically.
+This method is called modularity clustering, and
+has been widely used to analyze all kinds of networks.
+For this method,
+we need to define a modularity score that we will aim to maximize.
+This score applies to a given clustering in two communities.
+The characteristic idea of modularity, is to compare the communities
+to a random baseline graph that share some properties with our actual graph.
+Such as the number of edges, and roughly, the degree of the nodes.
+Good communities should have many more edges inside
+than expected by the baseline.
+So, let's say we have two candidate communities.
+How do we measure their deviation from a baseline?
+We compute the number of edges within a community, and
+then subtract the expected number of edges as per the baseline model.
+Concretely, for every pair of nodes, i and j, that are in the same community,
+we count AIJ minus PIJ.
+AIJ indicates an edge.
+It is 1 if i and j are connected, and 0 otherwise.
+PIJ is the expected number of edges between i and j in the baseline graph.
+We sum this over all pairs.
+For each community, we get the actual total number of edges within
+the community, minus the expected number of edges within the community.
+If that is large, then the community is surprisingly dense.
+This score can be generalized to an arbitrary number of communities.
+What is the expected baseline number of ages?
+There are several ways to define that baseline model.
+Here's a common one.
+The expected number of edges between node i and
+node j is proportional to the degree of i times the degree of j.
+So, nodes with edges in our graph
+are expected to have many edges in the baseline tool.
+The idea of modularity is that an arbitrary set of nodes, say people in
+a social network, may have just as many connections as the baseline expect.
+In that case, the modularity is closed to zero.
+In the example here, we have an arbitrary partition into meaningless communities.
+The modularity of this partition is low.
+Bu, if we pick exceptionally well connected communities,
+then the modularity is high.
+In fact, modularity can be negative too.
+This happens if the number of agents in our community is much lower than expected.
+It may look like this example.
+This looks like our edge stretch plots within Laplacian eigenvectors.
+That's not a coincidence.
+The phenomenon is closely related.
+Such communities can be useful, too.
+Say the nodes in this graph are words, and
+they have an edge if they co-occur in a collection of texts.
+Verbs and nouns typically co-occur, but not two verbs or two nouns.
+So, this partitioning would separate verbs and nouns.
+But, let's get back to dense communities and
+find communities that maximize modularity.
+Note that we do not need to specify the umber of communities.
+We pick whichever number is best for the score, it happens automatically.
+How do we find the a good partitioning?
+We could try all possibilities, but
+that's going to take really long, even with a very fast computer.
+One approach is to start with some partitioning and
+then move nodes between groups, if that improves the score.
+But it turns out, we can use eigenvectors.
+This time, we use a matrix that is related to the adjacency matrix and
+the Laplacian we have already seen, but it's slightly different.
+Remember our sum over Aij minus Pij to compute the modularity?
+Our matrix has one entry for each pair of nodes.
+And the entry in row i and column j is exactly Aij- Pij.
+Remember, Aij indicates if there's an edge,
+and Pij is the expected number of edges between i and j.
+We compute their eigenvectors of this matrix.
+Again, each eigenvector assigns a value to each node.
+For two communities, we use the eigenvector with the largest eigenvalue.
+We put all nodes with positive values in one community, and
+all nodes with negative values in the other.
+We can extend this to more eigenvectors and communities.
+The actual value given by the eigenvector shows how important or
+central a node is in the community.
+Now, there's one important difference to our previous vector clustering method.
+The eigenvalues here can be negative.
+A negative eigenvalue means that the associated eigenvector gives the node
+value that leads to low modularity.
+Let's conclude with a famous example.
+Zachary's karate club network.
+In this network here,
+each node is a member of the karate club at a US university in the 1970s.
+The edges indicate friendships between the members.
+Using modularity, we find two communities in this network.
+Now, the interesting fact is that, shortly after the data collection,
+there was an internal dispute and the karate club split into two groups.
+And guess what? The communities found by
+modularity clustering are exactly the two groups that resulted from the split.

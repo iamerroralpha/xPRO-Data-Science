@@ -1,0 +1,130 @@
+Welcome back, in the previous videos we've introduced unsupervised learning.
+We saw that clustering is a particular form of unsupervised learning and
+that k-means clustering is a particular form of clustering..
+In this video, we'll explore k- means clustering in an extended application due
+to Alexander Gorban and Andrei Zinovyev, Understanding the Genetic Code.
+Recall that DNA is essentially a sequence of letters.
+As, Cs, Gs, and Ts.
+You typically learn in a biology class that these letters form a sort of code,
+a set of instructions for how to grow and maintain a living organism.
+But how can we interpret the sequence of letters as a set of instructions?
+Well, any English sentence is a sequence of letters, and
+the units of meaning within that sentence are words.
+So we might hypothesize that a DNA sequence is similarly composed of words.
+A particularly simple hypothesis is to assume that the words are all
+of the same length.
+You might first guess that the words in DNA are either 1, 2, 3 or 4 letters long.
+So the question we want to answer is,
+is it true that DNA breaks down into meaningful words of the same length?
+And if so, how long are the words?
+We're going to see how we can use k-means to help answer these questions.
+First, we gather up some real DNA.
+A fragment of the full DNA sequence of a particular bacteria.
+The total fragment is made up of around 300,000 letters.
+But you could try any other DNA sequence instead.
+Next, we break this full sequence into strings of 300 letters each.
+And we make sure these strings don't overlap at all.
+We'll think of these strings like a data point.
+So in this data set we end up with 1,017 data points.
+Let m be the proposed word length.
+So if m=2, we expect each word to be two letters long.
+For each value of m, we're actually going to make a different data set.
+Recall that in order to run k means we need to featurize our data.
+That is, we need to come up with a vector of numerical features for each data point.
+Here's something that we can do.
+For any value of m, we can divide the DNA string up into sub strings of that length.
+For each possible word like ac.
+We'll count how many times that word occurs.
+That is, how many sub strings are the same as that word.
+Consider m= 2 for a moment.
+How many possible words are there?
+Well, there are four possible letters in the first slot and
+there are four possible letters in the second slot.
+So there are four squared or 16 possible words.
+So for the m=2 data set, each data point will have 16 features associated with it.
+For instance, the ac feature will tell us,
+how many times the two letter word ac occurs in the string?
+Since this counts only take integer values they're not exactly continues values but
+their close on that, so our data set for words of length 1 has 4 features.
+Our data set for M = 2 has 4 squared features.
+Our data set for M = 3 has 4 cubed features.
+And our data set for M = 4 has 4 to the 4th features.
+That's a lot of features.
+Even for M = 1, 4 features is hard to visualize.
+As humans we basically only ever look at plots in two dimensions.
+Even three dimensions is pushing it.
+So four features is already a lot.
+And it just gets worse as the proposed word lengths get longer.
+Since we can't really visualize these data sets as they are let's run PCA.
+Remember that PCA stands for principal component analysis.
+We'll pick out the top two features from PCA.
+Also remember,
+these don't have to correspond to any two features in our data set.
+The can be wholly new composite features.
+Julia Lye an awesome engineering student did the coding and plotting for
+this case study, as well as the next.
+Here, Julia plotted these two PCA features for each data set.
+We immediately see something really interesting here.
+There's not much going on for M=1 or for M=2 the data just form a big blob.
+And that's also pretty true for M = 4.
+But there's a lot of clear structure and symmetry for words of length three.
+So from here on out let's concentrate on M = 3.
+And now let's run K means.
+Remember, we still need to standardize, or normalize, our data somehow.
+So let's first normalize each feature by subtracting the empirical feature mean
+across the data set.
+And dividing by the empirical feature standard deviation.
+Now, we'll take that normalized data and run K means.
+How should we choose k?
+Well, from visual examination of the PCA platform earlier,
+it looks like there are six or seven clusters.
+Let's try each value of K and see what happens.
+First, we try K means with K=6.
+And we visualize the end result using the first two components of PCA.
+Remember, we ran K means on the full fourth of a third or 64 features here.
+We didn't just ran K means on a 2D that we're visualizing.
+So it's a meaningful and great sign, that the K means result align so
+well with the structure we're seeing in this visualization.
+Now, lets try K=7.
+In this case, we pick up even more structure.
+We're able to almost perfectly separate out the middle part from the six
+lobes around the outside in the visualization.
+So what's going on here?
+What does this result mean?
+Well, let's talk a little bit more about DNA.
+Suppose the words are really length three.
+As we've been assuming in running K means M equals three data.
+Then what would we expect to see?
+Well, we don't know exactly where these words start.
+So there are three possible starting points we might pick up.
+When we divided up DNA into words we might have started on the first letter of
+the word, the second letter of the word or the third letter of the word.
+And actually we don't really know that all the genes read forward for
+the direction we chose for our strings.
+Some might read backward, too.
+So we might start on the first letter backward, the second letter backward, or
+the third letter backward.
+And finally, there might be some non-coding regions of DNA.
+DNA that doesn't actually have any instructions and acts as filler.
+We've seen from the other M plots like M =1 and
+M =2 that filler kind of looks like a center blob.
+And that's exactly what we are seeing here.
+We see six lobes, one for each of the possible directions we might read
+meaningful words in DNA, three directions forward, and three directions backward.
+And the seventh blob in the middle represents words in a DNA, In fact,
+now that we've run K means, we can go back into each of our data points,
+each of our DNA string segments and say whether it's noncoding or coding and which
+of the six ships it shares with other strings based on the results of K means.
+So we've seen strong evidence that DNA is composed of words of three letters each,
+as well as noncoding bits.
+In fact, these three little words are now known as codons and
+scientist know that they basically encode amino acids,
+we were able to show this with just a data set of DNA sequence fragment.
+And we're also able to identify which of our string are likely coding regions and
+non coding regions and which have similar offsets.
+In this case study, we've seen how quickly and
+easily we can use K means clustering and PCA, another powerful unsupervised
+learning method, to get results that lend deep insights into a scientific problem.
+In the next case study,
+we'll take a look at another data type that is ubiquitous these days.
+Human-generated text.

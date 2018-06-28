@@ -1,0 +1,84 @@
+Now let's apply spectro clustering to a real world example, news stories.
+News websites like Google News group articles by topics.
+Let's see how we can construct a grouping like that.
+We collected 60 news articles from the Guardian, Independent, BBC and CNN.
+On those websites the articles had the tags Brexit, Trump, USA,
+Middle East, Africa, Euro 2016 and cricket.
+For our analysis we ignore the text, we only use the words on the articles.
+First, we will build a feature vector for
+each article, then we compute a similarity graph for each node as an article.
+Then we compute the Laplacian Eigenvectors and
+this will give us a visualization and a cluster.
+So let's start by creating a vector for each article that is present.
+Here's one example article this article was published in the Guardian
+right after the Brexit referendum in the UK on the 23rd of June, 2016.
+The article has 720 words, we use a library to extract
+all entities mentioned in the article, names, organizations, and locations.
+Here are the entities detected in the article and how often they occur.
+Bank of England and
+BBC occur once, Brexit occurs three times, Britain six times and so on.
+How can we use this to compute similarities between articles?
+We collect all the entity words from all the articles in the dictionary.
+These are 1063 words in total.
+Here are some of the words in our dictionary.
+Each word is assigned an ID number between zero and 1062.
+Now each article can be represented as a vector of 1062 columns.
+One for each entity.
+For example the word Britain has ID 138 and it occurs sic times in our article.
+So the column vector of our article has six in position 138.
+To make these counts more meaningful, we convert them into the TF IDF format.
+This stands for term frequency, inverse document frequency.
+And indicates the importance of a work.
+This value increases with the number of times the word occurs in an article.
+But decreases if the word occurs often in many articles.
+The term-frequency is the number of times a word occurs in the article.
+That is our count divided by the number of entities in this article.
+So if Britain occurs 6 times in an article with 200 entities,
+then the term-frequency would be 6 divided by 200.
+We divide this by the number of articles this word occurs in, for example 35.
+We use our tf-idf vectors to compute similarities between all articles.
+For any two articles we sum up the square differences of their tf-idf vectors and
+exponentiate that.
+Now we build a graph of articles by connecting each article
+to its ten closest articles.
+Then we apply spectral clustering.
+We get seven clusters.
+Cluster 1 contains for example the articles, Can Donald Trump Afford to be
+President, and Bernie Sanders: I Will Vote For Hillary Clinton To Stop Donald Trump.
+Cluster 3 contains, fro example,
+the Brexit article, Merkel Says, No Need To Be Nasty In Leaving Talks.
+Indeed the clusters correspond pretty much to the tags given my the news websites.
+Here we see how the articles of each tag are clustered, one color for each cluster.
+The tags that are put together here are USA and Trump.
+And indeed, these articles contain very similar words, but we get much more.
+Let's use the eigenvectors of the second and
+third smallest eigenvalues to plot our data.
+Each article now has two coordinates, the entry in each of these eigenvectors.
+Each dot is an article.
+The colors indicate the predicted clusters and
+here we label some articles by their tags from the news websites.
+This plot shows the relationships between articles.
+Even without the cluster labelings, we see different directions emerging.
+The top left are articles on cricket and the bottom left are articles on Brexit.
+Towards the right we get a stretch of articles on USA and
+let's have a look at the purple group on the right.
+It contains articles from Middle East and Africa.
+For example, one talks about an attack on a hotel in Somalia and
+one about Russian air strikes in Syria.
+These are articles about war and attacks.
+One Middle East article is positioned much closer to the center and the Europe ties.
+It's title is the orchestra of Syrian musicians.
+When there's violence, you have to make music.
+It talks about musicians from a former Syrian national orchestra
+who were refugees and were reunited to go on Europe tour.
+This article also mentions how the conductor is still waiting in the U.S.
+It mentions the public opinion toward refugees and the In short,
+it touches upon many of the other topics.
+So it's drawn to the middle of the plot.
+Here, we already see some clusters emerging, but
+some clusters are still somewhat close together.
+They get separated when we use other item vectors.
+In summary, we've seen how a spectral embedding arranges news articles
+by content, and finds topic groups.
+It reveals whether there is any group structure in our data, and
+it illustrates relationships in the data.

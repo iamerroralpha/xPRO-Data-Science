@@ -1,0 +1,103 @@
+In the previous sections we've seen PCAs,
+spectral embeddings and spectral clustering.
+All these methods find new feature vectors for
+the data points, in other words, an embedding.
+The idea of embeddings is very useful, so
+let's summarize some different types of embeddings and their uses.
+With vectors we already saw that different embeddings can look very different.
+We used embeddings to do dimensionality reduction.
+We found short feature vectors since finding important information in
+high dimensions is like finding a needle in a haystack.
+Our two dimensional embeddings visualize graphs, news, or people's preferences.
+The new feature vectors bring out major trends, so
+it's easier to apply other methods.
+In spectral clustering,
+k-means give better clustering after spectral embedding.
+It's very easy to separate the clusters now.
+And embeddings can give us important components or themes, as with PCA.
+This points to a difference between the spectrograph embeddings and PCA.
+In PCA,
+each data point could be written as a weighted combination of the components.
+Such embeddings are called linear.
+In spectral clustering, we first construct a graph and then point eigenvectors.
+Even if we start our feature vectors, our new representation is not linear.
+Such embeddings are non linear.
+The different types of embeddings are guided by different goals and criteria.
+In spectral clustering all of you knew their pairs similarity relationships,
+like friendships in the social network or the related articles for
+given use article in a collection.
+Our goal is to find a vector representation that maintains these local
+relationships and puts related coins close to each other.
+This is for in our visualizations.
+This goal of low dimensional features that preserve some pairs as relationships
+is shared by other methods.
+For example,
+sometimes we have site information available to guide the embeddings.
+Say, we have images of handwritten digits and
+we know the correct digits for some of them.
+We'd like an embedding that places all two's together, all three's together and
+so on.
+We can guide our embedding by giving it example pairs that should be close
+because we know they are the same digit and
+example pairs that should not be close because those images are different digits.
+Apart from that we to preserve local relationships.
+Metric Learning is a method that takes outside information
+to guide the embedding.
+In methods like PCA we are not directly looking for a clustering, but for
+prominent patterns in our data and
+each data point may be associated with more than one pattern.
+The idea of finding prevalent patterns, components,
+topics or themes appears in several other methods.
+Independent component analysis or
+ICA recovers components that are statistically independent.
+That is, they have no information about of each other.
+This is stronger than the difference between the PCA components.
+Think of a microphone that records an overlay of noise from a dishwasher,
+a barking dog, and people speaking.
+ICA can be used to recover all these different sources of sounds.
+Dictionary Learning poses constraints on the data point associations.
+Each data point maybe associated with only very few components.
+In this case, we may need many components so we may not reduce the dimentionality
+but, we obtain a dictionary that can be used for
+example, to reconstruct corrupt images.
+Let's go into a bit more detail for one of the methods that is closely related to
+PCA, Singular Value Decomposition or SVD.
+In fact, it also gives us the principal components.
+Recall our PCA example, our friends' ratings of holiday places.
+Each row in our data matrix corresponds to one person and each column to a place.
+Each principal component is a pattern like adventure or mountains.
+And associate is the places with those patterns.
+SVD will give us a associations of both places and people for each pattern.
+How does it work?
+We take our data matrix and as for
+PCA, subtract the means, this gives us a matrix X.
+The covariance matrix in PCA is X times X transposed.
+Right here we keep X.
+The singular value decomposition writes our data matrix
+X as a product of three matrixes.
+These are usually called U, Sigma and V transpose.
+The matrix sigma is zero, except for the diagonal.
+The squares of the diagonal entries in sigma's are values we get in PCA.
+The roles of V principals are the same as the eigenvectors in PCA.
+These are called the right singular vectors.
+The columns of the matrix are the left singular vectors.
+These three matrices describe our data via themes.
+For each theme we have a singular value, and a left and right singular vector.
+The singular value tells the importance of the theme.
+Higher is more important.
+The right singular vector shows the association of each place with a theme.
+Recall, scuba diving was associated with a adventure, but not mountains.
+The corresponding left singular vector tells the preference of each person for
+the particular pattern.
+So we can simultaneously understand the likings of people and
+the characteristics of the places.
+The entries in the left vectors multiplied by the respective singular values
+are exactly the coordinates we use to visualize the data.
+The same kind of analysis is useful when the rows of our data are customers and
+the columns are products.
+Or if we describe drug interactions, the rows may be drugs and
+the columns are proteins or pathways in the body.
+So let's summarize.
+Embeddings give us meaningful dimensionality reductions,
+bring out hidden clusters in the data, and
+help us understand the data via major patterns, components or themes.

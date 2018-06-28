@@ -1,0 +1,103 @@
+Welcome back, in the last two videos, we got a sense of what clustering is,
+as a particular form of unsupervised learning problem.
+Next, we're going to learn what is not only the most popular algorithm for
+clustering, but
+quite possibly the most popular algorithm within unsupervised learning.
+This algorithm is called the k-means algorithm.
+Why has this particular algorithm been so popular for so long?
+First of all, it's fast, not only are the steps of the algorithm simple and
+quick to run, but
+it turns out the algorithm can easily take advantage of parallel computing.
+By running calculations simultaneously across multiple cores or
+processors, we can get even further speed ups and running time.
+And finally, it's fast in programmer time.
+We'll see that the algorithm is straight forward to understand, and to code, and
+doesn't require the large number of parameter tweaks some other
+algorithms need.
+It's easy to dismiss this last advantage, but
+when you need results on a timeline, it's no small consideration.
+Now, before we can learn the k-means algorithm, we need to understand
+the set-up and assumptions that go into the k-means clustering problem.
+Any method, in machine learning or statistics,
+will have assumptions built into it.
+To use any method effectively in practice,
+you have to know what those assumptions are.
+Our first assumption, in this case,
+is that we can express any data point as a list, or vector, of continuous values.
+For instance, recall our archaeology example,
+we can write the location of an artifact as a list, or vector, with two elements.
+Some distance, say in meters east of a marker near our site, and
+some distance north of the marker, also in meters.
+This data point is 1.5 meters east, and 4.3 meters north of the marker.
+So our data set is a list of all these vectors.
+We have one vector for each data point.
+Here, we suppose that we have capital N data points.
+In general, the information we collect for any data point,
+doesn't have to be a distance relative to some marker in an archaeology dig.
+Usually we'll just call each component of the vector a feature.
+In this example we have two features, one for east and one for north.
+But more generally, we might have any finite number of features.
+Often we'll call the number of features d,
+where you might think of d as standing for dimension.
+Now, recall that clustering is grouping data according to similarity.
+We've defined what a data point is for the k-means clustering problem,
+now we need to define what similarity means in the k-means clustering problem.
+And remember, last time we talked briefly about how it's equivalent to define
+dissimilarity for two data points, instead of similarity.
+And that's what we'll do here, we'll say that the dissimilarity between two data
+points, in the archaeology example, is the distance as the crow flies.
+That is,
+the distance between these two points is the length of the line connecting them.
+This is sometimes called the euclidean distance.
+One pair of data points that is farther in euclidean distance than another pair,
+will also be farther away in the square of the euclidean distance.
+In this case, it will turn out we get the same result from k-means clustering,
+If we define dissimilarity as squared euclidean distance, and
+this is straightforward to calculate.
+The square of the distance between two data points,
+is the square of the distance between them in one direction, say east,
+plus the square of the distance between them in another direction, say north.
+Instead of writing out both square differences,
+a convenient way to write this sum is using a summation symbol.
+This notation is like a for loop from computer science.
+Let's suppose capital D is two for the moment, since we have two directions.
+Then this notation says, for each index, little d,
+from 1 to capital D, add the distance in the little d direction.
+When capital D is 2, there are 2 terms in the sum.
+But remember, more generally, we might have more than 2 features and
+this notation let's us have as many as we want.
+Okay, we've got our data, we defined our dissimilarity,
+finally we need to group the data.
+What does this mean?
+What is the output we expect from our algorithm?
+Well, the reason k-means is called k-means,
+is that we say upfront that we expect some number, k, of clusters.
+In the archaeology example, we chose k equal to 3.
+We'll talk later about what happens when you don't know k in advance, but
+the k-means clustering problem assumes you do know k.
+Now, for each of these k clusters, we plan to get out a description of the cluster.
+In particular, we wanna know roughly what the cluster looks like,
+and which data points belong to it.
+To be more precise, to get a sense of what each cluster looks like,
+we'll get a cluster center for each cluster.
+Let's call the cluster center for the little k cluster, mu sub little k.
+And then we want to know which data points are assigned to each cluster.
+So, let capital S sub little k,
+be the set of data points assigned to cluster little k.
+Remember that in clustering,
+every data point has to be assigned to exactly one cluster.
+In this video, we've discussed the set-up and
+assumptions that go into the k-means clustering problem.
+Note, that the k-means clustering problem is more specific than
+clustering in general.
+We assumed that the data points can be expressed as continuous numbers.
+That's not really true if we have a yes/no vector,
+like in some of our examples from last time.
+Even if we encode yes as one,
+and no as zero, we can't get any other values than those two in our vector.
+We also assumed a particular form for our dissimilarity.
+There are lots of other forms we might use, and we'll discuss some of them later.
+And finally, we assume that there are exactly
+k clusters where k is known in advance, that isn't always true in applications.
+But now that we've got this setup in hand, in the next video,
+we'll see the k-means clustering algorithm in action.

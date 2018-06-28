@@ -1,0 +1,103 @@
+Welcome back.
+In the last video we started to hint that there might be various reasons
+one might want to go beyond the K-Means clustering problem.
+In this video, we'll see some concrete examples of when that might happen.
+As we said last time clustering is grouping data according to similarity.
+In this video we will examine different notions of grouping than we've seen so
+far in the K-Means clustering problem.
+Probably the most immediate and obvious issue with K-Means clustering in a variety
+of applications is that it requires the user to specify the number of clusters K.
+Sometimes this is completely fine.
+For instance, K-Means can be used for image compression.
+In this application, each data point might be the red, green,
+and blue intensity values for each pixel.
+The K-Means algorithm finds K colors that can be used to approximate the true,
+and typically much wider range of colors in the image.
+Here, K might be determined by how much we want to compress the image.
+In this illustration,
+we see how the increase in K increases the quality of the compressed image.
+In many other cases though, K is unknown in advance.
+Suppose we get some new data and
+we need to determine both K as well as the latent clusters.
+One option is to use popular heuristics.
+One heuristic arises from plotting the global dissimilarity
+across a wide range of values of K.
+We can't choose K immediately from such a figure because the K,
+being a subjective function will always decrease as we increase K.
+If we just chose K as the value that minimized the K mean subjective function,
+we'd have to choose K equal to capital N, the number of datapoints, but
+that's a useless clustering.
+An alternative heuristic is to look for
+an elbow in a plot global dissimilarity as a function of K.
+That is, a point in the figure where the gain from new clusters
+suddenly slows down.
+We can set K to be the number of clusters at this elbow.
+Other, more theoretically motivated options, for choosing K exists as well.
+These options include the gap statistic,
+as well as methods that change the objective of K-Means.
+The idea of these latter methods is to explicitly account for
+the fact that we pay a price for more complex models.
+In particular, we can start with the original K-Means objective function, and
+add a penalty term that grows with the number of parameters.
+Some appropriate penalties are given by AIC, BIC, or other so
+called information criteria.
+Once these penalties are added,
+we can plot the new objective function as a function of K.
+And now there will typically be a non trivial minimum.
+We can choose K to be the number of clusters of this minimum.
+There are broader issues with choosing K though.
+Sometimes there isn't a clear right value of K.
+Suppose we have a bunch of data on various organisms we've studies in
+some environment.
+We might find that if we favor smaller clusters,
+we cluster the organisms roughly into species, which is great.
+We've picked up an interesting and
+meaningful latent grouping of the organisms.
+But if we favor larger clusters,
+we might end up clustering the organisms at the genus, family, or order level,
+which are all useful and meaningful classifications used in biology.
+Clustering at any of these levels would lend insight into the problem, but
+each level would result in a different number of clusters.
+In this case, it might be useful to try a hierarchical clustering approach,
+such as agglomerative clustering.
+These approaches explicitly model that some clusters might be composed of further
+sub-clusters.
+Finally, all of the clustering we've talked about so
+far puts each data point into one and only one cluster.
+This is called hard clustering.
+On the other hand, we might sometimes have clusters that aren't perfectly separated.
+Some data points might be on the border between two or more clusters.
+For instance, recall our archaeological dig example.
+We might have an artifact that happens to be close to the cluster
+centers corresponding to two different families.
+When we go back to the lab and analyze this artifact, it would make sense to keep
+in mind that we're not sure which family it belonged to.
+More broadly we'd often like to express our uncertainty about cluster a given
+data point belongs to.
+An alternative to hard clustering that allows us to do this is soft clustering.
+In soft clustering we might allow each data point to have a different degree of
+membership in each cluster.
+For instance, a data point might have a probability distribution over its
+belonging in different clusters.
+For many data points, this probability distribution might express that we're
+very sure that the data point belongs in one particular cluster.
+But in other cases near the border between clusters, the probability distribution for
+a data point might favor one cluster, but also make it clear that the data point
+could reasonably belong in another cluster.
+In the archaeology example,
+we might have a best guess as to which family generated some piece of pottery.
+But we want to encode that we're not certain,
+and another family could reasonably have made and used the pottery.
+In the soft clustering case we might use alternatives like fuzzy clustering and
+mixture models such as Gaussian mixture models instead of k-means clustering.
+In this video we saw a number of examples with a different notion of clustering
+than the notion encoded within K-Means clustering.
+We saw that we might not always know the number of clusters before we apply
+clustering Moreover we saw that clusters can sometimes be at multiple scales and
+even nested within each other.
+Finally, we saw that clusters don't have to be an all or nothing proposition.
+Often it's useful to express that we're uncertain about the cluster assignments of
+some data points.
+Here we've explored the notion of what makes a cluster and it has motivated us to
+look at clustering problems and models beyond K-Means clustering.
+In the next video we will similarly dissect the notion of similarity.

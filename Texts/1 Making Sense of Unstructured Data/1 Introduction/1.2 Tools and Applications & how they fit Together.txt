@@ -1,0 +1,144 @@
+
+Welcome back.
+In the last video, we introduced two types of data analysis
+problems, supervised learning and unsupervised learning.
+We talked about why unsupervised learning
+is both particularly challenging and particularly important.
+And we discussed a data example.
+For supervised learning, we imagined
+we had labels on a bunch of emails,
+whether they were spam or not spam.
+And we wanted to predict the label of future emails.
+For unsupervised learning, we imagined
+that the emails were unlabeled.
+And we wanted to find hidden patterns in the data.
+For instance, we'd like to group the emails by topic.
+One interesting thing about these examples
+was that, for both cases, we had essentially the same data.
+It was really whether we had labels
+and what we wanted to do with the data that
+determined whether the problem was supervised or unsupervised.
+This time, we will go through some more examples
+to test your knowledge of supervised and unsupervised
+learning, and also to get a taste of the really wide range
+of machine learning problems that are out there.
+OK, so here's a data analysis problem.
+Suppose I've gone around and measured the concentration
+in the air of a certain type of pollution.
+I measured the amounts of pollution
+at different locations, under different weather conditions,
+and at different times of day and different days of the week.
+Now I'd like to predict the air pollution concentration
+at a new location with known weather and known date
+and time.
+Take a moment to convince yourself
+whether this is supervised or unsupervised learning.
+Pause your video if you need to.
+This is an example of supervised learning.
+The data point is the collection of information
+about your surroundings, what your location is,
+what the weather is, what date and time it is.
+The label is the air pollution concentration,
+and we observe that.
+You'd like to predict the label under new conditions.
+In the email spam example, our label was spam or not spam.
+That was a categorical label, because the label
+was a category.
+There's no inherent order on those labels.
+In this pollution example, the label
+is numerical and has an order.
+2,000 particles per cubic centimeter
+is less than, say, 6,000 particles per cubic centimeter.
+I've got another data analysis problem.
+When Frank Sampson was a PhD student in the '60s,
+he spent some month in a New England monastery.
+He followed the novices' training there,
+and recorded their interactions with each other.
+We'd like to discover what the friendships or social groups
+among the novice monks are.
+Is this supervised or unsupervised learning?
+It's unsupervised learning.
+We don't have any labels that tell us
+which social groups exist or who belongs to which groups.
+We need to discover these patterns
+in the data in an unsupervised way.
+The Sampson data is old, but this is actually
+a modern problem.
+We often want to detect communities or groups
+in large social networks, like those on Facebook or Twitter
+or even Fitbit, only that today our networks are
+way bigger than what Sampson could record in his notebook
+back in the '60s.
+OK, here's another one.
+NASA uses rocket boosters to launch spacecraft into orbit.
+It's expensive to build a whole new rocket
+booster for every slight tweak, and it's
+difficult to recreate real atmospheric conditions
+in a wind tunnel for testing these out.
+So NASA uses computer simulations.
+But it takes a long time to run the computer simulations
+for different rocket booster's specifications.
+So NASA would like to measure the simulated lift,
+say, for different rocket booster's specifications
+and predict the simulated lift under other specifications.
+Is this supervised learning or unsupervised learning?
+It's supervised learning.
+The data point is the rocket booster's specifications,
+details that go into the rocket booster as built.
+The label is the simulated lift.
+We'd like to predict the simulated lift at new data
+points.
+It's interesting here that we're putting machine learning on top
+of other computer simulations.
+It's turtles all the way down.
+How about this one?
+I have some small cameras that I've
+installed to monitor birds' nests in New England.
+I don't have a lot of bandwidth to send video,
+so I'd like to compress the recorded videos
+before I send it to my laptop.
+Can I use supervised or unsupervised
+learning to help me out?
+It sounds quite different from problems
+we've encountered before, but you
+can think of this as an unsupervised learning problem.
+Yes, if you consider the pixels at each time step as a data
+point, we can group together pixels
+that are similar in color and similar in time
+to achieve compression.
+We learn more about this in a later video.
+OK, one last example.
+Suppose I'm working at a computer science
+MOOC, one of these Massive Open Online Courses.
+And for a particular exercise, I'm having all of the students
+submit some code to implement a particular algorithm.
+I'd like to understand all the different types of errors
+they make so that I can easily grade the work
+and formulate my next lecture accordingly.
+Supervised or unsupervised learning?
+It's unsupervised.
+You can't anticipate all possible errors in advance,
+so it would be difficult to even try to label this data.
+You are trying to find hidden patterns
+in the types of responses students
+give based solely on their homework answers.
+Exactly.
+And this might help me personalize
+the educational experience going forward.
+Students who made similar mistakes
+might profit from doing the same kinds of exercises next.
+Well, at this point, we've seen a really wide range
+of different supervised and unsupervised learning problems.
+But that's still only the top of the iceberg.
+In other modules, you'll see further examples
+of supervised learning.
+But for the rest of this module, we
+will be diving deeper into supervised learning.
+Today we've become experts at identifying
+unsupervised learning problems.
+But in the remaining videos, we'll
+see particular algorithms for unsupervised learning
+and how they work in practice.
+We'll develop a whole toolbox for unsupervised learning.
+Not only will you know an unsupervised learning problem
+when you see one, but you'll know how to solve it, too.

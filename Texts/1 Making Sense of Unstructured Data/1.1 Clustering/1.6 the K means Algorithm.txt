@@ -1,0 +1,138 @@
+
+Welcome back.
+In the last video, we set up the k-means clustering problem
+as a particular subset of general clustering problems.
+In particular, we assumed that each data point
+is a vector of continuous values,
+and we're using square Euclidean distance
+as our dissimilarity measure between two data points.
+In this video, we'll finally see exactly what
+defines the k-means clustering problem,
+and we'll see how the k-means algorithm is
+a particular algorithm one might use to solve this problem.
+Remember, last time we saw that the output
+of the k-means clustering problem
+should be a set of cluster centers,
+mu sub 1 to mu sub capital K, and a set of assignments
+of data points to clusters.
+That is, capital S sub little k is
+the set of data points assigned to the little k cluster.
+The k-means clustering problem tells us
+exactly how we should choose the cluster
+centers and the assignments of data points to clusters.
+As we've said before, we want to group data points
+according to similarity, so the broad idea
+will be that we want to minimize dissimilarity
+within each cluster.
+We've defined dissimilarity between two data points.
+What's the global dissimilarity?
+Well, first, we'll say that the dissimilarity between any data
+point and a cluster center is the distance from the data
+point to the cluster center.
+We're still using square Euclidean distance here.
+Then the dissimilarity within a cluster
+will be the sum over the distances
+between data points in that cluster and the cluster center.
+And finally, the global dissimilarity
+will be the sum over the cluster dissimilarities.
+To recap, we calculate the global dissimilarity
+by iterating over each cluster, over each data
+point within the cluster, and over each feature of the data
+point.
+So now we can finally define the k-means clustering problem
+precisely.
+The k-means clustering problem is
+to minimize this global dissimilarity.
+We will typically call this quantity the k-means objective
+function.
+We will want to minimize it by choosing
+a set of k cluster centers and assignments of data points
+to clusters.
+Remember, we're still assuming that we know the value of k.
+OK, so that's the problem, but how do we solve it?
+As with most problems in machine learning,
+there is no single silver bullet that will always
+get us the best answer.
+But in this case, there is an algorithm
+that seems to perform very well in practice,
+and it's called the k-means algorithm, or sometimes
+Lloyd's algorithm.
+Let's start by covering the algorithm in broad strokes,
+and then we'll get into the details.
+We don't know the cluster centers in advance,
+so we start by initializing them to some values.
+Then we alternate between two steps.
+One, we assign each data point to the cluster with the closest
+cluster center.
+And two, we update the cluster center to be the mean of all
+the data points in its cluster.
+We iterate these last two steps until we
+can't make any more changes.
+That is, we repeat these steps until we converge.
+Now let's talk through these steps in a little more detail.
+First, we need to initialize the cluster centers.
+You don't want to choose cluster centers that
+are far from all of your data.
+One option is to draw the cluster centers
+uniformly at random from the existing data points.
+There are other, more sophisticated initializations
+you might try as well, such as k-means plus plus.
+You might also see these in popular statistical software.
+However we choose to initialize the cluster centers,
+once we have some values for the centers,
+we can start iterating the main steps of the algorithm.
+Recall, we repeat these two steps until nothing changes.
+That might mean we check that the assignments of data
+points to clusters don't change between one
+iteration and the next, or we might
+check that the k-means objective function--
+that global dissimilarity-- doesn't change between one
+iteration and the next.
+Now let's focus on the two steps within each iteration.
+First, we assign each data point to the cluster with the closest
+center.
+That is, for each data point, we compute the distance
+to all k cluster centers.
+Suppose little k has the closest center.
+Then we assign this data point to belong to cluster little k.
+Note that this calculation can be done completely separately
+for every data point.
+Therefore, it's extremely easy to divide up the data points
+across cores or processors and perform these calculations
+separately for speed-ups and running time.
+This is called an embarrassingly parallel computation.
+Finally, once we have the assignments
+of data points of clusters, we recalculate the cluster
+centers.
+In particular, we visit each cluster in turn.
+For the little k cluster, we collect all of the data points
+in this cluster and compute their mean.
+That is, for each feature, we sum up the values of the data
+points in this feature and divide by the total number
+of data points in the cluster.
+The result is another vector with capital D features,
+and this is the new cluster center value.
+Let's see a quick animation of the k
+means algorithm in practice.
+We start with some initialization.
+For instance, as we said before, we
+might choose three of our data points
+at random to be the first cluster centers.
+Then we iterate between assigning data points
+to clusters and choosing the cluster centers.
+We again assign data points to clusters and calculate
+the new cluster centers, and again, and again.
+When we've reached this stationary point, we stop.
+A first and immediate question to ask is,
+does this algorithm always stop in finite time?
+Luckily for us, the answer is yes, always.
+You might try to convince yourself
+why this is true after finishing this video.
+We'll leave a more careful evaluation of the algorithm
+output until next time.
+In this video, we've defined what the k-means clustering
+problem is, and we've developed the k-means algorithm
+as a way to solve it.
+In the next video, we'll talk about how
+to know whether the results you're getting out
+of this algorithm are any good.

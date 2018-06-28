@@ -1,0 +1,117 @@
+Welcome back.
+In the last video we learned that clustering is a particular form of
+unsupervised learning.
+Generally in unsupervised learning we might be trying to find any hidden pattern
+in a set of data points without labels.
+In clustering, we want to find a latent grouping
+such that each data point belongs to exactly one group called a cluster.
+Last time we saw a particular example of clustering in action.
+We thought about how me might use clustering to help us understand
+the arrangement of artifacts at an archeological dig.
+In this video, we'll go through more examples of clustering and see why and
+when you might want to use clustering in practice.
+To start, sometimes we have a collection of data but
+we're not quite sure what to do with it yet.
+We might want to explore the data without a particular end goal in mind.
+Perhaps the data will suggest interesting avenues for further analysis.
+In this case, we say that we're performing exploratory data analysis.
+For instance, I might imagine that I have some data on meetup.com users.
+So, roughly each data point corresponds to a person.
+In order to apply clustering I have to define a notion of similarity too.
+So, I'll say similarity is the number of common interests between two people.
+Well I can't actually feed a person or a user into my computer so,
+I need to be more precise about what constitutes a data point here.
+Perhaps what I've actually collected for each person is a list or vector of
+whether that person is interested in each meetup.com group on the meetup website.
+Then it's easy to calculate the similarity between two users.
+It's the total number of groups those two people are both interested in,
+after I apply clustering I might hope to find groups of users with
+broadly similar interests.
+Maybe after I run clustering it turns out
+these users are interested in playing music and watching musical performances.
+These users are interested in outdoor sports.
+And these users are interested in hackathons.
+What are some other times I might use clustering?
+Basically, I'm going to use clustering for
+problems that kind of look like classification.
+But when I don't have any labels that I could use to divide up my population and
+the direction I'm interested in.
+For one, I might just not know the labels in advance.
+Perhaps I have a corpus of documents.
+Like I have all the documents on Wikipedia or
+all the past articles from WIRED magazine or all the user reviews on Yelp.
+I would like to find out what topics or themes are represented in these documents.
+In general.
+I don't know the possible topics in advance so I might guess at some topics,
+but I can't really be sure in advance that I've got them all.
+Or topics I think of might not be the ones that would really appear in the corpus.
+So, ideally I'd like to discover the topics.
+In this case, we can apply cluster.
+You might say each data point corresponds to a word and
+we can measure the similarity of two words by counting how many documents they both
+appear in finally, we can group together similar words to form our cluster.
+Okay, but we can't actually calculate how many documents
+two words both occur in just by looking at the letters of those words.
+So, we need to be more precise about what constitutes a data point.
+Here the data point that corresponds to any particular word
+could be a list or vector.
+Of whether this word occurs in each document, yes or no.
+Then we can actually calculate the overall similarity of two words.
+A student in my class last semester Julia,
+looked at research abstracts from professors like Stephanie and Me here at
+MIT in the Department of Electrical Engineering and Computer Science.
+She found the following words that tend to co occur.
+Words like temperature, graphene, devices and magnetic go together.
+Words like algorithm, model and data go together.
+And words like quantum, state, channel and energy go together.
+It turns out that the first set of words have to do with fabrication or
+manufacturing.
+The second set of words are related to data science and
+the last set of words are related to physics.
+But don't worry if you wouldn't have thought of these topics on your own.
+Here's the really neat thing.
+This student didn't use any advance knowledge about what
+MIT professors are working on.
+The different topics in the data came out in an automated way.
+This is just one of many applications where we might not know
+the labels of our clusters in advance.
+Sometimes we don't have labels because it's expensive to label data.
+For instance, it might take a while for a human to label each data point.
+And the labels might be changing too quickly to keep up.
+Take the example of Google News we mentioned in a previous video.
+We might want to put news documents about similar topics in a cluster.
+But the topics in the news are changing everyday.
+For instance just hours after a new Game of Thrones episode comes out,
+there are great many articles about that episode.
+We would like to detect all those articles and group them together.
+And we would like to do this even when some surprise wildness about happens that
+we didn't anticipate in advance.
+In this case our data plan might be a list of which topics occur in a given document
+and how similarity measure between two documents might be account
+of how many topics are shared by the two documents or
+how similar the topic proportions are between the two documents.
+Alternatively it might be expensive to label data
+simply because there's way too much of it.
+For instance there are ton of image sharing services right now.
+And as a result there's a wealth of images online.
+Consider some recent news articles about the discovery of a new species of bird.
+These birds were found to live in parts of India and China and
+this picture of the bird appeared in the news articles about it.
+We might want to automatically break up the image into the pixels corresponding to
+the bird, the pixels corresponding to the hand, and
+the pixels corresponding to the wall.
+In general, it's time intensive to label a substantial number of pictures and
+pixels within them.
+So, we might use clustering instead.
+In this case, each data point corresponds to a single pixel.
+And our measure of similarity might be how similar the pixel is to another pixel,
+in both color And location.
+Equivalently we might say our measure of this similarity is some notion of distance
+and color between pixels plus distance in location of the pixels in the image.
+So, what does our data point need to tell us to calculate this similarity.
+Our data point for each pixel could consist of the color of the pixel.
+Followed by the location of the pixel.
+In this video we've seen a lot of different reasons to use clustering.
+We've also seen a lot of different types of data where you might apply clustering.
+In the next videos, we'll learn about the most popular algorithm for
+clustering or probably for any type of unsupervised learning.

@@ -1,0 +1,110 @@
+Welcome back.
+In the past few videos we've been talking about troubleshooting
+the K means algorithm.
+In particular, we've been working our way through the definition of clustering as
+grouping data according to similarity.
+We talked about what happens if we have a different notion of grouping than K means,
+and we talked about what happens if we need a different notion of similarity
+than K means.
+In this video we'll take a closer look at our data.
+When we first step through the K means algorithm, we imagined as
+an example data set that we were looking at the locations of archaeology artifacts.
+In particular for each data point,
+we recorded a distance east of some marker and a distance north of the same marker,
+but there are a lot of other types of data out there that I might collect.
+How do I know when it's okay to run K means,
+and is there anything I can do to make it possible to run K means?
+Before running K means on your data,
+there are a bunch of questions you want to ask yourself.
+We'll start through the big ones here.
+First question, is your data featurized?
+As an example, suppose you've made a fitness app and
+you've collected a bunch of data about your users, this person is 45 years old,
+five feet seven inches tall, has a terminal bachelor's degree,
+occasionally posts some public funds in your app and so on.
+Remember that K means needs a vector of data.
+So the first thing we need to do is turn all of this information into
+an orderly vector.
+Each entry in the vector will have a particular meaning.
+The first entry could be a person's age, the second entry could be a person's
+height, the third could be a person's education, and the fourth could be how
+many of ounces of smoothies this person drink in the past week.
+And maybe there are a bunch of moe entries.
+Each of these entries is called a feature.
+It's a feature or a trait of the data with a very specific meaning.
+We can imagine a big table or
+a matrix that collects these features across all of the users of the app.
+Once we've organized our data like this it is featurized.
+Next, remember that K means needs its features to be valued as
+continuous numbers.
+So the second question we have to ask ourselves is,
+is each feature a continuous number?
+In our example, age is in years.
+So we're all set there.
+We can convert height into inches.
+So a five foot seven person would be 67 inches tall.
+We could express education as years of education and write 16 for
+a Bachelor's degree, and 8.2 ounces of smoothie is also fine.
+The third question gets at a subtle point about K means.
+Are these numbers commensurate?
+To see the issue here, recall that K means assumes that we have spherical clusters.
+So the clusters have basically the same width in all directions.
+Imagine we have the following data set but notice the axes.
+One axis ranges from 0 to 10 and the other ranges from 0 to 1.
+So if we plot the axes on the same scale this is what the data looks like to the K
+means algorithm.
+So we might want to put all the data on the same scale and
+typically a standardization or a normalization procedure is used.
+For instance, all data on each feature can be separately standardized to
+lie between -1 and 1.
+A common alternative is to normalize the data in each feature to have a standard
+deviation of 1.
+Another subtle question is the fourth question, are there too many features?
+If I have a fitness app, I might want to find different groups of individuals who
+have similar health and fitness needs.
+But suppose I add a bunch of useless features.
+Like, for every word in the English dictionary, I add a feature for
+how many times this particular person uses that word in the forums.
+It sounds silly, but a lot of times we have features in our data that
+aren't entirely useful to the purpose at hand.
+When we know which features aren't useful,
+because of some domain knowledge, we want to get rid of them beforehand.
+But sometimes we don't know which are the useful and useless features.
+In this case there are some pretty magical algorithms that let us reduce
+the dimension of our feature space.
+That is they let us reduce the number of features to just get the most
+important features out.
+Probably the most widely used algorithm of this sort
+is Principal Components Analysis, or PCA.
+As an example, imagine I have a spring and a ball is moving back and
+forth on that spring.
+And I record this motion with a bunch of different cameras.
+Maybe five cameras.
+Well, the motion of the spring is really just one-dimensional.
+So I effectively have four extra features.
+PCA will help me pick out the one feature that really matters,
+even though it doesn't even necessarily correspond to just one camera.
+So it's often a good idea to run PCA on your data before running K means.
+In this case we refer to PCA as a pre processing step for K means.
+Okay, a fifth and final question to ask is,
+are there any domain-specific reasons to change the features?
+As I mentioned earlier, it's best to get rid of any features you know in advance
+won't be helpful for the final problem.
+Typically you or a colleague might have this knowledge due to being
+an expert about the particular data you're using.
+Note that any domain-specific feature changes should be done
+before running PCA or K means or anything else for that matter.
+It's also best to change any features that might not
+satisfy the assumptions of K means.
+Princeton says we talked about in this video and
+the last video there might be transformations of your features
+to something that better fits the assumptions of K means.
+It's nice to automate everything about using machine learning and statistics.
+But if there's knowledge you can use specific to your problem area can
+sometimes make a big difference if you use it.
+In this video, we talked about preparing or pre processing your dataset so
+that you you can run the K means algorithm with the best possible results.
+In the past few videos, we started to dig deep into the grouping similarity and
+data assumptions that goes into K means clustering.
+In the next two videos, we'll explore further the assumption on
+a fixed number of clusters, K clusters, and clustering itself.

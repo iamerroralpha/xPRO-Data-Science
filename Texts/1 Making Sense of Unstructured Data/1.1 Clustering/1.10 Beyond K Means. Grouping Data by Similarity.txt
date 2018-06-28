@@ -1,0 +1,120 @@
+
+Welcome back.
+So far, we've seen that K-means clustering
+is a powerful framework for clustering.
+But in the previous videos, we've
+started to explore how K-means clustering isn't always
+the best clustering framework for a particular problem.
+So sometimes it behooves us to look at clustering frameworks
+beyond that of K-means.
+We recalled that clustering is grouping data by similarity.
+In the last video, we looked at how
+we might be interested in different notions of grouping,
+or clustering, beyond that provided by K-means.
+In this video, we're going to look at how we might sometimes
+want to define "similarity" differently than the definition
+used by K-means clustering.
+It's worth recalling that K-means clustering assumes
+that we have K spherical, equally-sized clusters.
+This follows from our use of the Euclidean distance
+as the dissimilarity measure for K-means.
+Using the squared Euclidean distance
+in our objective function is equivalent to using
+Euclidean distance and doesn't change this fact.
+So what could go wrong with the K-means
+definition of similarity?
+First, let's consider the case where our clusters
+aren't equally sized.
+For instance, consider an example
+where we have small circles filled with data points
+adjacent to a very large circle filled with data points.
+We might naturally think that there are three clusters here,
+corresponding to the three circles.
+In the K-means objective, though, the clustering
+where all the data points in a large circle
+are assigned to the same cluster has relatively higher,
+or worse, objective value.
+And the clustering where the points in the large circle
+closest to the small circles are assigned to the outer clusters
+has a relatively lower, or better, objective value.
+This is because the data points at the edges
+of the large circle are relatively far from the cluster
+center there, but relatively close to the cluster centers
+in the small circles.
+What can we do if we really want to separate out
+the three circles as clusters?
+One option is to use a model that specifically encodes
+clusters of different sizes.
+For instance, in the last video we
+mentioned Gaussian mixture models.
+When the mixture components are allowed
+to have different covariances, these models
+can capture the kind of clusters we're looking for here.
+One useful algorithm for this type of model
+is called the expectation maximization, or EM algorithm.
+Another issue that might arise is
+that we might encounter outliers in our data.
+Outliers are data points that are
+relatively distant from most of the data
+points in the data set.
+Because of its use of Euclidean distance,
+K-means clustering is typically very sensitive to outliers.
+Consider this simple one-dimensional data set.
+If we run the K-means algorithm with K equals 2,
+we discover that there are two clusters, as we expect.
+But if we add a single point very far away from our data,
+we're now stuck with one cluster over all the main data set,
+and the second cluster contains only the outlier point.
+This clustering doesn't capture the two clusters
+we think really exist in this data.
+What can we do?
+One option is to use an alternative measure of distance
+that is less sensitive to outliers.
+To calculate the squared Euclidean distance,
+we added up the squared difference
+between every pair of features shared by two data points.
+This is sometimes called the L2 distance.
+An alternative distance is the L1 distance,
+where we say that the distance is
+the sum of the absolute values of the differences
+between every pair of features shared by two data points.
+Pretty much everything we already did
+can be adapted to this case.
+In particular, we can derive an iterative algorithm,
+like K-means, for this problem.
+The algorithm is called K-medoids,
+since the optimal cluster centers are now
+medoids instead of means.
+The medoid in one dimension is the familiar median.
+Finally, we might be interested in clusters of different shapes
+than spherical clusters.
+Consider this example data set.
+Here, there seem to be two identifiable groups,
+or clusters, of points.
+But one group is situated inside the other.
+If we applied K-means with two centers,
+we'd just split the data into two sides of some essentially
+straight line.
+To capture the two clusters we think really exist here,
+we'd have to try something different.
+For instance, we might define a radial notion of similarity.
+Consider splitting the data into polar coordinates,
+or use kernel methods.
+Another alternative is to use the agglomerative clustering
+methods we mentioned in the previous video.
+Another potential issue with applying K-means
+is that it requires continuous numerical features.
+If we're dealing with text or binary yes-no features
+or other features that aren't continuous and numerical,
+we might consider alternative notions of similarity.
+Another option, though, is to transform our data
+into a form more amenable to K-means clustering.
+We'll talk more about this in the next video.
+In this video, we explored using different notions of similarity
+and clustering than the squared Euclidean distance required
+by K-means clustering.
+In the previous video, we looked at different notions
+of clustering and clusters than those required by K-means.
+In the next video, we'll look at what
+we can do when our data isn't already
+in the form assumed by K-means.

@@ -1,0 +1,83 @@
+Welcome back.
+In the past few videos we've been examining some of the assumptions that go
+into K-Means clustering.
+And we've talked about what you can do if you want to cluster data but
+your application or your data don't quite fit those assumptions.
+In this video and the next, though, we're going to take a step back.
+After all, K-Means clustering is just one particular type of fixed K clustering.
+That is, clustering where we assume the number of clusters is finite.
+Even when we don't know the number of clusters in advance, we often still assume
+that the number of clusters in our data is some fixed, finite number.
+In this video we'll talk about why that assumption might not always be right.
+Often big data doesn't just mean that we have a single very-large data set.
+We might have streaming data,
+where new data is being added to our data set all the time.
+For instance,
+English-language Wikipedia along averages around 800 new articles per day right now.
+If we build a new fitness app, we hope that it will not only get new
+users all the time, but that those users will interact with it everyday.
+So what changes when we have streaming data.
+To illustrate, I like to think about my own experiences with Wikipedia.
+I recently read this really neat book, A Long Trek Home, about a couple who travel
+4,000 from Seattle to the Aleutian Islands in Alaska by hiking and rafting.
+So this makes me go on Wikipedia and look up the Aleutian Islands.
+And that leads me to an article on the Pacific Ring of Fire.
+And soon I'm reading about volcanos, earthquakes, and plate tectonics.
+And the thing about Wikipedia is, no matter how many articles I've read in
+the past, there are always new topics to read about and learn about.
+I like to think of this as some sort of Wikipedia phenomena.
+Suppose I have 100 articles from Wikipedia,
+I could cluster those article and find some topics to group articles together,
+but if I have a thousand Wikipedia articles,
+I expect to find new topics I didn't see in the first 100 articles.
+And as I read more and more Wikipedia, getting to millions and
+billions of articles, I expect to keep finding new topics.
+In this case it might be okay to run clustering with some fixed number of
+clusters for a hundred articles, or any fixed number of articles.
+But as the size of my dataset grows,
+I always expect to see more groups, more clusters.
+So I want the number of clusters to grow with the size of my data.
+Or another way to think of this is,
+I want the complexity of my model to be able to grow with the size of my data.
+We see this in a lot of other types of data as well.
+Humans have been studying and discovering new species for a very long time now.
+And yet at any time you can do a search on Google News and be sure to find articles
+about all kinds of new species that were discovered in the past week.
+Humanity has discovered a ton of different species, but
+we're still discovering new ones all the time, and we're not done yet.
+Thinking back to our imaginary fitness app,
+we could imagine asking people about their exercise routines.
+And no matter how many people we ask, we might expect that we will keep discovering
+new and unusual exercises that we haven't seen among the previous users we've asked.
+In genetics, we might expect to find new and
+unknown ancestral populations, as we study more individuals' DNA.
+Or supposed we look at newborns in a hospital.
+As we study more and more newborns, we might expect to find more new and
+unique health issues among those newborns.
+And we want to be prepared for this new health issues so
+that we can best treat this newborns and not less in important diagnosis.
+We might consider a social network.
+As more and more people joined the social network,
+we expect to see new friend groups and interests represented in the network.
+Or we can imagine image database, like the images on Instagram.
+As we examine more and more images,
+we expect to find more unique objects on those images.
+Objects we haven't seen before in previous images.
+In all of these cases we wouldn't want a fix number of clusters, K, for clustering.
+We want K to be able to grow as the size of the data grows.
+Once solution to this problem is provided by non-parametric Bayesian methods.
+Non-parametric makes it sound like there are no parameters, but
+in the context of the term non-parametric Bayes,
+non-parametric actually means many parameters, or infinitely many parameters.
+These methods let the number of instantiated parameters grow with
+the size of the data.
+While these methods are more complex than K-Means clustering.
+Some recent work on MAD-Bayes shows how to turn non-parametric bayesian methods
+into K-Means like problems, and algorithms for clustering in particular, and
+unsupervised learning in general.
+In this video,
+we've talked about why you might not always want a fixed number of clusters K.
+Even when K isn't known in advance, the assumption that K is the same throughout
+some streaming dataset might be problematic.
+In the next video we'll talk about cases where you want to find hidden patterns
+in your data, but clustering might not be quite the right type of pattern.

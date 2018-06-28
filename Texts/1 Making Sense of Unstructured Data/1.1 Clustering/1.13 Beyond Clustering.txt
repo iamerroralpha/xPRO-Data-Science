@@ -1,0 +1,97 @@
+Welcome back.
+In the previous video, we started talking about cases where traditional clustering
+just doesn't cut it anymore.
+Last time, we looked specifically at the case where we can't assume
+there's a fixed number of clusters in our data set.
+We might want the complexity of our model to grow with the size of the data.
+In this video, we'll talk about cases where clustering doesn't quite represent
+the hidden patterns we want to find in our data.
+Let's think back to the image analysis example from last time.
+For the moment, suppose that I have a website where people post
+pictures of their pets.
+I can imagine that I might like to cluster these images.
+And I'd be very happy if my clustering algorithm put all of the images of cats
+in one cluster, all of the images of dogs in another cluster and
+all of the images of lizards in yet another cluster.
+One way I could represent this clustering is in a table or a matrix.
+Each row of the table or matrix will correspond to one of my images.
+I'll put a one in the column that corresponds to the cluster this
+image belongs to.
+So here pictures one, two and seven belong to the same cluster, pictures three and
+five belong to the same cluster and picture four is in its own cluster.
+But it seems something's missing.
+What if someone post a picture of both a cat and a dog?
+Or a cat and a dog and a lizard?
+Or what if they post the picture that doesn't happen to have any animals then?
+The problem with clustering is that each data point has to belong to one and
+only one group or cluster.
+We might express uncertainty about which group that is,
+but ultimately we believe that the ground truth is
+that there's exactly one true group that the data point belongs to.
+So now, think back to our website and people's pet pictures.
+Here we might want our data points, the pictures, to belong to multiple groups
+simultaneously or no groups or just one group.
+Any of these options should be allowed.
+In this case, we call the groups features instead of clusters, and
+the underlying structure is a feature allocation instead of a clustering.
+Note that this is a different use of the word feature than we saw on
+previous videos.
+A similar idea is to say that the data points exhibit mixed membership.
+They can belong to multiple groups at the same time unlike clustering.
+Sometimes, clustering is called the mixture model,
+since each day the point comes from one of a bunch of different groups.
+The bunch of different groups forms the mixture.
+Then, the case where each data point can belong to multiple
+groups at the same time is called then admixture model.
+The word comes from the genetics literature.
+But essentially all of these terms, feature allocation, mixed membership,
+and admixture,
+capture the idea that data points can belong to multiple groups simultaneously.
+We see this sort of motif crop up in lots of different data.
+Suppose we're analyzing a corpus of documents, and
+we want to find the topics or themes that occur.
+We might look at all of the documents and past issues of the New York Times.
+So natural topics that we might find could include sports, arts and economics.
+But then suppose we read a review of the movie Moneyball,
+based on the book by Michael Lewis.
+Well, it's about the arts because it's a movie review.
+The review is also about sports because the movie is about baseball players.
+But the review is also about economics because the movie is about using analytics
+and statistics to trade players and choose the best players.
+So, if we think of a document as a data point,
+we want our data points to be able to belong to multiple groups.
+Similarly, if we study genomics we often see that an individual's DNA
+may be comprised of parts from a number of different ancestral groups.
+If we study politics, we may see that individuals votes
+actually represent a number of different political ideologies.
+If we study social networks,
+we may see that an individual's interactions on a social network,
+represent various different personal identities such as a work identity,
+a family identity and a social identity separate from the first two identities.
+There are number of different models and algorithms that let us go beyond
+clustering and capture this kind of mixed membership structure in data.
+Perhaps the most popular of these algorithms is
+Latent Dirichlet Allocation or LDA.
+LDA was originally designed for text data, and it's popularity maybe due in
+part to the rise in massive amounts of text data available online.
+But it could be applied much more widely to other types of categorical data,
+including genetics data.
+Other K-means like algorithms for this feature allocation problem,
+have been derived using MAD-Bayes.
+For instance, the DP-Means and
+BP-Means algorithms have been used to study tumor hydrogenated.
+In many tumors, multiple different types of cancer are present.
+It's important to identify all of the different types of cancer, so
+as to design effective treatments.
+In this submodule, we've studied clustering in general and
+the very popular K-Means algorithm for clustering in particular.
+In the past couple of videos, we got the taste of when and
+how you might start to go beyond the clustering paradigm.
+In the remaining videos of the submodule,
+we'll get some hands on experience with clustering and mixed membership.
+Not only will you know all about clustering and K-Means, and
+it's extensions, but you'll see them used on practical problems.
+But, it's worth emphasizing there are many other forms of unsupervised learning out
+there, beyond the ones we've seen so far.
+Clustering and mixed membership and
+feature allocations are just the beginning.

@@ -1,0 +1,69 @@
+Welcome back.
+In the last few videos we introduced the K-Means clustering problem and
+a particular algorithm for coming up with the solution to it.
+This algorithm is called the K-Means algorithm or Lloyd's algorithm.
+Then we talked about how we might start inspecting the output from
+K-Means algorithm.
+So what happens if that output isn't what we expected or wanted?
+What do we do now?
+In this video and the next few videos we'll talk about troubleshooting K-Means.
+How can we make K-Means clustering better?
+In answering this question we'll often find ourselves leavings K-Means behind for
+different clustering algorithms and even different clustering problems.
+The first thing to do though is to make sure we're getting the best possible
+output from the K-Means algorithm.
+Now we know that the K-Means algorithm will stop, eventually.
+To see that this is true,
+note that there are only finitely many possible clusterings.
+And the K-Means algorithm will move to a new clustering only if the new clustering
+decreases the K-Means objective.
+But just because the algorithm will stop eventually
+doesn't mean that the algorithm will stop quickly.
+That being said, and practice the K-Means algorithm tends to be quite fast.
+But you might find that on a particular dataset,
+the algorithm is taking a while to run.
+What do you do?
+There are various speed ups that have been proposed.
+These are often based on the following idea.
+In the K-Means clustering algorithm, as we wrote it,
+we needed to calculate the distance from every data point, to every cluster center.
+But you don't actually need to check every possible cluster center to decide which
+is the closest for a given data point.
+This observation relies on a fact known as the Triangle Inequality,
+that lets us ignore cluster centers that are relatively far away from a given data
+point in our calculations.
+Another related issue is that when the K-Means algorithm stops,
+it doesn't necessarily stop at a minimum value of the K-Means objective.
+Remember, this objective is the global dissimilarity.
+When the K-Means algorithm stops at a value that
+isn't the minimum value of the K-Means objective,
+we call the objective value it does stop at a local optimum.
+We wish we had access to the true minimum, the global optimum, but
+that's a very difficult problem that we can't solve in general.
+One option to try to get closer to the global optimum
+is to run the K-Means algorithm multiple times for multiple random initializations.
+Then finally, we take the configuration of cluster centers and cluster assignments
+with the lowest objective function value, that is, the least global dissimilarity.
+While this does require a more total computation,
+these multiple runs can be performed completely in parallel.
+Moreover, another option to get better output from our algorithm
+is to use smarter initializations, like in K-Means++.
+This also has the potential to produce total running time.
+In fact, K-Means++, unlike vanilla K-Means,
+comes with theoretical bounds on the running time.
+Okay, but imagine somehow we magically had access to the global optimum.
+We could know the actual set of cluster centers and assignments of data points to
+clusters that minimize the K-Means objective function.
+And we could still be dissatisfied with our results.
+In the upcoming videos we'll talk about some examples of how this could happen and
+what we can do about it.
+In this case the issue isn't our K-Means algorithm.
+The issue is the K-Means clustering problem itself.
+In this video we focused on how to improve the K-Means algorithm
+to give better results when it comes to minimizing the K-Means objective.
+But we also hinted that there might be deeper issues with the K-Means clustering
+problem in certain application domains.
+Recall that clustering is grouping data according to similarity.
+In the next few videos we'll dissect how each of those terms might have
+a different meaning than the one we assumed in the K-Means clustering problem.
+Next, we'll start by seeing a number of different ways we might define grouping.

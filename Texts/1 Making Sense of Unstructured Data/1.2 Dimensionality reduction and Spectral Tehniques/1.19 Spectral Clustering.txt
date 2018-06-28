@@ -1,0 +1,102 @@
+Communities and networks give us a much better understanding of network
+properties, friendships or functional groups.
+In the past sections, we've seen criteria for finding communities and
+we've seen that eigenvectors capture important properties of the network.
+Now we'll put everything together.
+Let's start with a graph where there are no connections between communities, and
+build this so called adjacency matrix.
+For every node,
+we put the strengths of the connection, or edge, to every other node in the matrix.
+If there is no connection, we'll put a 0.
+The Laplacian matrix that we've seen previously is closely related.
+Put the roll sums on the diagonal and negate the other numbers.
+Both matrices have the same block structure.
+And each block consists of edges of one community.
+Of course, in a real network,
+we don't know how to order the nodes to make this block pattern emerge.
+So, how do we find the blocks?
+Let's take a look at the eigenvector software of the matrix.
+The bottom three vectors, exactly indicate the block structure.
+And, they each, exactly indicate the nodes, of long community.
+The remaining eigenvectors are less important here.
+This works even if the nodes are scrambled.
+For each node, recreate a feature vector as we've seen before.
+One entry from each eigenvector.
+These feature vectors directly indicate which community the node belongs to.
+In reality of course, the communities are not separated so clearly.
+There are edges between communities, and edges within communities that are missing.
+But if there are not too many of these extra edges,
+the eigenvectors don't change too much, and things still work out.
+To see this, we can use our new features as an embedding,
+just like we've done previously.
+Here we have three features, so three dimensions.
+We plot each node on these three axis, and
+see that the graph communities emerge, as well as separated clusters.
+This suggests the following approach called spectral clustering.
+First, we write down the laplacian, which comes from the adjacent matrix.
+Then we compute the eigenvectors and keep the few bottom ones.
+The eigenvectors give new features.
+We use K-means clustering on those new features.
+This works because the new features magically separate the communities.
+To find K clusters, one typically uses K-eigenvectors.
+If the graph is completely connected,
+there's a Bohring-Eigen vector all at once that we discard right away.
+They are variants of spectral clustering, but the main idea is the same.
+Now recall our criteria from the very beginning
+where we wanted clusters of decent size with small cut between them.
+This sounds very different from our eigenvectors here,
+but in fact there's a closed connection.
+We can give labels to nodes to indicate the optimal clusters for the criterion.
+For example, a special positive number for cluster one, and
+a special negative number for cluster two.
+The eigenvectors approximate those labels.
+Actually, spectral clustering is widely used even for data that is not a network.
+Recall K means if you plug the data points,
+the clusters we find with K-means are round.
+So here's an example of data with clusters.
+But they are not round.
+The data seems to curve around, and
+intuitively, we'd like to follow that curvy structure.
+We run K-means, and the clusters look a bit odd.
+They disregard the shape of the data.
+Well, spectral clustering can help here.
+We translate the data into the world of graphs.
+Concretely, if you build a graph from the data.
+For each data point, we create a node and
+connect it to what's closest or most similar points nearby.
+The graph now reflects local relationships between our data points.
+It follows the shape of the data.
+Now we used spectral clustering.
+We get clusters of points that are densely connected in the graph.
+These clusters do follow the shape.
+They look very different and more meaningful.
+In summary,
+to use spectral clustering on other data, we just add one step to our procedure.
+Create the so called neighborhood graph.
+A bit of care is needed when building this graph.
+An edge between two points is weighted by the similarity of the points.
+A common similarity function is the Gaussian similarity that decays
+exponentially with a distance.
+We connect each point to a fixed number of closest neighboring points.
+How many?
+Typically it should not be too many, but enough that the resulting graph has no, or
+very few, disconnected parts.
+What is the difference on spectral clustering and K-means here?
+The inter-point distances used by K-means
+don't capture the complicated shape of the data.
+In some sense, we don't want to jump across the gaps.
+A graph captures those gaps.
+Another interesting point, our Spectral Clustering also uses K-means but
+with an important difference.
+We created new feature factors and use K-Means with those new features.
+Then the clusters follow the inherent tape of the data.
+In other words,we found them embedding for
+our data points that captures delayed in structure much better.
+We've seen embedding with PCA, but this one is different.
+In PCA the new features are some combination of the existing features,
+even though we didn't explicitly write it that way.
+With a graph, there's no such relatively simple relation.
+Here we have a nonlinear embedding.
+In summary,
+by putting everything together we saw how to use the eigenvectors of the Laplacian
+matrix to find meaningful clusters that respect hidden structure in the data.

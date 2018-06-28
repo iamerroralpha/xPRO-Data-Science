@@ -1,0 +1,116 @@
+
+In the last section, we saw the usefulness
+of Principal Component Analysis, or PCA.
+Now we learn how we can actually compute it.
+The magic is called eigenvectors,
+and indeed, we will see many more benefits of eigenvectors.
+In PCA, we want to find principal patterns.
+Typically, these patterns do not affect a single feature,
+or in the holiday example, a single rating.
+They affect many ratings together.
+Ratings for several holiday locations
+go up and down together, governed by some latent
+factor like adventure.
+This going up and down together is
+the covariance of the ratings.
+They co-vary from the mean.
+We want to find the major directions of covariance.
+To find those, a helpful tool is the covariance matrix
+of the data.
+Let's see how we construct it.
+For each holiday location, we compute the average rating.
+We then look how for each person,
+the rating is deviating from that average.
+For example, the deviation of Hawaii for Anne
+is Anne's rating for Hawaii minus the mean rating
+for Hawaii.
+The covariance of two locations-- say,
+Hawaii and the Himalayas--
+measures how much the ratings both vary
+in the same direction.
+For each person, we multiply the deviation
+for Hawaii and for Himalayas.
+If both ratings are larger than their mean,
+then the product is positive.
+If they vary from the mean in different directions,
+the product is negative.
+We do that for all people.
+The covariance of Hawaii and the Himalayas
+is then the sum of those.
+The covariance matrix contains these terms
+for all possible pairs of features.
+For D features, this is a D by D matrix,
+and the [? i-j-th ?] entry is the covariance or features I
+and J. In our matrix, for example,
+the relaxing Alpine location has negative covariance with deep
+sea diving.
+People tend to like either one or the other.
+The principal components that we are looking for
+are the eigenvectors of this coherence matrix.
+What are eigenvectors?
+We can define them by our matrix and vector products.
+We can multiply every length D vector by a D by D matrix.
+The result is another vector.
+You can think of a vector as a string of numbers
+or as a direction or arrow in D dimensional space.
+When we multiply it by a matrix, the vector
+gets rotated and scaled.
+If the vector is an eigenvector, its direction stays the same.
+It only gets scaled.
+The amount by which it gets scaled
+is the corresponding eigenvalue.
+Each eigenvector has an eigenvalue.
+In some sense, the eigenvectors capture the major directions
+that are inherent in the matrix, and the larger the eigenvalue,
+the more important is the vector.
+This can be written as an equation.
+We won't solve that.
+The computer can do that for us.
+Let's rather try to understand what this
+means for covariance matrices.
+Here is another data set.
+The data are points in 2D on a plane.
+Each data point has two features.
+In this data, either both features are low
+or both are high.
+In fact, there may be an exact relationship,
+and the rest is noise.
+The principal components here literally
+capture the major axis of variation.
+The first and most important eigenvector points
+in the direction in which the ellipse of the data
+extends most--
+that is, the vector with the largest eigenvalue.
+The eigenvalue tells the amount of stretch.
+That's also the major relationship
+between the features.
+We found this automatically.
+The second eigenvector is perpendicular,
+and given that constraint, shows the next largest direction.
+This is what it looks like for another data set with clusters.
+If we encode every vector only by the first principal
+component, we shrink all the data onto this component.
+But even though everything is now on one line,
+the clusters are still separated.
+We did not lose much.
+All of this can be done in high dimensions too.
+This last example actually points to another question.
+How many components do we need?
+Some of them may be useful, and the rest is noise.
+For that, we can look at the eigenvalues.
+If we sort them, there's often a gap after which all are small.
+We pick all the eigenvectors that correspond to large ones
+and ignore the rest.
+In summary, we have seen that we can compute the PCA
+from the covariance matrix.
+The eigenvectors with the largest eigenvalues
+are the principal components.
+PCA is very useful for a wide range of settings.
+We've seen a few.
+It can also be used to reduce the large feature
+vectors that come from deep neural networks, for example.
+Of course, it can't do everything.
+For example, it can only capture linear relationships
+in the data.
+Still, it is one of the most widely used data
+analysis tools.

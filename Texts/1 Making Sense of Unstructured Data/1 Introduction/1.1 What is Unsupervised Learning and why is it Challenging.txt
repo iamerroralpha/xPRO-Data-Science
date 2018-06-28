@@ -1,0 +1,146 @@
+Hi, and welcome to this module on unsupervised learning.
+>> So what is unsupervised learning?
+>> In unsupervised learning,
+you are trying to discover hidden patterns in data, when we don't have any labels.
+>> We'll talk about what hidden patterns are and what labels are shortly, and
+we'll talk through a lot of real data examples.
+But before that, let's introduce ourselves.
+>> I am Stefanie Jegelka.
+>> I'm Tamara Broderick.
+Both Stefanie and I are professors at MIT with the Department of
+Electrical Engineering and Computer Science and also with the Center for
+Statistics at the Institute for Data Systems in Society.
+>> I work on machine learning methods for
+all sorts of communatorial data, things like networks, subsets or images, from
+theory to making them work on real data >> I work on machine learning methods for
+Bayesian and non-parametric Bayesian learning,
+that scale to very large data sets.
+I often work on methods for unsupervised learning.
+Stephanie and I will be your instructors for this module.
+>> So, what is unsupervised learning, again?
+And, in fact, is supervised learning a thing at all?
+>> This is a great observation.
+First, let's step back to what learning even means here.
+In machine learning in statistics,
+we're typically trying to find hidden patterns in data.
+>> Ideally, we want these hidden patterns to help us in some way.
+For instance, to help us understand some scientific result,
+to improve our user experience, or to help us maximize profit in some investment.
+>> Supervise learning is when we learn from data but we have labels for
+all the data we've seen so far.
+Unsupervised learning is when we learn from data but we don't have any labels.
+>> Some examples would be really helpful.
+>> Absolutely, let's start by thinking about email.
+>> I don't know about you, but for me it's really hard to keep my inbox in check.
+I get so many e-mails everyday.
+>> And a big problem here is spam.
+In fact, it would be an even bigger problem if e-mail providers,
+like Gmail, weren't so effective at keeping spam out of our inboxes.
+But how do they know whether a particular e-mail is spam or not?
+>> So that's our first example of a machine learning problem.
+Every machine learning problem has a data set.
+That is, a collection of data points that help us learn.
+Here, our data set will be all the e-mails that are sent to some MIT professor over,
+say, a month.
+Each data point will be a single e-mail.
+Whenever I get an e-mail, I can quickly tell whether it's spam.
+So I might hit a button to label any particular e-mail as spam or not spam.
+Now we can imagine that each of our datapoints has one of two labels, spam or
+not spam.
+In the future, I keep getting emails but
+of course I won't know in advance which label it should have, spam or not spam.
+So the machine learning problem is to predict whether a new label for
+a new email is spam or not spam.
+That is, we want to predict the label of the next email.
+If our machine learning algorithm works,
+we can put all the spam in a separate folder, and not have to worry about it.
+>> This spam problem, is an example of supervised learning.
+And now we can start to see why it's called supervised learning.
+You can imagine some teacher, or
+supervisor, telling you the label of each data point.
+That is, whether each e-mail is spam or not spam.
+And, we often want to check how well our machine learning algorithm is doing too.
+Then, the supervisor might be able to tell us whether the labels we
+predicted were correct.
+When I got a new e-mail, and I said it was spam using my algorithm, was I really
+correct about that, or did I just throw a really important e-mail into the trash?
+>> Okay, so that's supervised learning.
+So what is, then, unsupervised learning?
+What do I learn here?
+>> Let's try another example of a machine learning problem.
+Now imagine, I'm looking at my emails, and
+I realize, man, I have way too many emails.
+It would actually be super helpful if I could read all the emails that
+are on the same topic at the same time.
+So, I might run a machine learning algorithm that groups together
+similar emails.
+It turns out I'm rushing around, so
+I don't have the time to label emails spam or not spam or anything else.
+I don't even have the time to come up with topics.
+But, after I've run my machine learning algorithm,
+I find that there are natural groups of emails in my inbox.
+There are all the e-mails about upcoming and past hiking trips.
+There are bunch of e-mails
+about the machine learning class I taught last semester.
+And there are e-mails about a cool machine learning research project I'm currently
+working on.
+>> Now this is an example of an unsupervised learning problem.
+You didn't have any labels because you didn't have time to give any labels.
+And since no one else made labels for each email, there's no supervisor.
+In the previous supervised learning example,
+the machine learning algorithm had to find hidden patterns in the data
+that helped predict whether any e-mail is spam or not spam.
+In this unsupervised example, the machine learning algorithm
+only has the contexts of the e-mails to find hidden patterns.
+There aren't any labels to help it out.
+>> Unfortunately, my email client doesn't actually group my emails by topic, yet.
+But you actually see this kind of thing all the time on other websites.
+For instance, have you looked at Google News recently?
+Google could just list all the news articles it finds and order them by,
+say, the time they were published.
+But that would be overwhelming, and when you go to their site you'd
+never be able to find out what the interesting news stories are.
+Instead, Google groups together all the articles that are about a similar story.
+That way you can see the major trends and
+then dive into lots of different articles on a single topic.
+>> Yes.
+Same thing with Facebook trending stories.
+If you're on Facebook, you'll see a list of big stories.
+But these are just groupings of a lot of individual articles and posts.
+You'll see the individual post if you click on the big story.
+>> We're starting to see some of the benefits and
+challenges of unsupervised learning.
+Sometimes, it's really expensive to get labels.
+I can always hire someone to come up with topics for my emails and
+to label each email with some topic, but then I'd have to pay that person's salary,
+plus it would take them quite some time to label everything.
+Humans take a long time to read emails, much longer than a computer does.
+That's the whole problem to start with, tt's cheaper for me in terms of both time
+and money if a machine learning algorithm can sort my emails automatically.
+>> On the other hand, it's often a lot harder to do unsupervised learning.
+The labels give us a lot of information.
+We can identify words that will tend to occur in spam emails, and
+words that tend to occur in emails that aren't spam.
+When we don't know what kind of hidden patterns we are looking for,
+it can be mush harder to find the pattern that's actually important.
+My algorithm may group together all the emails that come in before noon and
+make a separate group for all the emails that come in the afternoon.
+Well, that's not very helpful to me.
+But since I didn't tell the algorithm what I wanted, well,
+maybe I shouldn't be surprised.
+>> Plus it's easier to tell how well a supervised learning algorithm is
+performing.
+Just check what percentage of spam and not spam emails it's getting correct.
+But is there a really quantitative way to check whether my emails are getting a good
+grouping by topic?
+Or a way to check whether Google News is finding a good grouping of stories.
+>> These are hard problems.
+>> In the next video, we'll talk about some more supervised, and
+unsupervised learning problems, to make super clear what the difference is, and
+to get a sense of what the many different flavors of unsupervised learning.
+Then in the remainder of this module, we'll start to dig deep into how
+unsupervised learning really works in practice.
+>> We'll see how to actually build an unsupervised learning algorithm
+to help find these patterns in your data.
+We'll talk about methods for evaluating these algorithms, and
+we'll see some more real life examples of unsupervised learning in action

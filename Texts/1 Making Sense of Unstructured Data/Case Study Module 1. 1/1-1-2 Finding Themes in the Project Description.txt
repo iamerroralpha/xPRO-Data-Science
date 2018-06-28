@@ -1,0 +1,198 @@
+
+Welcome back.
+In the previous video, we looked at using
+k means clustering in practice to try to understand DNA
+as a genetic code.
+In this video, we'll look beyond k means
+and clustering to see how some of the extensions we discussed
+earlier can be useful in real life data analysis.
+In particular, here we'll analyze human generated text
+data.
+It's common nowadays to have access to large text corpuses.
+The text of Wikipedia is publicly available,
+or we can look at the text of news releases from MIT.
+But text data can arise in many other forms.
+A news website might have the text of all of its articles.
+And the company running the website
+might be interested to find natural ways to present
+this text to its audience.
+It might be helpful to present topics
+in the text for easy navigation to relevant news articles,
+or a search engine might be interested in analyzing
+the text of websites it crawls for convenient presentation
+of its search results.
+For instance, Michael Jordan is the name
+of both a famous basketball player and a famous statistics
+researcher.
+Suppose someone enters Michael Jordan as an input
+into our internet search website.
+If we presented search results by topic instead of solely
+by popularity, we can quickly reach
+both the audience searching for sports information
+as well as the audience searching
+for scientific research.
+So there are a lot of reasons we might
+be interested to find the topics or themes
+in a collection of text.
+But as we mentioned in a previous video,
+clustering by itself can be a little problematic here,
+because a single document might exhibit multiple topics.
+What if Michael Jordan, the statistician,
+writes a statistical analysis of the other Michael Jordan's
+basketball career, or what if I look at the Wikipedia page
+for the sports figure Michael Jordan?
+Actually, Wikipedia covers not just his basketball career,
+but his brief time playing baseball, as well
+as his experience as a businessman, and his acting.
+Remember Space Jam?
+So it makes a lot of sense to use
+a model that lets each data point, each article,
+exhibit multiple topics.
+Recall that one term for this is a mixed membership model.
+A particularly popular model in this vein
+is known as Latent Dirichlet Allocation or LDA.
+To see what it looks like to use this model in practice,
+let's use LDA to analyze what MIT faculty are working on
+in their research.
+The code and visualizations for this analysis
+were all provided by Julia [? Lat. ?]
+The electrical engineering and computer science department
+at MIT is really big.
+It's the biggest department on campus with over 130 faculty.
+And there are a number of major research labs
+that those faculty belong to.
+Four of the main labs in EECS are
+the computer science and artificial intelligence
+laboratory, or CSAIL, the laboratory for information
+and decision systems, or LIDS, the micro systems technology
+laboratories, or MTL, and the research laboratory
+of electronics or RLE.
+If you've never heard of these labs before,
+it's not necessarily clear what they all do.
+And even if you're a member of this department,
+it's hard to keep track of the research of 130 other faculty
+members.
+But you might want a high level summary of what
+everyone else is working on.
+For instance, if some area of research looks interesting,
+you can go talk to the faculty working in that area.
+This line of thought suggests we should
+try to find latent groups of research topics
+among the faculty.
+But a faculty member can work on multiple research topics
+at a time.
+So we're going to try to learn a mixed membership
+model like LDA.
+To create our data set, we assemble abstracts
+from each professor's published papers for a total of over 900
+abstracts.
+Each abstract is a text document that
+briefly describes a particular piece of research
+a professor conducted.
+A common pre-processing step for LDA
+is to remove the most common words, words like of,
+the, and a, that don't tell us much
+about a document, and the least common words, words so rare
+that they don't tell us much across documents.
+Just like we need to specify the number of clusters in advance
+in k means, we need to specify the number of topics in advance
+for LDA.
+And just like we called the number of clusters k
+for clustering, here we can call the number of topics k.
+In an earlier video, we talked about heuristics
+to choose the number of clusters in a clustering problem.
+Similar heuristics can be used to choose the number of topics
+and topic modeling.
+Heuristics for this problem suggest that smaller k
+yield more meaningful results.
+And henceforth, we choose k equals five topics.
+At this point, we can run a stochastic variational
+inference algorithm for LDA and look at the results.
+Just as in clustering we discover clusters,
+in topic modeling, we discover topics.
+So the first thing to do is to look at the topics.
+We can visualize topics by looking at the most
+common words in each topic.
+In this case, one of the topics has
+words like quantum, state, system, channel,
+and information.
+This topic seems to be capturing a line of research
+on quantum computation communication and information
+theory.
+Another topic has words like algorithm, model, problem,
+and time.
+This is a topic on traditional computer science
+themes, like algorithms, and complexity theory.
+N is a symbol typically used to express the number of data
+points in a data problem.
+Yet another topic has words like temperature, graphene, phase,
+and gate.
+These are words related to material science.
+So one of the first things we notice here
+is that research in the department
+is pretty diverse, which makes sense
+since the department contains both electrical engineering
+and computer science.
+We can also look at the topics of research in each lab.
+To generate this figure, we consider all the research
+abstracts within each lab, and show
+what proportion of the research text
+falls into each topic category.
+First, we notice that CSAIL and LIDS are both dominated
+by the algorithms topic.
+This makes sense.
+CSAIL essentially contains all of the computer science
+professors within the EECS department.
+And the faculty in LIDS work on similar problems,
+with perhaps a bit more focus on information theory.
+We see this reflected in the higher proportion of the topic
+on quantum and information-related themes.
+RLE and MTL both contain words related to circuits.
+So again, this makes sense since these labs
+form the more traditional lab-based side
+of electrical engineering.
+Finally, MTL is distinguished by a significant proportion
+of research text related to material science.
+So the nice thing about this analysis
+is that we learned all of these topics
+and the breakdown of labs by topic automatically.
+Few people, including professors at MIT,
+would be able to describe exactly
+what all these different MIT professors work on.
+But we were able to automatically pick up
+what words go together and describe coherent themes
+of this research.
+And we were able to distinguish different parts
+of the department by the different types of research
+that goes on there.
+You could imagine doing a similar analysis for a company,
+or for the user base of an app.
+What are the different themes users talk
+about in their post on a forum?
+And how different forms differ in what they focus on?
+This type of analysis can be very useful
+for understanding a user base, or for generating
+a quick summary of a lot of text documents
+that might otherwise be difficult to navigate.
+In this video, we've seen hair extensions of clustering
+can be useful in practice.
+In particular, we investigated a data analysis problem
+with human-generated tax using Latent Dirichlet Allocation,
+or LDA.
+We've come a long way in this module and sub-module.
+We started by introducing unsupervised learning,
+and then we focused in-depth on clustering,
+and k means clustering in particular.
+We saw all of the ins and outs of using k
+means clustering in practice.
+And let me be clear.
+This sort of detail and care is necessary for any machine
+learning or statistics algorithm.
+No algorithm is a black box.
+You want to understand what assumptions
+are going into your algorithm.
+And there are always assumptions.
+Once you understand these assumptions,
+you can decide if your algorithm is the right approach
+to a problem, or if you need an extension, or something totally
+new.
